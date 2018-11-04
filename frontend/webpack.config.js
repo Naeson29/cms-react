@@ -1,7 +1,11 @@
+const webpack = require('webpack');
 const path = require('path');
 
 const DIST_DIR = path.resolve(__dirname, 'dist');
 const SRC_DIR = path.resolve(__dirname, 'src');
+
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const config = {
   entry: SRC_DIR + '/app/index.js',
@@ -20,6 +24,17 @@ const config = {
       },
     }],
   },
+
+  plugins: [
+      new webpack.NamedModulesPlugin(),
+      new HtmlWebpackPlugin(
+          {
+              inject: true,
+              template: './src/index.html',
+              filename : DIST_DIR + '/index.html'
+          }
+      )
+  ]
 };
 
 module.exports = config;
