@@ -1,0 +1,23 @@
+.header-app {
+  position: fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:$header-height;
+
+  .navbar-brand {
+    img {
+      height:$header-height;
+    }
+  }
+
+  .navbar {
+    padding:0;
+    border-radius: initial;
+
+    .navbar-nav {
+      flex-direction:row;
+    }
+  }
+
+}

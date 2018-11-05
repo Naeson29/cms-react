@@ -1,8 +1,10 @@
 let mongoose = require('mongoose');
 let Item = require('../models/Item.model');
 
-mongoose.connect('mongodb://mongodb:27017');
+mongoose.connect('mongodb://mongodb:27017/reactCms', { useNewUrlParser: true });
+
 Item.collection.drop();
+
 let items = [
   new Item({
     name: '[Seed] Item 1',

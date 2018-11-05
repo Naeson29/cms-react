@@ -1,12 +1,12 @@
 'use strict';
 
-let express = require('express');
-let app = express();
-let bodyParser = require('body-parser');
+const express = require('express');
+const app = express();
+const bodyParser = require('body-parser');
 const PORT = process.env.PORT || 3000;
-let winston = require('winston');
-let logger = require('morgan');
-let items = require('./routes/items');
+const winston = require('winston');
+const logger = require('morgan');
+const items = require('./routes/items');
 
 
 // Body Parser
@@ -17,6 +17,6 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use('/api', items);
 
 
-app.listen(3000, function() {
+app.listen(PORT, function() {
   winston.log('info', `Server is listening on port ${PORT}`);
 });

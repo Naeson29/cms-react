@@ -1,11 +1,11 @@
 'use strict';
 
-let express = require('express');
-let router = express.Router();
-let mongoose = require('mongoose');
-let Item = require('../models/Item.model');
+const express = require('express');
+const router = express.Router();
+const mongoose = require('mongoose');
+const Item = require('../models/Item.model');
 
-mongoose.connect('mongodb://mongodb:27017');
+mongoose.connect('mongodb://mongodb:27017/reactCms', { useNewUrlParser: true });
 
 // Get all items
 router.get('/items', function(req, res, next) {
