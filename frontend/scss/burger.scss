@@ -1,12 +1,7 @@
 .burger-menu {
 
-  position   : absolute;
-  right      : 15px;
-  top        : 50%;
-  margin-top : -18px;
-  z-index    : 1;
-  width      : 36px;
-  height     : 30px;
+  margin-left  : auto;
+  margin-right : 15px;
 
   .bm-overlay {
     background : rgba(0, 0, 0, 0.3);
@@ -18,6 +13,7 @@
 
   .bm-menu-wrap {
     top:0;
+    width:100%;
 
     .bm-cross-button {
       height : 24px;
@@ -25,16 +21,20 @@
 
       .bm-cross {
         background: #bdc3c7;
+        height:18%;
       }
     }
   }
 
   .bm-burger-button {
-    width      : 36px;
-    height     : 30px;
 
-    .bm-burger-bars {
-      background: #fbfbfb;
+    .burger-svg {
+      width      : 46px;
+      height     : 40px;
+
+      path {
+        fill : $menu-color;
+      }
     }
   }
 
@@ -51,9 +51,5 @@
         display: inline-block;
       }
     }
-  }
-
-  .bm-morph-shape {
-    fill: #373a47;
   }
 }

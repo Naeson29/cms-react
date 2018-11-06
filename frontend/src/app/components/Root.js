@@ -8,7 +8,7 @@ export class Root extends React.Component {
             <div className="header-app">
                 <Header/>
             </div>
-            <div className="content col-lg-10 offset-lg-1 col-md-12 col-sm-12 col-xs-12">
+            <div className="content col-lg-8 offset-lg-2 col-md-12 col-sm-12 col-xs-12">
                 {this.props.children}
             </div>
         </div>

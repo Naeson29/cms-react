@@ -1,9 +1,6 @@
 // Import Bootstrap source files
 @import '../node_modules/bootstrap/scss/bootstrap';
 
-// Import Burger Menu
-@import 'burger';
-
 //variables
 @import "variables";
 
@@ -12,3 +9,6 @@
 
 // header
 @import "header";
+
+// Burger Menu
+@import 'burger';
