@@ -1,22 +1,32 @@
 .header-app {
-  position: fixed;
-  top:0;
-  left:0;
-  width:100%;
-  height:$header-height;
-
-  .navbar-brand {
-    img {
-      height:$header-height;
-    }
-  }
+  position : fixed;
+  z-index  : 100;
+  top      : 0;
+  left     : 0;
+  width    : 100%;
+  height   : $header-height;
 
   .navbar {
-    padding:0;
-    border-radius: initial;
+    padding         : 0;
+    border-radius   : initial;
+    justify-content : flex-start;
+    height          : inherit;
+
+    .navbar-brand {
+      margin : 0 1rem;
+      height : 95%;
+      img {
+        height : 100%;
+      }
+    }
 
     .navbar-nav {
-      flex-direction:row;
+      flex-direction : row;
+
+      .nav-item {
+        padding : 0 1rem;
+        float   : none;
+      }
     }
   }
 

@@ -4,11 +4,11 @@ import { Header } from './Header';
 export class Root extends React.Component {
   render() {
     return (
-        <div className="container">
+        <div className="container col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <div className="header-app">
                 <Header/>
             </div>
-            <div className="content">
+            <div className="content col-lg-10 offset-lg-1 col-md-12 col-sm-12 col-xs-12">
                 {this.props.children}
             </div>
         </div>
