@@ -2,7 +2,9 @@ import React from 'react';
 import {Link} from 'react-router';
 import { slide as Menu } from 'react-burger-menu';
 import {DEVICE_TYPE} from '../../utils/consts';
-import ReactSVG from 'react-svg'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import * as IconSolid from '@fortawesome/free-solid-svg-icons';
+
 
 export class Header extends React.Component {
 
@@ -58,7 +60,9 @@ export class Header extends React.Component {
                             <Menu
                                 right
                                 width={'100%'}
-                                customBurgerIcon={<ReactSVG src="img/burger.svg" svgClassName={'burger-svg'}/>}
+                                customBurgerIcon={<FontAwesomeIcon icon={IconSolid.faBars} />}
+                                customCrossIcon={<FontAwesomeIcon icon={IconSolid.faTimesCircle} />}
+                                //isOpen={true}
                             >
                                 <Link to={'/home'} className="nav-link" activeClassName="active">
                                     {'Accueil'}

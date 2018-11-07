@@ -12,44 +12,39 @@
   }
 
   .bm-menu-wrap {
-    top:0;
-    width:100%;
+    top        : 0;
+    width      : 100%;
+
+    .bm-menu {
+      background : $menu-color;
+      padding    : 2.5em 1.5em 0;
+      font-size  : 1.15em;
+
+      .bm-item-list {
+        color   : #b8b7ad;
+        padding : 0.8em;
+
+        .bm-item {
+          display: inline-block;
+        }
+      }
+    }
 
     .bm-cross-button {
-      height : 24px;
-      width  : 24px;
-
       .bm-cross {
-        background: #bdc3c7;
-        height:18%;
+        color:#fff;
       }
     }
   }
 
   .bm-burger-button {
 
-    .burger-svg {
-      width      : 46px;
-      height     : 40px;
+    width      : 46px;
+    height     : 40px;
+    position   : relative;
 
-      path {
-        fill : $menu-color;
-      }
-    }
-  }
-
-  .bm-menu {
-    background : #373a47;
-    padding    : 2.5em 1.5em 0;
-    font-size  : 1.15em;
-
-    .bm-item-list {
-      color   : #b8b7ad;
-      padding : 0.8em;
-
-      .bm-item {
-        display: inline-block;
-      }
+    .bm-icon {
+      color : $menu-color
     }
   }
 }
