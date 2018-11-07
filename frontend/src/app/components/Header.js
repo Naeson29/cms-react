@@ -37,6 +37,15 @@ export class Header extends React.Component {
     render() {
         const {device} = this.state;
 
+        const styles = {
+            bmCrossButton : {
+                width  : '32px',
+                height : '32px',
+                top    : '15px',
+                right  : '15px',
+            }
+        };
+
         return (
             <nav className="navbar col-lg-8 offset-lg-2 col-md-12 col-sm-12 col-xs-12">
                 <Link to={'/home'} className="navbar-brand">
@@ -62,7 +71,8 @@ export class Header extends React.Component {
                                 width={'100%'}
                                 customBurgerIcon={<FontAwesomeIcon icon={IconSolid.faBars} />}
                                 customCrossIcon={<FontAwesomeIcon icon={IconSolid.faTimesCircle} />}
-                                //isOpen={true}
+                                isOpen={true}
+                                styles={styles}
                             >
                                 <Link to={'/home'} className="nav-link" activeClassName="active">
                                     {'Accueil'}
