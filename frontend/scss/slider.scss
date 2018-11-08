@@ -1,15 +1,27 @@
 .slider-container {
 
+  &:hover {
+    .previousButton, .nextButton {
+      visibility : visible;
+      opacity    : 1;
+    }
+  }
+
   .previousButton, .nextButton {
     position    : absolute;
     top         : 50%;
     margin-top  : -20px;
     z-index     : 10;
+    cursor      : pointer;
+    visibility  : hidden;
+    opacity     : 0;
+    transition  : all 0.3s ease 0s;
 
     .svg-inline--fa {
-      color  : $primary-color;
+      color  : rgba(255,255,255,0.5);
       width  : 40px;
       height : 40px;
+      transition  : all 0.3s ease 0s;
     }
 
     &.previousButton {
@@ -18,6 +30,11 @@
 
     &.nextButton {
       right: 10px;
+    }
+    &:hover {
+      .svg-inline--fa {
+        color:#fff;
+      }
     }
   }
 
@@ -81,43 +98,43 @@
           max-width   : 640px;
         }
       }
-    }
 
-    &.animateIn, &.animateOut {
-      -webkit-transition : 1s;
-      transition         : 1s;
-    }
-
-    &.animateIn.previous h1,
-    &.current h1,
-    &.animateIn.next h1,
-    &.animateIn.previous p,
-    &.current p,
-    &.animateIn.next p {
-      -webkit-transform        : translateX(0);
-      transform                : translateX(0);
-      -webkit-transition-delay : .9s;
-      transition-delay         : .9s;
-      opacity                  : 1;
-    }
-
-    &.animateIn.previous p,
-    &.animateIn.next p {
-      -webkit-transition-delay : 1.1s;
-      transition-delay         : 1.1s;
-    }
-
-    &.animateOut {
-      h1 {
-        -webkit-transition-delay : .3s;
-        transition-delay         : .3s;
+      &.animateIn, &.animateOut {
+        -webkit-transition : .8s;
+        transition         : .8s;
       }
-    }
 
-    &.animateOut {
-      p {
-        -webkit-transition-delay : .2s;
-        transition-delay         : .2s;
+      &.animateIn {
+        &.previous, &.next {
+          p {
+            -webkit-transition-delay : 1.1s;
+            transition-delay         : 1.1s;
+          }
+        }
+      }
+
+      &.animateOut {
+        h1 {
+          -webkit-transition-delay : .3s;
+          transition-delay         : .3s;
+        }
+        p {
+          -webkit-transition-delay : .2s;
+          transition-delay         : .2s;
+        }
+      }
+
+      &.animateIn.previous h1,
+      &.current h1,
+      &.animateIn.next h1,
+      &.animateIn.previous p,
+      &.current p,
+      &.animateIn.next p {
+        -webkit-transform        : translateX(0);
+        transform                : translateX(0);
+        -webkit-transition-delay : .9s;
+        transition-delay         : .9s;
+        opacity                  : 1;
       }
     }
   }

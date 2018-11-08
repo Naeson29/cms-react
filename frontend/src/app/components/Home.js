@@ -33,9 +33,9 @@ export class Home extends React.Component {
             <div className={'home'}>
                 <Slider
                     className="slider-container"
-                    previousButton={<FontAwesomeIcon icon={IconSolid.faChevronLeft} />}
-                    nextButton={<FontAwesomeIcon icon={IconSolid.faChevronRight} />}
-                    duration={1000}
+                    previousButton={<FontAwesomeIcon icon={IconSolid.faChevronCircleLeft} />}
+                    nextButton={<FontAwesomeIcon icon={IconSolid.faChevronCircleRight} />}
+                    duration={800}
                 >
                     {
                         content.map((item, index) => (
