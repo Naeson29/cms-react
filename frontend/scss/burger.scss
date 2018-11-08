@@ -16,7 +16,7 @@
     width      : 100%;
 
     .bm-menu {
-      background : $color-header;
+      background : $primary-color;
       padding    : 2.5em 1.5em 0;
       font-size  : 1.15em;
 
@@ -50,7 +50,7 @@
     position : relative;
 
     .bm-icon {
-      color : $color-header
+      color : $primary-color
     }
   }
 }

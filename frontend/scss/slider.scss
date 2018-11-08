@@ -1,57 +1,27 @@
-.slider-wrapper {
-
-  @media (min-width: 768px) {
-    height : calc(80vh - 75px);
-  }
-
-  @media (max-width: 768px) {
-    height : calc(70vh - 75px);
-  }
+.slider-container {
 
   .previousButton, .nextButton {
     position    : absolute;
     top         : 50%;
-    transform   : translateY(-50%);
+    margin-top  : -20px;
     z-index     : 10;
-    background  : url('http://svgshare.com/i/41_.svg') no-repeat center center / 16px;
-    width       : 32px;
-    height      : 32px;
-    text-indent : -9999px;
-    cursor      : pointer;
 
-    &:hover {
-      background: url('http://svgshare.com/i/41_.svg') no-repeat center center / 16px;
+    .svg-inline--fa {
+      color  : $primary-color;
+      width  : 40px;
+      height : 40px;
     }
-  }
 
-  .previousButton {
-    left: 0;
-    -webkit-transform: rotate(180deg) translateY(calc(50% + 0px));
-    transform: rotate(180deg) translateY(calc(50% + 0px));
-
-    &:hover {
-      left: -10px;
+    &.previousButton {
+      left: 10px;
     }
-  }
 
-  .nextButton {
-    right: 0;
-
-    &:hover {
-      right: -10px;
+    &.nextButton {
+      right: 10px;
     }
   }
 
   .slide {
-
-    @media (min-width: 768px) {
-      height : calc(80vh - 75px);
-    }
-
-    @media (max-width: 768px) {
-      height : calc(70vh - 75px);
-    }
-
     background-size     : cover!important;
     background-position : center center;
 
@@ -145,5 +115,15 @@
         transition-delay         : .2s;
       }
     }
+  }
+}
+
+.slider-container, .slider-container .slide {
+  @media (min-width: 768px) {
+    height : calc(80vh - 75px);
+  }
+
+  @media (max-width: 768px) {
+    height : calc(70vh - 75px);
   }
 }
