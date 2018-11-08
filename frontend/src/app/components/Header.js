@@ -5,7 +5,6 @@ import {DEVICE_TYPE} from '../../utils/consts';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import * as IconSolid from '@fortawesome/free-solid-svg-icons';
 
-
 export class Header extends React.Component {
 
     constructor(props) {
@@ -48,7 +47,7 @@ export class Header extends React.Component {
 
         return (
             <nav className="navbar col-lg-8 offset-lg-2 col-md-12 col-sm-12 col-xs-12">
-                <Link to={'/home'} className="navbar-brand">
+                <Link to={'/'} className="navbar-brand">
                     <img src={'img/logo.png'} alt={'Logo'} />
                 </Link>
                 {
@@ -71,7 +70,6 @@ export class Header extends React.Component {
                                 width={'100%'}
                                 customBurgerIcon={<FontAwesomeIcon icon={IconSolid.faBars} />}
                                 customCrossIcon={<FontAwesomeIcon icon={IconSolid.faTimesCircle} />}
-                                isOpen={true}
                                 styles={styles}
                             >
                                 <Link to={'/home'} className="nav-link" activeClassName="active">

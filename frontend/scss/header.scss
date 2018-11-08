@@ -41,11 +41,11 @@
           transition         : color .3s ease-in;
 
           &:hover {
-            color : $menu-color-light;
+            color : $color-header-light;
           }
 
           &.active {
-            color : $menu-color;
+            color : $color-header;
           }
         }
       }
