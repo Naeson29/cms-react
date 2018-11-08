@@ -83,6 +83,11 @@
       }
     }
 
+    &.animateIn, &.animateOut {
+      -webkit-transition : 1s;
+      transition         : 1s;
+    }
+
     &.animateIn.previous h1,
     &.current h1,
     &.animateIn.next h1,
