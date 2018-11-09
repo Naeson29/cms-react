@@ -2,11 +2,8 @@ import {getSlider} from '../../actions/home';
 import Manager from './manager';
 
 class Home extends Manager {
-    getAll() {
-        return this.search({ limit: 0 });
-    }
 
-    search(parameters, callback) {
+    slider(parameters, callback) {
         return this.classicDispatch(
             getSlider.INIT,
             () => getSlider.ACTION(parameters),

@@ -1,7 +1,7 @@
 import Api from './api';
 import {HTTP_GET} from './utils';
 
-const API_PREFIX = 'civilities';
+const API_PREFIX = 'items';
 
 export default class HomeApi {
 

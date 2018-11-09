@@ -46,6 +46,7 @@ class Full extends Component {
                 </div>
                 <Switch>
                     <Route exact path="/" name="home" component={Home}/>
+                    <Route exact path="/home" name="home" component={Home}/>
                 </Switch>
             </div>
         );

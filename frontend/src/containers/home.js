@@ -13,7 +13,7 @@ const mapDispatchToProps = () => {
 
     return {
         load: (parameters) => {
-
+            HomeManager.slider(parameters);
         },
     };
 };
