@@ -1,11 +1,11 @@
-import React from 'react';
-import {Link} from 'react-router-dom';
+import React, {Component} from 'react';
+import {NavLink} from 'react-router-dom';
 import { slide as Menu } from 'react-burger-menu';
 import {DEVICE_TYPE} from '../../../utils/consts';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import * as IconSolid from '@fortawesome/free-solid-svg-icons';
 
-class Header extends React.Component {
+class Header extends Component {
 
     constructor(props) {
         super(props);
@@ -47,21 +47,21 @@ class Header extends React.Component {
 
         return (
             <nav className="navbar col-lg-8 offset-lg-2 col-md-12 col-sm-12 col-xs-12">
-                <Link to={'/'} className="navbar-brand">
+                <NavLink to={'/'} className="navbar-brand">
                     <img src={'img/logo.png'} alt={'Logo'} />
-                </Link>
+                </NavLink>
                 {
                     device === DEVICE_TYPE.TYPE_DESKTOP ?
                         <ul className="nav navbar-nav">
                             <li className="nav-item">
-                                <Link to={'/home'} className="nav-link" activeClassName="active">
+                                <NavLink to={'/home'} className="nav-link" activeClassName="active">
                                     {'Accueil'}
-                                </Link>
+                                </NavLink>
                             </li>
                             <li className="nav-item">
-                                <Link to={'/newItem'} className="nav-link" activeClassName="active">
+                                <NavLink to={'/newItem'} className="nav-link" activeClassName="active">
                                     {'Items'}
-                                </Link>
+                                </NavLink>
                             </li>
                         </ul> :
                         <div className={'burger-menu'}>
@@ -72,12 +72,12 @@ class Header extends React.Component {
                                 customCrossIcon={<FontAwesomeIcon icon={IconSolid.faTimesCircle} />}
                                 styles={styles}
                             >
-                                <Link to={'/home'} className="nav-link" activeClassName="active">
+                                <NavLink to={'/home'} className="nav-link" activeClassName="active">
                                     {'Accueil'}
-                                </Link>
-                                <Link to={'/newItem'} className="nav-link" activeClassName="active">
+                                </NavLink>
+                                <NavLink to={'/newItem'} className="nav-link" activeClassName="active">
                                     {'Items'}
-                                </Link>
+                                </NavLink>
                             </Menu>
                         </div>
                 }
