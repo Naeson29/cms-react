@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import {withRouter} from 'react-router-dom';
-import Home from '../../components/app/home';
-import HomeManager from '../../models/manager/home';
+import Home from '../components/app/home';
+import HomeManager from '../models/manager/home';
 
 const mapStateToProps = (state) => {
     return {

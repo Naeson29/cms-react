@@ -1,11 +1,10 @@
 import { combineReducers } from 'redux';
 import { routerReducer } from 'react-router-redux';
-
-import HomeReducer from './accountingFec';
+import HomeReducer from './home';
 
 
 const rootReducer = combineReducers({
-    AccountingFec : AccountingFecReducer,
+    Home : HomeReducer,
 });
 
 export default rootReducer;
