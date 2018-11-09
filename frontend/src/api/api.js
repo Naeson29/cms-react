@@ -9,13 +9,8 @@ export default class Api {
     static callApi(httpMethod, route, params = {}) {
         // Waiting for result
         let promise;
-        let token = localStorage.getItem('token');
         let currentConf = { headers: {} };
         currentConf.headers = Object.assign(currentConf.headers, AXIOS_CONF.headers);
-
-        if (token !== null) {
-            currentConf.headers['Authorization'] = 'Bearer ' + token;
-        }
 
         let transformParams = false;
         for (let key in params) {
