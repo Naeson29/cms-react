@@ -1,10 +1,11 @@
 import React from 'react';
+import {connect} from 'react-redux';
 import Slider from 'react-animated-slider';
 import 'react-animated-slider/build/horizontal.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import * as IconSolid from '@fortawesome/free-solid-svg-icons';
 
-export class Home extends React.Component {
+class Home extends React.Component {
 
     render() {
 
@@ -55,3 +56,5 @@ export class Home extends React.Component {
         );
     }
 }
+
+export default connect()(Home);

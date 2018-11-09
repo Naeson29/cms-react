@@ -4,8 +4,8 @@ import {Router, Route, browserHistory, IndexRoute} from 'react-router';
 
 import '../scss/styles.scss';
 
-import {Root} from './components/app/Root';
-import {Home} from './components/app/Home';
+import {Root} from './components/app/root';
+import {Home} from './components/app/home';
 import {NewItem} from './components/app/NewItem';
 
 class App extends React.Component {

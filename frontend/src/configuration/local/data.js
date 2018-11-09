@@ -1,3 +1,3 @@
 export const ConfigData = {
-    api_url: 'http://cms.apt.dev:3000',
+    api_url: 'http://cms.api.dev:3000/',
 };
