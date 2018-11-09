@@ -25,7 +25,7 @@ const DIST_DIR = path.resolve(__dirname, 'public');
 module.exports = (env = {}) => {
     return {
         entry: {
-            index: ['babel-polyfill', SRC_DIR + '/app/index.js']
+            index: ['babel-polyfill', SRC_DIR + '/index.js']
         },
         output: {
             path: DIST_DIR,

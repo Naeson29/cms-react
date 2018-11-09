@@ -2,11 +2,11 @@ import React from 'react';
 import {render} from 'react-dom';
 import {Router, Route, browserHistory, IndexRoute} from 'react-router';
 
-import '../../scss/styles.scss';
+import '../scss/styles.scss';
 
-import {Root} from './components/Root';
-import {Home} from './components/Home';
-import {NewItem} from './components/NewItem';
+import {Root} from './components/app/Root';
+import {Home} from './components/app/Home';
+import {NewItem} from './components/app/NewItem';
 
 class App extends React.Component {
   render() {

@@ -1,7 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router';
 import { slide as Menu } from 'react-burger-menu';
-import {DEVICE_TYPE} from '../../utils/consts';
+import {DEVICE_TYPE} from '../../../utils/consts';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import * as IconSolid from '@fortawesome/free-solid-svg-icons';
 
