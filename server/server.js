@@ -8,7 +8,7 @@ const bodyParser = require('body-parser');
 const PORT = process.env.PORT || 3000;
 const winston = require('winston');
 const logger = require('morgan');
-const items = require('./routes/items');
+const items = require('./routes/sliders');
 
 // Body Parser
 app.use(logger('dev'));
