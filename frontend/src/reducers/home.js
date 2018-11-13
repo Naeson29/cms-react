@@ -4,6 +4,14 @@ import ReducerFunctions from './functions';
 
 const INITIAL_STATE = {
     data: {},
+    view: {
+        content : [],
+        loading: true
+    },
+    slider: {
+        content : [],
+        loading: true
+    }
 };
 
 export default function Home(state = INITIAL_STATE, action) {
@@ -16,7 +24,7 @@ export default function Home(state = INITIAL_STATE, action) {
         }
 
         case GET_SLIDER.SUCCESS: {
-            return ReducerFunctions.getSuccess(state, action.payload, HomeEntity, action);
+            return ReducerFunctions.getSuccessSlider(state, action.payload);
         }
 
         case GET_SLIDER.FAILURE: {

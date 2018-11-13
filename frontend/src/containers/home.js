@@ -5,7 +5,7 @@ import HomeManager from '../models/manager/home';
 
 const mapStateToProps = (state) => {
     return {
-
+        slider : state.Home.slider.content
     };
 };
 
