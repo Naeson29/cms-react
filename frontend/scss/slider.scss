@@ -1,16 +1,32 @@
 .slider-container {
 
+  background: rgba(0,0,0,0.05);
+  position: relative;
+
+  .loading {
+    position: absolute;
+    top:0;
+    right:0;
+    left:0;
+    bottom:0;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+  }
+
   .previousButton, .nextButton {
     position    : absolute;
     top         : 50%;
-    margin-top  : -20px;
+    margin-top  : -40px;
     z-index     : 10;
     cursor      : pointer;
+    width  : 40px;
+    height : 40px;
 
     .svg-inline--fa {
       color  : rgba(255,255,255,0.5);
-      width  : 40px;
-      height : 40px;
+      width  : inherit;
+      height : inherit;
       transition  : all 0.3s ease 0s;
     }
 
@@ -49,6 +65,7 @@
       -webkit-transform : translateY(-20px);
       transform         : translateY(-20px);
       opacity           : 0;
+      text-shadow: 2px 2px 2px #000000;
     }
 
     p {
@@ -82,7 +99,7 @@
 
         p {
           color       : #FFFFFF;
-          font-size   : 14px;
+          font-size   : 16px;
           line-height : 1.5;
           margin      : 20px auto 30px;
           max-width   : 640px;

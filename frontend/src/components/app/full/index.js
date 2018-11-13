@@ -6,41 +6,10 @@ import Home   from '../../../containers/home';
 
 class Full extends Component {
 
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            loading:true,
-        };
-    }
-
-    componentWillUnmount() {
-    }
-
-    componentDidUpdate() {
-        const {loading} = this.state;
-
-        if (loading && !this.props.loading) {
-            this.setState({
-                loading:false
-            });
-        }
-    }
-
     render() {
-        const {loading} = this.state;
-
-        // if (loading) {
-        //     return (
-        //         <div className={'root-loader'}>
-        //             <Loader />
-        //         </div>
-        //     );
-        // }
-
         return (
 
-            <div className="container col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div className="container-app">
                 <div className="header-app">
                     <Header/>
                 </div>
