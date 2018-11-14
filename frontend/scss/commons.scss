@@ -1,6 +1,7 @@
 body {
 
   background: $body-color;
+  font-family: 'Nobile', cursive;
 
   .container-app {
 
@@ -8,6 +9,12 @@ body {
     width:100%;
 
     .content-full {
+
+      &:after {
+        content: '';
+        display: block;
+        clear: both;
+      }
 
       h1 {
         background: $primary-color;
@@ -32,6 +39,16 @@ body {
         }
       }
       .content {
+        padding-top:2rem;
+
+        h3 {
+          color:$primary-color;
+          margin-bottom:.8rem;
+        }
+
+        p {
+          margin-bottom:1.5rem;
+        }
 
       }
     }

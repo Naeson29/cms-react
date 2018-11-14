@@ -1,3 +1,28 @@
 .home {
+  .content {
 
+    @media (min-width: 768px) {
+      display:flex;
+      justify-content:center;
+
+      .column {
+        width:50%;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .column {
+        width:100%;
+      }
+    }
+
+    .column {
+      text-align: left;
+      padding:1rem;
+
+      p {
+        font-size:1rem
+      }
+    }
+  }
 }
