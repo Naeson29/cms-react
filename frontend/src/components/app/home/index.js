@@ -10,7 +10,6 @@ class Home extends Component {
 
     constructor(props){
         super(props);
-
         props.load();
     }
 
@@ -38,7 +37,7 @@ class Home extends Component {
                                 slider.map((item, index) => (
                                     <div key={'slider_' + index} className="slider-content" style={{ background: `url('${item.image}') no-repeat center center` }}>
                                         <div className="inner">
-                                            <h1>{item.title}</h1>
+                                            <h2>{item.title}</h2>
                                             <p>{item.description}</p>
                                         </div>
                                     </div>
@@ -46,9 +45,11 @@ class Home extends Component {
                             }
                         </Slider>
                 }
+                <div className={'content-full'}>
+                    <h1>{'Présentation'}</h1>
+                    <div className="content col-lg-8 offset-lg-2 col-md-12 col-sm-12 col-xs-12">
 
-                <div className="content col-lg-8 offset-lg-2 col-md-12 col-sm-12 col-xs-12">
-                    <h3>Home</h3>
+                    </div>
                 </div>
             </div>
         );

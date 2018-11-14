@@ -2,6 +2,7 @@
 
   background: rgba(0,0,0,0.05);
   position: relative;
+  overflow: hidden;
 
   .loading {
     position: absolute;
@@ -60,7 +61,7 @@
       left       : 0;
     }
 
-    h1 {
+    h2 {
       transition        : all 0.3s ease;
       -webkit-transform : translateY(-20px);
       transform         : translateY(-20px);
@@ -88,12 +89,12 @@
         -webkit-transform : translate(-50%, -50%);
         transform         : translate(-50%, -50%);
 
-        h1 {
+        h2 {
           font-weight : 900;
           margin      : 0 auto;
           max-width   : 840px;
           color       : #FFFFFF;
-          font-size   : 64px;
+          font-size   : 60px;
           line-height : 1;
         }
 
@@ -121,7 +122,7 @@
       }
 
       &.animateOut {
-        h1 {
+        h2 {
           -webkit-transition-delay : .3s;
           transition-delay         : .3s;
         }
@@ -131,9 +132,9 @@
         }
       }
 
-      &.animateIn.previous h1,
-      &.current h1,
-      &.animateIn.next h1,
+      &.animateIn.previous h2,
+      &.current h2,
+      &.animateIn.next h2,
       &.animateIn.previous p,
       &.current p,
       &.animateIn.next p {
@@ -149,7 +150,7 @@
 
 .slider-container, .slider-container .slide {
   @media (min-width: 768px) {
-    height : calc(80vh - 75px);
+    height : calc(60vh - 75px);
   }
 
   @media (max-width: 768px) {

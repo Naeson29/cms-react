@@ -55,7 +55,7 @@ class Header extends Component {
                         <ul className="nav navbar-nav">
                             <li className="nav-item">
                                 <NavLink to={'/home'} className="nav-link" activeClassName="active">
-                                    {'Accueil'}
+                                    {'Présentation'}
                                 </NavLink>
                             </li>
                             <li className="nav-item">
@@ -73,7 +73,7 @@ class Header extends Component {
                                 styles={styles}
                             >
                                 <NavLink to={'/home'} className="nav-link" activeClassName="active">
-                                    {'Accueil'}
+                                    {'Présentation'}
                                 </NavLink>
                                 <NavLink to={'/newItem'} className="nav-link" activeClassName="active">
                                     {'Items'}
