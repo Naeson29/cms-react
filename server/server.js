@@ -36,7 +36,7 @@ app.use((req, res, next) => {
                 error   : 401,
                 message : "Unauthorized token"
             });
-            return false;
+            return;
         }
         next();
     }
