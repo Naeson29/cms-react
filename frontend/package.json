@@ -64,6 +64,7 @@
     "node-sass": "^4.10.0",
     "react-addons-test-utils": "^15.3.2",
     "react-hot-loader": "^3.0.0-beta.5",
+    "react-social-icons": "^3.0.0",
     "sass-loader": "^7.1.0",
     "style-loader": "^0.13.1",
     "webpack": "^4.25.0",

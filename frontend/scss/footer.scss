@@ -1,3 +1,14 @@
 .footer-app {
+  background: $primary-color;
+  padding:1rem;
+
+  .social-network {
+    display: flex;
+    justify-content:center;
+
+    .social-icon {
+      margin:0 0.8rem;
+    }
+  }
 
 }
