@@ -1,6 +1,7 @@
 import Axios from 'axios';
 import qs from 'qs';
 import {ROOT_URL, AXIOS_CONF, HTTP_GET, HTTP_POST, HTTP_PUT, HTTP_DELETE} from './utils';
+import Config from "../configuration";
 
 let frontUrl    = ROOT_URL + 'api/';
 
@@ -11,6 +12,7 @@ export default class Api {
         let promise;
         let currentConf = { headers: {} };
         currentConf.headers = Object.assign(currentConf.headers, AXIOS_CONF.headers);
+        currentConf.headers['Authorization'] = 'Bearer ' + Config.get('api_token');
 
         let transformParams = false;
         for (let key in params) {

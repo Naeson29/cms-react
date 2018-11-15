@@ -1,21 +1,25 @@
 'use strict';
-const express = require('express');
-const router = express.Router();
-const mongoose = require('mongoose');
-const Slider = require('../models/slider');
+const Constants = require('../utils/consts');
+const Express   = require('express');
+const Mongoose  = require('mongoose');
+const Router    = Express.Router();
 
-mongoose.connect('mongodb://mongodb:27017/reactCms', { useNewUrlParser: true });
+//Models
+const Slider    = require('../models/slider');
 
-// Get all items
-router.get('/sliders', function(req, res, next) {
+//Connect
+Mongoose.connect(`mongodb://mongodb:27017/${Constants.database}`, { useNewUrlParser: true });
+
+
+//Slider
+Router.get('/sliders', function(req, res) {
   Slider.find()
     .then(function(data) {
       res.json(data);
     });
 });
 
-// Get single item
-router.get('/sliders/:id', function(req, res, next) {
+Router.get('/sliders/:id', function(req, res) {
   let _id = req.params.id;
   Slider.findById(_id, function(err, data) {
     if (err) {
@@ -25,6 +29,31 @@ router.get('/sliders/:id', function(req, res, next) {
     }
   });
 });
+
+module.exports = Router;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // // Add new item
 // router.post('/sliders', function(req, res, next) {
@@ -73,5 +102,3 @@ router.get('/sliders/:id', function(req, res, next) {
 //     }
 //   });
 // });
-
-module.exports = router;
