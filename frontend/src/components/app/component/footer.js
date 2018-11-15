@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { SocialIcon } from 'react-social-icons';
-import {DEVICE_TYPE} from "../../../utils/consts";
+import {DEVICE_TYPE} from '../../../utils/consts';
 
 
 class Footer extends Component {
