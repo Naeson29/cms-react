@@ -18,7 +18,7 @@ class Full extends Component {
                 <div className={'content-app'}>
                     <Switch>
                         <Route exact path="/" name="Dashboard" component={Dashboard}/>
-                        <Route exact path="/Dashboard" name="Dashboard" component={Dashboard}/>
+                        <Route path="/Dashboard" name="Dashboard" component={Dashboard}/>
                     </Switch>
                 </div>
                 {/*<div className="footer-app">*/}

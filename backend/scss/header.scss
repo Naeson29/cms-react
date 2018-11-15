@@ -18,7 +18,13 @@
     height          : inherit;
 
     .navbar-brand {
+      height : 100%;
+      margin-left : 0.8rem;
 
+      img {
+        height:80%;
+        margin-top:10%;
+      }
     }
 
     .navbar-nav {
