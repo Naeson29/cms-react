@@ -16,6 +16,13 @@
   }
 
   .previousButton, .nextButton {
+    @media (min-width: 768px) {
+      display:block;
+    }
+    @media (max-width: 768px) {
+      display:none;
+    }
+
     position    : absolute;
     top         : 50%;
     margin-top  : -40px;
