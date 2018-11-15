@@ -1,56 +1,21 @@
 body {
 
-  background: $body-color;
-
   .container-app {
 
-    padding-top:$header-height;
-    width:100%;
+    position : absolute;
+    top      : 0;
+    left     : 0;
+    right    : 0;
+    bottom   : 0;
+    z-index  : 1;
 
-    .content-full {
-
-      &:after {
-        content: '';
-        display: block;
-        clear: both;
-      }
-
-      h1 {
-        background: $primary-color;
-        color:#fff;
-        text-align: center;
-        font-size:28px;
-        padding:0.8rem;
-        position: relative;
-
-        &:before {
-          content: '';
-          display: block;
-          position: absolute;
-          left:50%;
-          margin-left:-15px;
-          top: 100%;
-          width: 0;
-          height: 0;
-          border-left: 15px solid transparent;
-          border-right: 15px solid transparent;
-          border-top: 10px solid $primary-color;
-        }
-      }
-      .content {
-        padding-top:2rem;
-
-        h3 {
-          color:$primary-color;
-          margin-bottom:.8rem;
-          font-size: 1.4rem;
-        }
-
-        p {
-          margin-bottom:1.5rem;
-        }
-
-      }
+    .content-app {
+      position : absolute;
+      top      : 0;
+      right    : 0;
+      bottom   : 0;
+      z-index  : 1;
+      width    : calc(100% - 250px);
     }
   }
 }

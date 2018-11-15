@@ -3,11 +3,12 @@
 $primary-color       : #0e85cd;
 $primary-color-light : #0e85cd;
 
-//Body
+//Sidebar
 
-$body-color : #e6eef5;
+$bg-sidebar : #1a1a1a;
+
 
 //Header
 
-$header-height : 70px;
-$header-bg     : #fff;
+$header-height : 60px;
+$header-bg     : rgba(0,0,0,0.8);

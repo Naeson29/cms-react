@@ -1,3 +1,10 @@
 .sidebar {
+  position   : absolute;
+  top        : 0;
+  left       : 0;
+  bottom     : 0;
+  width      : 250px;
+  background : $bg-sidebar;
+  z-index    : 1;
 
 }

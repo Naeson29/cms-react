@@ -4,7 +4,7 @@ import DashboardReducer from './dashboard';
 
 
 const rootReducer = combineReducers({
-    dashboard  : DashboardReducer,
+    Dashboard  : DashboardReducer,
     routing    : routerReducer,
 });
 

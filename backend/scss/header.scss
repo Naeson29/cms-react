@@ -18,37 +18,11 @@
     height          : inherit;
 
     .navbar-brand {
-      margin : 0 1rem;
-      height : 95%;
-      img {
-        height : 100%;
-      }
+
     }
 
     .navbar-nav {
-      flex-direction : row;
 
-      .nav-item {
-        float : none;
-
-        .nav-link {
-          color   : #585858;
-          padding : 0.5rem 1rem;
-
-          -webkit-transition : color .3s ease-in;
-          -moz-transition    : color .3s ease-in;
-          -o-transition      : color .3s ease-in;
-          transition         : color .3s ease-in;
-
-          &:hover {
-            color : $primary-color-light;
-          }
-
-          &.active {
-            color : $primary-color;
-          }
-        }
-      }
     }
   }
 
