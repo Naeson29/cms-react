@@ -101,8 +101,14 @@
           margin      : 0 auto;
           max-width   : 840px;
           color       : #FFFFFF;
-          font-size   : 60px;
           line-height : 1;
+
+          @media (min-width: 768px) {
+            font-size   : 60px;
+          }
+          @media (max-width: 768px) {
+            font-size   : 50px;
+          }
         }
 
         p {
@@ -161,6 +167,6 @@
   }
 
   @media (max-width: 768px) {
-    height : calc(70vh - 75px);
+    height : calc(60vh - 75px);
   }
 }
