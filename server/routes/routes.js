@@ -12,14 +12,14 @@ Mongoose.connect(`mongodb://mongodb:27017/${Constants.database}`, { useNewUrlPar
 
 
 //Slider
-Router.get('/sliders', function(req, res) {
+Router.get('/sliders', (req, res) => {
   Slider.find()
     .then(function(data) {
       res.json(data);
     });
 });
 
-Router.get('/sliders/:id', function(req, res) {
+Router.get('/sliders/:id', (req, res) => {
   let _id = req.params.id;
   Slider.findById(_id, function(err, data) {
     if (err) {

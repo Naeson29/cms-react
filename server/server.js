@@ -22,7 +22,7 @@ app.listen(PORT, function() {
     winston.log('info', `Server is listening on port ${PORT}`);
 });
 
-app.use(function(req, res, next) {
+app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Methods', '*');
     res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
@@ -32,10 +32,11 @@ app.use(function(req, res, next) {
     }
     else {
         if(req.token !== Constants.token){
-            res.json(401, {
+            res.status(401).send({
                 error   : 401,
                 message : "Unauthorized token"
             });
+            return false;
         }
         next();
     }
