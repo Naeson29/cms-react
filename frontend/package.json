@@ -8,7 +8,8 @@
     "prod": "cp src/configuration/prod/data.js src/configuration/data.js && webpack --watch --config=prod.config.js",
     "start": "npm run build",
     "build": "webpack -d && cp 'src/index.html' 'dist' && webpack-dev-server --content-base src/ --inline --hot --history-api-fallback --port 5000",
-    "build:prod": "webpack -p && cp 'src/index.html' 'public'"
+    "build:prod": "webpack -p && cp 'src/index.html' 'public'",
+    "lint": "node_modules/.bin/eslint src/* --fix"
   },
   "author": "",
   "license": "ISC",

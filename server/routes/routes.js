@@ -23,7 +23,7 @@ Router.get('/sliders/:id', function(req, res) {
   let _id = req.params.id;
   Slider.findById(_id, function(err, data) {
     if (err) {
-      res.status(404).send();
+      res.status(404).send('Not found');
     } else {
       res.json(data);
     }

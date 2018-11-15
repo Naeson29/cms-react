@@ -28,11 +28,14 @@ app.use(function(req, res, next) {
     res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
 
     if (req.method === 'OPTIONS') {
-        res.send(200);
+        res.status(200).send();
     }
     else {
         if(req.token !== Constants.token){
-            res.send(401);
+            res.json(401, {
+                error   : 401,
+                message : "Unauthorized token"
+            });
         }
         next();
     }

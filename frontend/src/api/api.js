@@ -1,7 +1,7 @@
 import Axios from 'axios';
 import qs from 'qs';
 import {ROOT_URL, AXIOS_CONF, HTTP_GET, HTTP_POST, HTTP_PUT, HTTP_DELETE} from './utils';
-import Config from "../configuration";
+import Config from '../configuration';
 
 let frontUrl    = ROOT_URL + 'api/';
 

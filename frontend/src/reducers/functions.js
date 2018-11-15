@@ -25,7 +25,7 @@ class ReducerFunctions {
         return {...state};
     }
 
-    getSuccess(state, payload, entityFunction) {
+    getSuccess(state, payload) {
         state.data = {...state.data};
         state.view.content = payload;
         state.view.loading = false;

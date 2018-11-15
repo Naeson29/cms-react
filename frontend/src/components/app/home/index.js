@@ -5,6 +5,7 @@ import 'react-animated-slider/build/horizontal.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import * as IconSolid from '@fortawesome/free-solid-svg-icons';
 import Loading from 'react-loading-components';
+import PropTypes from 'prop-types';
 
 class Home extends Component {
 
@@ -95,3 +96,12 @@ class Home extends Component {
 }
 
 export default connect()(Home);
+
+Home.propTypes = {
+    load         : PropTypes.func.isRequired,
+    loadingSlide : PropTypes.bool,
+    slider       : PropTypes.oneOfType([
+        PropTypes.object,
+        PropTypes.array
+    ])
+};
