@@ -26,16 +26,34 @@ services:
     volumes:
       - ../frontend:/app
     ports:
-      - "4000:4000"
+      - "5000:5000"
 
-  public:
-    container_name : http-public
+  public_front:
+    container_name : http-public-front
     image: nginx:latest
     ports:
         - "80:80"
     volumes:
-      - ../frontend/public:/var/www/cms-react
+      - ../frontend/public:/var/www/cms-react/front
       - ../frontend/front.conf:/etc/nginx/conf.d/default.conf
+
+  backend:
+      container_name : http-backend
+      image: node:9
+      working_dir: /app
+      volumes:
+        - ../backend:/app
+      ports:
+        - "4000:4000"
+
+  public_back:
+    container_name : http-public-back
+    image: nginx:latest
+    ports:
+        - "8000:80"
+    volumes:
+      - ../backend/public:/var/www/cms-react/back
+      - ../backend/back.conf:/etc/nginx/conf.d/default.conf
 
   mongodb:
     container_name : db-mongo

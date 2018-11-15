@@ -1,0 +1,17 @@
+// Import Bootstrap source files
+@import '../node_modules/bootstrap/scss/bootstrap';
+
+//variables
+@import "variables";
+
+// commons
+@import "commons";
+
+//sidebar
+@import "sidebar";
+
+// header
+@import "header";
+
+// footer
+@import "footer";
