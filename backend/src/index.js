@@ -13,7 +13,7 @@ ReactDOM.render((
         <HashRouter>
             <div>
                 <Switch>
-                    <Route path="/" name="Dashboard" component={Full}/>
+                    <Route path="/" name="dashboard" component={Full}/>
                 </Switch>
             </div>
         </HashRouter>

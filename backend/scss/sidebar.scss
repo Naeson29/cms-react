@@ -3,37 +3,76 @@
   top         : 0;
   left        : 0;
   bottom      : 0;
-  width       : 250px;
+  width       : $sidebar-width;
   background  : $bg-sidebar;
   z-index     : 1;
-  padding-top : $header-height;
 
-  .navbar {
-    margin-top: 0.8rem;
+  .sidebar-nav {
+    overflow-x: hidden;
+    overflow-y: auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    padding-top : $header-height;
+    padding-bottom : 30px;
 
-    .navbar-nav {
-      display : block;
-      width   : 100%;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+    @include sidebar-width($sidebar-borders, $sidebar-width);
 
-      .nav-item {
-        .nav-link {
-          color : $color-sidebar;
-          border-bottom : 1px solid $border-sidebar;
-          padding-top : .9rem;
-          padding-bottom : .9rem;
+    &::-webkit-scrollbar {
+      position: absolute;
+      width: 10px;
+      margin-left: -10px;
+      -webkit-appearance: none;
+    }
 
-          .svg-inline--fa {
-            width        : 25px;
-            height       : 25px;
-            margin-right : 1.4rem;
-          }
+    &::-webkit-scrollbar-track {
+      background-color: lighten($bg-sidebar, 5%);
+      border-right: 1px solid darken($bg-sidebar, 5%);
+      border-left: 1px solid darken($bg-sidebar, 5%);
+    }
 
-          .svg-inline--fa, span {
-            display        : inline-block;
-            vertical-align : middle;
-          }
-          span {
-            font-size:14px;
+    &::-webkit-scrollbar-thumb {
+      height: 50px;
+      background-color: darken($bg-sidebar, 10%);
+      background-clip: content-box;
+      border-color: transparent;
+      border-style: solid;
+      border-width: 1px 2px;
+    }
+
+    .navbar {
+      margin-top: 0.8rem;
+
+      .navbar-nav {
+        display : block;
+        width   : 100%;
+
+        .nav-item {
+          .nav-link {
+            color : $color-sidebar;
+            border-bottom : 1px solid $border-sidebar;
+            padding-top : .9rem;
+            padding-bottom : .9rem;
+
+            &.active {
+              color : $primary-color;
+            }
+
+            .svg-inline--fa {
+              width        : 25px;
+              height       : 25px;
+              margin-right : 1.4rem;
+            }
+
+            .svg-inline--fa, span {
+              display        : inline-block;
+              vertical-align : middle;
+            }
+            span {
+              font-size:14px;
+            }
           }
         }
       }

@@ -2,7 +2,6 @@ import React, {Component}   from 'react';
 import {Switch, Route}      from 'react-router-dom';
 
 import Header  from '../component/header';
-import Footer  from '../component/footer';
 import Sidebar from '../component/sidebar';
 import Dashboard    from '../../../containers/dashboard';
 
@@ -17,13 +16,10 @@ class Full extends Component {
                 <Sidebar/>
                 <div className={'content-app'}>
                     <Switch>
-                        <Route exact path="/" name="Dashboard" component={Dashboard}/>
-                        <Route path="/Dashboard" name="Dashboard" component={Dashboard}/>
+                        <Route exact path="/" name="dashboard" component={Dashboard}/>
+                        <Route path="/dashboard" name="dashboard" component={Dashboard}/>
                     </Switch>
                 </div>
-                {/*<div className="footer-app">*/}
-                    {/*<Footer/>*/}
-                {/*</div>*/}
             </div>
         );
     }
