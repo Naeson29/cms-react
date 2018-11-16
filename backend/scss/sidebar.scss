@@ -1,6 +1,7 @@
 .sidebar {
   background  : $bg-sidebar;
   z-index     : 1;
+  position    : fixed;
 
   @media (min-width: 1024px) {
     width : $sidebar-width;
@@ -10,14 +11,13 @@
   }
 
   @media (min-width: 768px) {
-    position    : absolute;
     top         : 0;
     left        : 0;
     bottom      : 0;
+    min-height  : 100%;
 
   }
   @media (max-width: 768px) {
-    position : fixed;
     bottom   : 0;
     left     : 0;
     right    : 0;
@@ -129,8 +129,15 @@
             }
 
             .svg-inline--fa {
-              width        : 25px;
-              height       : 25px;
+              @media (min-width: 1024px) {
+                width        : 25px;
+                height       : 25px;
+              }
+              @media (max-width: 1024px) {
+                width        : 30px;
+                height       : 30px;
+              }
+
               margin-right : 1.4rem;
             }
 

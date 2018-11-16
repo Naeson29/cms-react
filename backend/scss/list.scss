@@ -1,0 +1,33 @@
+.list {
+
+  .tables {
+    margin-bottom:0;
+
+    thead {
+      tr {
+        th {
+          border-top   : none;
+          border-right : 1px solid #dee2e6;
+
+          &:last-of-type {
+            border-right : none;
+          }
+        }
+      }
+    }
+    tbody {
+      tr {
+        td {
+          border-right : 1px solid #dee2e6;
+          &.center {
+            text-align: center;
+          }
+        }
+        &:last-of-type {
+          border-right : none;
+        }
+      }
+
+    }
+  }
+}

@@ -5,7 +5,9 @@ import SliderManager from '../models/manager/slider';
 
 const mapStateToProps = (state) => {
     return {
-
+        content : state.Slider.view.content,
+        loading : state.Slider.view.loading,
+        error   : state.Slider.view.error
     };
 };
 
@@ -13,7 +15,7 @@ const mapDispatchToProps = () => {
 
     return {
         load: (parameters) => {
-            //DashboardManager.slider(parameters);
+            SliderManager.slider(parameters);
         },
     };
 };

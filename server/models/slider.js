@@ -2,11 +2,26 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const SliderSchema = new Schema({
-    title: {type: String, required: true},
-    description: {type: String, required: true},
-    image: {type: String, required: true}
+        label : {
+            type: String,
+            required: true
+        },
+        text  : {
+            type: String,
+            required: true
+        },
+        image : {
+            type: String,
+            required: true
+        },
+        order : {
+            type: Number,
+            required: true
+        }
     },
-    {versionKey: false}
+    {
+        versionKey: false
+    }
 );
 
 module.exports = mongoose.model('Slider', SliderSchema);

@@ -38,8 +38,8 @@ class Home extends Component {
                                 slider.map((item, index) => (
                                     <div key={'slider_' + index} className="slider-content" style={{ background: `url('${item.image}') no-repeat center center` }}>
                                         <div className="inner">
-                                            <h2>{item.title}</h2>
-                                            <p>{item.description}</p>
+                                            <h2>{item.label}</h2>
+                                            <p>{item.text}</p>
                                         </div>
                                     </div>
                                 ))

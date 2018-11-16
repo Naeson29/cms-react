@@ -13,7 +13,6 @@ body {
       position     : absolute;
       top          : 0;
       right        : 0;
-      bottom       : 0;
       z-index      : 0;
       width        : 100%;
       padding-top  : $header-height;
@@ -25,7 +24,9 @@ body {
         padding-left : $sidebar-width-small;
       }
       @media (max-width: 768px) {
-        padding-left : 0;
+        padding-left   : 0;
+        padding-bottom : 50px;
+        left           : 0;
       }
 
       h1 {
@@ -33,7 +34,8 @@ body {
         color         : $primary-color;
         font-size     : 26px;
         padding       : 1.3rem 2rem;
-        border-bottom : 1px solid $h1-border
+        border-bottom : 1px solid $h1-border;
+        margin-bottom : 0;
       }
     }
   }
