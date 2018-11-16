@@ -1,12 +1,11 @@
 import React, {Component}   from 'react';
 import {Switch, Route}      from 'react-router-dom';
 
-import Header  from '../component/header';
-import Sidebar from '../component/sidebar';
-import Dashboard    from '../../../containers/dashboard';
+import Header    from '../component/header';
+import Sidebar   from '../component/sidebar';
+import Dashboard from '../../../containers/dashboard';
 
 class Full extends Component {
-
     render() {
         return (
             <div className="container-app">

@@ -23,29 +23,30 @@
       color       : $primary-color;
 
       &:before {
-        content:'';
-        display: inline-block;
-        height:100%;
-        vertical-align: middle;
+        content        : '';
+        display        : inline-block;
+        height         : 100%;
+        vertical-align : middle;
       }
 
       img {
-        height:80%;
-        display: inline-block;
-        vertical-align: middle;
-        margin-right: 0.8rem;
+        height         :80%;
+        display        : inline-block;
+        vertical-align : middle;
+        margin-right   : 0.8rem;
       }
 
       span {
         display: inline-block;
+        font-size:16px;
       }
     }
 
     .navbar-nav-right {
 
       .svg-inline--fa {
-        width: 26px;
-        height: 26px;
+        width  : 22px;
+        height : 22px;
       }
     }
   }
