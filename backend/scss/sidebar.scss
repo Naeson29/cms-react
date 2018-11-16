@@ -1,60 +1,119 @@
 .sidebar {
-  position    : absolute;
-  top         : 0;
-  left        : 0;
-  bottom      : 0;
-  width       : $sidebar-width;
   background  : $bg-sidebar;
   z-index     : 1;
 
+  @media (min-width: 768px) {
+    position    : absolute;
+    top         : 0;
+    left        : 0;
+    bottom      : 0;
+    width       : $sidebar-width;
+  }
+  @media (max-width: 768px) {
+    position : fixed;
+    bottom   : 0;
+    left     : 0;
+    right    : 0;
+  }
+
   .sidebar-nav {
-    overflow-x: hidden;
-    overflow-y: auto;
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    padding-top : $header-height;
-    padding-bottom : 30px;
 
-    -ms-overflow-style: -ms-autohiding-scrollbar;
-    @include sidebar-width($sidebar-borders, $sidebar-width);
-
-    &::-webkit-scrollbar {
+    @media (min-width: 768px) {
+      overflow-x: hidden;
+      overflow-y: auto;
       position: absolute;
-      width: 10px;
-      margin-left: -10px;
-      -webkit-appearance: none;
+      top: 0;
+      left: 0;
+      height: 100%;
+      padding-top : $header-height;
+      padding-bottom : 30px;
+
+      -ms-overflow-style: -ms-autohiding-scrollbar;
+      @include sidebar-width($sidebar-borders, $sidebar-width);
+
+      &::-webkit-scrollbar {
+        position: absolute;
+        width: 10px;
+        margin-left: -10px;
+        -webkit-appearance: none;
+      }
+
+      &::-webkit-scrollbar-track {
+        background-color: lighten($bg-sidebar, 5%);
+        border-right: 1px solid darken($bg-sidebar, 5%);
+        border-left: 1px solid darken($bg-sidebar, 5%);
+      }
+
+      &::-webkit-scrollbar-thumb {
+        height: 50px;
+        background-color: darken($bg-sidebar, 10%);
+        background-clip: content-box;
+        border-color: transparent;
+        border-style: solid;
+        border-width: 1px 2px;
+      }
     }
 
-    &::-webkit-scrollbar-track {
-      background-color: lighten($bg-sidebar, 5%);
-      border-right: 1px solid darken($bg-sidebar, 5%);
-      border-left: 1px solid darken($bg-sidebar, 5%);
-    }
-
-    &::-webkit-scrollbar-thumb {
-      height: 50px;
-      background-color: darken($bg-sidebar, 10%);
-      background-clip: content-box;
-      border-color: transparent;
-      border-style: solid;
-      border-width: 1px 2px;
-    }
 
     .navbar {
-      margin-top: 0.8rem;
+
+      @media (min-width: 768px) {
+        margin-top: 0.8rem;
+
+        .navbar-nav {
+          display : block;
+          width   : 100%;
+
+          .nav-item {
+            .nav-link {
+              border-bottom : 1px solid $border-sidebar;
+              padding-top : .9rem;
+              padding-bottom : .9rem;
+
+              .svg-inline--fa {
+                margin-right : 1.4rem;
+              }
+
+              .svg-inline--fa, span {
+                display        : inline-block;
+                vertical-align : middle;
+              }
+              span {
+                font-size:14px;
+              }
+            }
+          }
+        }
+      }
+
+      @media (max-width: 768px) {
+        height : $header-height;
+        display         : flex;
+        justify-content : center;
+        align-content   : center;
+
+        .navbar-nav {
+
+          flex-direction  : initial;
+
+          .nav-item {
+            display         : flex;
+            .nav-link {
+              .svg-inline--fa {
+                margin : 0 1.2rem;
+              }
+              span {
+                display: none;
+              }
+            }
+          }
+        }
+      }
 
       .navbar-nav {
-        display : block;
-        width   : 100%;
-
         .nav-item {
           .nav-link {
             color : $color-sidebar;
-            border-bottom : 1px solid $border-sidebar;
-            padding-top : .9rem;
-            padding-bottom : .9rem;
 
             &.active {
               color : $primary-color;
@@ -64,14 +123,6 @@
               width        : 25px;
               height       : 25px;
               margin-right : 1.4rem;
-            }
-
-            .svg-inline--fa, span {
-              display        : inline-block;
-              vertical-align : middle;
-            }
-            span {
-              font-size:14px;
             }
           }
         }

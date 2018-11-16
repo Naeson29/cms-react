@@ -4,6 +4,7 @@ import {Switch, Route}      from 'react-router-dom';
 import Header    from '../component/header';
 import Sidebar   from '../component/sidebar';
 import Dashboard from '../../../containers/dashboard';
+import Slider    from '../../../containers/slider';
 
 class Full extends Component {
     render() {
@@ -17,6 +18,7 @@ class Full extends Component {
                     <Switch>
                         <Route exact path="/" name="dashboard" component={Dashboard}/>
                         <Route path="/dashboard" name="dashboard" component={Dashboard}/>
+                        <Route path="/slider" name="slider" component={Slider}/>
                     </Switch>
                 </div>
             </div>

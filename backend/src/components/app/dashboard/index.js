@@ -11,7 +11,7 @@ class Dashboard extends Component {
 
     render() {
         return (
-            <div className={'Dashboard'}>
+            <div className={'dashboard'}>
                 {/*<div className={'content-full'}>*/}
                 {/*<h1>{'Présentation'}</h1>*/}
                 {/*<div className="content col-lg-8 offset-lg-2 col-md-12 col-sm-12 col-xs-12">*/}
@@ -64,10 +64,5 @@ class Dashboard extends Component {
 export default connect()(Dashboard);
 
 Dashboard.propTypes = {
-    load         : PropTypes.func.isRequired,
-    loadingSlide : PropTypes.bool,
-    slider       : PropTypes.oneOfType([
-        PropTypes.object,
-        PropTypes.array
-    ])
+    load : PropTypes.func.isRequired
 };
