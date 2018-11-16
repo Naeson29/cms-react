@@ -17,8 +17,15 @@ body {
       z-index      : 0;
       width        : 100%;
       padding-top  : $header-height;
-      @media (min-width: 768px) {
+
+      @media (min-width: 1024px) {
         padding-left : $sidebar-width;
+      }
+      @media (max-width: 1024px) {
+        padding-left : $sidebar-width-small;
+      }
+      @media (max-width: 768px) {
+        padding-left : 0;
       }
 
       h1 {
