@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 import { Table } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import * as IconSolid from '@fortawesome/free-solid-svg-icons';
+import PanelFunctions from '../../../containers/panel/functions';
+import {ACTIONS} from '../../../utils/actions';
 
 class Slider extends Component {
     constructor(props){
@@ -12,13 +14,23 @@ class Slider extends Component {
     }
 
     render() {
-        const { content, loading } = this.props;
+        const { content, openRightPanel, createSlider, loading } = this.props;
+
+        console.log(this.props)
 
         return (
             <div className={'slider list'}>
                 <h1>
                     <span>{'Slider'}</span>
-                    <FontAwesomeIcon icon={IconSolid.faPlusCircle} />
+                    <FontAwesomeIcon icon={IconSolid.faPlusCircle} onClick={() => openRightPanel(ACTIONS.PANEL_SLIDER, {
+                        createCivility: createSlider
+                    } , {
+                        onClose: (success) => {
+                            if(success) {
+                                this.reload();
+                            }
+                        }
+                    })} />
                 </h1>
                 <Table responsive striped className="tables">
                     <thead>
@@ -47,12 +59,13 @@ class Slider extends Component {
     }
 }
 
-export default connect()(Slider);
+export default connect(() => {return {};}, PanelFunctions)(Slider);
 
 Slider.propTypes = {
-    load    : PropTypes.func.isRequired,
-    loading : PropTypes.bool,
-    content : PropTypes.oneOfType([
+    load         : PropTypes.func.isRequired,
+    createSlider : PropTypes.func.isRequired,
+    loading      : PropTypes.bool,
+    content      : PropTypes.oneOfType([
         PropTypes.object,
         PropTypes.array
     ])

@@ -1,8 +1,4 @@
-import {
-    closePanel,
-    openRightPanel,
-    closeAllRightPanel,
-} from '../../actions/panel';
+import { closePanel, openRightPanel, closeAllRightPanel} from '../../actions/panel';
 import PanelManager from '../../models/manager/panel';
 
 export default function(dispatch, ownProps) {

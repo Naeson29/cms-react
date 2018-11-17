@@ -3,20 +3,12 @@ import Panel from './panel';
 import {ACTIONS} from '../../../utils/actions';
 import {  TransitionGroup, CSSTransition } from 'react-transition-group';
 import PropTypes from 'prop-types';
-
-// PRODUCT
-//import PanelProduct from '../../../components/app/product/panelProduct';
+import PanelSlider from '../../../components/app/slider/panel';
 
 class PanelList extends Component {
     constructor(props) {
         super(props);
-
-        this._getWidth    = this._getWidth.bind(this);
         this._renderPanel = this._renderPanel.bind(this);
-    }
-
-    _getWidth() {
-        return '100%';
     }
 
     _renderPanel(panel, position) {
@@ -37,10 +29,9 @@ class PanelList extends Component {
         let component = (<div />);
 
         switch(panel.label) {
-            // PRODUCT
-            case ACTIONS.PANEL_PRODUCT:
-                component   = (<PanelProduct {...panel.parameters} />);
-                panel.title = panel.parameters.product ? 'Modification d\'un produit' : 'Ajout d\'un produit';
+            case ACTIONS.PANEL_SLIDER:
+                component   = (<PanelSlider {...panel.parameters} />);
+                panel.title = panel.parameters.product ? 'Modification d\'un slider' : 'Ajout d\'un slider';
                 break;
 
             default:
@@ -70,8 +61,7 @@ class PanelList extends Component {
                     key={'trans_right_' + panel.id}
                     classNames={'panel'}
                     timeout={{enter: 500, exit: 500}}>
-                    <div className={'panel-container right'}
-                        style={{width: this._getWidth()}}>
+                    <div className={'panel-container right'}>
                         {this._renderPanel(panel, 'right')}
                     </div>
                 </CSSTransition>
