@@ -1,10 +1,11 @@
 import React, {Component}   from 'react';
 import {Switch, Route}      from 'react-router-dom';
 
-import Header    from '../component/header';
-import Sidebar   from '../component/sidebar';
-import Dashboard from '../../../containers/dashboard';
-import Slider    from '../../../containers/slider';
+import Header        from '../component/header';
+import Sidebar       from '../component/sidebar';
+import Dashboard     from '../../../containers/dashboard';
+import Slider        from '../../../containers/slider';
+import panelManager  from '../../../containers/panel/panelManager';
 
 class Full extends Component {
     render() {
@@ -20,6 +21,7 @@ class Full extends Component {
                         <Route path="/dashboard" name="dashboard" component={Dashboard}/>
                         <Route path="/slider" name="slider" component={Slider}/>
                     </Switch>
+                    <panelManager/>
                 </div>
             </div>
         );

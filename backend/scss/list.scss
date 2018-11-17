@@ -1,13 +1,20 @@
 .list {
 
   .tables {
-    margin-bottom:0;
+    margin : 0.9rem;
+    width  : auto;
 
     thead {
       tr {
+        background: $primary-color-light;
         th {
           border-top   : none;
-          border-right : 1px solid #dee2e6;
+          border-right : 1px solid $primary-border-light;
+          border-bottom: 1px solid $primary-border-light;
+          color        : #fff;
+          font-weight  : normal;
+          font-size    : 14px;
+          text-transform: uppercase;
 
           &:last-of-type {
             border-right : none;
@@ -19,12 +26,16 @@
       tr {
         td {
           border-right : 1px solid #dee2e6;
+          font-size: 14px;
           &.center {
             text-align: center;
           }
-        }
-        &:last-of-type {
-          border-right : none;
+          &.order {
+            color : $primary-color;
+          }
+          &:last-of-type {
+            border-right : none;
+          }
         }
       }
 

@@ -30,12 +30,25 @@ body {
       }
 
       h1 {
-        background    : $h1-bg;
-        color         : $primary-color;
-        font-size     : 26px;
-        padding       : 1.3rem 2rem;
-        border-bottom : 1px solid $h1-border;
-        margin-bottom : 0;
+        background      : $h1-bg;
+        color           : $primary-color;
+        font-size       : 26px;
+        padding         : 1.3rem 2rem;
+        border-bottom   : 1px solid $h1-border;
+        margin-bottom   : 0;
+        display         : flex;
+        justify-content : space-between;
+        align-content   : center;
+
+        .svg-inline--fa {
+          color      : $primary-color-light;
+          cursor     : pointer;
+          transition : all 0.3s ease 0s;
+
+          &:hover {
+            color  : $primary-color;
+          }
+        }
       }
     }
   }

@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import { Table } from 'reactstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import * as IconSolid from '@fortawesome/free-solid-svg-icons';
 
 class Slider extends Component {
     constructor(props){
@@ -14,7 +16,10 @@ class Slider extends Component {
 
         return (
             <div className={'slider list'}>
-                <h1>{'Slider'}</h1>
+                <h1>
+                    <span>{'Slider'}</span>
+                    <FontAwesomeIcon icon={IconSolid.faPlusCircle} />
+                </h1>
                 <Table responsive striped className="tables">
                     <thead>
                     <tr>
@@ -28,7 +33,7 @@ class Slider extends Component {
                         content.map((slider, idx) => {
                             return (
                                 <tr key={idx}>
-                                    <td className={'center'}>{slider.order}</td>
+                                    <td className={'center order'}>{slider.order}</td>
                                     <td>{slider.label}</td>
                                     <td>{slider.text}</td>
                                 </tr>
