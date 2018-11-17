@@ -3,7 +3,6 @@ import PanelManager from '../../components/app/panel/panelManager';
 
 const mapStateToProps = (state) => {
     return {
-        aLeftPanel: state.Panel.left,
         aRightPanel: state.Panel.right,
     };
 };

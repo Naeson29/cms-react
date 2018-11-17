@@ -8,15 +8,14 @@ class PanelManager extends Component {
     }
 
     shouldComponentUpdate(nextProps) {
-        return (nextProps.aRightPanel.length + nextProps.aLeftPanel.length) !== (this.props.aRightPanel.length + this.props.aLeftPanel.length);
+        return nextProps.aRightPanel.length !== this.props.aRightPanel.length;
     }
 
     render() {
-        const { aRightPanel, aLeftPanel } = this.props;
+        const { aRightPanel } = this.props;
 
         return (
             <div>
-                <PanelList left aPanel={aLeftPanel} />
                 <PanelList right aPanel={aRightPanel} />
             </div>
         );
