@@ -18,9 +18,17 @@
     height          : inherit;
 
     .navbar-brand {
-      height      : 100%;
-      margin-left : 0.8rem;
-      color       : $primary-color;
+      height       : 100%;
+      padding-left : 0.8rem;
+      color        : $primary-color;
+      @media (min-width: 1024px) {
+        width : $sidebar-width;
+      }
+      @media (max-width: 1024px) {
+        width : $sidebar-width-small;
+      }
+
+      background   : rgba(0,0,0,0.8);
 
       &:before {
         content        : '';
@@ -54,6 +62,7 @@
     }
 
     .navbar-nav-right {
+      margin-right : 0.8rem;
 
       .svg-inline--fa {
         width  : 22px;

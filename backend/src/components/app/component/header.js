@@ -18,7 +18,7 @@ class Header extends Component {
                     <span>{'Backoffice'}</span>
                 </NavLink>
                 <div className={'navbar-nav-right'}>
-                    <NavLink to={'/'} className="navbar-brand">
+                    <NavLink to={'/'}>
                         <FontAwesomeIcon icon={IconSolid.faUser} />
                     </NavLink>
                 </div>
