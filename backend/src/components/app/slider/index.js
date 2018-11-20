@@ -21,7 +21,7 @@ class Slider extends Component {
                 <h1>
                     <span>{'Slider'}</span>
                     <FontAwesomeIcon icon={IconSolid.faPlusCircle} onClick={() => openRightPanel(ACTIONS.PANEL_SLIDER, {
-                        createCivility: createSlider
+                        createSlider : createSlider
                     } , {
                         onClose: (success) => {
                             if(success) {
@@ -32,24 +32,24 @@ class Slider extends Component {
                 </h1>
                 <Table responsive striped className="tables">
                     <thead>
-                    <tr>
-                        <th>{'Ordre'}</th>
-                        <th>{'Titre'}</th>
-                        <th>{'Texte'}</th>
-                    </tr>
+                        <tr>
+                            <th>{'Ordre'}</th>
+                            <th>{'Titre'}</th>
+                            <th>{'Texte'}</th>
+                        </tr>
                     </thead>
                     <tbody>
-                    {
-                        content.map((slider, idx) => {
-                            return (
-                                <tr key={idx}>
-                                    <td className={'center order'}>{slider.order}</td>
-                                    <td>{slider.label}</td>
-                                    <td>{slider.text}</td>
-                                </tr>
-                            );
-                        })
-                    }
+                        {
+                            content.map((slider, idx) => {
+                                return (
+                                    <tr key={idx}>
+                                        <td className={'center order'}>{slider.order}</td>
+                                        <td>{slider.label}</td>
+                                        <td>{slider.text}</td>
+                                    </tr>
+                                );
+                            })
+                        }
                     </tbody>
                 </Table>
             </div>
@@ -60,10 +60,11 @@ class Slider extends Component {
 export default connect(() => {return {};}, PanelFunctions)(Slider);
 
 Slider.propTypes = {
-    load         : PropTypes.func.isRequired,
-    createSlider : PropTypes.func.isRequired,
-    loading      : PropTypes.bool,
-    content      : PropTypes.oneOfType([
+    load           : PropTypes.func.isRequired,
+    openRightPanel : PropTypes.func.isRequired,
+    createSlider   : PropTypes.func.isRequired,
+    loading        : PropTypes.bool,
+    content        : PropTypes.oneOfType([
         PropTypes.object,
         PropTypes.array
     ])

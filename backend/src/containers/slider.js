@@ -18,7 +18,7 @@ const mapDispatchToProps = () => {
             SliderManager.slider(parameters);
         },
         createSlider: (parameters, callback) => {
-            //CivilityManager.create(parameters, callback);
+            SliderManager.create(parameters, callback);
         },
     };
 };

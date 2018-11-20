@@ -1,6 +1,6 @@
-import { GET_SLIDER} from '../actions/dashboard';
-import DashboardEntity from '../models/entity/dashboard';
-import ReducerFunctions from './functions';
+// import { GET_SLIDER} from '../actions/dashboard';
+// import DashboardEntity from '../models/entity/dashboard';
+// import ReducerFunctions from './functions';
 
 const INITIAL_STATE = {
     data: {},

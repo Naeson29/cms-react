@@ -12,13 +12,13 @@ class PanelSlider extends Component
     {
         super(props);
         this.state = {
-            parameters: props.slider ? props.slider : {
+            registerFormErrors : {},
+            inputStarted       : {},
+            create             : !props.slider,
+            parameters         : props.slider ? props.slider : {
                 title       : '',
                 description : ''
-            },
-            registerFormErrors: {},
-            inputStarted: {},
-            create: !props.slider,
+            }
         };
 
         this._checkForm    = this._checkForm.bind(this);
@@ -31,8 +31,8 @@ class PanelSlider extends Component
     _checkForm() {
         let errors = {};
 
-        if (!this.state.parameters.label) {
-            errors.label = 'invalid';
+        if (!this.state.parameters.title) {
+            errors.title = 'invalid';
         }
         this.setState({ registerFormErrors: errors});
         return Object.keys(errors).length === 0;
@@ -64,10 +64,8 @@ class PanelSlider extends Component
             return;
         }
 
-        const seri = serialize(document.getElementById('civilityForm'), {hash: true});
-
         this.setState({ displayErrors: false });
-        this.props.updateSlider(this.state.parameters.id, seri, (data, success) => {
+        this.props.updateSlider(this.state.parameters.id, serialize(document.getElementById('civilityForm'), {hash: true}), (data, success) => {
             if (success) {
                 this.props.closePanel(this.props._id);
             }
@@ -103,16 +101,16 @@ class PanelSlider extends Component
                                     onBlur={this._checkForm}
                                     onChange={(event) => this._handleChange('title', event.target.value)}
                                 />
-                                {this._hasError('title') && <span className="error">{'Ce champs est requis'}</span>}
+                                {this._hasError('title') && <span className="error">{'Le titre du slider est requis'}</span>}
                             </div>
                             <div className="bloc-form">
                                 <label className={'label-info'} htmlFor="label">{'Description :'}</label>
                                 <textarea id="description" name="description" required className={'textarea'}
                                     value={parameters.description}
                                     onBlur={this._checkForm}
-                                    onChange={(event) => this._handleChange({'description': event.target.value})}
+                                    onChange={(event) => this._handleChange('description', event.target.value)}
                                 />
-                                {this._hasError('description') && <span className="error">{'Ce champs est requis'}</span>}
+                                {this._hasError('description') && <span className="error">{'La description du slider est requise'}</span>}
                             </div>
                             <PanelActions {...this.props}>
                                 <Button color={'primary'}>{create ? 'Créer' : 'Modifier'}</Button>

@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import {withRouter} from 'react-router-dom';
 import Dashboard from '../components/app/dashboard';
 
-const mapStateToProps = (state) => {
+const mapStateToProps = () => {
     return {
 
     };
@@ -11,7 +11,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = () => {
 
     return {
-        load: (parameters) => {
+        load: () => {
 
         },
     };

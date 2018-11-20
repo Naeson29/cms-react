@@ -31,6 +31,37 @@ class ReducerFunctions {
 
         return {...state};
     }
+
+    createInit(state) {
+        return this.getInit(state);
+    }
+
+    createProcessed(state) {
+        return this.getProcessed(state);
+    }
+
+    createFailure(state, payload) {
+        //Notifier(action, TYPE_ERROR, 'Echec de la création');
+        return this.getFailure(state, payload);
+    }
+
+    createSuccess(state, payload, section, entityFunction, action) {
+        // state.view[section].error = null;
+        //
+        // let newItem = {};
+        // newItem[payload.id] = entityFunction(payload);
+        // state.data = {...state.data, ...newItem};
+        //
+        // if (state.view[section].content !== undefined && !Array.isArray(state.view[section].content)) {
+        //     state.view[section].content = newItem[payload.id];
+        // }
+        //
+        // state.view[section].loading = false;
+        // Notifier(action, TYPE_SUCCESS, 'Succès de la création');
+
+        return {...state};
+    }
+
 }
 
 export default new ReducerFunctions();
