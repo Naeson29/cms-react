@@ -13,7 +13,7 @@ Mongoose.connect(`mongodb://mongodb:27017/${Constants.database}`, { useNewUrlPar
 
 //Slider
 Router.get('/sliders', (req, res) => {
-  Slider.find()
+  Slider.find().sort({order : 1})
     .then(function(data) {
       res.json(data);
     });
@@ -31,24 +31,28 @@ Router.get('/sliders/:id', (req, res) => {
 });
 
 Router.post('/sliders', function(req, res) {
-  req.accepts('application/json');
-  let item = {
-      label : req.body.label,
-      text  : req.body.text,
-      order : 4
-  };
+    req.accepts('application/json');
 
-  let data = new Slider(item);
-  data.save(function(err) {
-    if (err) {
-      res.status(500).send(err);
-    } else {
-      res.status(200).send({
-          success : 'created',
-          id      : data._id
-      });
-    }
-  });
+    Slider.count({}, function(err, count) {
+
+        const item = {
+            label : req.body.label,
+            text  : req.body.text,
+            order : ( count + 1)
+        };
+        const data = new Slider(item);
+
+        data.save(function(err) {
+            if (err) {
+                res.status(500).send(err);
+            } else {
+                res.status(200).send({
+                    success : 'created',
+                    id      : data._id
+                });
+            }
+        });
+    });
 });
 
 module.exports = Router;
