@@ -35,7 +35,7 @@ class Slider extends Component {
                         <tr>
                             <th>{'Ordre'}</th>
                             <th>{'Titre'}</th>
-                            <th>{'Texte'}</th>
+                            <th className={'no-display'}>{'Texte'}</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -45,7 +45,7 @@ class Slider extends Component {
                                     <tr key={idx}>
                                         <td className={'center order'}>{slider.order}</td>
                                         <td>{slider.label}</td>
-                                        <td>{slider.text}</td>
+                                        <td className={'no-display'}>{slider.text}</td>
                                     </tr>
                                 );
                             })

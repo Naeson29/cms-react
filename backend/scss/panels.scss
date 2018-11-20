@@ -6,11 +6,11 @@
   bottom: 0;
 
   @media (min-width: 768px) {
-    height: calc(100% - 50px);
+    height: calc(100% - 40px);
   }
 
   @media (max-width: 768px) {
-    height: calc(100% - 100px);
+    height: calc(100% - 80px);
   }
   top: $header-height;
 
@@ -70,7 +70,7 @@
 
   .panel {
     position: relative;
-    padding-top: 40px;
+    padding-top: 30px;
     height: 100%;
     background: #fff;
 
@@ -85,10 +85,10 @@
       .svg-inline--fa {
         position: absolute;
         right: 15px;
-        width: 24px;
-        height: 24px;
+        width: 20px;
+        height: 20px;
         top: 50%;
-        margin-top: -12px;
+        margin-top: -10px;
         cursor: pointer;
       }
 
@@ -96,23 +96,24 @@
         top: 0;
         text-align: center;
         padding: 5px 10px;
-        height: 40px;
+        height: 30px;
 
         span {
           text-transform: uppercase;
-          line-height: 30px;
+          line-height: 15px;
           font-size: 14px;
         }
       }
 
       &.button-panel {
         bottom: 0;
-        height: 40px;
+        height: 30px;
 
         .btn {
           border-radius: initial;
-          height:40px;
+          height:30px;
           border:none;
+          font-size: 14px;
           &:focus {
             box-shadow: none;
           }
@@ -122,7 +123,7 @@
 
     .content-panel {
       overflow-y: auto;
-      height: calc(100% - 40px);
+      height: calc(100% - 30px);
       padding: 0 15px 15px 15px;
 
       &::-webkit-scrollbar-track

@@ -2,7 +2,7 @@
 
   .tables {
     margin : 0.9rem;
-    width  : auto;
+    width  : calc(100% - 1.8rem);
 
     thead {
       tr {
@@ -40,6 +40,12 @@
         }
       }
 
+    }
+  }
+
+  @media (max-width: 768px) {
+    .no-display {
+      display:none;
     }
   }
 }
