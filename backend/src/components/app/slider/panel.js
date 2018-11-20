@@ -1,10 +1,12 @@
-import React, { Component } from 'react';
-import {Button} from 'reactstrap';
-import serialize from 'form-serialize';
-import PanelFunctions from '../../../containers/panel/functions';
-import {connect} from 'react-redux';
-import PanelActions from '../component/panelActions';
-import PropTypes from 'prop-types';
+import React, { Component }     from 'react';
+import {Button}                 from 'reactstrap';
+import serialize                from 'form-serialize';
+import PanelFunctions           from '../../../containers/panel/functions';
+import {connect}                from 'react-redux';
+import PanelActions             from '../component/panelActions';
+import FineUploaderTraditional  from 'fine-uploader-wrappers'
+import Gallery                  from 'react-fine-uploader'
+import PropTypes                from 'prop-types';
 
 class PanelSlider extends Component
 {
@@ -16,8 +18,8 @@ class PanelSlider extends Component
             inputStarted       : {},
             create             : !props.slider,
             parameters         : props.slider ? props.slider : {
-                title       : '',
-                description : ''
+                label : '',
+                text  : ''
             }
         };
 
@@ -31,8 +33,8 @@ class PanelSlider extends Component
     _checkForm() {
         let errors = {};
 
-        if (!this.state.parameters.title) {
-            errors.title = 'invalid';
+        if (!this.state.parameters.label) {
+            errors.label = 'invalid';
         }
         this.setState({ registerFormErrors: errors});
         return Object.keys(errors).length === 0;
@@ -89,6 +91,24 @@ class PanelSlider extends Component
     render() {
         const { create, parameters } = this.state;
 
+        const uploader = new FineUploaderTraditional({
+            options: {
+                chunking: {
+                    enabled: true
+                },
+                deleteFile: {
+                    enabled: true,
+                    endpoint: '/uploads'
+                },
+                request: {
+                    endpoint: '/uploads'
+                },
+                retry: {
+                    enableAuto: true
+                }
+            }
+        });
+
         return (
             <div className="content-panel">
                 <div className="content">
@@ -96,21 +116,24 @@ class PanelSlider extends Component
                         <form id="sliderForm" autoComplete="off" onSubmit={create ? this._createSlider : this._updateSlider} noValidate>
                             <div className="bloc-form">
                                 <label className={'label-info'} htmlFor="label">{'Titre :'}</label>
-                                <input id="title" name="title" type="text" autoFocus required className={'input'}
-                                    value={parameters.title}
+                                <input id="label" name="label" type="text" autoFocus required className={'input'}
+                                    value={parameters.label}
                                     onBlur={this._checkForm}
-                                    onChange={(event) => this._handleChange('title', event.target.value)}
+                                    onChange={(event) => this._handleChange('label', event.target.value)}
                                 />
-                                {this._hasError('title') && <span className="error">{'Le titre du slider est requis'}</span>}
+                                {this._hasError('label') && <span className="error">{'Le titre du slider est requis'}</span>}
                             </div>
                             <div className="bloc-form">
-                                <label className={'label-info'} htmlFor="label">{'Description :'}</label>
-                                <textarea id="description" name="description" required className={'textarea'}
-                                    value={parameters.description}
+                                <label className={'label-info'} htmlFor="label">{'Texte :'}</label>
+                                <textarea id="text" name="text" required className={'textarea'}
+                                    value={parameters.text}
                                     onBlur={this._checkForm}
-                                    onChange={(event) => this._handleChange('description', event.target.value)}
+                                    onChange={(event) => this._handleChange('text', event.target.value)}
                                 />
-                                {this._hasError('description') && <span className="error">{'La description du slider est requise'}</span>}
+                                {this._hasError('text') && <span className="error">{'La texte du slider est requis'}</span>}
+                            </div>
+                            <div className="bloc-form">
+                                <Gallery uploader={ uploader } />
                             </div>
                             <PanelActions {...this.props}>
                                 <Button color={'primary'}>{create ? 'Créer' : 'Modifier'}</Button>

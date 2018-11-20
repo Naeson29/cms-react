@@ -29,6 +29,36 @@
       height : 150px;
     }
 
+    .react-fine-uploader-gallery-dropzone {
+      border : 1px dashed $primary-color-light;
+    }
+
+    .react-fine-uploader-gallery-nodrop-container {
+      border : 1px solid $primary-color-light;
+    }
+
+    .react-fine-uploader-gallery-dropzone, .react-fine-uploader-gallery-nodrop-container {
+      min-height: 200px;
+
+      .react-fine-uploader-gallery-file-input-container {
+        background : $primary-color-light;
+        border     : 1px solid $primary-color-light;
+        width      : 150px;
+        font-size  : 14px;
+        padding    : 5px 0 2px 0;
+
+        .react-fine-uploader-gallery-file-input-content {
+          margin-top : 0;
+
+          .react-fine-uploader-gallery-file-input-upload-icon {
+            margin-bottom: 5px;
+          }
+        }
+      }
+    }
+
+
+
     .error {
       color      : $error-color;
       background : $bg-error;

@@ -4,7 +4,14 @@
   position: fixed;
   z-index: 10;
   bottom: 0;
-  height: calc(100% - 40px);
+
+  @media (min-width: 768px) {
+    height: calc(100% - 50px);
+  }
+
+  @media (max-width: 768px) {
+    height: calc(100% - 100px);
+  }
   top: $header-height;
 
   @media (min-width: 1025px) {
@@ -99,15 +106,7 @@
       }
 
       &.button-panel {
-
-        @media (min-width: 768px) {
-          bottom: 0;
-        }
-
-        @media (max-width: 768px) {
-          bottom: 50px;
-        }
-
+        bottom: 0;
         height: 40px;
 
         .btn {

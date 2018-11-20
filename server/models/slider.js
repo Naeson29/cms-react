@@ -12,7 +12,6 @@ const SliderSchema = new Schema({
         },
         image : {
             type: String,
-            required: true
         },
         order : {
             type: Number,

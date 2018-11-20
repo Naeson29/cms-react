@@ -30,6 +30,27 @@ Router.get('/sliders/:id', (req, res) => {
   });
 });
 
+Router.post('/sliders', function(req, res) {
+  req.accepts('application/json');
+  let item = {
+      label : req.body.label,
+      text  : req.body.text,
+      order : 4
+  };
+
+  let data = new Slider(item);
+  data.save(function(err) {
+    if (err) {
+      res.status(500).send(err);
+    } else {
+      res.status(200).send({
+          success : 'created',
+          id      : data._id
+      });
+    }
+  });
+});
+
 module.exports = Router;
 
 
