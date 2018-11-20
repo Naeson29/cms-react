@@ -16,8 +16,6 @@ class Slider extends Component {
     render() {
         const { content, openRightPanel, createSlider, loading } = this.props;
 
-        console.log(this.props)
-
         return (
             <div className={'slider list'}>
                 <h1>
@@ -27,7 +25,7 @@ class Slider extends Component {
                     } , {
                         onClose: (success) => {
                             if(success) {
-                                this.reload();
+                                //this.reload();
                             }
                         }
                     })} />

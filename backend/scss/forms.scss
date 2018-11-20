@@ -1,0 +1,33 @@
+.forms {
+
+  .bloc-form {
+    padding    : 10px 15px;
+    text-align : left;
+
+    label {
+      display   : block;
+      font-size : 14px;
+    }
+
+    .select, .input, .textarea {
+      background    : #fff;
+      border        : 1px solid #b4b5b7;
+      border-radius : 0.25rem;
+      padding       : 0.375rem 0.75rem;
+      display       : block;
+      width         : 100%;
+      font-size     : 0.875rem;
+      color         : #3e515b;
+    }
+
+    .input {
+      line-height : 1.5;
+    }
+
+    .textarea {
+      resize : none;
+      height : 150px;
+    }
+
+  }
+}

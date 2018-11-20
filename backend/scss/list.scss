@@ -6,15 +6,16 @@
 
     thead {
       tr {
-        background: $primary-color-light;
+        background: $primary-color;
         th {
-          border-top   : none;
-          border-right : 1px solid $primary-border-light;
-          border-bottom: 1px solid $primary-border-light;
+          border-top   : 1px solid $primary-border;
+          border-right : 1px solid $primary-border;
+          border-bottom: 1px solid $primary-border;
           color        : #fff;
           font-weight  : normal;
           font-size    : 14px;
           text-transform: uppercase;
+          padding: 0.5rem 0.75rem;
 
           &:last-of-type {
             border-right : none;

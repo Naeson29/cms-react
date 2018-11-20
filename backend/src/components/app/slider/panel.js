@@ -6,25 +6,26 @@ import {connect} from 'react-redux';
 import PanelActions from '../component/panelActions';
 import PropTypes from 'prop-types';
 
-class PanelCivility extends Component
+class PanelSlider extends Component
 {
     constructor(props)
     {
         super(props);
         this.state = {
-            parameters: props.civility ? props.civility : {
-                label: '',
+            parameters: props.slider ? props.slider : {
+                title       : '',
+                description : ''
             },
             registerFormErrors: {},
             inputStarted: {},
-            create: !props.civility,
+            create: !props.slider,
         };
 
-        this._checkForm = this._checkForm.bind(this);
+        this._checkForm    = this._checkForm.bind(this);
         this._handleChange = this._handleChange.bind(this);
-        this._updateCivility = this._updateCivility.bind(this);
-        this._createCivility = this._createCivility.bind(this);
-        this._hasError = this._hasError.bind(this);
+        this._updateSlider = this._updateSlider.bind(this);
+        this._createSlider = this._createSlider.bind(this);
+        this._hasError     = this._hasError.bind(this);
     }
 
     _checkForm() {
@@ -56,7 +57,7 @@ class PanelCivility extends Component
         return this.state.registerFormErrors[attribute] && this.state.inputStarted[attribute];
     }
 
-    _updateCivility(event) {
+    _updateSlider(event) {
         event.preventDefault();
 
         if (!this._checkForm()) {
@@ -66,21 +67,21 @@ class PanelCivility extends Component
         const seri = serialize(document.getElementById('civilityForm'), {hash: true});
 
         this.setState({ displayErrors: false });
-        this.props.updateCivility(this.state.parameters.id, seri, (data, success) => {
+        this.props.updateSlider(this.state.parameters.id, seri, (data, success) => {
             if (success) {
                 this.props.closePanel(this.props._id);
             }
         });
     }
 
-    _createCivility(event) {
+    _createSlider(event) {
         event.preventDefault();
 
         if (!this._checkForm()) {
             return;
         }
 
-        this.props.createCivility(serialize(document.getElementById('civilityForm'), {hash: true}), (data, success) => {
+        this.props.createSlider(serialize(document.getElementById('sliderForm'), {hash: true}), (data, success) => {
             if (success) {
                 this.props.closePanel(this.props._id);
             }
@@ -94,24 +95,24 @@ class PanelCivility extends Component
             <div className="content-panel">
                 <div className="content">
                     <div className="forms">
-                        <form id="civilityForm" autoComplete="off" onSubmit={create ? this._createCivility : this._updateCivility} noValidate>
+                        <form id="sliderForm" autoComplete="off" onSubmit={create ? this._createSlider : this._updateSlider} noValidate>
                             <div className="bloc-form">
-                                <label className={'label-info'} htmlFor="label">{'Abréviation :'}</label>
-                                <input id="abbreviation" name="abbreviation" type="text" autoFocus required className="input"
-                                    value={parameters.abbreviation}
+                                <label className={'label-info'} htmlFor="label">{'Titre :'}</label>
+                                <input id="title" name="title" type="text" autoFocus required className={'input'}
+                                    value={parameters.title}
                                     onBlur={this._checkForm}
-                                    onChange={(event) => this._handleChange('abbreviation', event.target.value)}
+                                    onChange={(event) => this._handleChange('title', event.target.value)}
                                 />
-                                {this._hasError('label') && <span className="error">{'Ce champs est requis'}</span>}
+                                {this._hasError('title') && <span className="error">{'Ce champs est requis'}</span>}
                             </div>
                             <div className="bloc-form">
-                                <label className={'label-info'} htmlFor="label">{'Libellé :'}</label>
-                                <input id="label" name="label" type="text" required className="input"
-                                    value={parameters.label}
+                                <label className={'label-info'} htmlFor="label">{'Description :'}</label>
+                                <textarea id="description" name="description" required className={'textarea'}
+                                    value={parameters.description}
                                     onBlur={this._checkForm}
-                                    onChange={(event) => this._handleChange('label', event.target.value)}
+                                    onChange={(event) => this._handleChange({'description': event.target.value})}
                                 />
-                                {this._hasError('label') && <span className="error">{'Ce champs est requis'}</span>}
+                                {this._hasError('description') && <span className="error">{'Ce champs est requis'}</span>}
                             </div>
                             <PanelActions {...this.props}>
                                 <Button color={'primary'}>{create ? 'Créer' : 'Modifier'}</Button>
@@ -125,13 +126,13 @@ class PanelCivility extends Component
     }
 }
 
-PanelCivility.propTypes = {
-    closePanel          : PropTypes.func.isRequired,
-    _id                 : PropTypes.number.isRequired,
-    createCivility      : PropTypes.func,
-    updateCivility      : PropTypes.func,
-    parameters                : PropTypes.object,
-    civility       : PropTypes.object,
+PanelSlider.propTypes = {
+    closePanel     : PropTypes.func.isRequired,
+    _id            : PropTypes.number.isRequired,
+    createSlider   : PropTypes.func,
+    updateSlider   : PropTypes.func,
+    parameters     : PropTypes.object,
+    slider         : PropTypes.object,
 };
 
-export default connect(() => {return {};}, PanelFunctions)(PanelCivility);
+export default connect(() => {return {};}, PanelFunctions)(PanelSlider);
