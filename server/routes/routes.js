@@ -3,13 +3,24 @@ const Constants = require('../utils/consts');
 const Express   = require('express');
 const Mongoose  = require('mongoose');
 const Router    = Express.Router();
+const multer    = require('multer');
+
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, 'uploads/slider')
+    },
+    filename: function (req, file, cb) {
+        cb(null, Date.now() + '.jpg')
+    }
+});
+const upload = multer({storage: storage}).single('qqfile');
+
 
 //Models
 const Slider    = require('../models/slider');
 
 //Connect
 Mongoose.connect(`mongodb://mongodb:27017/${Constants.database}`, { useNewUrlParser: true });
-
 
 //Slider
 Router.get('/sliders', (req, res) => {
@@ -53,6 +64,21 @@ Router.post('/sliders', function(req, res) {
             }
         });
     });
+});
+
+//Upload
+Router.post('/upload', function(req, res) {
+
+    upload(req, res, function(err) {
+        if(err) {
+            console.log('Error Occured');
+            return;
+        }
+
+        res.status(200).send({
+            upload : 'success'
+        });
+    })
 });
 
 module.exports = Router;

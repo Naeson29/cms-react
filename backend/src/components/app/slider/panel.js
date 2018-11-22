@@ -4,9 +4,10 @@ import serialize                from 'form-serialize';
 import PanelFunctions           from '../../../containers/panel/functions';
 import {connect}                from 'react-redux';
 import PanelActions             from '../component/panelActions';
-import FineUploaderTraditional  from 'fine-uploader-wrappers'
+import FineUploaderTraditional  from 'fine-uploader-wrappers';
 import Gallery                  from 'react-fine-uploader'
 import PropTypes                from 'prop-types';
+import Config                   from '../../../configuration';
 
 class PanelSlider extends Component
 {
@@ -15,13 +16,32 @@ class PanelSlider extends Component
         super(props);
         this.state = {
             registerFormErrors : {},
-            inputStarted       : {},
             create             : !props.slider,
             parameters         : props.slider ? props.slider : {
                 label : '',
                 text  : ''
             }
         };
+
+        this.uploader = new FineUploaderTraditional({
+            options: {
+                autoUpload : false,
+                multiple   : false,
+                chunking   : {
+                    enabled : true
+                },
+                deleteFile : {
+                    enabled : true,
+                    endpoint: Config.get('api_url') + 'api/upload/'
+                },
+                request    : {
+                    customHeaders : {
+                        'Authorization' : 'Bearer ' + Config.get('api_token'),
+                    },
+                    endpoint: Config.get('api_url') + 'api/upload/'
+                }
+            }
+        });
 
         this._checkForm    = this._checkForm.bind(this);
         this._handleChange = this._handleChange.bind(this);
@@ -44,19 +64,16 @@ class PanelSlider extends Component
         let newItem = {...this.state.parameters};
         newItem[attribute] = value;
 
-        let newList = this.state.inputStarted;
-        newList[attribute] = true;
-
         let errorList = this.state.registerFormErrors;
         if (errorList[attribute] !== undefined) {
             delete errorList[attribute];
         }
 
-        this.setState({parameters: {...newItem}, inputStarted: {...newList}, registerFormErrors: {...errorList} });
+        this.setState({parameters: {...newItem}, registerFormErrors: {...errorList} });
     }
 
     _hasError(attribute) {
-        return this.state.registerFormErrors[attribute] && this.state.inputStarted[attribute];
+        return this.state.registerFormErrors[attribute];
     }
 
     _updateSlider(event) {
@@ -67,7 +84,7 @@ class PanelSlider extends Component
         }
 
         this.setState({ displayErrors: false });
-        this.props.updateSlider(this.state.parameters.id, serialize(document.getElementById('civilityForm'), {hash: true}), (data, success) => {
+        this.props.updateSlider(this.state.parameters.id, serialize(document.getElementById('sliderForm'), {hash: true}), (data, success) => {
             if (success) {
                 this.props.closePanel(this.props._id);
             }
@@ -76,38 +93,27 @@ class PanelSlider extends Component
 
     _createSlider(event) {
         event.preventDefault();
+        const uploader = this.uploader;
 
         if (!this._checkForm()) {
             return;
         }
 
-        this.props.createSlider(serialize(document.getElementById('sliderForm'), {hash: true}), (data, success) => {
-            if (success) {
-                this.props.closePanel(this.props._id);
-            }
-        });
+        //const files = uploader.methods.getUploads({status: uploader.qq.status.SUBMITTED}).length;
+        //console.log(files);
+
+
+        //uploader.methods.uploadStoredFiles()
+
+        // this.props.createSlider(serialize(document.getElementById('sliderForm'), {hash: true}), (data, success) => {
+        //     if (success) {
+        //         this.props.closePanel(this.props._id);
+        //     }
+        // });
     }
 
     render() {
         const { create, parameters } = this.state;
-
-        const uploader = new FineUploaderTraditional({
-            options: {
-                chunking: {
-                    enabled: true
-                },
-                deleteFile: {
-                    enabled: true,
-                    endpoint: '/uploads'
-                },
-                request: {
-                    endpoint: '/uploads'
-                },
-                retry: {
-                    enableAuto: true
-                }
-            }
-        });
 
         return (
             <div className="content-panel">
@@ -133,7 +139,7 @@ class PanelSlider extends Component
                                 {this._hasError('text') && <span className="error">{'La texte du slider est requis'}</span>}
                             </div>
                             <div className="bloc-form">
-                                <Gallery uploader={ uploader } />
+                                <Gallery uploader={this.uploader} />
                             </div>
                             <PanelActions {...this.props}>
                                 <Button color={'primary'}>{create ? 'Créer' : 'Modifier'}</Button>

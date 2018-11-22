@@ -6,6 +6,7 @@ const bodyParser  = require('body-parser');
 const winston     = require('winston');
 const logger      = require('morgan');
 const bearerToken = require('express-bearer-token');
+const cors        = require('cors');
 const PORT        = process.env.PORT || 3000;
 const Routes      = require('./routes/routes');
 const Constants   = require('./utils/consts');
@@ -16,6 +17,9 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 
 app.use(logger('dev'));
+app.use(cors({
+    optionsSuccessStatus : 200
+}));
 app.use(bearerToken());
 
 app.listen(PORT, function() {
@@ -23,23 +27,14 @@ app.listen(PORT, function() {
 });
 
 app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Methods', '*');
-    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
-
-    if (req.method === 'OPTIONS') {
-        res.status(200).send();
+    if(req.token !== Constants.token){
+        res.status(401).send({
+            error   : 401,
+            message : "Unauthorized token"
+        });
+        return;
     }
-    else {
-        if(req.token !== Constants.token){
-            res.status(401).send({
-                error   : 401,
-                message : "Unauthorized token"
-            });
-            return;
-        }
-        next();
-    }
+    next();
 });
 
 app.use('/api', Routes);
