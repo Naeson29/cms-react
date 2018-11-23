@@ -67,6 +67,13 @@
       text-align : center;
       margin-top : 10px;
       padding    : 0.3rem;
+
+      -moz-box-shadow: 1px 1px 3px 0px #9b9b9b;
+      -webkit-box-shadow: 1px 1px 3px 0px #9b9b9b;
+      -o-box-shadow: 1px 1px 3px 0px #9b9b9b;
+      box-shadow: 1px 1px 3px 0px #9b9b9b;
+      filter:progid:DXImageTransform.Microsoft.Shadow(color=#9b9b9b, Direction=134, Strength=3);
+
     }
 
   }

@@ -1,13 +1,13 @@
 import React, { Component }     from 'react';
+import {connect}                from 'react-redux';
 import {Button}                 from 'reactstrap';
 import serialize                from 'form-serialize';
 import PanelFunctions           from '../../../containers/panel/functions';
-import {connect}                from 'react-redux';
+import Config                   from '../../../configuration';
 import PanelActions             from '../component/panelActions';
 import FineUploaderTraditional  from 'fine-uploader-wrappers';
 import Gallery                  from 'react-fine-uploader'
 import PropTypes                from 'prop-types';
-import Config                   from '../../../configuration';
 
 class PanelSlider extends Component
 {
@@ -20,6 +20,11 @@ class PanelSlider extends Component
             parameters         : props.slider ? props.slider : {
                 label : '',
                 text  : ''
+            },
+            messages           : {
+                label : 'Le titre est requis',
+                text  : 'Le texte est requis',
+                image : 'L\'image est requise'
             }
         };
 
@@ -51,11 +56,23 @@ class PanelSlider extends Component
     }
 
     _checkForm() {
+        const parameters = this.state.parameters;
         let errors = {};
 
-        if (!this.state.parameters.label) {
-            errors.label = 'invalid';
+        Object.keys(parameters).map((key) => {
+            if (!parameters[key]) {
+                errors[key] = true;
+            }
+        });
+
+        const image = this.uploader.methods.getUploads({
+            status: this.uploader.qq.status.SUBMITTED
+        }).length;
+
+        if(image === 0){
+            errors.image = true;
         }
+
         this.setState({ registerFormErrors: errors});
         return Object.keys(errors).length === 0;
     }
@@ -73,7 +90,14 @@ class PanelSlider extends Component
     }
 
     _hasError(attribute) {
-        return this.state.registerFormErrors[attribute];
+        if(!this.state.registerFormErrors[attribute]){
+            return;
+        }
+        return (
+            <span className="error">
+                {this.state.messages[attribute]}
+            </span>
+        );
     }
 
     _updateSlider(event) {
@@ -93,14 +117,11 @@ class PanelSlider extends Component
 
     _createSlider(event) {
         event.preventDefault();
-        const uploader = this.uploader;
 
         if (!this._checkForm()) {
             return;
         }
 
-        //const files = uploader.methods.getUploads({status: uploader.qq.status.SUBMITTED}).length;
-        //console.log(files);
 
 
         //uploader.methods.uploadStoredFiles()
@@ -124,25 +145,24 @@ class PanelSlider extends Component
                                 <label className={'label-info'} htmlFor="label">{'Titre :'}</label>
                                 <input id="label" name="label" type="text" autoFocus required className={'input'}
                                     value={parameters.label}
-                                    onBlur={this._checkForm}
                                     onChange={(event) => this._handleChange('label', event.target.value)}
                                 />
-                                {this._hasError('label') && <span className="error">{'Le titre du slider est requis'}</span>}
+                                {this._hasError('label')}
                             </div>
                             <div className="bloc-form">
                                 <label className={'label-info'} htmlFor="label">{'Texte :'}</label>
                                 <textarea id="text" name="text" required className={'textarea'}
                                     value={parameters.text}
-                                    onBlur={this._checkForm}
                                     onChange={(event) => this._handleChange('text', event.target.value)}
                                 />
-                                {this._hasError('text') && <span className="error">{'La texte du slider est requis'}</span>}
+                                {this._hasError('text')}
                             </div>
                             <div className="bloc-form">
                                 <Gallery uploader={this.uploader} />
+                                {this._hasError('image')}
                             </div>
                             <PanelActions {...this.props}>
-                                <Button color={'primary'}>{create ? 'Créer' : 'Modifier'}</Button>
+                                <Button color={'primary'}>{'Enregistrer'}</Button>
                             </PanelActions>
                         </form>
                     </div>

@@ -1,9 +1,9 @@
 .panel-container {
 
-  background: none;
-  position: fixed;
-  z-index: 10;
-  bottom: 0;
+  background : none;
+  position   : fixed;
+  z-index    : 10;
+  bottom     : 0;
 
   @media (min-width: 768px) {
     height: calc(100% - 40px);
@@ -24,98 +24,99 @@
   }
   @media (max-width: 1024px) {
     padding-left : $sidebar-width-small;
-    width: 100%;
+    width        : 100%;
   }
 
   @media (max-width: 768px) {
     padding-left : 0;
   }
 
-
   &.right {
     right: 0;
 
     &.panel-enter {
       @media (min-width: 1025px) {
-        right: -50%;
+        right : -50%;
       }
       @media (max-width: 1024px) {
-        right: -100%;
+        right : -100%;
       }
     }
     &.panel-enter.panel-enter-active {
-      right: 0;
-      transition: right 600ms ease-in;
+      right      : 0;
+      transition : right 600ms ease-in;
     }
     &.panel-exit, .panel-enter-done {
-      right: 0;
+      right : 0;
     }
     &.panel-exit.panel-exit-active {
       @media (min-width: 1025px) {
-        right: -50%;
+        right : -50%;
       }
       @media (max-width: 1024px) {
-        right: -100%;
+        right : -100%;
       }
-      transition: right 600ms ease-in;
-    }
-
-    .button-panel {
-      text-align: left;
-      button {
-        margin-right:10px;
-      }
+      transition : right 600ms ease-in;
     }
   }
 
   .panel {
-    position: relative;
-    padding-top: 30px;
-    height: 100%;
-    background: #fff;
+    position    : relative;
+    padding-top : 30px;
+    height      : 100%;
+    background  : #fff;
 
 
     .action {
-      width: 100%;
-      position: absolute;
-      left: 0;
-      background-color: $primary-color;
-      color:#fff;
+      width    : 100%;
+      position : absolute;
+      left     : 0;
+      color    :#fff;
 
       .svg-inline--fa {
-        position: absolute;
-        right: 15px;
-        width: 18px;
-        height: 18px;
-        top: 50%;
-        margin-top: -10px;
-        cursor: pointer;
+        position   : absolute;
+        right      : 15px;
+        width      : 18px;
+        height     : 18px;
+        top        : 50%;
+        margin-top : -10px;
+        cursor     : pointer;
       }
 
       &.close-panel {
-        top: 0;
-        text-align: center;
-        padding: 5px 10px;
-        height: 30px;
+        top             : 0;
+        text-align      : center;
+        padding         : 5px 10px;
+        height          : 30px;
+        background-color: $primary-color;
 
         span {
-          text-transform: uppercase;
-          line-height: 15px;
-          font-size: 14px;
+          text-transform : uppercase;
+          line-height    : 15px;
+          font-size      : 14px;
         }
       }
 
       &.button-panel {
-        bottom: 0;
-        height: 30px;
+        bottom           : 0;
+        height           : 30px;
+        background-color : $footer-panel-color;
+        text-align : center;
 
         .btn {
-          border-radius: initial;
-          height:30px;
-          border:none;
-          font-size: 14px;
+          height        : 100%;
+          border        : none;
+          font-size     : 14px;
+          background    : $primary-color-light;
+          border-radius : initial;
+          padding       : 0 1.8rem;
+
           &:focus {
-            box-shadow: none;
+            box-shadow : none;
+          }
+
+          &:hover {
+            background : $btn-transition-color;
           }
         }
       }
@@ -134,13 +135,13 @@
 
       &::-webkit-scrollbar
       {
-        width: 12px;
+        width: 6px;
         background-color: #FAFAFA;
       }
 
       &::-webkit-scrollbar-thumb
       {
-        background: linear-gradient(#1e8fc6, #1f97d1, #1e8fc6);
+        background: linear-gradient($scrollbar-color1, $scrollbar-color2, $scrollbar-color3);
       }
 
       h2 {
@@ -153,5 +154,4 @@
 
     }
   }
-
 }
