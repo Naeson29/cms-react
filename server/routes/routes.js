@@ -76,7 +76,7 @@ Router.post('/upload', function(req, res) {
         }
 
         res.status(200).send({
-            upload : 'success'
+            success : true
         });
     })
 });

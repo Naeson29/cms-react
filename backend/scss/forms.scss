@@ -68,5 +68,14 @@
       border-radius : 0.25rem;
     }
 
+    .notification-appear {
+      opacity: 0.01;
+    }
+
+    .notification-appear.notification-appear-active {
+      opacity: 1;
+      transition: opacity 300ms ease-in;
+    }
+
   }
 }

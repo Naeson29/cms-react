@@ -3,11 +3,14 @@ import {connect}                from 'react-redux';
 import {Button}                 from 'reactstrap';
 import serialize                from 'form-serialize';
 import PanelFunctions           from '../../../containers/panel/functions';
-import Config                   from '../../../configuration';
 import PanelActions             from '../component/panelActions';
-import FineUploaderTraditional  from 'fine-uploader-wrappers';
 import Gallery                  from 'react-fine-uploader'
 import PropTypes                from 'prop-types';
+import Notification             from '../panel/notification';
+import Config                   from '../../../configuration';
+import FineUploaderTraditional  from 'fine-uploader-wrappers';
+
+import { NOTIFICATION, EXTENSION_IMAGE, SIZE_IMAGE } from '../../../utils/consts';
 
 class PanelSlider extends Component
 {
@@ -16,15 +19,11 @@ class PanelSlider extends Component
         super(props);
         this.state = {
             registerFormErrors : {},
+            errorFile          : '',
             create             : !props.slider,
             parameters         : props.slider ? props.slider : {
                 label : '',
                 text  : ''
-            },
-            messages           : {
-                label : 'Le titre est requis',
-                text  : 'Le texte est requis',
-                image : 'L\'image est requise'
             }
         };
 
@@ -36,15 +35,32 @@ class PanelSlider extends Component
                     enabled : true
                 },
                 deleteFile : {
-                    enabled : true,
-                    endpoint: Config.get('api_url') + 'api/upload/'
+                    enabled : false,
                 },
                 request    : {
                     customHeaders : {
                         'Authorization' : 'Bearer ' + Config.get('api_token'),
                     },
-                    endpoint: Config.get('api_url') + 'api/upload/'
-                }
+                    endpoint: Config.get('api_url') + 'api/upload/',
+                    requireSuccessJson : true,
+                },
+                validation : {
+                    allowedExtensions : EXTENSION_IMAGE,
+                    sizeLimit         : SIZE_IMAGE
+                },
+                messages : {
+                    typeError : NOTIFICATION.error.extension,
+                    sizeError : NOTIFICATION.error.size
+                },
+                callbacks : {
+                    onValidate : (data) => {
+                        this._changeImage(data);
+                    },
+                    onError    : (id, name, message) => {
+                        this._errorFile(message);
+                    }
+                },
+
             }
         });
 
@@ -73,7 +89,7 @@ class PanelSlider extends Component
             errors.image = true;
         }
 
-        this.setState({ registerFormErrors: errors});
+        this.setState({ registerFormErrors: errors, errorFile : ''});
         return Object.keys(errors).length === 0;
     }
 
@@ -89,14 +105,24 @@ class PanelSlider extends Component
         this.setState({parameters: {...newItem}, registerFormErrors: {...errorList} });
     }
 
+    _changeImage(data){
+        if(data.name){
+            let errorList = this.state.registerFormErrors;
+            delete errorList.image;
+            this.setState({registerFormErrors: {...errorList}, errorFile : ''});
+        }
+    }
+
+    _errorFile(message){
+        this.setState({ errorFile: <Notification type={'error'} attribute={'custom'} custom={message}/>});
+    }
+
     _hasError(attribute) {
         if(!this.state.registerFormErrors[attribute]){
             return;
         }
         return (
-            <span className="error">
-                {this.state.messages[attribute]}
-            </span>
+            <Notification type={'error'} attribute={attribute}/>
         );
     }
 
@@ -122,15 +148,13 @@ class PanelSlider extends Component
             return;
         }
 
-
-
-        //uploader.methods.uploadStoredFiles()
-
         // this.props.createSlider(serialize(document.getElementById('sliderForm'), {hash: true}), (data, success) => {
         //     if (success) {
         //         this.props.closePanel(this.props._id);
         //     }
         // });
+        //
+        // //uploader.methods.uploadStoredFiles()
     }
 
     render() {
@@ -160,6 +184,7 @@ class PanelSlider extends Component
                             <div className="bloc-form">
                                 <Gallery uploader={this.uploader} />
                                 {this._hasError('image')}
+                                {this.state.errorFile}
                             </div>
                             <PanelActions {...this.props}>
                                 <Button color={'primary'}>{'Enregistrer'}</Button>
@@ -168,7 +193,6 @@ class PanelSlider extends Component
                     </div>
                 </div>
             </div>
-
         );
     }
 }
