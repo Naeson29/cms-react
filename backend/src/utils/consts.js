@@ -14,5 +14,8 @@ export const NOTIFICATION    = {
         image     : 'L\'image est requise',
         extension : 'Le format de l\'image n\'est pas valide',
         size      : 'La taille de l\'image ne doit pas dépasser 1 Mo'
+    },
+    success : {
+        content : 'Le contenu a bien été enregistré'
     }
 };

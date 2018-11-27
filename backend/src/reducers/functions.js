@@ -33,32 +33,33 @@ class ReducerFunctions {
     }
 
     createInit(state) {
-        return this.getInit(state);
+        state.form = {
+            loading : true,
+            error   : null,
+            success : false
+        };
+        return {...state};
     }
 
     createProcessed(state) {
-        return this.getProcessed(state);
+        return {...state};
     }
 
     createFailure(state, payload) {
-        //Notifier(action, TYPE_ERROR, 'Echec de la création');
-        return this.getFailure(state, payload);
+        state.form = {
+            loading : false,
+            error   : payload,
+            success : false
+        };
+        return {...state};
     }
 
-    createSuccess(state, payload, section, entityFunction, action) {
-        // state.view[section].error = null;
-        //
-        // let newItem = {};
-        // newItem[payload.id] = entityFunction(payload);
-        // state.data = {...state.data, ...newItem};
-        //
-        // if (state.view[section].content !== undefined && !Array.isArray(state.view[section].content)) {
-        //     state.view[section].content = newItem[payload.id];
-        // }
-        //
-        // state.view[section].loading = false;
-        // Notifier(action, TYPE_SUCCESS, 'Succès de la création');
-
+    createSuccess(state, payload) {
+        state.form = {
+            loading : false,
+            error   : null,
+            success : payload
+        };
         return {...state};
     }
 

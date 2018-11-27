@@ -3,11 +3,16 @@ import SliderEntity     from '../models/entity/slider';
 import ReducerFunctions from './functions';
 
 const INITIAL_STATE = {
-    data: {},
-    view: {
+    data : {},
+    view : {
         content : [],
         loading : true,
         error   : null
+    },
+    form : {
+        loading : false,
+        error   : null,
+        success : false
     }
 };
 

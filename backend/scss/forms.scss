@@ -1,5 +1,18 @@
 .forms {
 
+  .submit-form {
+    position        : absolute;
+    top             : 30px;
+    left            : 0;
+    width           : 100%;
+    height          : 100%;
+    background      : rgba(255,255,255,0.5);
+    z-index         : 1;
+    display         : flex;
+    align-items     : center;
+    justify-content : center;
+  }
+
   .bloc-form {
     padding    : 10px 15px;
     text-align : left;
@@ -38,7 +51,7 @@
     }
 
     .react-fine-uploader-gallery-dropzone, .react-fine-uploader-gallery-nodrop-container {
-      min-height: 200px;
+      min-height: 300px;
 
       .react-fine-uploader-gallery-file-input-container {
         background : $primary-color-light;
@@ -56,26 +69,34 @@
         }
       }
     }
+  }
 
-    .error {
+  .bloc-success {
+    padding : 0 15px;
+  }
+
+  .notifications {
+    font-size     : 13px;
+    display       : block;
+    text-align    : center;
+    margin-top    : 10px;
+    padding       : 0.3rem;
+    border-radius : 0.25rem;
+
+    &.error {
       color         : $error-color;
       background    : $bg-error;
-      font-size     : 13px;
-      display       : block;
-      text-align    : center;
-      margin-top    : 10px;
-      padding       : 0.3rem;
-      border-radius : 0.25rem;
     }
-
-    .notification-appear {
+    &.success {
+      color         : $success-color;
+      background    : $bg-success;
+    }
+    &.notification-appear {
       opacity: 0.01;
     }
-
-    .notification-appear.notification-appear-active {
+    &.notification-appear.notification-appear-active {
       opacity: 1;
       transition: opacity 300ms ease-in;
     }
-
   }
 }

@@ -6,17 +6,17 @@ import {  TransitionGroup, CSSTransition } from 'react-transition-group';
 
 class Notification extends Component {
     render() {
-        const { type, attribute, custom} = this.props;
+        const { type, attribute} = this.props;
 
         return (
             <TransitionGroup>
                 <CSSTransition
-                    key={'trans_' + attribute}
+                    key={`trans_${attribute}`}
                     classNames={'notification'}
                     appear={true}
                     timeout={300}>
-                    <span className={type}>
-                        {attribute !== 'custom' ? NOTIFICATION[type][attribute] : custom}
+                    <span className={`${type} notifications`}>
+                        {NOTIFICATION[type][attribute]}
                     </span>
                 </CSSTransition>
             </TransitionGroup>
@@ -27,7 +27,6 @@ class Notification extends Component {
 Notification.propTypes = {
     type      : PropTypes.string,
     attribute : PropTypes.string,
-    custom    : PropTypes.string
 };
 
 export default Notification;

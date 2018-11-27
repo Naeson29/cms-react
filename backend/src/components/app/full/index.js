@@ -4,7 +4,7 @@ import {Switch, Route}      from 'react-router-dom';
 import Header        from '../component/header';
 import Sidebar       from '../component/sidebar';
 import Dashboard     from '../../../containers/dashboard';
-import Slider        from '../../../containers/slider';
+import Slider        from '../../../containers/slider/index';
 import PanelManager  from '../../../containers/panel/panelManager';
 
 class Full extends Component {
