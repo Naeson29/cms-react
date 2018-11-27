@@ -154,6 +154,27 @@
         font-size: 22px;
       }
 
+      .content {
+        .nav-tabs {
+          display: flex;
+          justify-content: left;
+          align-content: center;
+          margin : 1rem 0;
+
+          li {
+            cursor:pointer;
+            background: #dce6f3;
+            padding:0.2rem 1rem;
+            color:#505050;
+
+            &.active {
+              background: $primary-color-light;
+              color:#fff;
+            }
+          }
+        }
+      }
+
     }
   }
 }

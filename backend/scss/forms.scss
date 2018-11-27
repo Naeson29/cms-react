@@ -84,12 +84,14 @@
     border-radius : 0.25rem;
 
     &.error {
-      color         : $error-color;
-      background    : $bg-error;
+      color      : $error-color;
+      background : $bg-error;
+      border     : 1px solid $error-border;
     }
     &.success {
-      color         : $success-color;
-      background    : $bg-success;
+      color      : $success-color;
+      background : $bg-success;
+      border     : 1px solid $success-border;
     }
     &.notification-appear {
       opacity: 0.01;
