@@ -31,7 +31,7 @@ class PanelList extends Component {
         switch(panel.label) {
             case ACTIONS.PANEL_SLIDER:
                 component   = (<PanelSlider {...panel.parameters} />);
-                panel.title = panel.parameters.product ? 'Modification d\'un slider' : 'Ajout d\'un slider';
+                panel.title = panel.parameters.slider ? 'Modification d\'un slider' : 'Ajout d\'un slider';
                 break;
 
             default:

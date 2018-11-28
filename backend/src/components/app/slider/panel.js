@@ -153,15 +153,16 @@ class PanelSlider extends Component
                             </div>
                             <div className={'bloc-form'}>
                                 <ImageUploader
-                                    withIcon={true}
+                                    name={'slider'}
+                                    buttonClassName={'btn'}
+                                    onChange={this._onDrop}
                                     label={UPLOAD_LABEL}
                                     buttonText={UPLOAD_IMAGE}
-                                    onChange={this._onDrop}
                                     imgExtension={EXTENSION_IMAGE}
-                                    name={'slider'}
                                     maxFileSize={SIZE_IMAGE}
                                     fileTypeError={NOTIFICATION.error.extension}
                                     fileSizeError={NOTIFICATION.error.size}
+                                    withIcon={true}
                                     withPreview={true}
                                     singleImage={true}
                                 />

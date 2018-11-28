@@ -14,7 +14,7 @@ class Slider extends Component {
     }
 
     render() {
-        const { content, openRightPanel, createSlider, loading } = this.props;
+        const { content, openRightPanel, createSlider, updateSlider, loading } = this.props;
 
         return (
             <div className={'slider list'}>
@@ -42,7 +42,10 @@ class Slider extends Component {
                         {
                             content.map((slider, idx) => {
                                 return (
-                                    <tr key={idx}>
+                                    <tr key={idx} className={'clickable'} onClick={() => openRightPanel(ACTIONS.PANEL_SLIDER, {
+                                        slider       : slider,
+                                        updateSlider : updateSlider
+                                    })}>
                                         <td className={'center order'}>{slider.order}</td>
                                         <td>{slider.label}</td>
                                         <td className={'no-display'}>{slider.text}</td>
@@ -62,7 +65,8 @@ export default connect(() => {return {};}, PanelFunctions)(Slider);
 Slider.propTypes = {
     load           : PropTypes.func.isRequired,
     openRightPanel : PropTypes.func.isRequired,
-    createSlider   : PropTypes.func.isRequired,
+    createSlider   : PropTypes.func,
+    updateSlider   : PropTypes.func,
     loading        : PropTypes.bool,
     content        : PropTypes.oneOfType([
         PropTypes.object,

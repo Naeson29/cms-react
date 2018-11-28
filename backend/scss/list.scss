@@ -25,6 +25,16 @@
     }
     tbody {
       tr {
+        &.clickable {
+          cursor : pointer;
+          transition: 0.3s;
+          &:nth-of-type(odd) {
+            background-color: rgba(0, 0, 0, 0.01);
+          }
+          &:hover {
+            background: rgba(0, 0, 0, 0.1);
+          }
+        }
         td {
           border-right : 1px solid #dee2e6;
           font-size: 14px;

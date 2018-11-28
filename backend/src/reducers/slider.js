@@ -1,4 +1,4 @@
-import { GET_SLIDER, CREATE_SLIDER} from '../actions/slider';
+import { GET_SLIDER, CREATE_SLIDER, UPDATE_SLIDER} from '../actions/slider';
 import SliderEntity     from '../models/entity/slider';
 import ReducerFunctions from './functions';
 
@@ -45,6 +45,22 @@ export default function Slider(state = INITIAL_STATE, action) {
         }
 
         case CREATE_SLIDER.FAILURE: {
+            return ReducerFunctions.createFailure(state, action.payload);
+        }
+
+        case UPDATE_SLIDER.INIT: {
+            return ReducerFunctions.createInit(state);
+        }
+
+        case UPDATE_SLIDER.ACTION: {
+            return ReducerFunctions.createProcessed(state);
+        }
+
+        case UPDATE_SLIDER.SUCCESS: {
+            return ReducerFunctions.createSuccess(state, action.payload);
+        }
+
+        case UPDATE_SLIDER.FAILURE: {
             return ReducerFunctions.createFailure(state, action.payload);
         }
 

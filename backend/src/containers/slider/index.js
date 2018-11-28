@@ -20,6 +20,9 @@ const mapDispatchToProps = () => {
         createSlider: (parameters, callback) => {
             SliderManager.create(parameters, callback);
         },
+        updateSlider: (sliderId, parameters, callback) => {
+            SliderManager.update(sliderId, parameters, callback);
+        },
     };
 };
 

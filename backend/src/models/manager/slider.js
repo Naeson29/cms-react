@@ -1,4 +1,4 @@
-import {getSlider, createSlider} from '../../actions/slider';
+import {getSlider, createSlider, updateSlider} from '../../actions/slider';
 import Manager from './manager';
 
 class Slider extends Manager {
@@ -19,6 +19,17 @@ class Slider extends Manager {
             () => createSlider.ACTION(parameters),
             (content) => createSlider.SUCCESS(content, parameters),
             (error) => createSlider.FAILURE(error, parameters),
+            callback
+        );
+    }
+
+    update(sliderId, parameters, callback) {
+        parameters.sliderId = sliderId;
+        return this.classicDispatch(
+            updateSlider.INIT,
+            () => updateSlider.ACTION(parameters),
+            (content) => updateSlider.SUCCESS(content, parameters),
+            (error) => updateSlider.FAILURE(error, parameters),
             callback
         );
     }

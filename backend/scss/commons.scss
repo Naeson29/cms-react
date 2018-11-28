@@ -51,6 +51,17 @@ body {
           }
         }
       }
+
+      .btn {
+        background : $primary-color-light;
+
+        &:hover {
+          background : $btn-transition-color;
+        }
+        &:focus {
+          box-shadow : none;
+        }
+      }
     }
   }
 }
