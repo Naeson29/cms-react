@@ -19,17 +19,6 @@ Router.get('/sliders', (req, res) => {
     });
 });
 
-Router.get('/sliders/:id', (req, res) => {
-  let _id = req.params.id;
-  Slider.findById(_id, function(err, data) {
-    if (err) {
-      res.status(404).send('Not found');
-    } else {
-      res.json(data);
-    }
-  });
-});
-
 Router.post('/sliders', function(req, res) {
 
     const fileName = Date.now() + '.jpg';
@@ -46,9 +35,7 @@ Router.post('/sliders', function(req, res) {
 
     upload(req, res, function(err) {
         if(err) {
-            res.status(500).send({
-                error : err
-            });
+            res.status(500).send(err);
         }
 
         Slider.count({}, function(err, count) {
@@ -68,30 +55,24 @@ Router.post('/sliders', function(req, res) {
                 } else {
                     res.status(200).send({
                         success : true,
-                        id      : data._id
+                        id      : data._id,
+                        message : 'Create and upload success'
                     });
                 }
             });
         });
     })
-    // req.accepts('application/json');
-    //
-
 });
 
-//Upload
-Router.post('/upload', function(req, res) {
-
-    upload(req, res, function(err) {
-        if(err) {
-            console.log('Error Occured');
-            return;
-        }
-
-        res.status(200).send({
-            success : true
-        });
-    })
+Router.get('/sliders/:id', (req, res) => {
+  let _id = req.params.id;
+  Slider.findById(_id, function(err, data) {
+    if (err) {
+      res.status(404).send('Not found');
+    } else {
+      res.json(data);
+    }
+  });
 });
 
 module.exports = Router;

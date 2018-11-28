@@ -18,11 +18,11 @@ class PanelSlider extends Component
         this.state = {
             formErrors : {},
             create     : !props.slider,
+            image      : [],
             parameters : props.slider ? props.slider : {
                 label : '',
                 text  : ''
-            },
-            pictures: []
+            }
         };
 
         this._checkForm    = this._checkForm.bind(this);
@@ -30,7 +30,7 @@ class PanelSlider extends Component
         this._handleChange = this._handleChange.bind(this);
         this._createSlider = this._createSlider.bind(this);
         this._updateSlider = this._updateSlider.bind(this);
-        this.onDrop        = this.onDrop.bind(this);
+        this._onDrop       = this._onDrop.bind(this);
     }
 
     _handleChange(attribute, value) {
@@ -45,6 +45,16 @@ class PanelSlider extends Component
         this.setState({parameters: {...newItem}, formErrors: {...errorList} });
     }
 
+    _onDrop(picture) {
+        let errors = this.state.formErrors;
+        delete errors.image;
+
+        this.setState({
+            formErrors : errors,
+            image      : picture
+        });
+    }
+
     _checkForm() {
         const parameters = this.state.parameters;
         let errors = {};
@@ -54,6 +64,10 @@ class PanelSlider extends Component
                 errors[key] = true;
             }
         });
+
+        if(this.state.image.length === 0){
+            errors.image = true;
+        }
 
         this.setState({formErrors: errors});
         return Object.keys(errors).length === 0;
@@ -100,12 +114,6 @@ class PanelSlider extends Component
         // });
     }
 
-    onDrop(picture) {
-        this.setState({
-            pictures: this.state.pictures.concat(picture),
-        });
-    }
-
     render(){
         const { submit, success }    = this.props;
         const { create, parameters } = this.state;
@@ -148,7 +156,7 @@ class PanelSlider extends Component
                                     withIcon={true}
                                     label={UPLOAD_LABEL}
                                     buttonText={UPLOAD_IMAGE}
-                                    onChange={this.onDrop}
+                                    onChange={this._onDrop}
                                     imgExtension={EXTENSION_IMAGE}
                                     name={'slider'}
                                     maxFileSize={SIZE_IMAGE}
@@ -156,9 +164,8 @@ class PanelSlider extends Component
                                     fileSizeError={NOTIFICATION.error.size}
                                     withPreview={true}
                                     singleImage={true}
-                                >
-                                    <div>test</div>
-                                </ImageUploader>
+                                />
+                                {this._hasError('image')}
                             </div>
                             {
                                 success && (
