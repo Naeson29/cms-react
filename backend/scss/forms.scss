@@ -42,29 +42,68 @@
       height : 150px;
     }
 
-    .react-fine-uploader-gallery-dropzone {
-      border : 1px dashed $primary-color-light;
-    }
+    .fileContainer {
+      border     : 1px dashed $primary-color-light;
+      box-shadow : none;
+      padding    : 0.8rem;
+      position   : relative;
+      min-height : 250px;
 
-    .react-fine-uploader-gallery-nodrop-container {
-      border : 1px solid $primary-color-light;
-    }
+      img {
+        path {
+          background-color: $primary-color-light;
+          fill : $primary-color-light;
+        }
+      }
 
-    .react-fine-uploader-gallery-dropzone, .react-fine-uploader-gallery-nodrop-container {
-      min-height: 300px;
+      .chooseFileButton {
+        background    : $primary-color-light;
+        border        : 1px solid $primary-border-light;
+        border-radius : 5px;
+        font-size     : 13px;
+      }
+      p {
+        color      : #4386E0;
+        text-align : center;
+      }
+      .errorsContainer {
+        color      : $bg-error;
+        text-align : center;
+      }
+      .uploadPicturesWrapper {
+        .uploadPictureContainer {
+          width      : auto;
+          margin     : 0.8rem;
+          padding    : 5px;
+          background : #f9f9f9;
+          box-shadow : none;
+          transition : none!important;
 
-      .react-fine-uploader-gallery-file-input-container {
-        background : $primary-color-light;
-        border     : 1px solid $primary-color-light;
-        width      : 150px;
-        font-size  : 14px;
-        padding    : 5px 0 2px 0;
-
-        .react-fine-uploader-gallery-file-input-content {
-          margin-top : 0;
-
-          .react-fine-uploader-gallery-file-input-upload-icon {
-            margin-bottom: 5px;
+          img {
+            &.uploadPicture {
+              width  :auto;
+              height :130px;
+            }
+          }
+          .deleteImage {
+            width  : 20px;
+            height : 20px;
+            top    : -5px;
+            right  : -5px;
+            background: none;
+            font-size: 0;
+            &:before {
+              content  :'';
+              position : absolute;
+              top      : 0;
+              left     : 0;
+              z-index  : 1;
+              width    : 100%;
+              height   : 100%;
+              border-radius: 50%;
+              background: #000 url('../resources/img/cross.svg') center center no-repeat;
+              background-size : 50% 50%;
+            }
           }
         }
       }

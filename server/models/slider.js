@@ -3,23 +3,24 @@ const Schema = mongoose.Schema;
 
 const SliderSchema = new Schema({
         label : {
-            type: String,
-            required: true
+            type     : String,
+            required : true
         },
         text  : {
-            type: String,
-            required: true
+            type     : String,
+            required : true
         },
         image : {
-            type: String,
+            type     : String,
+            required : true
         },
         order : {
-            type: Number,
-            required: true
+            type     : Number,
+            required : true
         }
     },
     {
-        versionKey: false
+        versionKey : false
     }
 );
 

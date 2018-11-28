@@ -5,17 +5,6 @@ const Mongoose  = require('mongoose');
 const Router    = Express.Router();
 const multer    = require('multer');
 
-const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        cb(null, 'uploads/slider')
-    },
-    filename: function (req, file, cb) {
-        cb(null, Date.now() + '.jpg')
-    }
-});
-const upload = multer({storage: storage}).single('qqfile');
-
-
 //Models
 const Slider    = require('../models/slider');
 
@@ -42,28 +31,52 @@ Router.get('/sliders/:id', (req, res) => {
 });
 
 Router.post('/sliders', function(req, res) {
-    req.accepts('application/json');
 
-    Slider.count({}, function(err, count) {
+    const fileName = Date.now() + '.jpg';
 
-        const item = {
-            label : req.body.label,
-            text  : req.body.text,
-            order : ( count + 1)
-        };
-        const data = new Slider(item);
-
-        data.save(function(err) {
-            if (err) {
-                res.status(500).send(err);
-            } else {
-                res.status(200).send({
-                    success : true,
-                    id      : data._id
-                });
-            }
-        });
+    const storage = multer.diskStorage({
+        destination: function (req, file, cb) {
+            cb(null, 'public/slider')
+        },
+        filename: function (req, file, cb) {
+            cb(null, fileName)
+        }
     });
+    const upload = multer({storage: storage}).single('slider');
+
+    upload(req, res, function(err) {
+        if(err) {
+            res.status(500).send({
+                error : err
+            });
+        }
+
+        Slider.count({}, function(err, count) {
+
+            const item = {
+                label : req.body.label,
+                text  : req.body.text,
+                order : ( count + 1),
+                image : fileName
+
+            };
+            const data = new Slider(item);
+
+            data.save(function(err) {
+                if (err) {
+                    res.status(500).send(err);
+                } else {
+                    res.status(200).send({
+                        success : true,
+                        id      : data._id
+                    });
+                }
+            });
+        });
+    })
+    // req.accepts('application/json');
+    //
+
 });
 
 //Upload

@@ -22,6 +22,8 @@ app.use(cors({
 }));
 app.use(bearerToken());
 
+app.use('/static', express.static(__dirname + '/public'));
+
 app.listen(PORT, function() {
     winston.log('info', `Server is listening on port ${PORT}`);
 });

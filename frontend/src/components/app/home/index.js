@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import * as IconSolid from '@fortawesome/free-solid-svg-icons';
 import Loading from 'react-loading-components';
 import PropTypes from 'prop-types';
+import Config from '../../../configuration'
 
 class Home extends Component {
 
@@ -16,6 +17,7 @@ class Home extends Component {
 
     render() {
         const { loadingSlide, slider } = this.props;
+        const url = Config.get('api_url') + 'static/slider/';
 
         return (
             <div className={'home'}>
@@ -36,7 +38,7 @@ class Home extends Component {
                         >
                             {
                                 slider.map((item, index) => (
-                                    <div key={'slider_' + index} className="slider-content" style={{ background: `url('${item.image}') no-repeat center center` }}>
+                                    <div key={'slider_' + index} className="slider-content" style={{ background: `url('${url + item.image}') no-repeat center center` }}>
                                         <div className="inner">
                                             <h2>{item.label}</h2>
                                             <p>{item.text}</p>
