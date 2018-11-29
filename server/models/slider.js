@@ -1,5 +1,6 @@
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+const mongoose      = require('mongoose');
+const Schema        = mongoose.Schema;
+const AutoIncrement = require('mongoose-sequence')(mongoose);
 
 const SliderSchema = new Schema({
         label : {
@@ -12,11 +13,9 @@ const SliderSchema = new Schema({
         },
         image : {
             type     : String,
-            required : true
         },
         order : {
             type     : Number,
-            required : true
         }
     },
     {
@@ -24,4 +23,5 @@ const SliderSchema = new Schema({
     }
 );
 
+SliderSchema.plugin(AutoIncrement, {inc_field: 'id'});
 module.exports = mongoose.model('Slider', SliderSchema);

@@ -57,6 +57,7 @@ class PanelSlider extends Component
 
     _checkForm() {
         const parameters = this.state.parameters;
+        const create     = this.state.create;
         let errors = {};
 
         Object.keys(parameters).map((key) => {
@@ -65,7 +66,7 @@ class PanelSlider extends Component
             }
         });
 
-        if(this.state.image.length === 0){
+        if(this.state.image.length === 0 && create){
             errors.image = true;
         }
 
@@ -106,12 +107,14 @@ class PanelSlider extends Component
             return;
         }
 
-        // this.setState({ displayErrors: false });
-        // this.props.updateSlider(this.state.parameters.id, serialize(document.getElementById('sliderForm'), {hash: true}), (data, success) => {
-        //     if (success) {
-        //         this.props.closePanel(this.props._id);
-        //     }
-        // });
+        const form = document.getElementById('sliderForm');
+        const data = new FormData(form);
+
+        this.props.updateSlider(this.state.parameters.id, data, (data, success) => {
+            if (success) {
+                //this.props.closePanel(this.props._id);
+            }
+        });
     }
 
     render(){

@@ -1,9 +1,11 @@
 'use strict';
-const Constants = require('../utils/consts');
-const Express   = require('express');
-const Mongoose  = require('mongoose');
-const Router    = Express.Router();
-const multer    = require('multer');
+const mime                = require('mime');
+const Constants           = require('../utils/consts');
+const Express             = require('express');
+const Mongoose            = require('mongoose');
+const Router              = Express.Router();
+const multer              = require('multer');
+const cryptoRandomString  = require('crypto-random-string');
 
 //Models
 const Slider    = require('../models/slider');
@@ -21,17 +23,17 @@ Router.get('/sliders', (req, res) => {
 
 Router.post('/sliders', function(req, res) {
 
-    const fileName = Date.now() + '.jpg';
+    let fileName = cryptoRandomString(16);
 
-    const storage = multer.diskStorage({
-        destination: function (req, file, cb) {
-            cb(null, 'public/slider')
-        },
-        filename: function (req, file, cb) {
-            cb(null, fileName)
-        }
-    });
-    const upload = multer({storage: storage}).single('slider');
+    const upload = multer({storage: multer.diskStorage({
+            destination: function (req, file, callback) {
+                callback(null, 'public/slider')
+            },
+            filename: function (req, file, callback) {
+                fileName = fileName + '.' + mime.getExtension(file.mimetype);
+                callback(null, fileName)
+            }
+        })}).single('slider');
 
     upload(req, res, function(err) {
         if(err) {
@@ -56,7 +58,7 @@ Router.post('/sliders', function(req, res) {
                     res.status(200).send({
                         success : true,
                         id      : data._id,
-                        message : 'Create and upload success'
+                        message : 'Create and upload success slider'
                     });
                 }
             });
@@ -64,16 +66,30 @@ Router.post('/sliders', function(req, res) {
     })
 });
 
-Router.get('/sliders/:id', (req, res) => {
-  let _id = req.params.id;
-  Slider.findById(_id, function(err, data) {
-    if (err) {
-      res.status(404).send('Not found');
-    } else {
-      res.json(data);
-    }
-  });
+Router.post('/sliders/:id', function(req, res) {
+    let id = req.params.id;
+
+    Slider.findOne({id : id }, function(err, data) {
+        if (err) {
+            res.status(500).send(err);
+        } else {
+            data.label = req.body.label;
+            data.text  = req.body.text;
+            data.save(function(err) {
+                if (err) {
+                    res.status(500).send(err);
+                } else{
+                    res.status(200).send({
+                        success : true,
+                        id      : data._id,
+                        message : 'Update success slider'
+                    });
+                }
+            });
+        }
+    });
 });
+
 
 module.exports = Router;
 
@@ -98,6 +114,16 @@ module.exports = Router;
 
 
 
+// Router.get('/sliders/:id', (req, res) => {
+//   let _id = req.params.id;
+//   Slider.findById(_id, function(err, data) {
+//     if (err) {
+//       res.status(404).send('Not found');
+//     } else {
+//       res.json(data);
+//     }
+//   });
+// });
 
 
 // // Add new item
@@ -130,20 +156,5 @@ module.exports = Router;
 //     }
 //   });
 // });
-//
-// // Update item
-// router.put('/sliders/:id', function(req, res, next) {
-//   req.accepts('application/json');
-//   let _id = req.params.id;
-//   Item.findById(_id, function(err, data) {
-//     if (err) {
-//       res.status(404).send();
-//     } else {
-//       data.name = req.body.name;
-//       data.category = req.body.category;
-//       data.count = req.body.count;
-//       data.save();
-//       res.status(200).json(data);
-//     }
-//   });
-// });
+
+
