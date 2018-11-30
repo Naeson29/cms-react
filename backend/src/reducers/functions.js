@@ -1,3 +1,5 @@
+import Notifier, {TYPE_ERROR, TYPE_SUCCESS} from '../utils/notifier';
+
 class ReducerFunctions {
 
     getInit(state) {
@@ -49,17 +51,51 @@ class ReducerFunctions {
         state.form = {
             loading : false,
             error   : payload,
-            success : false
         };
+        Notifier(action, TYPE_ERROR, 'Echec de la création');
         return {...state};
     }
 
-    createSuccess(state, payload) {
+    createSuccess(action, state, payload) {
         state.form = {
             loading : false,
             error   : null,
             success : payload
         };
+        Notifier(action, TYPE_SUCCESS, 'Succès de la création');
+        return {...state};
+    }
+
+    updateInit(state) {
+        state.form = {
+            loading : true,
+            error   : null,
+            success : false
+        };
+        return {...state};
+    }
+
+    updateProcessed(state) {
+        return {...state};
+    }
+
+    updateFailure(state, payload) {
+        state.form = {
+            loading : false,
+            error   : payload,
+            success : false
+        };
+        Notifier(action, TYPE_ERROR, 'Echec de la création');
+        return {...state};
+    }
+
+    updateSuccess(action, state, payload) {
+        state.form = {
+            loading : false,
+            error   : null,
+            success : payload
+        };
+        Notifier(action, TYPE_SUCCESS, 'Succès de la modification');
         return {...state};
     }
 

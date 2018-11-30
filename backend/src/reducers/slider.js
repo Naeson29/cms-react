@@ -41,27 +41,27 @@ export default function Slider(state = INITIAL_STATE, action) {
         }
 
         case CREATE_SLIDER.SUCCESS: {
-            return ReducerFunctions.createSuccess(state, action.payload);
+            return ReducerFunctions.createSuccess(action, state, action.payload);
         }
 
         case CREATE_SLIDER.FAILURE: {
-            return ReducerFunctions.createFailure(state, action.payload);
+            return ReducerFunctions.createFailure(action, state, action.payload);
         }
 
         case UPDATE_SLIDER.INIT: {
-            return ReducerFunctions.createInit(state);
+            return ReducerFunctions.updateInit(state);
         }
 
         case UPDATE_SLIDER.ACTION: {
-            return ReducerFunctions.createProcessed(state);
+            return ReducerFunctions.updateProcessed(state);
         }
 
         case UPDATE_SLIDER.SUCCESS: {
-            return ReducerFunctions.createSuccess(state, action.payload);
+            return ReducerFunctions.updateSuccess(action, state, action.payload);
         }
 
         case UPDATE_SLIDER.FAILURE: {
-            return ReducerFunctions.createFailure(state, action.payload);
+            return ReducerFunctions.updateFailure(action, state, action.payload);
         }
 
         default: {

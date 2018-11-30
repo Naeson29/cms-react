@@ -22,7 +22,8 @@ class PanelSlider extends Component
             parameters : props.slider ? props.slider : {
                 label : '',
                 text  : ''
-            }
+            },
+            reset     : false
         };
 
         this._checkForm    = this._checkForm.bind(this);
@@ -31,6 +32,7 @@ class PanelSlider extends Component
         this._createSlider = this._createSlider.bind(this);
         this._updateSlider = this._updateSlider.bind(this);
         this._onDrop       = this._onDrop.bind(this);
+        this._reset        = this._reset.bind(this);
     }
 
     _handleChange(attribute, value) {
@@ -53,6 +55,16 @@ class PanelSlider extends Component
             formErrors : errors,
             image      : picture
         });
+    }
+
+    _reset(){
+        this.setState({
+            reset      : true,
+            parameters : {
+                label : '',
+                text  : ''
+            }
+        })
     }
 
     _checkForm() {
@@ -95,7 +107,8 @@ class PanelSlider extends Component
 
         this.props.createSlider(data, (data, success) => {
             if (success) {
-                //this.props.closePanel(this.props._id);
+                this._reset();
+                this.props.closePanel(this.props._id);
             }
         });
     }
@@ -112,14 +125,16 @@ class PanelSlider extends Component
 
         this.props.updateSlider(this.state.parameters.id, data, (data, success) => {
             if (success) {
-                //this.props.closePanel(this.props._id);
+                this._reset();
+                this.props.closePanel(this.props._id);
             }
         });
     }
 
     render(){
-        const { submit, success }    = this.props;
+        const { submit }    = this.props;
         const { create, parameters } = this.state;
+        const key = !this.state.reset ? 'editable' : 'clean';
 
         return (
             <div className="content-panel">
@@ -156,6 +171,7 @@ class PanelSlider extends Component
                             </div>
                             <div className={'bloc-form'}>
                                 <ImageUploader
+                                    key={key}
                                     name={'slider'}
                                     buttonClassName={'btn'}
                                     onChange={this._onDrop}
@@ -171,13 +187,6 @@ class PanelSlider extends Component
                                 />
                                 {this._hasError('image')}
                             </div>
-                            {
-                                success && (
-                                    <div className={'bloc-success'}>
-                                        <Notification type={'success'} attribute={'content'}/>
-                                    </div>
-                                )
-                            }
                             <PanelActions {...this.props}>
                                 <Button color={'primary'}>{'Enregistrer'}</Button>
                             </PanelActions>

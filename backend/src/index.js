@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import {HashRouter, Route, Switch} from 'react-router-dom';
 import { Provider } from 'react-redux';
 import store from './store';
+import {ToastContainer} from 'react-toastify';
 
 import '../scss/styles.scss';
 
@@ -12,6 +13,10 @@ ReactDOM.render((
     <Provider store={store}>
         <HashRouter>
             <div>
+                <ToastContainer
+                    draggable={false}
+                    autoClose={false}
+                />
                 <Switch>
                     <Route path="/" name="dashboard" component={Full}/>
                 </Switch>

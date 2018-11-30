@@ -2,4 +2,6 @@
 
 sudo docker exec -it http-server /bin/sh -c 'node ./seeders/seed.js cp -r ./seeders/slider ./public/slider'
 
+sudo rm ../server/public/slider/*
+
 cp -r ../server/seeders/slider ../server/public
