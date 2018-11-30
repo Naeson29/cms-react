@@ -16,7 +16,7 @@ Mongoose.connect(`mongodb://mongodb:27017/${Constants.database}`, { useNewUrlPar
 
 //Routes
 Router.get('/sliders', (req, res) => {
-  Slider.find().sort({order : 1})
+  Slider.find()
     .then(function(data) {
       res.json(data);
     });

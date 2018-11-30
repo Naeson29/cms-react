@@ -24,11 +24,7 @@ class Slider extends Component {
     _delete(event, sliderId){
         event.stopPropagation();
 
-        this.props.deleteSlider(sliderId, (datum, success) => {
-            if(success){
-                //this.reload();
-            }
-        });
+        this.props.deleteSlider(sliderId, (datum, success) => {});
     }
 
     render() {
@@ -54,7 +50,7 @@ class Slider extends Component {
                     </thead>
                     <tbody>
                         {
-                            content.map((slider, idx) => {
+                            content.sort((a, b) => a.order > b.order).map((slider, idx) => {
                                 return (
                                     <tr key={idx} className={'clickable'} onClick={() => openRightPanel(ACTIONS.PANEL_SLIDER, {
                                         slider       : slider,
