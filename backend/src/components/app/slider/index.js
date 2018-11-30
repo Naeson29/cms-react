@@ -13,7 +13,12 @@ class Slider extends Component {
         super(props);
         props.load();
 
-        this._delete = this._delete.bind(this);
+        this._updateList = this._updateList.bind(this);
+        this._delete     = this._delete.bind(this);
+    }
+
+    _updateList(){
+        this.forceUpdate();
     }
 
     _delete(event, sliderId){
@@ -34,13 +39,8 @@ class Slider extends Component {
                 <h1>
                     <span>{'Slider'}</span>
                     <FontAwesomeIcon icon={IconSolid.faPlusCircle} onClick={() => openRightPanel(ACTIONS.PANEL_SLIDER, {
-                        createSlider : createSlider
-                    } , {
-                        onClose: (success) => {
-                            if(success) {
-                                //this.reload();
-                            }
-                        }
+                        createSlider : createSlider,
+                        updateList   : this._updateList
                     })} />
                 </h1>
                 <Table responsive striped className="tables">
@@ -58,7 +58,8 @@ class Slider extends Component {
                                 return (
                                     <tr key={idx} className={'clickable'} onClick={() => openRightPanel(ACTIONS.PANEL_SLIDER, {
                                         slider       : slider,
-                                        updateSlider : updateSlider
+                                        updateSlider : updateSlider,
+                                        updateList   : this._updateList
                                     })}>
                                         <td className={'center order'}>{slider.order}</td>
                                         <td>{slider.label}</td>

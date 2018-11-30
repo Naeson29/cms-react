@@ -52,14 +52,14 @@ Router.post('/sliders', function(req, res) {
             };
             const data = new Slider(item);
 
-            data.save(function(err) {
+            data.save(function(err, data) {
                 if (err) {
                     res.status(500).send(err);
                 } else {
                     res.status(200).send({
                         success : true,
-                        id      : data._id,
-                        message : 'Create and upload success slider'
+                        data    : data,
+                        message : 'Create slider success'
                     });
                 }
             });
@@ -103,8 +103,8 @@ Router.put('/sliders/:id', function(req, res) {
                     } else{
                         res.status(200).send({
                             success : true,
-                            id      : data._id,
-                            message : 'Update success slider'
+                            data    : data,
+                            message : 'Update slider success'
                         });
                     }
                 });
@@ -120,9 +120,10 @@ Router.delete('/sliders/:id', function(req, res) {
         if (err) {
           res.status(500).send(err);
         } else {
-            Slider.find().sort({order : 1})
-            .then(function(data) {
-                res.status(200).send(data);
+            res.status(200).send({
+                success : true,
+                id      : parseInt(id),
+                message : 'Delete slider success'
             });
         }
     });

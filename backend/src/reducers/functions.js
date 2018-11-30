@@ -57,6 +57,7 @@ class ReducerFunctions {
     }
 
     createSuccess(action, state, payload) {
+        state.view.content.push(payload.data);
         state.form = {
             loading : false,
             error   : null,
@@ -90,6 +91,11 @@ class ReducerFunctions {
     }
 
     updateSuccess(action, state, payload) {
+        state.view.content.map((item, key) => {
+            if(item.id === payload.data.id){
+                state.view.content[key] = payload.data;
+            }
+        });
         state.form = {
             loading : false,
             error   : null,
@@ -119,7 +125,7 @@ class ReducerFunctions {
     }
 
     deleteSuccess(action, state, payload) {
-        state.view.content = payload;
+        state.view.content = state.view.content.filter((item) => item.id !== payload.id);
         state.view.loading = false;
         state.view.error   = null;
 

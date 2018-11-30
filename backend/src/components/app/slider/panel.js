@@ -107,6 +107,7 @@ class PanelSlider extends Component
             if (success) {
                 this._reset();
                 this.props.closePanel(this.props._id);
+                this.props.updateList();
             }
         });
     }
@@ -123,6 +124,7 @@ class PanelSlider extends Component
             if (success) {
                 this._reset();
                 this.props.closePanel(this.props._id);
+                this.props.updateList();
             }
         });
     }
