@@ -6,16 +6,16 @@
 
     thead {
       tr {
-        background: $primary-color;
+        background : $primary-color;
         th {
-          border-top   : 1px solid $primary-border;
-          border-right : 1px solid $primary-border;
-          border-bottom: 1px solid $primary-border;
-          color        : #fff;
-          font-weight  : normal;
-          font-size    : 14px;
-          text-transform: uppercase;
-          padding: 0.5rem 0.75rem;
+          border-top     : 1px solid $primary-border;
+          border-right   : 1px solid $primary-border;
+          border-bottom  : 1px solid $primary-border;
+          color          : #fff;
+          font-weight    : normal;
+          font-size      : 14px;
+          text-transform : uppercase;
+          padding        : 0.5rem 0.75rem;
 
           &:last-of-type {
             border-right : none;
@@ -26,18 +26,19 @@
     tbody {
       tr {
         &.clickable {
-          cursor : pointer;
-          transition: 0.3s;
+          cursor     : pointer;
+          transition : 0.3s;
+
           &:nth-of-type(odd) {
-            background-color: rgba(0, 0, 0, 0.01);
+            background-color : rgba(0, 0, 0, 0.01);
           }
           &:hover {
-            background: rgba(0, 0, 0, 0.1);
+            background : rgba(0, 0, 0, 0.1);
           }
         }
         td {
           border-right : 1px solid #dee2e6;
-          font-size: 14px;
+          font-size    : 14px;
           &.center {
             text-align: center;
           }
@@ -47,6 +48,12 @@
           &:last-of-type {
             border-right : none;
           }
+
+          .delete {
+            width  : 18px;
+            height : 18px;
+            color  : $primary-color;
+          }
         }
       }
 
@@ -55,7 +62,7 @@
 
   @media (max-width: 768px) {
     .no-display {
-      display:none;
+      display : none;
     }
   }
 }

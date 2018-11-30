@@ -5,8 +5,31 @@ body {
   #app {
 
     .Toastify {
-      .Toastify__toast-body {
-        text-align: center;
+
+      .Toastify__toast-container {
+        padding:0;
+        &.Toastify__toast-container--top-center {
+
+          @media (max-width: 768px) {
+            top:0;
+            left:0;
+            width:100%;
+            margin-left:0;
+          }
+        }
+
+        .Toastify__toast {
+          @media (min-width: 768px) {
+            min-height:55px;
+          }
+          @media (max-width: 768px) {
+            min-height:40px;
+          }
+
+          .Toastify__toast-body {
+            text-align: center;
+          }
+        }
       }
     }
 

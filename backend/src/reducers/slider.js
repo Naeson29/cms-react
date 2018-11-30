@@ -1,4 +1,4 @@
-import { GET_SLIDER, CREATE_SLIDER, UPDATE_SLIDER} from '../actions/slider';
+import { GET_SLIDER, CREATE_SLIDER, UPDATE_SLIDER, DELETE_SLIDER} from '../actions/slider';
 import SliderEntity     from '../models/entity/slider';
 import ReducerFunctions from './functions';
 
@@ -62,6 +62,22 @@ export default function Slider(state = INITIAL_STATE, action) {
 
         case UPDATE_SLIDER.FAILURE: {
             return ReducerFunctions.updateFailure(action, state, action.payload);
+        }
+
+        case DELETE_SLIDER.INIT: {
+            return ReducerFunctions.deleteInit(state);
+        }
+
+        case DELETE_SLIDER.ACTION: {
+            return ReducerFunctions.deleteProcessed(state);
+        }
+
+        case DELETE_SLIDER.SUCCESS: {
+            return ReducerFunctions.deleteSuccess(action, state, action.payload);
+        }
+
+        case DELETE_SLIDER.FAILURE: {
+            return ReducerFunctions.deleteFailure(action, state, action.payload);
         }
 
         default: {

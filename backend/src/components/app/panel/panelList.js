@@ -60,7 +60,7 @@ class PanelList extends Component {
                 <CSSTransition
                     key={'trans_right_' + panel.id}
                     classNames={'panel'}
-                    timeout={{enter: 600, exit: 600}}>
+                    timeout={{enter: 400, exit: 400}}>
                     <div className={'panel-container right'}>
                         {this._renderPanel(panel, 'right')}
                     </div>

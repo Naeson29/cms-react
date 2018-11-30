@@ -15,6 +15,7 @@ ReactDOM.render((
             <div>
                 <ToastContainer
                     draggable={true}
+                    autoClose={3000}
                     position={'top-center'}
                 />
                 <Switch>

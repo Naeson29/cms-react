@@ -23,6 +23,9 @@ const mapDispatchToProps = () => {
         updateSlider: (sliderId, parameters, callback) => {
             SliderManager.update(sliderId, parameters, callback);
         },
+        deleteSlider: (sliderId, parameters, callback) => {
+            SliderManager.remove(sliderId, parameters, callback);
+        },
     };
 };
 

@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { Table } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import * as IconSolid from '@fortawesome/free-solid-svg-icons';
+import * as IconRegular from '@fortawesome/free-regular-svg-icons';
 import PanelFunctions from '../../../containers/panel/functions';
 import {ACTIONS} from '../../../utils/actions';
 
@@ -11,6 +12,18 @@ class Slider extends Component {
     constructor(props){
         super(props);
         props.load();
+
+        this._delete = this._delete.bind(this);
+    }
+
+    _delete(event, sliderId){
+        event.stopPropagation();
+
+        this.props.deleteSlider(sliderId, (datum, success) => {
+            if(success){
+                //this.reload();
+            }
+        });
     }
 
     render() {
@@ -36,6 +49,7 @@ class Slider extends Component {
                             <th>{'Ordre'}</th>
                             <th>{'Titre'}</th>
                             <th className={'no-display'}>{'Texte'}</th>
+                            <th />
                         </tr>
                     </thead>
                     <tbody>
@@ -49,6 +63,9 @@ class Slider extends Component {
                                         <td className={'center order'}>{slider.order}</td>
                                         <td>{slider.label}</td>
                                         <td className={'no-display'}>{slider.text}</td>
+                                        <td>
+                                            <FontAwesomeIcon className={'delete'} icon={IconRegular.faTrashAlt} onClick={(e) => {this._delete(e,slider.id)}}/>
+                                        </td>
                                     </tr>
                                 );
                             })
@@ -65,6 +82,7 @@ export default connect(() => {return {};}, PanelFunctions)(Slider);
 Slider.propTypes = {
     load           : PropTypes.func.isRequired,
     openRightPanel : PropTypes.func.isRequired,
+    deleteSlider   : PropTypes.func.isRequired,
     createSlider   : PropTypes.func,
     updateSlider   : PropTypes.func,
     loading        : PropTypes.bool,

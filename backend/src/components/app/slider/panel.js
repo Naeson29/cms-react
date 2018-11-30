@@ -15,14 +15,17 @@ class PanelSlider extends Component
     constructor(props)
     {
         super(props);
+
+        this.default = {
+            label : '',
+            text  : ''
+        };
+
         this.state = {
             formErrors : {},
             create     : !props.slider,
             image      : [],
-            parameters : props.slider ? props.slider : {
-                label : '',
-                text  : ''
-            },
+            parameters : props.slider ? props.slider : this.default,
             reset     : false
         };
 
@@ -60,10 +63,7 @@ class PanelSlider extends Component
     _reset(){
         this.setState({
             reset      : true,
-            parameters : {
-                label : '',
-                text  : ''
-            }
+            parameters : this.default
         })
     }
 
@@ -101,9 +101,7 @@ class PanelSlider extends Component
         if (!this._checkForm()) {
             return;
         }
-
-        const form = document.getElementById('sliderForm');
-        const data = new FormData(form);
+        const data = new FormData(this.form);
 
         this.props.createSlider(data, (data, success) => {
             if (success) {
@@ -119,9 +117,7 @@ class PanelSlider extends Component
         if (!this._checkForm()) {
             return;
         }
-
-        const form = document.getElementById('sliderForm');
-        const data = new FormData(form);
+        const data = new FormData(this.form);
 
         this.props.updateSlider(this.state.parameters.id, data, (data, success) => {
             if (success) {
@@ -134,19 +130,19 @@ class PanelSlider extends Component
     render(){
         const { submit }    = this.props;
         const { create, parameters } = this.state;
-        const key = !this.state.reset ? 'editable' : 'clean';
+        const key = !this.state.reset ? 'form_edit' : 'form_clean';
 
         return (
             <div className="content-panel">
                 <div className="content">
                     <div className={'forms'}>
                         <form
-                            id={'sliderForm'}
+                            key={key}
                             name={'sliderForm'}
                             autoComplete={'off'}
                             onSubmit={create ? this._createSlider : this._updateSlider}
                             encType={'multipart/form-data'}
-                            noValidate
+                            ref={(el) => this.form = el}
                         >
                             {
                                 submit && (
@@ -171,7 +167,6 @@ class PanelSlider extends Component
                             </div>
                             <div className={'bloc-form'}>
                                 <ImageUploader
-                                    key={key}
                                     name={'slider'}
                                     buttonClassName={'btn'}
                                     onChange={this._onDrop}

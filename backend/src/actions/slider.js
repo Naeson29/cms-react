@@ -4,6 +4,7 @@ import {ClassicActions, ClassicConstantList} from './classic';
 export const GET_SLIDER    = ClassicConstantList('GET_SLIDER');
 export const CREATE_SLIDER = ClassicConstantList('CREATE_SLIDER');
 export const UPDATE_SLIDER = ClassicConstantList('UPDATE_SLIDER');
+export const DELETE_SLIDER = ClassicConstantList('DELETE_SLIDER');
 
 export let getSlider = new ClassicActions(GET_SLIDER, {
     action: (parameters) => {
@@ -23,7 +24,16 @@ export let updateSlider = new ClassicActions(UPDATE_SLIDER, {
             console.error('Invalid sliderId');
             return {};
         }
-
         return SliderApi.updateSlider(parameters.sliderId, parameters);
+    },
+});
+
+export let deleteSlider = new ClassicActions(DELETE_SLIDER, {
+    action: (parameters) => {
+        if (!parameters.sliderId) {
+            console.error('Invalid sliderId');
+            return {};
+        }
+        return SliderApi.deleteSlider(parameters.sliderId, parameters);
     },
 });

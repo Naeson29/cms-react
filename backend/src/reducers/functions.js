@@ -99,6 +99,33 @@ class ReducerFunctions {
         return {...state};
     }
 
+    deleteInit(state) {
+        state.view.error = null;
+        state.view.loading = true;
+
+        return {...state};
+    }
+
+    deleteProcessed(state) {
+        return {...state};
+    }
+
+    deleteFailure(action, state, payload) {
+        state.view.error = payload;
+        state.view.loading = false;
+
+        Notifier(action, TYPE_INFO, 'Echec de la suppression');
+        return {...state};
+    }
+
+    deleteSuccess(action, state, payload) {
+        state.view.content = payload;
+        state.view.loading = false;
+        state.view.error   = null;
+
+        Notifier(action, TYPE_INFO, 'Succès de la suppression');
+        return {...state};
+    }
 }
 
 export default new ReducerFunctions();

@@ -113,6 +113,21 @@ Router.put('/sliders/:id', function(req, res) {
     })
 });
 
+Router.delete('/sliders/:id', function(req, res) {
+    let id = req.params.id;
+
+    Slider.findOneAndRemove({id : id }, function(err) {
+        if (err) {
+          res.status(500).send(err);
+        } else {
+            Slider.find().sort({order : 1})
+            .then(function(data) {
+                res.status(200).send(data);
+            });
+        }
+    });
+});
+
 
 module.exports = Router;
 
@@ -168,16 +183,6 @@ module.exports = Router;
 //   });
 // });
 //
-// // Delete item
-// router.delete('/sliders/:id', function(req, res, next) {
-//   let _id = req.params.id;
-//   Item.findByIdAndRemove(_id, function(err, data) {
-//     if (err) {
-//       res.status(404).send();
-//     } else {
-//       res.status(204).send();
-//     }
-//   });
-// });
+
 
 

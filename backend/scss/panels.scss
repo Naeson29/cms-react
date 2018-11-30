@@ -44,7 +44,7 @@
     }
     &.panel-enter.panel-enter-active {
       right      : 0;
-      transition : right 600ms ease-in;
+      transition : right 400ms ease-in;
     }
     &.panel-exit, .panel-enter-done {
       right : 0;
@@ -56,7 +56,7 @@
       @media (max-width: 1024px) {
         right : -100%;
       }
-      transition : right 600ms ease-in;
+      transition : right 400ms ease-in;
     }
   }
 
