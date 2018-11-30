@@ -7,6 +7,7 @@ import * as IconSolid from '@fortawesome/free-solid-svg-icons';
 import * as IconRegular from '@fortawesome/free-regular-svg-icons';
 import PanelFunctions from '../../../containers/panel/functions';
 import {ACTIONS} from '../../../utils/actions';
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
 class Slider extends Component {
     constructor(props){
@@ -26,6 +27,10 @@ class Slider extends Component {
 
         this.props.deleteSlider(sliderId, (datum, success) => {});
     }
+
+    onDragEnd = (result) => {
+        console.log(result)
+    };
 
     render() {
         const { content, openRightPanel, createSlider, updateSlider, loading } = this.props;
@@ -48,26 +53,44 @@ class Slider extends Component {
                             <th />
                         </tr>
                     </thead>
-                    <tbody>
-                        {
-                            content.sort((a, b) => a.order > b.order).map((slider, idx) => {
-                                return (
-                                    <tr key={idx} className={'clickable'} onClick={() => openRightPanel(ACTIONS.PANEL_SLIDER, {
-                                        slider       : slider,
-                                        updateSlider : updateSlider,
-                                        updateList   : this._updateList
-                                    })}>
-                                        <td className={'center order'}>{slider.order}</td>
-                                        <td>{slider.label}</td>
-                                        <td className={'no-display'}>{slider.text}</td>
-                                        <td>
-                                            <FontAwesomeIcon className={'delete'} icon={IconRegular.faTrashAlt} onClick={(e) => {this._delete(e,slider.id)}}/>
-                                        </td>
-                                    </tr>
-                                );
-                            })
-                        }
-                    </tbody>
+                    <DragDropContext onDragEnd={this.onDragEnd}>
+                        <Droppable droppableId="droppable">
+                            {
+                                (provided, snapshot) => (
+                                    <tbody ref={provided.innerRef}>
+                                        {
+                                            content.sort((a, b) => a.order > b.order).map((slider, idx) => {
+                                                console.log(provided);
+                                                return (
+                                                    <Draggable key={slider.id} draggableId={slider.id} index={idx}>
+                                                        {(provided, snapshot) => (
+                                                            <tr
+                                                                onClick={() => openRightPanel(ACTIONS.PANEL_SLIDER, {
+                                                                    slider       : slider,
+                                                                    updateSlider : updateSlider,
+                                                                    updateList   : this._updateList
+                                                                })}
+                                                                ref={provided.innerRef}
+                                                                {...provided.draggableProps}
+                                                                {...provided.dragHandleProps}
+                                                            >
+                                                                <td className={'center order'}>{slider.order}</td>
+                                                                <td>{slider.label}</td>
+                                                                <td className={'no-display'}>{slider.text}</td>
+                                                                <td>
+                                                                    <FontAwesomeIcon className={'delete'} icon={IconRegular.faTrashAlt} onClick={(e) => {this._delete(e,slider.id)}}/>
+                                                                </td>
+                                                            </tr>
+                                                        )}
+                                                    </Draggable>
+                                                )
+                                            })
+                                        }
+                                    </tbody>
+                                )
+                            }
+                        </Droppable>
+                    </DragDropContext>
                 </Table>
             </div>
         );
