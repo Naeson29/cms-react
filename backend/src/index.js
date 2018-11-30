@@ -14,8 +14,8 @@ ReactDOM.render((
         <HashRouter>
             <div>
                 <ToastContainer
-                    draggable={false}
-                    autoClose={false}
+                    draggable={true}
+                    position={'top-center'}
                 />
                 <Switch>
                     <Route path="/" name="dashboard" component={Full}/>

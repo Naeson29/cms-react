@@ -2,66 +2,77 @@ body {
   font-family : 'Roboto', cursive;
   font-size   :14px;
 
-  .container-app {
-    position : absolute;
-    top      : 0;
-    left     : 0;
-    right    : 0;
-    bottom   : 0;
-    z-index  : 1;
+  #app {
 
-    .content-app {
-      position     : absolute;
-      top          : 0;
-      right        : 0;
-      z-index      : 0;
-      width        : 100%;
-      padding-top  : $header-height;
-
-      @media (min-width: 1024px) {
-        padding-left : $sidebar-width;
+    .Toastify {
+      .Toastify__toast-body {
+        text-align: center;
       }
-      @media (max-width: 1024px) {
-        padding-left : $sidebar-width-small;
-      }
-      @media (max-width: 768px) {
-        padding-left   : 0;
-        padding-bottom : 50px;
-        left           : 0;
-      }
+    }
 
-      h1 {
-        background      : $h1-bg;
-        color           : $primary-color;
-        font-size       : 26px;
-        padding         : 1.3rem 0.8rem;
-        border-bottom   : 1px solid $h1-border;
-        margin-bottom   : 0;
-        display         : flex;
-        justify-content : space-between;
-        align-content   : center;
+    .container-app {
+      position : absolute;
+      top      : 0;
+      left     : 0;
+      right    : 0;
+      bottom   : 0;
+      z-index  : 1;
 
-        .svg-inline--fa {
-          color      : $primary-color-light;
-          cursor     : pointer;
-          transition : all 0.3s ease 0s;
+      .content-app {
+        position     : absolute;
+        top          : 0;
+        right        : 0;
+        z-index      : 0;
+        width        : 100%;
+        padding-top  : $header-height;
 
-          &:hover {
-            color  : $primary-color;
+        @media (min-width: 1024px) {
+          padding-left : $sidebar-width;
+        }
+        @media (max-width: 1024px) {
+          padding-left : $sidebar-width-small;
+        }
+        @media (max-width: 768px) {
+          padding-left   : 0;
+          padding-bottom : 50px;
+          left           : 0;
+        }
+
+        h1 {
+          background      : $h1-bg;
+          color           : $primary-color;
+          font-size       : 26px;
+          padding         : 1.3rem 0.8rem;
+          border-bottom   : 1px solid $h1-border;
+          margin-bottom   : 0;
+          display         : flex;
+          justify-content : space-between;
+          align-content   : center;
+
+          .svg-inline--fa {
+            color      : $primary-color-light;
+            cursor     : pointer;
+            transition : all 0.3s ease 0s;
+
+            &:hover {
+              color  : $primary-color;
+            }
           }
         }
-      }
 
-      .btn {
-        background : $primary-color-light;
+        .btn {
+          background : $primary-color-light;
 
-        &:hover {
-          background : $btn-transition-color;
-        }
-        &:focus {
-          box-shadow : none;
+          &:hover {
+            background : $btn-transition-color;
+          }
+          &:focus {
+            box-shadow : none;
+          }
         }
       }
     }
   }
+
+
 }

@@ -1,4 +1,4 @@
-import Notifier, {TYPE_ERROR, TYPE_SUCCESS} from '../utils/notifier';
+import Notifier, {TYPE_ERROR, TYPE_INFO} from '../utils/notifier';
 
 class ReducerFunctions {
 
@@ -62,7 +62,7 @@ class ReducerFunctions {
             error   : null,
             success : payload
         };
-        Notifier(action, TYPE_SUCCESS, 'Succès de la création');
+        Notifier(action, TYPE_INFO, 'Succès de la création');
         return {...state};
     }
 
@@ -95,7 +95,7 @@ class ReducerFunctions {
             error   : null,
             success : payload
         };
-        Notifier(action, TYPE_SUCCESS, 'Succès de la modification');
+        Notifier(action, TYPE_INFO, 'Succès de la modification');
         return {...state};
     }
 
