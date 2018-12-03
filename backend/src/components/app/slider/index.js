@@ -17,8 +17,6 @@ class Slider extends Component {
 
         this._updateList = this._updateList.bind(this);
         this._delete     = this._delete.bind(this);
-
-        console.log(props);
     }
 
     _updateList(){
