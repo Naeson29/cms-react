@@ -38,7 +38,7 @@ class Slider extends Component {
     render() {
         const { content, openRightPanel, createSlider, updateSlider, loading } = this.props;
 
-        const DragHandle = SortableHandle(() => <FontAwesomeIcon className={'svg'} icon={IconSolid.faBars}/>);
+        const DragHandle = SortableHandle(() => <FontAwesomeIcon onClick={(e) => {e.stopPropagation()} } className={'svg'} icon={IconSolid.faBars}/>);
 
         const SortableItem = SortableElement(({value}) =>
             <tr onClick={() =>
