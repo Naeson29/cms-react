@@ -24,7 +24,6 @@
     "prop-types": "^15.6.2",
     "qs": "^6.5.2",
     "react": "^16.6.1",
-    "react-beautiful-dnd": "^10.0.2",
     "react-dom": "^16.6.1",
     "react-images-upload": "^1.2.3",
     "react-loading-components": "^1.1.12",
@@ -32,8 +31,10 @@
     "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",
     "react-router-redux": "^4.0.8",
+    "react-sortable-hoc": "^0.8.4",
     "react-toastify": "^4.4.3",
     "react-transition-group": "^2.5.0",
+    "react-truncate": "^2.4.0",
     "reactstrap": "^6.5.0",
     "redux": "^4.0.1",
     "redux-promise": "^0.6.0"

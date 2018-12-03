@@ -129,4 +129,9 @@ Router.delete('/sliders/:id', function(req, res) {
     });
 });
 
+Router.put('/sliders/order/:id', function(req, res) {
+
+});
+
+
 module.exports = Router;

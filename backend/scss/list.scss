@@ -8,18 +8,12 @@
       tr {
         background : $primary-color;
         th {
-          border-top     : 1px solid $primary-border;
-          border-right   : 1px solid $primary-border;
-          border-bottom  : 1px solid $primary-border;
+          border         : none;
           color          : #fff;
           font-weight    : normal;
           font-size      : 14px;
           text-transform : uppercase;
           padding        : 0.5rem 0.75rem;
-
-          &:last-of-type {
-            border-right : none;
-          }
         }
       }
     }
@@ -30,39 +24,74 @@
           transition : 0.3s;
 
           &:nth-of-type(odd) {
-            background-color : rgba(0, 0, 0, 0.01);
+            background-color : rgba(0, 0, 0, 0.07);
           }
-          &:hover {
-            background : rgba(0, 0, 0, 0.1);
+          td {
+            border    : none;
+            font-size : 14px;
+            &.center {
+              text-align: center;
+            }
+            .svg {
+              width  : 18px;
+              height : 18px;
+              color  : $primary-color;
+            }
           }
         }
-        td {
-          border-right : 1px solid #dee2e6;
-          font-size    : 14px;
-          &.center {
-            text-align: center;
-          }
-          &.order {
-            color : $primary-color;
-          }
-          &:last-of-type {
-            border-right : none;
-          }
 
-          .delete {
-            width  : 18px;
-            height : 18px;
-            color  : $primary-color;
-          }
-        }
       }
 
     }
   }
 
+
+  &.slider {
+    .label {
+      width:26%;
+    }
+    .text {
+      width:72%;
+    }
+    .action {
+      width:1%;
+      text-align: right;
+    }
+  }
+
+
   @media (max-width: 768px) {
     .no-display {
       display : none;
+    }
+  }
+}
+
+.isDragging {
+  background: $primary-color-light;
+  color:#fff;
+  td {
+    padding: 0.75rem;
+    .svg {
+      width  : 18px;
+      height : 18px;
+    }
+    &.action {
+      display:none;
+    }
+    @media (max-width: 768px) {
+      &.no-display {
+        display : none;
+      }
+    }
+  }
+
+  &.slider {
+    .label {
+      width:26%;
+    }
+    .text {
+      width:74%;
     }
   }
 }

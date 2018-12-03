@@ -7,7 +7,8 @@ import * as IconSolid from '@fortawesome/free-solid-svg-icons';
 import * as IconRegular from '@fortawesome/free-regular-svg-icons';
 import PanelFunctions from '../../../containers/panel/functions';
 import {ACTIONS} from '../../../utils/actions';
-import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+import {SortableContainer, SortableElement, SortableHandle, arrayMove} from 'react-sortable-hoc';
+import Truncate from 'react-truncate';
 
 class Slider extends Component {
     constructor(props){
@@ -16,6 +17,8 @@ class Slider extends Component {
 
         this._updateList = this._updateList.bind(this);
         this._delete     = this._delete.bind(this);
+
+        console.log(props);
     }
 
     _updateList(){
@@ -28,12 +31,54 @@ class Slider extends Component {
         this.props.deleteSlider(sliderId, (datum, success) => {});
     }
 
-    onDragEnd = (result) => {
-        console.log(result)
+    onSortEnd = ({oldIndex, newIndex, collection}) => {
+
     };
 
     render() {
         const { content, openRightPanel, createSlider, updateSlider, loading } = this.props;
+
+        const DragHandle = SortableHandle(() => <FontAwesomeIcon className={'svg'} icon={IconSolid.faBars}/>);
+
+        const SortableItem = SortableElement(({value}) =>
+            <tr onClick={() =>
+                openRightPanel(ACTIONS.PANEL_SLIDER, {
+                    slider: value,
+                    updateSlider: updateSlider,
+                    updateList: this._updateList
+                })
+            }
+            className={'clickable'}>
+                <td className={'label'}>
+                    <Truncate lines={1} ellipsis={'...'}>
+                        {value.label}
+                    </Truncate>
+                </td>
+                <td className={'no-display text'}>
+                    <Truncate lines={1} ellipsis={'...'}>
+                        {value.text}
+                    </Truncate>
+                </td>
+                <td className={'action'}>
+                    <DragHandle/>
+                </td>
+                <td className={'action'}>
+                    <FontAwesomeIcon className={'svg'} icon={IconRegular.faTrashAlt} onClick={(e) => {this._delete(e,value.id)}}/>
+                </td>
+            </tr>
+        );
+
+        const SortableList = SortableContainer(({items}) => {
+            return (
+                <tbody>
+                    {
+                        items.sort((a, b) => a.order > b.order).map((slider, idx) => (
+                            <SortableItem key={`item-${idx}`} index={idx} value={slider} />
+                        ))
+                    }
+                </tbody>
+            );
+        });
 
         return (
             <div className={'slider list'}>
@@ -47,50 +92,22 @@ class Slider extends Component {
                 <Table responsive striped className="tables">
                     <thead>
                         <tr>
-                            <th>{'Ordre'}</th>
                             <th>{'Titre'}</th>
                             <th className={'no-display'}>{'Texte'}</th>
                             <th />
+                            <th />
                         </tr>
                     </thead>
-                    <DragDropContext onDragEnd={this.onDragEnd}>
-                        <Droppable droppableId="droppable">
-                            {
-                                (provided, snapshot) => (
-                                    <tbody ref={provided.innerRef}>
-                                        {
-                                            content.sort((a, b) => a.order > b.order).map((slider, idx) => {
-                                                console.log(provided);
-                                                return (
-                                                    <Draggable key={slider.id} draggableId={slider.id} index={idx}>
-                                                        {(provided, snapshot) => (
-                                                            <tr
-                                                                onClick={() => openRightPanel(ACTIONS.PANEL_SLIDER, {
-                                                                    slider       : slider,
-                                                                    updateSlider : updateSlider,
-                                                                    updateList   : this._updateList
-                                                                })}
-                                                                ref={provided.innerRef}
-                                                                {...provided.draggableProps}
-                                                                {...provided.dragHandleProps}
-                                                            >
-                                                                <td className={'center order'}>{slider.order}</td>
-                                                                <td>{slider.label}</td>
-                                                                <td className={'no-display'}>{slider.text}</td>
-                                                                <td>
-                                                                    <FontAwesomeIcon className={'delete'} icon={IconRegular.faTrashAlt} onClick={(e) => {this._delete(e,slider.id)}}/>
-                                                                </td>
-                                                            </tr>
-                                                        )}
-                                                    </Draggable>
-                                                )
-                                            })
-                                        }
-                                    </tbody>
-                                )
-                            }
-                        </Droppable>
-                    </DragDropContext>
+                    <SortableList
+                        items={content}
+                        onSortEnd={this.onSortEnd}
+                        pressDelay={0}
+                        useDragHandle={true}
+                        lockToContainerEdges={true}
+                        lockAxis={'y'}
+                        helperClass={'isDragging slider'}
+                        lockOffset={'0%'}
+                    />
                 </Table>
             </div>
         );
