@@ -1,0 +1,25 @@
+.list {
+  &.slider {
+    .label {
+      @media (min-width: 768px) {
+        width:26%;
+      }
+      @media (max-width: 768px) {
+        width:100%;
+      }
+    }
+  }
+}
+
+.isDragging {
+  &.slider {
+    .label {
+      @media (min-width: 768px) {
+        width:26%;
+      }
+      @media (max-width: 768px) {
+        width:100%;
+      }
+    }
+  }
+}

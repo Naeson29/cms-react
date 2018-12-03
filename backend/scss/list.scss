@@ -39,20 +39,8 @@
             }
           }
         }
-
       }
 
-    }
-  }
-
-  &.slider {
-    .label {
-      @media (min-width: 768px) {
-        width:26%;
-      }
-      @media (max-width: 768px) {
-        width:100%;
-      }
     }
   }
 
@@ -62,6 +50,7 @@
     }
   }
 }
+
 
 .isDragging {
   background: $primary-color-light;
@@ -77,17 +66,5 @@
         display : none;
       }
     }
-  }
-
-  &.slider {
-    .label {
-      @media (min-width: 768px) {
-        width:26%;
-      }
-      @media (max-width: 768px) {
-        width:100%;
-      }
-    }
-
   }
 }
