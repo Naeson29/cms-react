@@ -17,12 +17,17 @@ class List extends  Component {
             items : props.content
         };
 
-        this.onSortEnd = this.onSortEnd.bind(this);
+        this._sort = this._sort.bind(this);
     }
 
-    onSortEnd = ({oldIndex, newIndex}) => {
+    _sort = ({oldIndex, newIndex}) => {
+        const {orderSlider} = this.props;
+        let items = arrayMove(this.state.items, oldIndex, newIndex);
+
         this.setState({
-            items: arrayMove(this.state.items, oldIndex, newIndex),
+            items: items,
+        }, () => {
+            orderSlider(items);
         });
     };
 
@@ -64,7 +69,7 @@ class List extends  Component {
             return (
                 <tbody>
                     {
-                        items.sort((a, b) => a.order > b.order).map((slider, idx) => (
+                        items.map((slider, idx) => (
                             <SortableItem key={`item-${idx}`} index={idx} value={slider} />
                         ))
                     }
@@ -75,7 +80,7 @@ class List extends  Component {
         return (
             <SortableList
                 items={items}
-                onSortEnd={this.onSortEnd}
+                onSortEnd={this._sort}
                 pressDelay={0}
                 useDragHandle={true}
                 lockToContainerEdges={true}
@@ -94,6 +99,7 @@ List.propTypes = {
     openRightPanel : PropTypes.func,
     deleteLine     : PropTypes.func,
     updateList     : PropTypes.func,
+    orderSlider    : PropTypes.func,
     content        : PropTypes.oneOfType([
         PropTypes.object,
         PropTypes.array

@@ -26,6 +26,9 @@ const mapDispatchToProps = () => {
         deleteSlider: (sliderId, parameters, callback) => {
             SliderManager.remove(sliderId, parameters, callback);
         },
+        orderSlider: (parameters, callback) => {
+            SliderManager.order(parameters, callback);
+        },
     };
 };
 

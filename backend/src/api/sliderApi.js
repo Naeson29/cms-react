@@ -21,4 +21,8 @@ export default class SliderApi {
     static deleteSlider(sliderId, parameters) {
         return Api.callApi(HTTP_DELETE, API_PREFIX + `/${sliderId}/`, parameters, false);
     }
+
+    static orderSlider(parameters) {
+        return Api.callApi(HTTP_POST, API_PREFIX + '/order/', parameters, false);
+    }
 }

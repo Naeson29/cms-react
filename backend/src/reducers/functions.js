@@ -132,6 +132,28 @@ class ReducerFunctions {
         Notifier(action, TYPE_INFO, 'Succès de la suppression');
         return {...state};
     }
+
+    orderInit(state) {
+        return {...state};
+    }
+
+    orderProcessed(state) {
+        return {...state};
+    }
+
+    orderFailure(action, state, payload) {
+        state.view.error = payload;
+
+        Notifier(action, TYPE_INFO, 'Echec de l\'ordre');
+        return {...state};
+    }
+
+    orderSuccess(action, state, payload) {
+        state.view.content = payload.data;
+        return {...state};
+    }
+
+
 }
 
 export default new ReducerFunctions();

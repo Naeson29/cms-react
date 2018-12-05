@@ -16,7 +16,7 @@ Mongoose.connect(`mongodb://mongodb:27017/${Constants.database}`, { useNewUrlPar
 
 //Routes
 Router.get('/sliders', (req, res) => {
-  Slider.find()
+  Slider.find().sort({order : 1})
     .then(function(data) {
       res.json(data);
     });
@@ -129,8 +129,28 @@ Router.delete('/sliders/:id', function(req, res) {
     });
 });
 
-Router.put('/sliders/order/:id', function(req, res) {
+Router.post('/sliders/order', async function(req, res) {
 
+    const body = req.body;
+
+    let ids = [];
+    let orders = [];
+
+    body.map((key, index) => {
+        ids.push(key.id);
+        orders.push(index + 1);
+    });
+
+    Slider.update({id : {$in : ids}}, {$inc: { order: +1 }}, { multiple: true }, function (err) {
+        if (err) {
+            res.status(500).send(err);
+        } else {
+            res.status(200).send({
+            success : true,
+            data    : body,
+            message : 'Order slider success'
+        })}
+    });
 });
 
 

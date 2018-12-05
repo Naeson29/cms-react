@@ -13,8 +13,9 @@ class Slider extends Component {
         super(props);
         props.load();
 
-        this._updateList = this._updateList.bind(this);
-        this._delete     = this._delete.bind(this);
+        this._updateList   = this._updateList.bind(this);
+        this._delete       = this._delete.bind(this);
+        this._orderSlider  = this._orderSlider.bind(this);
     }
 
     _updateList(){
@@ -25,6 +26,10 @@ class Slider extends Component {
         event.stopPropagation();
 
         this.props.deleteSlider(sliderId, () => {});
+    }
+
+    _orderSlider(items){
+        this.props.orderSlider(items);
     }
 
     render() {
@@ -54,7 +59,14 @@ class Slider extends Component {
                             <th />
                         </tr>
                     </thead>
-                    <List content={content} updateSlider={updateSlider} openRightPanel={openRightPanel} deleteLine={this._delete} updateList={this._updateList}/>
+                    <List
+                        content={content}
+                        updateSlider={updateSlider}
+                        openRightPanel={openRightPanel}
+                        deleteLine={this._delete}
+                        updateList={this._updateList}
+                        orderSlider={this._orderSlider}
+                    />
                 </Table>
             </div>
         );

@@ -5,6 +5,7 @@ export const GET_SLIDER    = ClassicConstantList('GET_SLIDER');
 export const CREATE_SLIDER = ClassicConstantList('CREATE_SLIDER');
 export const UPDATE_SLIDER = ClassicConstantList('UPDATE_SLIDER');
 export const DELETE_SLIDER = ClassicConstantList('DELETE_SLIDER');
+export const ORDER_SLIDER  = ClassicConstantList('ORDER_SLIDER');
 
 export let getSlider = new ClassicActions(GET_SLIDER, {
     action: (parameters) => {
@@ -35,5 +36,12 @@ export let deleteSlider = new ClassicActions(DELETE_SLIDER, {
             return {};
         }
         return SliderApi.deleteSlider(parameters.sliderId, parameters);
+    },
+});
+
+
+export let orderSlider = new ClassicActions(ORDER_SLIDER, {
+    action: (parameters) => {
+        return SliderApi.orderSlider(parameters);
     },
 });
