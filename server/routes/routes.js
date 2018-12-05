@@ -7,6 +7,7 @@ const Router              = Express.Router();
 const multer              = require('multer');
 const cryptoRandomString  = require('crypto-random-string');
 const fs                  = require('fs');
+const async               = require('async');
 
 //Models
 const Slider    = require('../models/slider');
@@ -130,28 +131,17 @@ Router.delete('/sliders/:id', function(req, res) {
 });
 
 Router.post('/sliders/order', async function(req, res) {
-
-    const body = req.body;
-
-    let ids = [];
-    let orders = [];
-
-    body.map((key, index) => {
-        ids.push(key.id);
-        orders.push(index + 1);
-    });
-
-    Slider.update({id : {$in : ids}}, {$inc: { order: +1 }}, { multiple: true }, function (err) {
-        if (err) {
-            res.status(500).send(err);
-        } else {
-            res.status(200).send({
-            success : true,
-            data    : body,
-            message : 'Order slider success'
-        })}
+    async.eachSeries(req.body, function(obj, done) {
+        Slider.update({ id: obj.id }, { $set : { order: (req.body.indexOf(obj) + 1) }}, done);
+    }, function(){
+        res.status(200).send({
+        success : true,
+        data    : req.body,
+        message : 'Order slider success'})
+    }
+    , function(err) {
+        res.status(500).send(err);
     });
 });
-
 
 module.exports = Router;
