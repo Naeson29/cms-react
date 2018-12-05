@@ -45,6 +45,7 @@ body {
         position     : absolute;
         top          : 0;
         right        : 0;
+        bottom       : 0;
         z-index      : 0;
         width        : 100%;
         padding-top  : $header-height;
@@ -92,6 +93,31 @@ body {
           &:focus {
             box-shadow : none;
           }
+        }
+
+        .loading-list {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          position: absolute;
+          top:40px;
+          right:0;
+
+          @media (min-width: 1024px) {
+            width: calc(100% - 250px);
+          }
+          @media (max-width: 1024px) {
+            width: calc(100% - 60px);
+          }
+          @media (min-width: 768px) {
+            height: calc(100% - 40px);
+          }
+          @media (max-width: 768px) {
+            width:100%;
+            height: calc(100% - 80px);
+          }
+
+          min-height:300px;
         }
       }
     }

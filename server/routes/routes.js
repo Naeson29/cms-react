@@ -132,6 +132,7 @@ Router.delete('/sliders/:id', function(req, res) {
 
 Router.post('/sliders/order', async function(req, res) {
     async.eachSeries(req.body, function(obj, done) {
+        req.body[req.body.indexOf(obj)].order = (req.body.indexOf(obj) + 1);
         Slider.update({ id: obj.id }, { $set : { order: (req.body.indexOf(obj) + 1) }}, done);
     }, function(){
         res.status(200).send({

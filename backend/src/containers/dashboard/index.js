@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import {withRouter} from 'react-router-dom';
-import Dashboard from '../components/app/dashboard';
+import Dashboard from '../../components/app/dashboard';
 
 const mapStateToProps = () => {
     return {

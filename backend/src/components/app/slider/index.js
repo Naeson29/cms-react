@@ -1,12 +1,13 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
-import PropTypes from 'prop-types';
-import { Table } from 'reactstrap';
+import React, {Component}  from 'react';
+import {connect}           from 'react-redux';
+import { Table }           from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import * as IconSolid from '@fortawesome/free-solid-svg-icons';
-import PanelFunctions from '../../../containers/panel/functions';
-import {ACTIONS} from '../../../utils/actions';
-import List from './list';
+import PanelFunctions      from '../../../containers/panel/functions';
+import {ACTIONS}           from '../../../utils/actions';
+import PropTypes           from 'prop-types';
+import * as IconSolid      from '@fortawesome/free-solid-svg-icons';
+import List                from './list';
+import Loader              from '../component/loading';
 
 class Slider extends Component {
     constructor(props){
@@ -24,7 +25,6 @@ class Slider extends Component {
 
     _delete(event, sliderId){
         event.stopPropagation();
-
         this.props.deleteSlider(sliderId, () => {});
     }
 
@@ -37,7 +37,7 @@ class Slider extends Component {
 
         if(loading){
             return (
-                <div/>
+                <Loader/>
             );
         }
 
@@ -45,10 +45,13 @@ class Slider extends Component {
             <div className={'slider list'}>
                 <h1>
                     <span>{'Slider'}</span>
-                    <FontAwesomeIcon icon={IconSolid.faPlusCircle} onClick={() => openRightPanel(ACTIONS.PANEL_SLIDER, {
-                        createSlider : createSlider,
-                        updateList   : this._updateList
-                    })} />
+                    <FontAwesomeIcon
+                        icon={IconSolid.faPlusCircle}
+                        onClick={() => openRightPanel(ACTIONS.PANEL_SLIDER, {
+                            createSlider : createSlider,
+                            updateList   : this._updateList
+                        })}
+                    />
                 </h1>
                 <Table responsive striped className="tables">
                     <thead>

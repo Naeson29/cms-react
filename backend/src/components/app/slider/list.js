@@ -1,11 +1,15 @@
-import React, {Component} from 'react';
+import React, {Component}  from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import * as IconRegular from '@fortawesome/free-regular-svg-icons/index';
-import * as IconSolid from '@fortawesome/free-solid-svg-icons/index';
-import {ACTIONS} from '../../../utils/actions';
-import {SortableContainer, SortableElement, SortableHandle, arrayMove} from 'react-sortable-hoc';
-import Truncate from 'react-truncate';
-import PropTypes from 'prop-types';
+import * as IconRegular    from '@fortawesome/free-regular-svg-icons/index';
+import * as IconSolid      from '@fortawesome/free-solid-svg-icons/index';
+import {ACTIONS}           from '../../../utils/actions';
+import Truncate            from 'react-truncate';
+import PropTypes           from 'prop-types';
+import {
+    SortableContainer,
+    SortableElement,
+    SortableHandle,
+    arrayMove}             from 'react-sortable-hoc';
 
 
 class List extends  Component {
