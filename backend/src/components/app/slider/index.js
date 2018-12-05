@@ -79,6 +79,7 @@ Slider.propTypes = {
     load           : PropTypes.func.isRequired,
     openRightPanel : PropTypes.func.isRequired,
     deleteSlider   : PropTypes.func.isRequired,
+    orderSlider    : PropTypes.func.isRequired,
     createSlider   : PropTypes.func,
     updateSlider   : PropTypes.func,
     loading        : PropTypes.bool,
