@@ -4,11 +4,9 @@ import PropTypes from 'prop-types';
 import { Table } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import * as IconSolid from '@fortawesome/free-solid-svg-icons';
-import * as IconRegular from '@fortawesome/free-regular-svg-icons';
 import PanelFunctions from '../../../containers/panel/functions';
 import {ACTIONS} from '../../../utils/actions';
-import {SortableContainer, SortableElement, SortableHandle, arrayMove} from 'react-sortable-hoc';
-import Truncate from 'react-truncate';
+import List from './list';
 
 class Slider extends Component {
     constructor(props){
@@ -26,57 +24,17 @@ class Slider extends Component {
     _delete(event, sliderId){
         event.stopPropagation();
 
-        this.props.deleteSlider(sliderId, (datum, success) => {});
+        this.props.deleteSlider(sliderId, () => {});
     }
-
-    onSortEnd = ({oldIndex, newIndex, collection}) => {
-
-    };
 
     render() {
         const { content, openRightPanel, createSlider, updateSlider, loading } = this.props;
 
-        const DragHandle = SortableHandle(() => <FontAwesomeIcon onClick={(e) => {e.stopPropagation()} } className={'svg'} icon={IconSolid.faBars}/>);
-
-        const SortableItem = SortableElement(({value}) =>
-            <tr onClick={() =>
-                openRightPanel(ACTIONS.PANEL_SLIDER, {
-                    slider: value,
-                    updateSlider: updateSlider,
-                    updateList: this._updateList
-                })
-            }
-            className={'clickable'}>
-                <td className={'label'}>
-                    <Truncate lines={1} ellipsis={'...'}>
-                        {value.label}
-                    </Truncate>
-                </td>
-                <td className={'no-display text'}>
-                    <Truncate lines={1} ellipsis={'...'}>
-                        {value.text}
-                    </Truncate>
-                </td>
-                <td className={'action'}>
-                    <DragHandle/>
-                </td>
-                <td className={'action'}>
-                    <FontAwesomeIcon className={'svg'} icon={IconRegular.faTrashAlt} onClick={(e) => {this._delete(e,value.id)}}/>
-                </td>
-            </tr>
-        );
-
-        const SortableList = SortableContainer(({items}) => {
+        if(loading){
             return (
-                <tbody>
-                    {
-                        items.sort((a, b) => a.order > b.order).map((slider, idx) => (
-                            <SortableItem key={`item-${idx}`} index={idx} value={slider} />
-                        ))
-                    }
-                </tbody>
+                <div/>
             );
-        });
+        }
 
         return (
             <div className={'slider list'}>
@@ -96,16 +54,7 @@ class Slider extends Component {
                             <th />
                         </tr>
                     </thead>
-                    <SortableList
-                        items={content}
-                        onSortEnd={this.onSortEnd}
-                        pressDelay={0}
-                        useDragHandle={true}
-                        lockToContainerEdges={true}
-                        lockAxis={'y'}
-                        helperClass={'isDragging slider'}
-                        lockOffset={'0%'}
-                    />
+                    <List content={content} updateSlider={updateSlider} openRightPanel={openRightPanel} deleteLine={this._delete} updateList={this._updateList}/>
                 </Table>
             </div>
         );

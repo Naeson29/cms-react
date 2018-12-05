@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes            from 'prop-types';
-import {NOTIFICATION}       from "../../../utils/consts";
+import {NOTIFICATION}       from '../../../utils/consts';
 
 import {  TransitionGroup, CSSTransition } from 'react-transition-group';
 

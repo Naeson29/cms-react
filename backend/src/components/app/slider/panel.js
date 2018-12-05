@@ -8,7 +8,7 @@ import PropTypes            from 'prop-types';
 import SubmitForm           from '../component/submitForm';
 import ImageUploader        from 'react-images-upload';
 
-import {SIZE_IMAGE, EXTENSION_IMAGE, UPLOAD_IMAGE, UPLOAD_LABEL, NOTIFICATION} from '../../../utils/consts'
+import {SIZE_IMAGE, EXTENSION_IMAGE, UPLOAD_IMAGE, UPLOAD_LABEL, NOTIFICATION} from '../../../utils/consts';
 
 class PanelSlider extends Component
 {
@@ -64,7 +64,7 @@ class PanelSlider extends Component
         this.setState({
             reset      : true,
             parameters : this.default
-        })
+        });
     }
 
     _checkForm() {
@@ -154,16 +154,16 @@ class PanelSlider extends Component
                             <div className={'bloc-form'}>
                                 <label className={'label-info'} htmlFor="label">{'Titre :'}</label>
                                 <input id="label" name="label" type="text" autoFocus required className={'input'}
-                                       value={parameters.label}
-                                       onChange={(event) => this._handleChange('label', event.target.value)}
+                                    value={parameters.label}
+                                    onChange={(event) => this._handleChange('label', event.target.value)}
                                 />
                                 {this._hasError('label')}
                             </div>
                             <div className={'bloc-form'}>
                                 <label className={'label-info'} htmlFor="label">{'Texte :'}</label>
                                 <textarea id="text" name="text" required className={'textarea'}
-                                          value={parameters.text}
-                                          onChange={(event) => this._handleChange('text', event.target.value)}
+                                    value={parameters.text}
+                                    onChange={(event) => this._handleChange('text', event.target.value)}
                                 />
                                 {this._hasError('text')}
                             </div>
@@ -191,7 +191,7 @@ class PanelSlider extends Component
                     </div>
                 </div>
             </div>
-        )
+        );
     }
 }
 
@@ -205,6 +205,7 @@ PanelSlider.propTypes = {
         PropTypes.object
     ]),
     createSlider   : PropTypes.func,
+    updateList     : PropTypes.func,
     updateSlider   : PropTypes.func,
     slider         : PropTypes.object,
 };

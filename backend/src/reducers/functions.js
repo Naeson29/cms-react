@@ -47,7 +47,7 @@ class ReducerFunctions {
         return {...state};
     }
 
-    createFailure(state, payload) {
+    createFailure(action, state, payload) {
         state.form = {
             loading : false,
             error   : payload,
@@ -80,7 +80,7 @@ class ReducerFunctions {
         return {...state};
     }
 
-    updateFailure(state, payload) {
+    updateFailure(action, state, payload) {
         state.form = {
             loading : false,
             error   : payload,
