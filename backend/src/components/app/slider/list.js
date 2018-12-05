@@ -24,6 +24,14 @@ class List extends  Component {
         this._sort = this._sort.bind(this);
     }
 
+    componentDidUpdate(prevProps) {
+        if (this.props.content !== prevProps.content) {
+            this.setState({
+                items: this.props.content
+            });
+        }
+    }
+
     _sort = ({oldIndex, newIndex}) => {
         const {orderSlider} = this.props;
         let items = arrayMove(this.state.items, oldIndex, newIndex);

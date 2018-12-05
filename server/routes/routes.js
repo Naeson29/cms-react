@@ -117,10 +117,12 @@ Router.put('/sliders/:id', function(req, res) {
 Router.delete('/sliders/:id', function(req, res) {
     let id = req.params.id;
 
-    Slider.findOneAndRemove({id : id }, function(err) {
+    Slider.findOneAndRemove({id : id }, function(err, data) {
         if (err) {
           res.status(500).send(err);
         } else {
+            fs.unlink(Constants.directory.slider + '/' + data.image);
+
             res.status(200).send({
                 success : true,
                 id      : parseInt(id),
