@@ -1,15 +1,15 @@
-import React, {Component}  from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import * as IconRegular    from '@fortawesome/free-regular-svg-icons/index';
-import * as IconSolid      from '@fortawesome/free-solid-svg-icons/index';
-import {ACTIONS}           from '../../../utils/actions';
-import Truncate            from 'react-truncate';
-import PropTypes           from 'prop-types';
+import React, {Component} from 'react';
+import {FontAwesomeIcon}  from '@fortawesome/react-fontawesome';
+import * as IconRegular   from '@fortawesome/free-regular-svg-icons/index';
+import * as IconSolid     from '@fortawesome/free-solid-svg-icons/index';
+import {ACTIONS}          from '../../../utils/actions';
+import Truncate           from 'react-truncate';
+import PropTypes          from 'prop-types';
 import {
     SortableContainer,
     SortableElement,
     SortableHandle,
-    arrayMove}             from 'react-sortable-hoc';
+    arrayMove}            from 'react-sortable-hoc';
 
 
 class List extends  Component {
@@ -63,13 +63,16 @@ class List extends  Component {
                         {value.label}
                     </Truncate>
                 </td>
-                <td className={'no-display text'}>
+                <td className={'no-display'}>
                     <Truncate lines={1} ellipsis={'...'}>
                         {value.text}
                     </Truncate>
                 </td>
                 <td className={'action'}>
-                    <DragHandle/>
+                    {
+                        items.length > 1 &&
+                        <DragHandle/>
+                    }
                 </td>
                 <td className={'action'}>
                     <FontAwesomeIcon className={'svg'} icon={IconRegular.faTrashAlt} onClick={(e) => {deleteLine(e,value.id);}}/>
@@ -97,7 +100,7 @@ class List extends  Component {
                 useDragHandle={true}
                 lockToContainerEdges={true}
                 lockAxis={'y'}
-                helperClass={'isDragging slider'}
+                helperClass={'isDragging isDragging-slider'}
                 lockOffset={'0%'}
             />
         );
