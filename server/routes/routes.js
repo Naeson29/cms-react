@@ -13,7 +13,11 @@ const async               = require('async');
 const Slider    = require('../models/slider');
 
 //Connect
-Mongoose.connect(`${Constants.dbUrl}${Constants.database}`, { useNewUrlParser: true, useCreateIndex : true });
+Mongoose.connect(`${Constants.dbUrl}${Constants.database}`, {
+    useNewUrlParser  : true,
+    useCreateIndex   : true,
+    useFindAndModify : false
+});
 
 //Routes
 Router.get('/sliders', (req, res) => {
@@ -40,28 +44,26 @@ Router.post('/sliders', function(req, res) {
     upload(req, res, function(err) {
         if(err) {
             res.status(500).send(err);
+        }else{
+            const data = new Slider({
+                label : req.body.label,
+                text  : req.body.text,
+                order : req.body.count,
+                image : fileName
+            });
+
+            data.save(function(err, data) {
+                if (err) {
+                    res.status(500).send(err);
+                } else {
+                    res.status(200).send({
+                        success : true,
+                        data    : data,
+                        message : 'Create slider success'
+                    });
+                }
+            });
         }
-
-        const item = {
-            label : req.body.label,
-            text  : req.body.text,
-            order : req.body.count,
-            image : fileName
-        };
-
-        const data = new Slider(item);
-
-        data.save(function(err, data) {
-            if (err) {
-                res.status(500).send(err);
-            } else {
-                res.status(200).send({
-                    success : true,
-                    data    : data,
-                    message : 'Create slider success'
-                });
-            }
-        });
     })
 });
 
