@@ -63,7 +63,7 @@ class List extends  Component {
                         {value.label}
                     </Truncate>
                 </td>
-                <td className={'no-display'}>
+                <td className={'text no-display'}>
                     <Truncate lines={1} ellipsis={'...'}>
                         {value.text}
                     </Truncate>
