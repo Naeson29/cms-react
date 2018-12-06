@@ -130,7 +130,7 @@ class PanelSlider extends Component
     }
 
     render(){
-        const { submit }    = this.props;
+        const { submit, count }    = this.props;
         const { create, parameters } = this.state;
         const key = !this.state.reset ? 'form_edit' : 'form_clean';
 
@@ -184,6 +184,10 @@ class PanelSlider extends Component
                                 />
                                 {this._hasError('image')}
                             </div>
+                            {
+                                create &&
+                                    <input type={'hidden'} value={count} id={'count'} name={'count'} />
+                            }
                             <PanelActions {...this.props}>
                                 <Button color={'primary'}>{'Enregistrer'}</Button>
                             </PanelActions>
@@ -208,6 +212,7 @@ PanelSlider.propTypes = {
     updateList     : PropTypes.func,
     updateSlider   : PropTypes.func,
     slider         : PropTypes.object,
+    count          : PropTypes.number,
 };
 
 export default connect(() => {return {};}, PanelFunctions)(PanelSlider);

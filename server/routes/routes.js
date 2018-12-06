@@ -13,7 +13,7 @@ const async               = require('async');
 const Slider    = require('../models/slider');
 
 //Connect
-Mongoose.connect(`mongodb://mongodb:27017/${Constants.database}`, { useNewUrlParser: true });
+Mongoose.connect(`${Constants.dbUrl}${Constants.database}`, { useNewUrlParser: true, useCreateIndex : true });
 
 //Routes
 Router.get('/sliders', (req, res) => {
@@ -42,28 +42,25 @@ Router.post('/sliders', function(req, res) {
             res.status(500).send(err);
         }
 
-        Slider.count({}, function(err, count) {
+        const item = {
+            label : req.body.label,
+            text  : req.body.text,
+            order : req.body.count,
+            image : fileName
+        };
 
-            const item = {
-                label : req.body.label,
-                text  : req.body.text,
-                order : ( count + 1),
-                image : fileName
+        const data = new Slider(item);
 
-            };
-            const data = new Slider(item);
-
-            data.save(function(err, data) {
-                if (err) {
-                    res.status(500).send(err);
-                } else {
-                    res.status(200).send({
-                        success : true,
-                        data    : data,
-                        message : 'Create slider success'
-                    });
-                }
-            });
+        data.save(function(err, data) {
+            if (err) {
+                res.status(500).send(err);
+            } else {
+                res.status(200).send({
+                    success : true,
+                    data    : data,
+                    message : 'Create slider success'
+                });
+            }
         });
     })
 });
@@ -117,11 +114,11 @@ Router.put('/sliders/:id', function(req, res) {
 Router.delete('/sliders/:id', function(req, res) {
     let id = req.params.id;
 
-    Slider.findOneAndRemove({id : id }, function(err, data) {
+    Slider.findOneAndDelete({id : id }, function(err, data) {
         if (err) {
           res.status(500).send(err);
         } else {
-            fs.unlink(Constants.directory.slider + '/' + data.image);
+            fs.unlinkSync(Constants.directory.slider + '/' + data.image);
 
             res.status(200).send({
                 success : true,
@@ -135,7 +132,7 @@ Router.delete('/sliders/:id', function(req, res) {
 Router.post('/sliders/order', async function(req, res) {
     async.eachSeries(req.body, function(obj, done) {
         req.body[req.body.indexOf(obj)].order = (req.body.indexOf(obj) + 1);
-        Slider.update({ id: obj.id }, { $set : { order: (req.body.indexOf(obj) + 1) }}, done);
+        Slider.updateOne({ id: obj.id }, { $set : { order: (req.body.indexOf(obj) + 1) }}, done);
     }, function(){
         res.status(200).send({
         success : true,

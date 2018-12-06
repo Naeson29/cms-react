@@ -49,7 +49,8 @@ class Slider extends Component {
                         icon={IconSolid.faPlusCircle}
                         onClick={() => openRightPanel(ACTIONS.PANEL_SLIDER, {
                             createSlider : createSlider,
-                            updateList   : this._updateList
+                            updateList   : this._updateList,
+                            count        : (content.length + 1)
                         })}
                     />
                 </h1>
