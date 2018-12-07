@@ -3,7 +3,7 @@ const Schema        = mongoose.Schema;
 const AutoIncrement = require('mongoose-sequence')(mongoose);
 
 const UserSchema = new Schema({
-        login : {
+        email : {
             type     : String,
             required : true
         },

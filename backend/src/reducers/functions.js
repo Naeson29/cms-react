@@ -152,7 +152,7 @@ class ReducerFunctions {
     }
 
     deleteSuccess(action, state, payload) {
-        state.view.content = state.view.content.filter((item) => item._id !== payload._id);
+        state.view.content = state.view.content.filter((item) => item._id !== payload.data._id);
         state.view.loading = false;
         state.view.error   = null;
 

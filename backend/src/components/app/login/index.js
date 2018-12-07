@@ -9,7 +9,7 @@ class Login extends Component {
             loading: this.props.loading,
             formErrors: {},
             parameters : {
-                login    : '',
+                email    : '',
                 password : ''
             }
         };
@@ -61,7 +61,7 @@ class Login extends Component {
     }
 
     render() {
-        const {login, password} = this.state.parameters;
+        const {email, password} = this.state.parameters;
 
         return (
             <div className={'container-app-login'}>
@@ -69,11 +69,11 @@ class Login extends Component {
                     <h1>{'Se connecter'}</h1>
                     <form className={'forms'} onSubmit={this._login}>
                         <div className={'bloc-form'}>
-                            <input id="login" name="login" type="text" autoFocus
+                            <input id="email" name="email" type="text" autoFocus
                                 className={'input'}
                                 placeholder={'Identifiant'}
-                                value={login}
-                                onChange={(event) => this._handleChange('login', event.target.value)}
+                                value={email}
+                                onChange={(event) => this._handleChange('email', event.target.value)}
                             />
                         </div>
                         <div className={'bloc-form'}>

@@ -12,7 +12,8 @@ const bcrypt              = require('bcrypt');
 const BCRYPT_SALT_ROUNDS  = 12;
 
 //Models
-const Slider    = require('../models/slider');
+const Slider = require('../models/slider');
+const User   = require('../models/user');
 
 //Connect
 Mongoose.connect(`${Constants.dbUrl}${Constants.database}`, {
@@ -25,12 +26,22 @@ Mongoose.connect(`${Constants.dbUrl}${Constants.database}`, {
 
 Router.post('/login', function(req, res){
     const password = req.body.password;
-    bcrypt.hash(password, BCRYPT_SALT_ROUNDS).then(function(hashedPassword) {
 
-        console.log('hash', hashedPassword);
+    User.findOne({email : req.body.email }, async function(err, data) {
 
-    });
-    res.status(200).send();
+        if(err){
+            res.status(500).send(err);
+        }
+
+        if(data){
+            const match = await bcrypt.compare(password, data.password);
+
+            if(match){
+                res.status(200).send(data);
+            }
+            res.status(401).send();
+        }
+    })
 });
 
 Router.get('/sliders', (req, res) => {
@@ -136,9 +147,9 @@ Router.delete('/sliders/:id', function(req, res) {
             fs.unlinkSync(Constants.directory.slider + '/' + data.image);
 
             res.status(200).send({
-                success   : true,
-                id_slider : parseInt(id),
-                message   : 'Delete slider success'
+                success : true,
+                data    : data,
+                message : 'Delete slider success'
             });
         }
     });
