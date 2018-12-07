@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-sudo docker exec -it http-server /bin/sh -c 'node ./seeders/seed.js cp -r ./seeders/slider ./public/slider'
+sudo docker exec -it http-server /bin/sh -c 'node ./seeders/seed.js'
 
-sudo rm ../server/public/slider/*
+sudo rm -R ../server/public/slider
 
 cp -r ../server/seeders/slider ../server/public

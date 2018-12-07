@@ -75,7 +75,7 @@ class List extends  Component {
                     }
                 </td>
                 <td className={'action'}>
-                    <FontAwesomeIcon className={'svg'} icon={IconRegular.faTrashAlt} onClick={(e) => {deleteLine(e,value.id);}}/>
+                    <FontAwesomeIcon className={'svg'} icon={IconRegular.faTrashAlt} onClick={(e) => {deleteLine(e,value.id_slider);}}/>
                 </td>
             </tr>
         );

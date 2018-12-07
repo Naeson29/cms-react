@@ -2,20 +2,22 @@ const mongoose      = require('mongoose');
 const Schema        = mongoose.Schema;
 const AutoIncrement = require('mongoose-sequence')(mongoose);
 
-const SliderSchema = new Schema({
-        label : {
+const UserSchema = new Schema({
+        login : {
             type     : String,
             required : true
         },
-        text  : {
+        password  : {
             type     : String,
             required : true
         },
-        image : {
+        lastName : {
             type     : String,
+            required : true
         },
-        order : {
-            type     : Number,
+        firstName : {
+            type     : String,
+            required : true
         }
     },
     {
@@ -23,5 +25,5 @@ const SliderSchema = new Schema({
     }
 );
 
-SliderSchema.plugin(AutoIncrement, {inc_field: 'id_slider'});
-module.exports = mongoose.model('Slider', SliderSchema);
+UserSchema.plugin(AutoIncrement, {inc_field: 'id_user'});
+module.exports = mongoose.model('User', UserSchema);

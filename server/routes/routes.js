@@ -8,6 +8,8 @@ const multer              = require('multer');
 const cryptoRandomString  = require('crypto-random-string');
 const fs                  = require('fs');
 const async               = require('async');
+const bcrypt              = require('bcrypt');
+const BCRYPT_SALT_ROUNDS  = 12;
 
 //Models
 const Slider    = require('../models/slider');
@@ -21,19 +23,15 @@ Mongoose.connect(`${Constants.dbUrl}${Constants.database}`, {
 
 //Routes
 
-Router.get('/me', function (req, res) {
+Router.post('/login', function(req, res){
+    const password = req.body.password;
+    bcrypt.hash(password, BCRYPT_SALT_ROUNDS).then(function(hashedPassword) {
 
-    // simple count for the session
-    if (!req.session.count) {
-        req.session.count = 0;
-    }
-    req.session.count += 1;
+        console.log('hash', hashedPassword);
 
-    // respond with the session object
-    res.json(req.session);
-
+    });
+    res.status(200).send();
 });
-
 
 Router.get('/sliders', (req, res) => {
   Slider.find().sort({order : 1})
@@ -102,7 +100,7 @@ Router.put('/sliders/:id', function(req, res) {
             res.status(500).send(err);
         }
 
-        Slider.findOne({id : id }, function(err, data) {
+        Slider.findOne({id_slider : id }, function(err, data) {
             if (err) {
                 res.status(500).send(err);
             } else {
@@ -131,16 +129,16 @@ Router.put('/sliders/:id', function(req, res) {
 Router.delete('/sliders/:id', function(req, res) {
     let id = req.params.id;
 
-    Slider.findOneAndDelete({id : id }, function(err, data) {
+    Slider.findOneAndDelete({id_slider : id }, function(err, data) {
         if (err) {
           res.status(500).send(err);
         } else {
             fs.unlinkSync(Constants.directory.slider + '/' + data.image);
 
             res.status(200).send({
-                success : true,
-                id      : parseInt(id),
-                message : 'Delete slider success'
+                success   : true,
+                id_slider : parseInt(id),
+                message   : 'Delete slider success'
             });
         }
     });
@@ -149,7 +147,7 @@ Router.delete('/sliders/:id', function(req, res) {
 Router.post('/sliders/order', async function(req, res) {
     async.eachSeries(req.body, function(obj, done) {
         req.body[req.body.indexOf(obj)].order = (req.body.indexOf(obj) + 1);
-        Slider.updateOne({ id: obj.id }, { $set : { order: (req.body.indexOf(obj) + 1) }}, done);
+        Slider.updateOne({ id_slider: obj.id_slider }, { $set : { order: (req.body.indexOf(obj) + 1) }}, done);
     }, function(){
         res.status(200).send({
         success : true,

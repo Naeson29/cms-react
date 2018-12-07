@@ -120,7 +120,7 @@ class PanelSlider extends Component
         }
         const data = new FormData(this.form);
 
-        this.props.updateSlider(this.state.parameters.id, data, (data, success) => {
+        this.props.updateSlider(this.state.parameters.id_slider, data, (data, success) => {
             if (success) {
                 this._reset();
                 this.props.closePanel(this.props._id);

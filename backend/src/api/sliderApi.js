@@ -3,7 +3,6 @@ import {HTTP_GET, HTTP_POST, HTTP_PUT, HTTP_DELETE} from './utils';
 
 const API_PREFIX = 'sliders';
 
-
 export default class SliderApi {
 
     static getSlider(parameters){

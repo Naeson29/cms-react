@@ -1,9 +1,14 @@
-const seeder = require('mongoose-seed');
-const data   = require('./data');
+const seeder    = require('mongoose-seed');
+const data      = require('./data');
+const Constants = require('../utils/consts');
 
-seeder.connect('mongodb://mongodb:27017/reactCms', { useNewUrlParser: true }, function() {
+seeder.connect(`${Constants.dbUrl}${Constants.database}`, {
+    useNewUrlParser  : true,
+    useCreateIndex   : true,
+    useFindAndModify : false }, function() {
 
     seeder.loadModels([
+        './models/user.js',
         './models/slider.js'
     ]);
 

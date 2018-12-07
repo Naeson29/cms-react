@@ -119,7 +119,7 @@ class ReducerFunctions {
 
     updateSuccess(action, state, payload) {
         state.view.content.map((item, key) => {
-            if(item.id === payload.data.id){
+            if(item.id_slider === payload.data.id_slider){
                 state.view.content[key] = payload.data;
             }
         });
@@ -152,7 +152,7 @@ class ReducerFunctions {
     }
 
     deleteSuccess(action, state, payload) {
-        state.view.content = state.view.content.filter((item) => item.id !== payload.id);
+        state.view.content = state.view.content.filter((item) => item.id_slider !== payload.id_slider);
         state.view.loading = false;
         state.view.error   = null;
 

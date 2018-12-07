@@ -18,11 +18,11 @@ const app = express();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
-app.use(session({
-    secret : "toto",
-    maxAge :  1800000
-}));
-app.use(cookieParser());
+// app.use(session({
+//     secret : "toto",
+//     maxAge :  1800000
+// }));
+// app.use(cookieParser());
 
 app.use(logger('dev'));
 app.use(cors({

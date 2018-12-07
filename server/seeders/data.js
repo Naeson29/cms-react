@@ -1,5 +1,16 @@
 const data = [
     {
+        'model' : 'User',
+        'documents' : [
+            {
+                login    : 'nnahmias@beable.fr',
+                password : '$2b$12$1qY2yLNi1PkshQHA5l3GZ.iWme.SBVZWXWcu0eF5/LEbUD/3F9pF.',
+                lastName  : 'Nahmias',
+                firstName : 'Nicolas'
+            }
+        ]
+    },
+    {
         'model': 'Slider',
         'documents': [
             {
