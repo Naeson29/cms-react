@@ -42,7 +42,7 @@ class Login extends Component {
 
     _hasError() {
         const {formErrors} = this.state;
-        if(!Object.keys(formErrors).length){
+        if(!Object.keys(formErrors).length && !this.props.error){
             return;
         }
         return (
@@ -56,11 +56,12 @@ class Login extends Component {
         if (!this._checkForm()) {
             return;
         }
+
+        this.props.login(this.state.parameters);
     }
 
     render() {
         const {login, password} = this.state.parameters;
-        //const { loginUser, error } = this.props;
 
         return (
             <div className={'container-app-login'}>
@@ -95,8 +96,18 @@ class Login extends Component {
 }
 
 Login.propTypes = {
-    error       : PropTypes.string,
+    error       : PropTypes.oneOfType([
+        PropTypes.bool,
+        PropTypes.object,
+        PropTypes.node,
+    ]),
+    success     : PropTypes.oneOfType([
+        PropTypes.bool,
+        PropTypes.object,
+        PropTypes.node,
+    ]),
     loading     : PropTypes.bool,
+    login       : PropTypes.func,
 };
 
 export default Login;

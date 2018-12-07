@@ -1,6 +1,33 @@
 import Notifier, {TYPE_ERROR, TYPE_INFO} from '../utils/notifier';
 
 class ReducerFunctions {
+    loginInit(state){
+        state.error   = false;
+        state.loading = true;
+        state.success = true;
+
+        return {...state};
+    }
+
+    loginProcessed(state){
+        return {...state};
+    }
+
+    loginFailure(state, payload){
+        state.error   = payload;
+        state.loading = false;
+        state.success = false;
+
+        return {...state};
+    }
+
+    loginSuccess(state, payload){
+        state.error   = false;
+        state.loading = false;
+        state.success = payload;
+
+        return {...state};
+    }
 
     getInit(state) {
         if (!state.view) {
@@ -152,8 +179,6 @@ class ReducerFunctions {
         state.view.content = payload.data;
         return {...state};
     }
-
-
 }
 
 export default new ReducerFunctions();
