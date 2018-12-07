@@ -20,6 +20,21 @@ Mongoose.connect(`${Constants.dbUrl}${Constants.database}`, {
 });
 
 //Routes
+
+Router.get('/me', function (req, res) {
+
+    // simple count for the session
+    if (!req.session.count) {
+        req.session.count = 0;
+    }
+    req.session.count += 1;
+
+    // respond with the session object
+    res.json(req.session);
+
+});
+
+
 Router.get('/sliders', (req, res) => {
   Slider.find().sort({order : 1})
     .then(function(data) {

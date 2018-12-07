@@ -8,6 +8,11 @@ import Slider        from '../../../containers/slider/index';
 import PanelManager  from '../../../containers/panel/panelManager';
 
 class Full extends Component {
+
+    constructor(props){
+        super(props);
+    }
+
     render() {
         return (
             <div className="container-app">

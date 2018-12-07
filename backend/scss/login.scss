@@ -1,0 +1,65 @@
+.container-app-login {
+  position        : absolute;
+  top             : 0;
+  left            : 0;
+  right           : 0;
+  bottom          : 0;
+  display         : flex;
+  justify-content : center;
+  align-items     : center;
+
+  @media (min-width: 768px) {
+    background : #e6e6e6;
+  }
+  @media (max-width: 768px) {
+    background : #fff;
+  }
+
+  .form-login {
+
+    padding       : 1.3rem;
+    background    : #fff;
+
+    @media (min-width: 768px) {
+      width         : 450px;
+      border-radius : 10px;
+      box-shadow: 2px 2px 3px 0 #ababab;
+      -moz-box-shadow: 2px 2px 3px 0 #ababab;
+      -webkit-box-shadow: 2px 2px 3px 0 #ababab;
+    }
+
+    @media (max-width: 768px) {
+      width : 450px;
+    }
+
+    @media (max-width: 480px) {
+      width : 350px;
+    }
+
+    h1 {
+      color         : $primary-color;
+      text-align    : center;
+      font-size     : 30px;
+      margin-bottom : 20px;
+    }
+
+    form {
+      .error {
+        display    : block;
+        color      : $error-color-red;
+        text-align : center;
+        margin-top : 0.4rem;
+      }
+      .submit-button {
+        text-align : center;
+        margin-top : 10px;
+
+        .btn {
+          border   : none;
+          padding  : 0 1.8rem;
+          height   : 40px
+        }
+      }
+    }
+  }
+}

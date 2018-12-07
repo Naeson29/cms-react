@@ -7,7 +7,8 @@ import {ToastContainer} from 'react-toastify';
 
 import '../scss/styles.scss';
 
-import Full from './containers/full';
+import Login from './containers/login';
+import Full  from './containers/full';
 
 ReactDOM.render((
     <Provider store={store}>
@@ -19,6 +20,7 @@ ReactDOM.render((
                     position={'top-center'}
                 />
                 <Switch>
+                    <Route exact path="/login" name="Login" component={Login}/>
                     <Route path="/" name="dashboard" component={Full}/>
                 </Switch>
             </div>
