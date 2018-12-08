@@ -25,21 +25,34 @@ Mongoose.connect(`${Constants.dbUrl}${Constants.database}`, {
 //Routes
 
 Router.post('/login', function(req, res){
-    const password = req.body.password;
 
-    User.findOne({email : req.body.email }, async function(err, data) {
+    const message  = 'Utilisateur et/ou mot de passe incorrect(s)';
+
+    User.findOne({email : req.body.email }, function(err, data) {
 
         if(err){
             res.status(500).send(err);
         }
 
         if(data){
-            const match = await bcrypt.compare(password, data.password);
+            const match = bcrypt.compareSync(req.body.password, data.password);
 
             if(match){
-                res.status(200).send(data);
+                res.status(200).send({
+                    success : true,
+                    message : 'Utilisateur authentifié'
+                });
+            }else{
+                res.status(401).send({
+                    error   : true,
+                    message : message
+                });
             }
-            res.status(401).send();
+        }else{
+            res.status(401).send({
+                error   : true,
+                message : message
+            });
         }
     })
 });
