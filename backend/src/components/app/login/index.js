@@ -6,7 +6,6 @@ class Login extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            loading: this.props.loading,
             formErrors: {},
             parameters : {
                 email    : '',
@@ -61,6 +60,7 @@ class Login extends Component {
     }
 
     render() {
+        const {loading} = this.props;
         const {email, password} = this.state.parameters;
 
         return (
@@ -68,26 +68,28 @@ class Login extends Component {
                 <div className={'form-login'}>
                     <h1>{'Se connecter'}</h1>
                     <form className={'forms'} onSubmit={this._login}>
-                        <div className={'bloc-form'}>
-                            <input id="email" name="email" type="text" autoFocus
-                                className={'input'}
-                                placeholder={'Identifiant'}
-                                value={email}
-                                onChange={(event) => this._handleChange('email', event.target.value)}
-                            />
-                        </div>
-                        <div className={'bloc-form'}>
-                            <input id="password" name="password" type="password"
-                                className={'input'}
-                                placeholder={'Mot de passe'}
-                                value={password}
-                                onChange={(event) => this._handleChange('password', event.target.value)}
-                            />
-                            {this._hasError()}
-                        </div>
-                        <div className={'submit-button'}>
-                            <Button color={'primary'}>{'Connexion'}</Button>
-                        </div>
+                        <fieldset disabled={loading}>
+                            <div className={'bloc-form'}>
+                                <input id="email" name="email" type="text" autoFocus
+                                    className={'input'}
+                                    placeholder={'Identifiant'}
+                                    value={email}
+                                    onChange={(event) => this._handleChange('email', event.target.value)}
+                                />
+                            </div>
+                            <div className={'bloc-form'}>
+                                <input id="password" name="password" type="password"
+                                    className={'input'}
+                                    placeholder={'Mot de passe'}
+                                    value={password}
+                                    onChange={(event) => this._handleChange('password', event.target.value)}
+                                />
+                                {this._hasError()}
+                            </div>
+                            <div className={'submit-button'}>
+                                <Button color={'primary'}>{'Connexion'}</Button>
+                            </div>
+                        </fieldset>
                     </form>
                 </div>
             </div>
