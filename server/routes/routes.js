@@ -9,7 +9,7 @@ const cryptoRandomString  = require('crypto-random-string');
 const fs                  = require('fs');
 const async               = require('async');
 const bcrypt              = require('bcrypt');
-const BCRYPT_SALT_ROUNDS  = 12;
+const salt                = Constants.salt;
 
 //Models
 const Slider = require('../models/slider');
@@ -26,32 +26,27 @@ Mongoose.connect(`${Constants.dbUrl}${Constants.database}`, {
 
 Router.post('/login', function(req, res){
 
-    const message  = 'Utilisateur et/ou mot de passe incorrect(s)';
-
     User.findOne({email : req.body.email }, function(err, data) {
 
         if(err){
             res.status(500).send(err);
         }
 
-        if(data){
-            const match = bcrypt.compareSync(req.body.password, data.password);
+        let match;
 
-            if(match){
-                res.status(200).send({
-                    success : true,
-                    message : 'Utilisateur authentifié'
-                });
-            }else{
-                res.status(401).send({
-                    error   : true,
-                    message : message
-                });
-            }
+        if(data){
+            match = bcrypt.compareSync(req.body.password, data.password);
+        }
+
+        if(match){
+            res.status(200).send({
+                success : true,
+                message : 'Utilisateur authentifié'
+            });
         }else{
             res.status(401).send({
                 error   : true,
-                message : message
+                message : 'Utilisateur et/ou mot de passe incorrect(s)'
             });
         }
     })

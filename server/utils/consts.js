@@ -4,7 +4,8 @@ const Constants = {
     token      : 'JWbeyk8QFH4dYsQYibqmkoeBCNQ63mCF6LZvJl8H',
     directory  : {
         slider : 'public/slider'
-    }
+    },
+    salt       : 12
 };
 
 module.exports = Constants;
