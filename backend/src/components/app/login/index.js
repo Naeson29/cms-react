@@ -16,8 +16,6 @@ class Login extends Component {
         this._handleChange = this._handleChange.bind(this);
         this._hasError     = this._hasError.bind(this);
         this._login        = this._login.bind(this);
-
-        props.load();
     }
 
     _handleChange(attribute, value) {

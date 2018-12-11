@@ -27,9 +27,7 @@ app.use(cors({ optionsSuccessStatus : 200 }));
 app.use(bearerToken());
 
 app.use('/front', withBearer,  Frontend);
-
 app.use('/auth', Auth);
-
 app.use('/admin', withAuth, Backend);
 
 app.use('/static', express.static(__dirname + '/public'));

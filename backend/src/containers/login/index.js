@@ -1,7 +1,6 @@
 import { connect }   from 'react-redux';
 import Login         from '../../components/app/login';
 import LoginManager  from '../../models/manager/login';
-import UserManager   from "../../models/manager/user";
 
 const mapStateToProps = (state) => {
     return {
@@ -16,11 +15,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 
     return {
         load  : () => {
-            UserManager.auth((datum, success) => {
-                if(success){
-                    history.push('/');
-                }
-            })
+
         },
         login : (parameters) => {
             LoginManager.login(parameters, (datum, success) => {
