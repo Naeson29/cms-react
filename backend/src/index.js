@@ -8,7 +8,7 @@ import {ToastContainer} from 'react-toastify';
 import '../scss/styles.scss';
 
 import Login from './containers/login';
-import Full  from './containers/full';
+import Full  from './containers/full/full';
 
 ReactDOM.render((
     <Provider store={store}>

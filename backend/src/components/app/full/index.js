@@ -11,6 +11,8 @@ class Full extends Component {
 
     constructor(props){
         super(props);
+
+        props.load();
     }
 
     render() {

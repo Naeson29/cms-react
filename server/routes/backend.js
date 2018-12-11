@@ -8,12 +8,9 @@ const multer              = require('multer');
 const cryptoRandomString  = require('crypto-random-string');
 const fs                  = require('fs');
 const async               = require('async');
-const bcrypt              = require('bcrypt');
-const salt                = Constants.salt;
 
 //Models
 const Slider = require('../models/slider');
-const User   = require('../models/user');
 
 //Connect
 Mongoose.connect(`${Constants.dbUrl}${Constants.database}`, {
@@ -23,40 +20,15 @@ Mongoose.connect(`${Constants.dbUrl}${Constants.database}`, {
 });
 
 //Routes
-
-Router.post('/login', function(req, res){
-
-    User.findOne({email : req.body.email }, function(err, data) {
-
-        if(err){
-            res.status(500).send(err);
-        }
-
-        let match;
-
-        if(data){
-            match = bcrypt.compareSync(req.body.password, data.password);
-        }
-
-        if(match){
-            res.status(200).send({
-                success : true,
-                message : 'Utilisateur authentifié'
-            });
-        }else{
-            res.status(401).send({
-                error   : true,
-                message : 'Utilisateur et/ou mot de passe incorrect(s)'
-            });
-        }
-    })
+Router.get('/user/check', (req, res) => {
+    res.sendStatus(200);
 });
 
 Router.get('/sliders', (req, res) => {
-  Slider.find().sort({order : 1})
-    .then(function(data) {
-      res.json(data);
-    });
+    Slider.find().sort({order : 1})
+        .then(function(data) {
+            res.json(data);
+        });
 });
 
 Router.post('/sliders', function(req, res) {
@@ -64,14 +36,14 @@ Router.post('/sliders', function(req, res) {
     let fileName = cryptoRandomString(16);
 
     const upload = multer({storage: multer.diskStorage({
-        destination: function (req, file, callback) {
-            callback(null, Constants.directory.slider)
-        },
-        filename: function (req, file, callback) {
-            fileName = fileName + '.' + mime.getExtension(file.mimetype);
-            callback(null, fileName)
-        }
-    })}).single('slider');
+            destination: function (req, file, callback) {
+                callback(null, Constants.directory.slider)
+            },
+            filename: function (req, file, callback) {
+                fileName = fileName + '.' + mime.getExtension(file.mimetype);
+                callback(null, fileName)
+            }
+        })}).single('slider');
 
     upload(req, res, function(err) {
         if(err) {
@@ -105,14 +77,14 @@ Router.put('/sliders/:id', function(req, res) {
     let fileName = cryptoRandomString(16);
 
     const upload = multer({storage: multer.diskStorage({
-        destination: function (req, file, callback) {
-            callback(null, Constants.directory.slider)
-        },
-        filename: function (req, file, callback) {
-            fileName = fileName + '.' + mime.getExtension(file.mimetype);
-            callback(null, fileName)
-        }
-    })}).single('slider');
+            destination: function (req, file, callback) {
+                callback(null, Constants.directory.slider)
+            },
+            filename: function (req, file, callback) {
+                fileName = fileName + '.' + mime.getExtension(file.mimetype);
+                callback(null, fileName)
+            }
+        })}).single('slider');
 
     upload(req, res, function(err) {
         if (err) {
@@ -150,7 +122,7 @@ Router.delete('/sliders/:id', function(req, res) {
 
     Slider.findOneAndDelete({id_slider : id }, function(err, data) {
         if (err) {
-          res.status(500).send(err);
+            res.status(500).send(err);
         } else {
             fs.unlinkSync(Constants.directory.slider + '/' + data.image);
 
@@ -165,17 +137,17 @@ Router.delete('/sliders/:id', function(req, res) {
 
 Router.post('/sliders/order', async function(req, res) {
     async.eachSeries(req.body, function(obj, done) {
-        req.body[req.body.indexOf(obj)].order = (req.body.indexOf(obj) + 1);
-        Slider.updateOne({ id_slider: obj.id_slider }, { $set : { order: (req.body.indexOf(obj) + 1) }}, done);
-    }, function(){
-        res.status(200).send({
-        success : true,
-        data    : req.body,
-        message : 'Order slider success'})
-    }
-    , function(err) {
-        res.status(500).send(err);
-    });
+            req.body[req.body.indexOf(obj)].order = (req.body.indexOf(obj) + 1);
+            Slider.updateOne({ id_slider: obj.id_slider }, { $set : { order: (req.body.indexOf(obj) + 1) }}, done);
+        }, function(){
+            res.status(200).send({
+                success : true,
+                data    : req.body,
+                message : 'Order slider success'})
+        }
+        , function(err) {
+            res.status(500).send(err);
+        });
 });
 
 module.exports = Router;

@@ -1,11 +1,22 @@
-import Api from './api';
-import {HTTP_POST} from './utils';
-
-const API_PREFIX = 'login';
+import {AXIOS_CONF, ROOT_URL} from './utils';
+import Axios from "axios/index";
 
 export default class LoginApi {
 
-    static login(parameters){
-        return Api.callApi(HTTP_POST, API_PREFIX, parameters, false);
+    static login(params = {}) {
+        let promise;
+        let that = this;
+
+        promise = Axios.post(ROOT_URL + 'auth/login', params, AXIOS_CONF);
+
+        promise.then((response) => {
+            if (response.data) {
+                localStorage.setItem('token', response.data.token);
+            }
+        }, (err) => {
+            //console.log(err)
+        });
+
+        return promise;
     }
 }

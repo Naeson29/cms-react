@@ -3,12 +3,11 @@ import qs from 'qs';
 import {ROOT_URL, AXIOS_CONF, HTTP_GET, HTTP_POST, HTTP_PUT, HTTP_DELETE} from './utils';
 import Config from '../configuration';
 
-let frontUrl    = ROOT_URL + 'api/';
+let frontUrl    = ROOT_URL + 'front/';
 
 export default class Api {
 
     static callApi(httpMethod, route, params = {}) {
-        // Waiting for result
         let promise;
         let currentConf = { headers: {} };
         currentConf.headers = Object.assign(currentConf.headers, AXIOS_CONF.headers);

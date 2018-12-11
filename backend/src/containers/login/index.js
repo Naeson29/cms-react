@@ -10,10 +10,14 @@ const mapStateToProps = (state) => {
     };
 };
 
-const mapDispatchToProps = () => {
+const mapDispatchToProps = (dispatch, ownProps) => {
     return {
-        login : (parameters, callback) => {
-            LoginManager.login(parameters, callback)
+        login : (parameters) => {
+            LoginManager.login(parameters, (datum, success) => {
+                if(success){
+                    ownProps.history.push('/');
+                }
+            })
         }
     };
 };
