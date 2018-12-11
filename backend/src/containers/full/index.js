@@ -1,11 +1,11 @@
 import { connect }    from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import Full           from '../../components/app/full/index';
-import UserManager    from '../../models/manager/user';
+import AuthManager    from '../../models/manager/auth';
 
 const mapStateToProps = (state) => {
     return {
-        loading : state.User.view.loading
+        loading : state.Auth.view.loading
     };
 };
 
@@ -17,7 +17,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
             full.getAuth();
         },
         getAuth : () => {
-            UserManager.auth((datum, success) => {
+            AuthManager.auth((datum, success) => {
                 if(!success){
                     full.redirectLogin();
                 }
