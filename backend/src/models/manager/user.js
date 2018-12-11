@@ -1,4 +1,4 @@
-import {auth} from '../../actions/user';
+//import {auth} from '../../actions/user';
 import Manager from './manager';
 
 class User extends Manager {
