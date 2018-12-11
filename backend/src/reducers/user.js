@@ -3,7 +3,9 @@ import UserEntity       from '../models/entity/user';
 import ReducerFunctions from './functions';
 
 const INITIAL_STATE = {
-    loading : true
+    view : {
+        loading : true
+    }
 };
 
 export default function User(state = INITIAL_STATE, action) {

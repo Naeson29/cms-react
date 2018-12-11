@@ -6,6 +6,7 @@ import Header        from '../../../containers/component/header';
 import Dashboard     from '../../../containers/dashboard/index';
 import Slider        from '../../../containers/slider/index';
 import PanelManager  from '../../../containers/panel/panelManager';
+import Loader        from '../component/loading';
 
 const INTERVAL = 60000;
 
@@ -27,7 +28,26 @@ class Full extends Component {
         clearInterval(authInterval);
     }
 
+    componentDidUpdate() {
+        const {loading} = this.state;
+
+        if (loading && !this.props.loading) {
+            this.setState({
+                loading:false
+            });
+        }
+    }
+
     render() {
+        const {loading} = this.state;
+
+        if (loading) {
+            return (
+                <div className={'root-loader'}>
+                    <Loader />
+                </div>
+            );
+        }
         return (
             <div className="container-app">
                 <div className="header-app">

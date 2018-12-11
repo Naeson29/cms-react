@@ -4,7 +4,9 @@ import Full           from '../../components/app/full/index';
 import UserManager    from '../../models/manager/user';
 
 const mapStateToProps = (state) => {
-    return {};
+    return {
+        loading : state.User.view.loading
+    };
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => {
