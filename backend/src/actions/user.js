@@ -1,10 +1,10 @@
 import UserApi from '../api/userApi';
 import {ClassicActions, ClassicConstantList} from './classic';
 
-export const CHECK = ClassicConstantList('CHECK');
+export const AUTH = ClassicConstantList('AUTH');
 
-export let check = new ClassicActions(CHECK, {
+export let auth = new ClassicActions(AUTH, {
     action: () => {
-        return UserApi.check();
+        return UserApi.auth();
     },
 });

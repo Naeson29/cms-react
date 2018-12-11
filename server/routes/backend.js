@@ -20,8 +20,10 @@ Mongoose.connect(`${Constants.dbUrl}${Constants.database}`, {
 });
 
 //Routes
-Router.get('/user/check', (req, res) => {
-    res.sendStatus(200);
+Router.get('/auth', (req, res) => {
+    res.status(200).send({
+        success : true
+    });
 });
 
 Router.get('/sliders', (req, res) => {

@@ -4,22 +4,25 @@ import Full           from '../../components/app/full/index';
 import UserManager    from '../../models/manager/user';
 
 const mapStateToProps = () => {
-    return {
-
-    };
+    return {};
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => {
+    const {history} = ownProps;
+
     const full = {
         load: () => {
-            UserManager.check((datum, success) => {
+            full.getAuth();
+        },
+        getAuth : () => {
+            UserManager.auth((datum, success) => {
                 if(!success){
                     full.redirectLogin();
                 }
             })
         },
         redirectLogin: () => {
-            ownProps.history.push('/login');
+            history.push('/login');
         }
     };
 

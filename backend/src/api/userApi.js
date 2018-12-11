@@ -5,7 +5,7 @@ const API_PREFIX = 'user';
 
 export default class UserApi {
 
-    static check(parameters){
-        return Api.callApi(HTTP_GET, `${API_PREFIX}/check`, parameters, false);
+    static auth(parameters){
+        return Api.callApi(HTTP_GET, 'auth', parameters, false);
     }
 }

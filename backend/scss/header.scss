@@ -63,10 +63,35 @@
 
     .navbar-nav-right {
       margin-right : 0.8rem;
+      display: flex;
+      align-items: center;
+
+      a, span {
+        color : $primary-color;
+        transition: color 0.15s ease-in-out;
+
+        &:hover {
+          color : $primary-color-light;
+        }
+      }
+
+      span {
+        cursor : pointer;
+        margin-left : 0.8rem;
+      }
 
       .svg-inline--fa {
-        width  : 22px;
-        height : 22px;
+        vertical-align: top;
+      }
+
+      .fa-user {
+        width  : 18px;
+        height : 18px;
+      }
+
+      .fa-sign-out-alt {
+        width  : 20px;
+        height : 20px;
       }
     }
   }

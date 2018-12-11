@@ -1,18 +1,28 @@
 import React, {Component}   from 'react';
 import {Switch, Route}      from 'react-router-dom';
 
-import Header        from '../component/header';
+import Header        from '../../../containers/component/header';
 import Sidebar       from '../component/sidebar';
 import Dashboard     from '../../../containers/dashboard/index';
 import Slider        from '../../../containers/slider/index';
 import PanelManager  from '../../../containers/panel/panelManager';
+
+const INTERVAL = 30000;
 
 class Full extends Component {
 
     constructor(props){
         super(props);
 
+        this.state = {
+            authInterval: setInterval(() => this.props.getAuth(), INTERVAL)
+        };
+
         props.load();
+    }
+
+    componentWillUnmount() {
+        clearInterval(this.state.authInterval);
     }
 
     render() {

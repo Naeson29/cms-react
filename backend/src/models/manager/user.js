@@ -1,14 +1,14 @@
-import {check} from '../../actions/user';
+import {auth} from '../../actions/user';
 import Manager from './manager';
 
 class User extends Manager {
 
-    check(callback) {
+    auth(callback) {
         return this.classicDispatch(
-            check.INIT,
-            () => check.ACTION(),
-            (content) => check.SUCCESS(content),
-            (error) => check.FAILURE(error),
+            auth.INIT,
+            () => auth.ACTION(),
+            (content) => auth.SUCCESS(content),
+            (error) => auth.FAILURE(error),
             callback
         );
     }

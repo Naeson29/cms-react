@@ -1,7 +1,8 @@
-import React, {Component} from 'react';
-import {NavLink} from 'react-router-dom';
+import React, {Component}  from 'react';
+import {NavLink}           from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import * as IconSolid from '@fortawesome/free-solid-svg-icons';
+import * as IconSolid      from '@fortawesome/free-solid-svg-icons';
+import PropTypes           from 'prop-types';
 
 class Header extends Component {
 
@@ -11,6 +12,8 @@ class Header extends Component {
 
 
     render() {
+        const {logout} = this.props;
+
         return (
             <nav className="navbar">
                 <NavLink to={'/'} className="navbar-brand">
@@ -21,6 +24,9 @@ class Header extends Component {
                     <NavLink to={'/'}>
                         <FontAwesomeIcon icon={IconSolid.faUser} />
                     </NavLink>
+                    <span onClick={() => logout()}>
+                        <FontAwesomeIcon icon={IconSolid.faSignOutAlt} />
+                    </span>
                 </div>
             </nav>
         );
@@ -28,3 +34,8 @@ class Header extends Component {
 }
 
 export default Header;
+
+Header.propTypes = {
+    logout : PropTypes.func.isRequired,
+};
+
