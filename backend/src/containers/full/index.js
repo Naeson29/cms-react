@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom';
 import Full           from '../../components/app/full/index';
 import UserManager    from '../../models/manager/user';
 
-const mapStateToProps = () => {
+const mapStateToProps = (state) => {
     return {};
 };
 

@@ -3,10 +3,10 @@ import UserEntity       from '../models/entity/user';
 import ReducerFunctions from './functions';
 
 const INITIAL_STATE = {
-
+    loading : true
 };
 
-export default function Login(state = INITIAL_STATE, action) {
+export default function User(state = INITIAL_STATE, action) {
     switch (action.type) {
         case AUTH.INIT: {
             return ReducerFunctions.getInit(state);

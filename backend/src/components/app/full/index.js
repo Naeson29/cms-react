@@ -1,13 +1,13 @@
 import React, {Component}   from 'react';
 import {Switch, Route}      from 'react-router-dom';
 
-import Header        from '../../../containers/component/header';
 import Sidebar       from '../component/sidebar';
+import Header        from '../../../containers/component/header';
 import Dashboard     from '../../../containers/dashboard/index';
 import Slider        from '../../../containers/slider/index';
 import PanelManager  from '../../../containers/panel/panelManager';
 
-const INTERVAL = 30000;
+const INTERVAL = 60000;
 
 class Full extends Component {
 
@@ -15,14 +15,16 @@ class Full extends Component {
         super(props);
 
         this.state = {
-            authInterval: setInterval(() => this.props.getAuth(), INTERVAL)
+            loading      : true,
+            authInterval : setInterval(() => this.props.getAuth(), INTERVAL)
         };
 
         props.load();
     }
 
     componentWillUnmount() {
-        clearInterval(this.state.authInterval);
+        const {authInterval} = this.state;
+        clearInterval(authInterval);
     }
 
     render() {
