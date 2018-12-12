@@ -6,6 +6,7 @@ import PanelActions         from '../component/panelActions';
 import Notification         from '../panel/notification';
 import PropTypes            from 'prop-types';
 import SubmitForm           from '../component/submitForm';
+import serialize            from 'form-serialize';
 
 class PanelUser extends Component
 {
@@ -20,10 +21,16 @@ class PanelUser extends Component
             password  : ''
         };
 
+        const userProps = props.user;
+
+        if(props.user){
+            userProps.password = '';
+        }
+
         this.state = {
             formErrors : {},
-            create     : !props.user,
-            parameters : props.user ? props.user : this.default,
+            create     : !userProps,
+            parameters : userProps ? userProps : this.default,
             reset     : false
         };
 
@@ -58,6 +65,10 @@ class PanelUser extends Component
         const parameters = this.state.parameters;
         let errors = {};
 
+        if(!this.state.create){
+            delete parameters.password;
+        }
+
         Object.keys(parameters).map((key) => {
             if (!parameters[key]) {
                 errors[key] = true;
@@ -83,9 +94,8 @@ class PanelUser extends Component
         if (!this._checkForm()) {
             return;
         }
-        const data = new FormData(this.form);
 
-        this.props.createUser(data, (data, success) => {
+        this.props.createUser(serialize(this.form, {hash: true}), (data, success) => {
             if (success) {
                 this._reset();
                 this.props.closePanel(this.props._id);
@@ -100,9 +110,14 @@ class PanelUser extends Component
         if (!this._checkForm()) {
             return;
         }
-        const data = new FormData(this.form);
 
-        this.props.updateUser(this.state.parameters.id_user, data, (data, success) => {
+        let serialData = serialize(this.form, {hash: true});
+
+        if(!this.state.create && !serialData['password']){
+            delete serialData['password'];
+        }
+
+        this.props.updateUser(this.state.parameters.id_user, serialData, (data, success) => {
             if (success) {
                 this._reset();
                 this.props.closePanel(this.props._id);
@@ -134,7 +149,7 @@ class PanelUser extends Component
                             }
                             <div className={'bloc-form'}>
                                 <label className={'label-info'} htmlFor="label">{'Nom :'}</label>
-                                <input id="lastName" name="lastName" type="text" autoFocus required className={'input'}
+                                <input id="lastName" name="lastName" type="text" autoFocus className={'input'}
                                     value={parameters.lastName}
                                     onChange={(event) => this._handleChange('lastName', event.target.value)}
                                 />
@@ -142,7 +157,7 @@ class PanelUser extends Component
                             </div>
                             <div className={'bloc-form'}>
                                 <label className={'label-info'} htmlFor="label">{'Prénom :'}</label>
-                                <input id="firstName" name="firstName" type="text" autoFocus required className={'input'}
+                                <input id="firstName" name="firstName" type="text" className={'input'}
                                     value={parameters.firstName}
                                     onChange={(event) => this._handleChange('firstName', event.target.value)}
                                 />
@@ -150,11 +165,19 @@ class PanelUser extends Component
                             </div>
                             <div className={'bloc-form'}>
                                 <label className={'label-info'} htmlFor="label">{'Email :'}</label>
-                                <input id="email" name="email" type="text" autoFocus required className={'input'}
+                                <input id="email" name="email" type="text" className={'input'}
                                     value={parameters.email}
                                     onChange={(event) => this._handleChange('email', event.target.value)}
                                 />
                                 {this._hasError('email')}
+                            </div>
+                            <div className={'bloc-form'}>
+                                <label className={'label-info'} htmlFor="label">{'Mot de passe :'}</label>
+                                <input id="password" name="password" type="password" className={'input'}
+                                       value={parameters.password}
+                                       onChange={(event) => this._handleChange('password', event.target.value)}
+                                />
+                                {this._hasError('password')}
                             </div>
                             <PanelActions {...this.props}>
                                 <Button color={'primary'}>{'Enregistrer'}</Button>

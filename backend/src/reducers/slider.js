@@ -77,8 +77,8 @@ export default function Slider(state = INITIAL_STATE, action) {
         }
 
         case DELETE_SLIDER.FAILURE: {
-            return ReducerFunctions.deleteFailure(action, state, action.payload);        }
-
+            return ReducerFunctions.deleteFailure(action, state, action.payload);
+        }
 
         case ORDER_SLIDER.INIT: {
             return ReducerFunctions.orderInit(state);

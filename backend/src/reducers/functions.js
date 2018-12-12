@@ -55,7 +55,6 @@ class ReducerFunctions {
     getFailure(state, payload) {
         state.view.error = payload;
         state.view.loading = false;
-
         return {...state};
     }
 
@@ -168,7 +167,7 @@ class ReducerFunctions {
         state.view.error = payload;
         state.view.loading = false;
 
-        Notifier(action, TYPE_INFO, 'Echec de la suppression');
+        Notifier(action, TYPE_ERROR, 'Echec de la suppression');
         return {...state};
     }
 

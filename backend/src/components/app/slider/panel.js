@@ -153,7 +153,7 @@ class PanelSlider extends Component
                             }
                             <div className={'bloc-form'}>
                                 <label className={'label-info'} htmlFor="label">{'Titre :'}</label>
-                                <input id="label" name="label" type="text" autoFocus required className={'input'}
+                                <input id="label" name="label" type="text" autoFocus className={'input'}
                                     value={parameters.label}
                                     onChange={(event) => this._handleChange('label', event.target.value)}
                                 />
@@ -161,7 +161,7 @@ class PanelSlider extends Component
                             </div>
                             <div className={'bloc-form'}>
                                 <label className={'label-info'} htmlFor="label">{'Texte :'}</label>
-                                <textarea id="text" name="text" required className={'textarea'}
+                                <textarea id="text" name="text" className={'textarea'}
                                     value={parameters.text}
                                     onChange={(event) => this._handleChange('text', event.target.value)}
                                 />

@@ -19,6 +19,7 @@ class User extends Component {
     }
 
     _updateList(){
+        console.log(1)
         this.forceUpdate();
     }
 
@@ -45,7 +46,6 @@ class User extends Component {
                         onClick={() => openRightPanel(ACTIONS.PANEL_USER, {
                             createUser  : createUser,
                             updateList  : this._updateList,
-                            count       : (content.length + 1)
                         })}
                     />
                 </h1>

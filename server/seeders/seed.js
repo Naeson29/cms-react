@@ -12,7 +12,7 @@ seeder.connect(`${Constants.dbUrl}${Constants.database}`, {
         './models/slider.js'
     ]);
 
-    seeder.clearModels(['Slider'], function() {
+    seeder.clearModels(['Slider', 'User'], function() {
         seeder.populateModels(data, function() {
             seeder.disconnect();
         });

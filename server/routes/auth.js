@@ -1,12 +1,11 @@
 'use strict';
-const Constants           = require('../utils/consts');
-const Express             = require('express');
-const Mongoose            = require('mongoose');
-const Router              = Express.Router();
-const bcrypt              = require('bcrypt');
-const salt                = Constants.salt;
-const jwt                 = require('jsonwebtoken');
-const secret              = Constants.secret;
+const Constants = require('../utils/consts');
+const Express   = require('express');
+const Mongoose  = require('mongoose');
+const Router    = Express.Router();
+const bcrypt    = require('bcrypt');
+const jwt       = require('jsonwebtoken');
+const secret    = Constants.secret;
 
 //Models
 const User = require('../models/user');

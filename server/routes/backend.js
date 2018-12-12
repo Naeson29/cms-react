@@ -21,12 +21,16 @@ Mongoose.connect(`${Constants.dbUrl}${Constants.database}`, {
 });
 
 //Routes
+
+//Auth
 Router.get('/auth', (req, res) => {
     res.status(200).send({
         success : true
     });
 });
 
+
+//Slider
 Router.get('/sliders', (req, res) => {
     Slider.find().sort({order : 1})
         .then(function(data) {
@@ -153,11 +157,81 @@ Router.post('/sliders/order', async function(req, res) {
         });
 });
 
+
+//User
 Router.get('/users', (req, res) => {
-    User.find().sort({order : 1})
+    User.find().sort({lastName : 1})
         .then(function(data) {
             res.json(data);
         });
+});
+
+Router.post('/users', function(req, res) {
+
+    const data = new User({
+        lastName  : req.body.lastName,
+        firstName : req.body.firstName,
+        email     : req.body.email,
+        password  : req.body.password
+    });
+
+    data.save(function(err, data) {
+        if (err) {
+            res.status(500).send(err);
+        } else {
+            res.status(200).send({
+                success : true,
+                data    : data,
+                message : 'Create user success'
+            });
+        }
+    });
+});
+
+Router.put('/users/:id', function(req, res) {
+    let id = req.params.id;
+
+    User.findOne({id_user : id }, function(err, data) {
+        if (err) {
+            res.status(500).send(err);
+        } else {
+            data.lastName  = req.body.lastName;
+            data.firstName = req.body.firstName;
+            data.email     = req.body.email;
+
+            if(req.body.password){
+                data.password = req.body.password;
+            }
+
+            data.save(function(err) {
+                if (err) {
+                    res.status(500).send(err);
+                } else{
+                    res.status(200).send({
+                        success : true,
+                        data    : data,
+                        message : 'Update user success'
+                    });
+                }
+            });
+        }
+    });
+});
+
+Router.delete('/users/:id', function(req, res) {
+    let id = req.params.id;
+
+    User.findOneAndDelete({id_user : id }, function(err, data) {
+        if (err) {
+            res.status(500).send(err);
+        } else {
+            res.status(200).send({
+                success : true,
+                data    : data,
+                message : 'Delete user success'
+            });
+        }
+    });
 });
 
 module.exports = Router;

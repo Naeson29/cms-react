@@ -18,7 +18,11 @@ export const NOTIFICATION    = {
         text      : 'Le texte est requis',
         image     : 'L\'image est requise',
         extension : 'n\'est pas un fichier valide',
-        size      : 'dépasse la taille autorisée'
+        size      : 'dépasse la taille autorisée',
+        lastName  : 'Le nom est requis',
+        firstName : 'Le prénom est requis',
+        email     : 'L\'adresse email est requise',
+        password  : 'Le mot de passe est requis',
     },
     success : {
         content : 'Le contenu a bien été enregistré'
