@@ -1,13 +1,14 @@
-import React, { Component } from 'react';
-import {connect}            from 'react-redux';
-import PanelFunctions       from '../../../containers/panel/functions';
-import {Button}             from 'reactstrap';
-import PanelActions         from '../component/panelActions';
-import Notification         from '../panel/notification';
-import PropTypes            from 'prop-types';
-import SubmitForm           from '../component/submitForm';
-import serialize            from 'form-serialize';
-import {NOTIFICATION}       from '../../../utils/consts';
+import React, { Component }  from 'react';
+import {connect}             from 'react-redux';
+import PanelFunctions        from '../../../containers/panel/functions';
+import {Button}              from 'reactstrap';
+import PanelActions          from '../component/panelActions';
+import Notification          from '../panel/notification';
+import PropTypes             from 'prop-types';
+import SubmitForm            from '../component/submitForm';
+import serialize             from 'form-serialize';
+import {NOTIFICATION}        from '../../../utils/consts';
+import ReactPasswordStrength from 'react-password-strength'
 
 class PanelUser extends Component
 {
@@ -29,18 +30,20 @@ class PanelUser extends Component
         }
 
         this.state = {
-            formErrors : {},
-            create     : !userProps,
-            parameters : userProps ? userProps : this.default,
-            reset     : false
+            formErrors    : {},
+            passwordValid : !!userProps,
+            create        : !userProps,
+            parameters    : userProps ? userProps : this.default,
+            reset         : false
         };
 
-        this._checkForm    = this._checkForm.bind(this);
-        this._hasError     = this._hasError.bind(this);
-        this._handleChange = this._handleChange.bind(this);
-        this._createUser   = this._createUser.bind(this);
-        this._updateUser   = this._updateUser.bind(this);
-        this._reset        = this._reset.bind(this);
+        this._checkForm     = this._checkForm.bind(this);
+        this._hasError      = this._hasError.bind(this);
+        this._handleChange  = this._handleChange.bind(this);
+        this._passwordValid = this._passwordValid.bind(this);
+        this._createUser    = this._createUser.bind(this);
+        this._updateUser    = this._updateUser.bind(this);
+        this._reset         = this._reset.bind(this);
     }
 
     _handleChange(attribute, value) {
@@ -53,6 +56,17 @@ class PanelUser extends Component
         }
 
         this.setState({parameters: {...newItem}, formErrors: {...errorList} });
+    }
+
+    _passwordValid(value, isValid){
+
+        if(!this.state.create && !value){
+            isValid = true;
+        }
+
+        this.setState({
+            passwordValid : isValid
+        })
     }
 
     _reset(){
@@ -75,6 +89,10 @@ class PanelUser extends Component
                 errors[key] = true;
             }
         });
+
+        if(!this.state.passwordValid){
+            errors.password = true;
+        }
 
         this.setState({formErrors: errors});
         return Object.keys(errors).length === 0;
@@ -186,9 +204,17 @@ class PanelUser extends Component
                             </div>
                             <div className={'bloc-form'}>
                                 <label className={'label-info'} htmlFor="label">{'Mot de passe :'}</label>
-                                <input id="password" name="password" type="password" className={'input'}
-                                       value={parameters.password || ''}
-                                       onChange={(event) => this._handleChange('password', event.target.value)}
+                                <ReactPasswordStrength
+                                    className={'password-strength'}
+                                    minLength={6}
+                                    minScore={1}
+                                    tooShortWord={'Trop court'}
+                                    scoreWords={['Faible', 'Moyen', 'Bon', 'Fort', 'Très fort']}
+                                    changeCallback={(value) => {
+                                        this._handleChange('password', value.password);
+                                        this._passwordValid(value.password, value.isValid);
+                                    }}
+                                    inputProps={{ name: "password", autoComplete: "off", className: "password" }}
                                 />
                                 {this._hasError('password')}
                             </div>

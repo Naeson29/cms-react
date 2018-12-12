@@ -72,7 +72,7 @@ class Login extends Component {
                             <div className={'bloc-form'}>
                                 <input id="email" name="email" type="text" autoFocus
                                     className={'input'}
-                                    placeholder={'Identifiant'}
+                                    placeholder={'Adresse email'}
                                     value={email}
                                     onChange={(event) => this._handleChange('email', event.target.value)}
                                 />
