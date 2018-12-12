@@ -24,6 +24,9 @@ export const NOTIFICATION    = {
         email      : 'L\'adresse email est requise',
         password   : 'Le mot de passe est requis'
     },
+    code : {
+        '001' : 'Un autre compte utlise cette adresse email'
+    },
     success : {
         content : 'Le contenu a bien été enregistré'
     }

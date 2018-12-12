@@ -7,6 +7,7 @@ import Notification         from '../panel/notification';
 import PropTypes            from 'prop-types';
 import SubmitForm           from '../component/submitForm';
 import serialize            from 'form-serialize';
+import {NOTIFICATION}       from '../../../utils/consts';
 
 class PanelUser extends Component
 {
@@ -92,7 +93,7 @@ class PanelUser extends Component
         else{
             if(this.props.error && this.props.error.field === attribute){
                 attribute = 'custom';
-                custom = this.props.error.message;
+                custom = NOTIFICATION.code[this.props.error.code];
             }
         }
         return (

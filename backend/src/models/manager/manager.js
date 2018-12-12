@@ -1,7 +1,6 @@
 import store from '../../store';
 
 const dispatch = store.dispatch;
-// const state = store.state;
 
 export default class Manager {
     classicDispatch(actionInit, action, actionSuccess, actionFailure, callback) {

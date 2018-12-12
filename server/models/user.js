@@ -51,7 +51,7 @@ UserSchema
             next({
                 field : 'email',
                 error : true,
-                message : 'Un autre compte utlise cette adresse email'
+                code  : '001'
             });
         } else {
             next(error);
