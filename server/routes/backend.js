@@ -177,7 +177,7 @@ Router.post('/users', (req, res) => {
 
     data.save((err, data) => {
         if (err) {
-            res.status(400).send(err);
+            res.status(500).send(err);
         } else {
             res.status(200).send({
                 success : true,
