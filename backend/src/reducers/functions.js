@@ -41,6 +41,13 @@ class ReducerFunctions {
         return {...state};
     }
 
+    getAuthInit(state){
+        state.error   = null;
+        state.loading = true;
+        state.success = false;
+        return {...state};
+    }
+
     getProcessed(state) {
         return {...state};
     }
@@ -52,12 +59,26 @@ class ReducerFunctions {
         return {...state};
     }
 
+    getAuthFailure(state, payload){
+        state.loading = false;
+        state.error   = payload;
+        state.success = false;
+        return {...state};
+    }
+
     getSuccess(state, payload) {
         state.data = {...state.data};
         state.view.content = payload;
         state.view.loading = false;
         state.view.error   = null;
 
+        return {...state};
+    }
+
+    getAuthSuccess(state, payload){
+        state.loading = false;
+        state.error   = null;
+        state.success = payload;
         return {...state};
     }
 

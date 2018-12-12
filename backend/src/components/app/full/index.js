@@ -1,5 +1,6 @@
 import React, {Component}   from 'react';
 import {Switch, Route}      from 'react-router-dom';
+import PropTypes            from 'prop-types';
 
 import Sidebar       from '../component/sidebar';
 import Header        from '../../../containers/component/header';
@@ -31,7 +32,7 @@ class Full extends Component {
     componentDidUpdate() {
         const {loading} = this.state;
 
-        if (loading && !this.props.loading) {
+        if (loading && !this.props.loading && this.props.error === null) {
             this.setState({
                 loading:false
             });
@@ -48,6 +49,7 @@ class Full extends Component {
                 </div>
             );
         }
+
         return (
             <div className="container-app">
                 <div className="header-app">
@@ -67,3 +69,8 @@ class Full extends Component {
     }
 }
 export default Full;
+
+Full.propTypes = {
+    load           : PropTypes.func.isRequired,
+    loading        : PropTypes.bool
+};
