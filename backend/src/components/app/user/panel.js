@@ -143,16 +143,16 @@ class PanelUser extends Component
                             <div className={'bloc-form'}>
                                 <label className={'label-info'} htmlFor="label">{'Prénom :'}</label>
                                 <input id="firstName" name="firstName" type="text" autoFocus required className={'input'}
-                                       value={parameters.firstName}
-                                       onChange={(event) => this._handleChange('firstName', event.target.value)}
+                                    value={parameters.firstName}
+                                    onChange={(event) => this._handleChange('firstName', event.target.value)}
                                 />
                                 {this._hasError('firstName')}
                             </div>
                             <div className={'bloc-form'}>
                                 <label className={'label-info'} htmlFor="label">{'Email :'}</label>
                                 <input id="email" name="email" type="text" autoFocus required className={'input'}
-                                       value={parameters.email}
-                                       onChange={(event) => this._handleChange('email', event.target.value)}
+                                    value={parameters.email}
+                                    onChange={(event) => this._handleChange('email', event.target.value)}
                                 />
                                 {this._hasError('email')}
                             </div>

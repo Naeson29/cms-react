@@ -23,7 +23,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
                 if(!success){
                     full.redirectLogin();
                 }
-            })
+            });
         },
         redirectLogin: () => {
             history.push('/login');

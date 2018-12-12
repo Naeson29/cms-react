@@ -74,5 +74,10 @@ export default Full;
 
 Full.propTypes = {
     load           : PropTypes.func.isRequired,
-    loading        : PropTypes.bool
+    getAuth        : PropTypes.func.isRequired,
+    loading        : PropTypes.bool,
+    error          : PropTypes.oneOfType([
+        PropTypes.node,
+        PropTypes.string,
+    ])
 };

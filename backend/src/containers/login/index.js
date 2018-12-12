@@ -22,7 +22,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
                 if(success){
                     history.push('/');
                 }
-            })
+            });
         }
     };
 };
