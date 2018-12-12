@@ -25,7 +25,7 @@ export const NOTIFICATION    = {
         password      : 'Le mot de passe est requis / mention "moyen" minimum',
     },
     code : {
-        '001' : 'Un autre compte utlise cette adresse email'
+        '001' : 'Un autre utilisateur utlise cette adresse email'
     },
     success : {
         content : 'Le contenu a bien été enregistré'
