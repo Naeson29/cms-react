@@ -52,6 +52,7 @@ class User extends Component {
                     <thead>
                         <tr>
                             <th>{'Nom'}</th>
+                            <th>{'Prénom'}</th>
                             <th>{'Email'}</th>
                             <th />
                         </tr>
