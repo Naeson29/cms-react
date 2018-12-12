@@ -15,17 +15,17 @@ class User extends Component {
         props.load();
 
         this._updateList   = this._updateList.bind(this);
-        //this._delete       = this._delete.bind(this);
+        this._delete       = this._delete.bind(this);
     }
 
     _updateList(){
         this.forceUpdate();
     }
 
-    // _delete(event, userId){
-    //     event.stopPropagation();
-    //     this.props.deleteUser(userId, () => {});
-    // }
+    _delete(event, userId){
+        event.stopPropagation();
+        this.props.deleteUser(userId, () => {});
+    }
 
     render() {
         const { content, openRightPanel, createUser, updateUser, loading } = this.props;
@@ -37,15 +37,15 @@ class User extends Component {
         }
 
         return (
-            <div className={'slider list'}>
+            <div className={'user list'}>
                 <h1>
-                    <span>{'Slider'}</span>
+                    <span>{'Utilisateurs'}</span>
                     <FontAwesomeIcon
                         icon={IconSolid.faPlusCircle}
                         onClick={() => openRightPanel(ACTIONS.PANEL_USER, {
-                            createSlider : createUser,
-                            updateList   : this._updateList,
-                            count        : (content.length + 1)
+                            createUser  : createUser,
+                            updateList  : this._updateList,
+                            count       : (content.length + 1)
                         })}
                     />
                 </h1>
@@ -59,7 +59,7 @@ class User extends Component {
                     </thead>
                     <List
                         content={content}
-                        updateSlider={updateUser}
+                        updateUser={updateUser}
                         openRightPanel={openRightPanel}
                         deleteLine={this._delete}
                         updateList={this._updateList}

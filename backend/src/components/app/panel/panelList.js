@@ -3,6 +3,7 @@ import Panel from './panel';
 import {ACTIONS} from '../../../utils/actions';
 import {  TransitionGroup, CSSTransition } from 'react-transition-group';
 import PropTypes from 'prop-types';
+
 import PanelSlider from '../../../containers/slider/panel';
 import PanelUser   from '../../../containers/user/panel';
 

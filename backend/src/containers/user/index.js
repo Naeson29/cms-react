@@ -20,11 +20,11 @@ const mapDispatchToProps = () => {
         createUser: (parameters, callback) => {
             UserManager.create(parameters, callback);
         },
-        updateUser: (sliderId, parameters, callback) => {
-            UserManager.update(sliderId, parameters, callback);
+        updateUser: (userId, parameters, callback) => {
+            UserManager.update(userId, parameters, callback);
         },
-        deleteUser: (sliderId, parameters, callback) => {
-            UserManager.remove(sliderId, parameters, callback);
+        deleteUser: (userId, parameters, callback) => {
+            UserManager.remove(userId, parameters, callback);
         }
     };
 };
