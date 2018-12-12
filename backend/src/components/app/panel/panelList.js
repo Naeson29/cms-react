@@ -4,6 +4,7 @@ import {ACTIONS} from '../../../utils/actions';
 import {  TransitionGroup, CSSTransition } from 'react-transition-group';
 import PropTypes from 'prop-types';
 import PanelSlider from '../../../containers/slider/panel';
+import PanelUser   from '../../../containers/user/panel';
 
 class PanelList extends Component {
     constructor(props) {
@@ -32,6 +33,11 @@ class PanelList extends Component {
             case ACTIONS.PANEL_SLIDER:
                 component   = (<PanelSlider {...panel.parameters} />);
                 panel.title = panel.parameters.slider ? 'Modification d\'un slider' : 'Ajout d\'un slider';
+                break;
+
+            case ACTIONS.PANEL_USER:
+                component   = (<PanelUser {...panel.parameters} />);
+                panel.title = panel.parameters.user ? 'Modification d\'un utlisateur' : 'Ajout d\'un utlisateur';
                 break;
 
             default:

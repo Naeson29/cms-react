@@ -22,6 +22,12 @@ class Sidebar extends Component {
                                 </NavLink>
                             </li>
                             <li className="nav-item">
+                                <NavLink to={'/user'} className="nav-link" activeClassName="active" replace>
+                                    <FontAwesomeIcon icon={IconSolid.faUser} />
+                                    <span>{'Utilisateurs'}</span>
+                                </NavLink>
+                            </li>
+                            <li className="nav-item">
                                 <NavLink to={'/slider'} className="nav-link" activeClassName="active" replace>
                                     <FontAwesomeIcon icon={IconSolid.faImages} />
                                     <span>{'Slider'}</span>

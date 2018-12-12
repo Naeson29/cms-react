@@ -21,9 +21,6 @@ class Header extends Component {
                     <span>{'Backoffice'}</span>
                 </NavLink>
                 <div className={'navbar-nav-right'}>
-                    <NavLink to={'/'}>
-                        <FontAwesomeIcon icon={IconSolid.faUser} />
-                    </NavLink>
                     <span onClick={() => logout()}>
                         <FontAwesomeIcon icon={IconSolid.faSignOutAlt} />
                     </span>

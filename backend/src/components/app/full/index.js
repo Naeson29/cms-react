@@ -4,8 +4,9 @@ import PropTypes            from 'prop-types';
 
 import Sidebar       from '../component/sidebar';
 import Header        from '../../../containers/component/header';
-import Dashboard     from '../../../containers/dashboard/index';
-import Slider        from '../../../containers/slider/index';
+import Dashboard     from '../../../containers/dashboard';
+import User          from '../../../containers/user';
+import Slider        from '../../../containers/slider';
 import PanelManager  from '../../../containers/panel/panelManager';
 import Loader        from '../component/loading';
 
@@ -60,6 +61,7 @@ class Full extends Component {
                     <Switch>
                         <Route exact path="/" name="dashboard" component={Dashboard}/>
                         <Route path="/dashboard" name="dashboard" component={Dashboard}/>
+                        <Route path="/user" name="user" component={User}/>
                         <Route path="/slider" name="slider" component={Slider}/>
                     </Switch>
                     <PanelManager/>

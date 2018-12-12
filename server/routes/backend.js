@@ -11,6 +11,7 @@ const async               = require('async');
 
 //Models
 const Slider = require('../models/slider');
+const User   = require('../models/user');
 
 //Connect
 Mongoose.connect(`${Constants.dbUrl}${Constants.database}`, {
@@ -149,6 +150,13 @@ Router.post('/sliders/order', async function(req, res) {
         }
         , function(err) {
             res.status(500).send(err);
+        });
+});
+
+Router.get('/users', (req, res) => {
+    User.find().sort({order : 1})
+        .then(function(data) {
+            res.json(data);
         });
 });
 

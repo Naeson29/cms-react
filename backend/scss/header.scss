@@ -63,30 +63,22 @@
 
     .navbar-nav-right {
       margin-right : 0.8rem;
-      display: flex;
-      align-items: center;
+      display      : flex;
+      align-items  : center;
 
-      a, span {
-        color : $primary-color;
-        transition: color 0.15s ease-in-out;
+      span {
+        color       : $primary-color;
+        transition  : color 0.15s ease-in-out;
+        cursor      : pointer;
+        margin-left : 0.8rem;
 
         &:hover {
           color : $primary-color-light;
         }
       }
 
-      span {
-        cursor : pointer;
-        margin-left : 0.8rem;
-      }
-
       .svg-inline--fa {
         vertical-align: top;
-      }
-
-      .fa-user {
-        width  : 18px;
-        height : 18px;
       }
 
       .fa-sign-out-alt {
