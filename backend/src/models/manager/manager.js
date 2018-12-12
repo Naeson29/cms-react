@@ -22,11 +22,10 @@ export default class Manager {
                 }
             }
         }).catch((error) => {
-            console.error(error);
-            dispatch(actionFailure(error.message));
+            dispatch(actionFailure(error.response.data));
 
             if (typeof callback === 'function') {
-                callback(error.message, false);
+                callback(error.response.data, false);
             }
         });
     }

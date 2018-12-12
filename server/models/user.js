@@ -29,22 +29,34 @@ const UserSchema = new Schema({
     }
 );
 
-UserSchema.pre('save', function(next) {
-    if (this.isNew || this.isModified('password')) {
-        const document = this;
-        bcrypt.hash(document.password, salt, function(err, hashedPassword) {
-            if (err) {
-                next(err);
-            }
-            else {
-                document.password = hashedPassword;
-                next();
-            }
-        });
-    } else {
-        next();
-    }
-});
+UserSchema
+    .pre('save', function(next) {
+        if (this.isNew || this.isModified('password')) {
+            const document = this;
+            bcrypt.hash(document.password, salt, (err, hashedPassword) => {
+                if (err) {
+                    next(err);
+                }
+                else {
+                    document.password = hashedPassword;
+                    next();
+                }
+            });
+        }else {
+            next();
+        }
+    })
+    .post('save', function(error, doc, next) {
+        if (error.name === 'MongoError' && error.code === 11000) {
+            next({
+                field : 'email',
+                error : true,
+                message : 'Un autre compte utlise cette adresse email'
+            });
+        } else {
+            next(error);
+        }
+    });
 
 UserSchema.plugin(AutoIncrement, {inc_field: 'id_user'});
 module.exports = mongoose.model('User', UserSchema);

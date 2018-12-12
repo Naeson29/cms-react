@@ -33,7 +33,7 @@ class Full extends Component {
     componentDidUpdate() {
         const {loading} = this.state;
 
-        if (loading && !this.props.loading && this.props.error === null) {
+        if (loading && !this.props.loading && !this.props.error) {
             this.setState({
                 loading:false
             });

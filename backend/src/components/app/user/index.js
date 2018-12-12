@@ -19,7 +19,6 @@ class User extends Component {
     }
 
     _updateList(){
-        console.log(1)
         this.forceUpdate();
     }
 

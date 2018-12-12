@@ -35,14 +35,14 @@ class ReducerFunctions {
                 content: [],
             };
         }
-        state.view.error = null;
+        state.view.error = false;
         state.view.loading = true;
 
         return {...state};
     }
 
     getAuthInit(state){
-        state.error   = null;
+        state.error   = false;
         state.loading = true;
         state.success = false;
         return {...state};
@@ -69,14 +69,14 @@ class ReducerFunctions {
         state.data = {...state.data};
         state.view.content = payload;
         state.view.loading = false;
-        state.view.error   = null;
+        state.view.error   = false;
 
         return {...state};
     }
 
     getAuthSuccess(state, payload){
         state.loading = false;
-        state.error   = null;
+        state.error   = false;
         state.success = payload;
         return {...state};
     }
@@ -84,7 +84,7 @@ class ReducerFunctions {
     createInit(state) {
         state.form = {
             loading : true,
-            error   : null,
+            error   : false,
             success : false
         };
         return {...state};
@@ -98,6 +98,7 @@ class ReducerFunctions {
         state.form = {
             loading : false,
             error   : payload,
+            success : false
         };
         Notifier(action, TYPE_ERROR, 'Echec de la création');
         return {...state};
@@ -107,7 +108,7 @@ class ReducerFunctions {
         state.view.content.push(payload.data);
         state.form = {
             loading : false,
-            error   : null,
+            error   : false,
             success : payload
         };
         Notifier(action, TYPE_INFO, 'Succès de la création');
@@ -117,7 +118,7 @@ class ReducerFunctions {
     updateInit(state) {
         state.form = {
             loading : true,
-            error   : null,
+            error   : false,
             success : false
         };
         return {...state};
@@ -145,7 +146,7 @@ class ReducerFunctions {
         });
         state.form = {
             loading : false,
-            error   : null,
+            error   : false,
             success : payload
         };
         Notifier(action, TYPE_INFO, 'Succès de la modification');
@@ -153,7 +154,7 @@ class ReducerFunctions {
     }
 
     deleteInit(state) {
-        state.view.error = null;
+        state.view.error = false;
         state.view.loading = true;
 
         return {...state};
@@ -174,7 +175,7 @@ class ReducerFunctions {
     deleteSuccess(action, state, payload) {
         state.view.content = state.view.content.filter((item) => item._id !== payload.data._id);
         state.view.loading = false;
-        state.view.error   = null;
+        state.view.error   = false;
 
         Notifier(action, TYPE_INFO, 'Succès de la suppression');
         return {...state};

@@ -14,15 +14,15 @@ export const UPLOAD_LABEL    = 'Maximum 1 Mo (JPG, JPEG, PNG, GIF)';
 //Notifications forms
 export const NOTIFICATION    = {
     error : {
-        label     : 'Le titre est requis',
-        text      : 'Le texte est requis',
-        image     : 'L\'image est requise',
-        extension : 'n\'est pas un fichier valide',
-        size      : 'dépasse la taille autorisée',
-        lastName  : 'Le nom est requis',
-        firstName : 'Le prénom est requis',
-        email     : 'L\'adresse email est requise',
-        password  : 'Le mot de passe est requis',
+        label      : 'Le titre est requis',
+        text       : 'Le texte est requis',
+        image      : 'L\'image est requise',
+        extension  : 'n\'est pas un fichier valide',
+        size       : 'dépasse la taille autorisée',
+        lastName   : 'Le nom est requis',
+        firstName  : 'Le prénom est requis',
+        email      : 'L\'adresse email est requise',
+        password   : 'Le mot de passe est requis'
     },
     success : {
         content : 'Le contenu a bien été enregistré'

@@ -11,7 +11,7 @@ const INITIAL_STATE = {
     },
     form : {
         loading : false,
-        error   : null,
+        error   : false,
         success : false
     }
 };

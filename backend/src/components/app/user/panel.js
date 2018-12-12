@@ -80,11 +80,23 @@ class PanelUser extends Component
     }
 
     _hasError(attribute) {
-        if(!this.state.formErrors[attribute]){
+        if(!this.state.formErrors[attribute] && !this.props.error){
             return;
         }
+
+        let custom;
+
+        if(this.props.error && this.props.error.field !== attribute){
+            return;
+        }
+        else{
+            if(this.props.error && this.props.error.field === attribute){
+                attribute = 'custom';
+                custom = this.props.error.message;
+            }
+        }
         return (
-            <Notification type={'error'} attribute={attribute}/>
+            <Notification type={'error'} attribute={attribute} custom={custom}/>
         );
     }
 
@@ -111,7 +123,7 @@ class PanelUser extends Component
             return;
         }
 
-        let serialData = serialize(this.form, {hash: true});
+        const serialData = serialize(this.form, {hash: true});
 
         if(!this.state.create && !serialData['password']){
             delete serialData['password'];
@@ -174,7 +186,7 @@ class PanelUser extends Component
                             <div className={'bloc-form'}>
                                 <label className={'label-info'} htmlFor="label">{'Mot de passe :'}</label>
                                 <input id="password" name="password" type="password" className={'input'}
-                                       value={parameters.password}
+                                       value={parameters.password || ''}
                                        onChange={(event) => this._handleChange('password', event.target.value)}
                                 />
                                 {this._hasError('password')}
@@ -196,6 +208,10 @@ PanelUser.propTypes = {
     create         : PropTypes.bool,
     submit         : PropTypes.bool,
     success        : PropTypes.oneOfType([
+        PropTypes.bool,
+        PropTypes.object
+    ]),
+    error          : PropTypes.oneOfType([
         PropTypes.bool,
         PropTypes.object
     ]),

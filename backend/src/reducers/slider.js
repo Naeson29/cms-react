@@ -7,11 +7,11 @@ const INITIAL_STATE = {
     view : {
         content : [],
         loading : true,
-        error   : null
+        error   : false
     },
     form : {
         loading : false,
-        error   : null,
+        error   : false,
         success : false
     }
 };

@@ -5,7 +5,7 @@ import ReducerFunctions from './functions';
 const INITIAL_STATE = {
     loading : true,
     success : false,
-    error   : null
+    error   : false
 };
 
 export default function User(state = INITIAL_STATE, action) {

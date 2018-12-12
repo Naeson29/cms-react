@@ -33,26 +33,26 @@ Router.get('/auth', (req, res) => {
 //Slider
 Router.get('/sliders', (req, res) => {
     Slider.find().sort({order : 1})
-        .then(function(data) {
+        .then((data) => {
             res.json(data);
         });
 });
 
-Router.post('/sliders', function(req, res) {
+Router.post('/sliders', (req, res) => {
 
     let fileName = cryptoRandomString(16);
 
     const upload = multer({storage: multer.diskStorage({
-            destination: function (req, file, callback) {
+            destination: (req, file, callback) => {
                 callback(null, Constants.directory.slider)
             },
-            filename: function (req, file, callback) {
+            filename: (req, file, callback) => {
                 fileName = fileName + '.' + mime.getExtension(file.mimetype);
                 callback(null, fileName)
             }
         })}).single('slider');
 
-    upload(req, res, function(err) {
+    upload(req, res, (err) => {
         if(err) {
             res.status(500).send(err);
         }else{
@@ -63,7 +63,7 @@ Router.post('/sliders', function(req, res) {
                 image : fileName
             });
 
-            data.save(function(err, data) {
+            data.save((err, data) => {
                 if (err) {
                     res.status(500).send(err);
                 } else {
@@ -78,27 +78,27 @@ Router.post('/sliders', function(req, res) {
     })
 });
 
-Router.put('/sliders/:id', function(req, res) {
+Router.put('/sliders/:id', (req, res) => {
     let id = req.params.id;
 
     let fileName = cryptoRandomString(16);
 
     const upload = multer({storage: multer.diskStorage({
-            destination: function (req, file, callback) {
+            destination: (req, file, callback) => {
                 callback(null, Constants.directory.slider)
             },
-            filename: function (req, file, callback) {
+            filename: (req, file, callback) => {
                 fileName = fileName + '.' + mime.getExtension(file.mimetype);
                 callback(null, fileName)
             }
         })}).single('slider');
 
-    upload(req, res, function(err) {
+    upload(req, res, (err) => {
         if (err) {
             res.status(500).send(err);
         }
 
-        Slider.findOne({id_slider : id }, function(err, data) {
+        Slider.findOne({id_slider : id }, (err, data) => {
             if (err) {
                 res.status(500).send(err);
             } else {
@@ -108,7 +108,7 @@ Router.put('/sliders/:id', function(req, res) {
                     fs.unlink(Constants.directory.slider + '/' + data.image);
                     data.image  = fileName;
                 }
-                data.save(function(err) {
+                data.save((err) => {
                     if (err) {
                         res.status(500).send(err);
                     } else{
@@ -124,10 +124,10 @@ Router.put('/sliders/:id', function(req, res) {
     })
 });
 
-Router.delete('/sliders/:id', function(req, res) {
+Router.delete('/sliders/:id', (req, res) => {
     let id = req.params.id;
 
-    Slider.findOneAndDelete({id_slider : id }, function(err, data) {
+    Slider.findOneAndDelete({id_slider : id }, (err, data) => {
         if (err) {
             res.status(500).send(err);
         } else {
@@ -142,17 +142,17 @@ Router.delete('/sliders/:id', function(req, res) {
     });
 });
 
-Router.post('/sliders/order', async function(req, res) {
-    async.eachSeries(req.body, function(obj, done) {
+Router.post('/sliders/order', async (req, res) => {
+    async.eachSeries(req.body, (obj, done) => {
             req.body[req.body.indexOf(obj)].order = (req.body.indexOf(obj) + 1);
             Slider.updateOne({ id_slider: obj.id_slider }, { $set : { order: (req.body.indexOf(obj) + 1) }}, done);
-        }, function(){
+        }, () => {
             res.status(200).send({
                 success : true,
                 data    : req.body,
                 message : 'Order slider success'})
         }
-        , function(err) {
+        , (err) => {
             res.status(500).send(err);
         });
 });
@@ -161,12 +161,12 @@ Router.post('/sliders/order', async function(req, res) {
 //User
 Router.get('/users', (req, res) => {
     User.find().sort({lastName : 1})
-        .then(function(data) {
+        .then((data) => {
             res.json(data);
         });
 });
 
-Router.post('/users', function(req, res) {
+Router.post('/users', (req, res) => {
 
     const data = new User({
         lastName  : req.body.lastName,
@@ -175,9 +175,9 @@ Router.post('/users', function(req, res) {
         password  : req.body.password
     });
 
-    data.save(function(err, data) {
+    data.save((err, data) => {
         if (err) {
-            res.status(500).send(err);
+            res.status(400).send(err);
         } else {
             res.status(200).send({
                 success : true,
@@ -188,10 +188,10 @@ Router.post('/users', function(req, res) {
     });
 });
 
-Router.put('/users/:id', function(req, res) {
+Router.put('/users/:id', (req, res) => {
     let id = req.params.id;
 
-    User.findOne({id_user : id }, function(err, data) {
+    User.findOne({id_user : id }, (err, data) =>{
         if (err) {
             res.status(500).send(err);
         } else {
@@ -203,7 +203,7 @@ Router.put('/users/:id', function(req, res) {
                 data.password = req.body.password;
             }
 
-            data.save(function(err) {
+            data.save((err) => {
                 if (err) {
                     res.status(500).send(err);
                 } else{
@@ -218,10 +218,10 @@ Router.put('/users/:id', function(req, res) {
     });
 });
 
-Router.delete('/users/:id', function(req, res) {
+Router.delete('/users/:id', (req, res) => {
     let id = req.params.id;
 
-    User.findOneAndDelete({id_user : id }, function(err, data) {
+    User.findOneAndDelete({id_user : id }, (err, data) => {
         if (err) {
             res.status(500).send(err);
         } else {

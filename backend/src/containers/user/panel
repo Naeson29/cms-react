@@ -5,7 +5,8 @@ import PanelUser     from '../../components/app/user/panel';
 const mapStateToProps = (state) => {
     return {
         submit  : state.User.form.loading,
-        success : state.User.form.success
+        success : state.User.form.success,
+        error   : state.User.form.error,
     };
 };
 
