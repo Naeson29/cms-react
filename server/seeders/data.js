@@ -4,7 +4,7 @@ const data = [
         'documents' : [
             {
                 email     : 'nnahmias@beable.fr',
-                password  : '$2b$12$HC/hUCiBO8qrFdIs6HDHoulGtL1VQxinowIMNEVUoU0QqjQNU5APG',
+                password  : '123456',
                 lastName  : 'Nahmias',
                 firstName : 'Nicolas'
             }
