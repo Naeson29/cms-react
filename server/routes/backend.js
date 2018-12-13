@@ -36,7 +36,10 @@ Router.get('/auth', (req, res) => {
 Router.get('/sliders', (req, res) => {
     Slider.find().sort({order : 1})
         .then((data) => {
-            res.json(data);
+            res.status(200).send({
+                logged : req.logged,
+                data   : data
+            });
         });
 });
 
@@ -164,14 +167,10 @@ Router.post('/sliders/order', async (req, res) => {
 Router.get('/users', (req, res) => {
     User.find().sort({lastName : 1})
     .then((data) => {
-
-        data.map((key, index) => {
-            if(key.id_user === req.logged){
-                data[index]['logged'] = true ;
-            }
+        res.status(200).send({
+            logged : req.logged,
+            data   : data
         });
-
-        res.status(200).send(data);
     });
 });
 

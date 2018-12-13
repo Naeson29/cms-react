@@ -6,6 +6,7 @@ const INITIAL_STATE = {
     data : {},
     view : {
         content : [],
+        logged  : null,
         loading : true,
         error   : false
     },

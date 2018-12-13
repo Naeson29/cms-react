@@ -33,6 +33,7 @@ class ReducerFunctions {
         if (!state.view) {
             state.view = {
                 content: [],
+                logged : null
             };
         }
         state.view.error = false;
@@ -67,7 +68,8 @@ class ReducerFunctions {
 
     getSuccess(state, payload) {
         state.data = {...state.data};
-        state.view.content = payload;
+        state.view.content = payload.data;
+        state.view.logged  = payload.logged;
         state.view.loading = false;
         state.view.error   = false;
 

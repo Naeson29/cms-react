@@ -6,6 +6,7 @@ import SliderManager from '../../models/manager/slider';
 const mapStateToProps = (state) => {
     return {
         content : state.Slider.view.content,
+        logged  : state.Slider.view.logged,
         loading : state.Slider.view.loading,
         error   : state.Slider.view.error
     };

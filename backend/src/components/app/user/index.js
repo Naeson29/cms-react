@@ -28,7 +28,7 @@ class User extends Component {
     }
 
     render() {
-        const { content, openRightPanel, createUser, updateUser, loading } = this.props;
+        const { content, logged, openRightPanel, createUser, updateUser, loading } = this.props;
 
         if(loading){
             return (
@@ -59,6 +59,7 @@ class User extends Component {
                     </thead>
                     <List
                         content={content}
+                        logged={logged}
                         updateUser={updateUser}
                         openRightPanel={openRightPanel}
                         deleteLine={this._delete}
@@ -79,6 +80,7 @@ User.propTypes = {
     createUser     : PropTypes.func,
     updateUser     : PropTypes.func,
     loading        : PropTypes.bool,
+    logged         : PropTypes.number,
     content        : PropTypes.oneOfType([
         PropTypes.object,
         PropTypes.array

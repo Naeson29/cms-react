@@ -6,6 +6,7 @@ import UserManager   from '../../models/manager/user';
 const mapStateToProps = (state) => {
     return {
         content : state.User.view.content,
+        logged  : state.User.view.logged,
         loading : state.User.view.loading,
         error   : state.User.view.error
     };
