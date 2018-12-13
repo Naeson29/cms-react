@@ -19,7 +19,7 @@ const withAuth = function(req, res, next) {
                     message : 'Unauthorized token'
                 });
             } else {
-                res.email = decoded.email;
+                req.logged = decoded.id_user;
                 next();
             }
         });

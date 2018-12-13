@@ -8,6 +8,8 @@ const multer              = require('multer');
 const cryptoRandomString  = require('crypto-random-string');
 const fs                  = require('fs');
 const async               = require('async');
+const jwt                 = require('jsonwebtoken');
+const secret              = Constants.secret;
 
 //Models
 const Slider = require('../models/slider');
@@ -161,9 +163,16 @@ Router.post('/sliders/order', async (req, res) => {
 //User
 Router.get('/users', (req, res) => {
     User.find().sort({lastName : 1})
-        .then((data) => {
-            res.json(data);
+    .then((data) => {
+
+        data.map((key, index) => {
+            if(key.id_user === req.logged){
+                data[index]['logged'] = true ;
+            }
         });
+
+        res.status(200).send(data);
+    });
 });
 
 Router.post('/users', (req, res) => {

@@ -32,7 +32,7 @@ Router.post('/login', function(req, res){
         }
 
         if(match){
-            const token = jwt.sign({email : data.email}, secret, {
+            const token = jwt.sign({email : data.email, id_user : data.id_user}, secret, {
                 expiresIn: '1 days'
             });
 

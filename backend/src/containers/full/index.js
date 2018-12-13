@@ -7,7 +7,7 @@ const mapStateToProps = (state) => {
     return {
         loading : state.Auth.loading,
         error   : state.Auth.error,
-        success : state.Auth.success,
+        success : state.Auth.success
     };
 };
 
