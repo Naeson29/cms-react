@@ -9,6 +9,7 @@ import SubmitForm            from '../component/submitForm';
 import serialize             from 'form-serialize';
 import {NOTIFICATION}        from '../../../utils/consts';
 import ReactPasswordStrength from 'react-password-strength';
+import * as EmailValidator   from 'email-validator';
 
 class PanelUser extends Component
 {
@@ -59,7 +60,6 @@ class PanelUser extends Component
     }
 
     _passwordValid(value, isValid){
-
         if(!this.state.create && !value){
             isValid = true;
         }
@@ -95,10 +95,15 @@ class PanelUser extends Component
             if (!parameters[key]) {
                 errors[key] = NOTIFICATION.error[key];
             }
-            if(!this.state.passwordValid && key === 'password'){
-                errors[key] = NOTIFICATION.error[key];
-            }
         });
+
+        if(!this.state.passwordValid){
+            errors.password = NOTIFICATION.error.password;
+        }
+
+        if(parameters.email && !EmailValidator.validate(parameters.email)){
+            errors.emailType = NOTIFICATION.error.emailType;
+        }
 
         this.setState({formErrors: errors});
 

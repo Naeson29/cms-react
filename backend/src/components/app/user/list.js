@@ -42,7 +42,7 @@ class List extends  Component {
                             className={'clickable'}>
                             <td>{user.lastName}</td>
                             <td>{user.firstName}</td>
-                            <td>{user.email}</td>
+                            <td className={'no-display'}>{user.email}</td>
                             <td className={'action'}>
                                 <FontAwesomeIcon className={'svg'} icon={IconRegular.faTrashAlt} onClick={(e) => {deleteLine(e,user.id_user);}}/>
                             </td>

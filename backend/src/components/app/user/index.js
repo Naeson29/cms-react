@@ -53,7 +53,7 @@ class User extends Component {
                         <tr>
                             <th>{'Nom'}</th>
                             <th>{'Prénom'}</th>
-                            <th>{'Email'}</th>
+                            <th className={'no-display'}>{'Email'}</th>
                             <th />
                         </tr>
                     </thead>

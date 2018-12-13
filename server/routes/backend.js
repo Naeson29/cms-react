@@ -205,7 +205,7 @@ Router.put('/users/:id', (req, res) => {
 
             data.save((err) => {
                 if (err) {
-                    res.status(400).send(err);
+                    res.status(500).send(err);
                 } else{
                     res.status(200).send({
                         success : true,

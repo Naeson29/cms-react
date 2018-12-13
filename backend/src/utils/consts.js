@@ -23,6 +23,7 @@ export const NOTIFICATION    = {
         firstName     : 'Le prénom est requis',
         email         : 'L\'adresse email est requise',
         password      : 'Le mot de passe est requis / mention "moyen" minimum',
+        emailType     : 'L\'adresse email n\'est pas au bon format (exemple@gmail.com)',
     },
     code : {
         '001' : 'Un autre utilisateur utlise cette adresse email'

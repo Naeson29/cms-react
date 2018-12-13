@@ -161,7 +161,6 @@
     display         : flex;
     justify-content : center;
     padding         : 0.8rem;
-    border-radius   : 0.25rem;
 
     .bloc-notification {
       text-align : center;
@@ -173,7 +172,6 @@
     &.error {
       color      : $error-color;
       background : $bg-error;
-      border     : 1px solid $error-border;
     }
     &.notification-appear {
       opacity: 0.01;
