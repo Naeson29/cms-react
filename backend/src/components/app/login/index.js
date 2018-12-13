@@ -101,7 +101,6 @@ Login.propTypes = {
     error       : PropTypes.oneOfType([
         PropTypes.bool,
         PropTypes.object,
-        PropTypes.node,
     ]),
     success     : PropTypes.oneOfType([
         PropTypes.bool,

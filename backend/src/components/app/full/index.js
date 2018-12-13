@@ -77,7 +77,7 @@ Full.propTypes = {
     getAuth        : PropTypes.func.isRequired,
     loading        : PropTypes.bool,
     error          : PropTypes.oneOfType([
-        PropTypes.node,
-        PropTypes.string,
+        PropTypes.object,
+        PropTypes.bool,
     ])
 };
