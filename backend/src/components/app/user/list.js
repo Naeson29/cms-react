@@ -23,7 +23,7 @@ class List extends  Component {
     }
 
     render(){
-        const {openRightPanel, updateUser, deleteLine, updateList} = this.props;
+        const {logged, openRightPanel, updateUser, deleteLine, updateList} = this.props;
         const {items} = this.state;
 
         return (
@@ -44,7 +44,11 @@ class List extends  Component {
                             <td>{user.firstName}</td>
                             <td className={'no-display'}>{user.email}</td>
                             <td className={'action'}>
-                                <FontAwesomeIcon className={'svg'} icon={IconRegular.faTrashAlt} onClick={(e) => {deleteLine(e,user.id_user);}}/>
+                                {
+                                    logged !== user.id_user && (
+                                        <FontAwesomeIcon className={'svg'} icon={IconRegular.faTrashAlt} onClick={(e) => {deleteLine(e,user.id_user);}}/>
+                                    )
+                                }
                             </td>
                         </tr>
                     ))
@@ -61,6 +65,7 @@ List.propTypes = {
     openRightPanel : PropTypes.func,
     deleteLine     : PropTypes.func,
     updateList     : PropTypes.func,
+    logged         : PropTypes.number,
     content        : PropTypes.oneOfType([
         PropTypes.object,
         PropTypes.array

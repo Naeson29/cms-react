@@ -33,7 +33,7 @@ class Slider extends Component {
     }
 
     render() {
-        const { content, openRightPanel, createSlider, updateSlider, loading } = this.props;
+        const { content, logged, openRightPanel, createSlider, updateSlider, loading } = this.props;
 
         if(loading){
             return (
@@ -70,6 +70,7 @@ class Slider extends Component {
                         deleteLine={this._delete}
                         updateList={this._updateList}
                         orderSlider={this._orderSlider}
+                        logged={logged}
                     />
                 </Table>
             </div>
@@ -87,6 +88,7 @@ Slider.propTypes = {
     createSlider   : PropTypes.func,
     updateSlider   : PropTypes.func,
     loading        : PropTypes.bool,
+    logged         : PropTypes.number,
     content        : PropTypes.oneOfType([
         PropTypes.object,
         PropTypes.array
