@@ -100,7 +100,11 @@ class ReducerFunctions {
             error   : payload,
             success : false
         };
-        Notifier(action, TYPE_ERROR, 'Echec de la création');
+
+        if(!payload.code){
+            Notifier(action, TYPE_ERROR, 'Echec de la création');
+        }
+
         return {...state};
     }
 
@@ -134,7 +138,9 @@ class ReducerFunctions {
             error   : payload,
             success : false
         };
-        Notifier(action, TYPE_ERROR, 'Echec de la création');
+        if(!payload.code){
+            Notifier(action, TYPE_ERROR, 'Echec de la création');
+        }
         return {...state};
     }
 

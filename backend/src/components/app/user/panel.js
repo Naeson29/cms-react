@@ -8,12 +8,11 @@ import PropTypes             from 'prop-types';
 import SubmitForm            from '../component/submitForm';
 import serialize             from 'form-serialize';
 import {NOTIFICATION}        from '../../../utils/consts';
-import ReactPasswordStrength from 'react-password-strength'
+import ReactPasswordStrength from 'react-password-strength';
 
 class PanelUser extends Component
 {
-    constructor(props)
-    {
+    constructor(props){
         super(props);
 
         this.default = {
@@ -44,6 +43,7 @@ class PanelUser extends Component
         this._createUser    = this._createUser.bind(this);
         this._updateUser    = this._updateUser.bind(this);
         this._reset         = this._reset.bind(this);
+        this._scrollTop     = this._scrollTop.bind(this);
     }
 
     _handleChange(attribute, value) {
@@ -76,6 +76,13 @@ class PanelUser extends Component
         });
     }
 
+    _scrollTop(){
+        this.content.scrollTo({
+            top      : 0,
+            behavior : "smooth"
+        });
+    }
+
     _checkForm() {
         const parameters = this.state.parameters;
         let errors = {};
@@ -86,36 +93,36 @@ class PanelUser extends Component
 
         Object.keys(parameters).map((key) => {
             if (!parameters[key]) {
-                errors[key] = true;
+                errors[key] = NOTIFICATION.error[key];
+            }
+            if(!this.state.passwordValid && key === 'password'){
+                errors[key] = NOTIFICATION.error[key];
             }
         });
 
-        if(!this.state.passwordValid){
-            errors.password = true;
+        this.setState({formErrors: errors});
+
+        if(Object.keys(errors).length){
+            this._scrollTop();
         }
 
-        this.setState({formErrors: errors});
         return Object.keys(errors).length === 0;
     }
 
-    _hasError(attribute) {
-        if(!this.state.formErrors[attribute] && !this.props.error){
+    _hasError() {
+        const formErrors = this.state.formErrors;
+        const error      = this.props.error;
+
+        if(!Object.keys(formErrors).length && !error){
             return;
         }
 
-        let custom;
+        if(error){
+            formErrors[error.code] = NOTIFICATION.code[error.code]
+        }
 
-        if(this.props.error && this.props.error.field !== attribute){
-            return;
-        }
-        else{
-            if(this.props.error && this.props.error.field === attribute){
-                attribute = 'custom';
-                custom = NOTIFICATION.code[this.props.error.code];
-            }
-        }
         return (
-            <Notification type={'error'} attribute={attribute} custom={custom}/>
+            <Notification content={formErrors}/>
         );
     }
 
@@ -127,6 +134,8 @@ class PanelUser extends Component
         }
 
         this.props.createUser(serialize(this.form, {hash: true}), (data, success) => {
+            this._scrollTop();
+
             if (success) {
                 this._reset();
                 this.props.closePanel(this.props._id);
@@ -149,6 +158,8 @@ class PanelUser extends Component
         }
 
         this.props.updateUser(this.state.parameters.id_user, serialData, (data, success) => {
+            this._scrollTop();
+
             if (success) {
                 this._reset();
                 this.props.closePanel(this.props._id);
@@ -163,7 +174,7 @@ class PanelUser extends Component
         const key = !this.state.reset ? 'form_edit' : 'form_clean';
 
         return (
-            <div className="content-panel">
+            <div className="content-panel" ref={(el) => { this.content = el; }}>
                 <div className="content">
                     <div className={'forms'}>
                         <form
@@ -179,12 +190,14 @@ class PanelUser extends Component
                                 )
                             }
                             <div className={'bloc-form'}>
+                                {this._hasError()}
+                            </div>
+                            <div className={'bloc-form'}>
                                 <label className={'label-info'} htmlFor="label">{'Nom :'}</label>
                                 <input id="lastName" name="lastName" type="text" autoFocus className={'input'}
                                     value={parameters.lastName}
                                     onChange={(event) => this._handleChange('lastName', event.target.value)}
                                 />
-                                {this._hasError('lastName')}
                             </div>
                             <div className={'bloc-form'}>
                                 <label className={'label-info'} htmlFor="label">{'Prénom :'}</label>
@@ -192,7 +205,6 @@ class PanelUser extends Component
                                     value={parameters.firstName}
                                     onChange={(event) => this._handleChange('firstName', event.target.value)}
                                 />
-                                {this._hasError('firstName')}
                             </div>
                             <div className={'bloc-form'}>
                                 <label className={'label-info'} htmlFor="label">{'Email :'}</label>
@@ -200,7 +212,6 @@ class PanelUser extends Component
                                     value={parameters.email}
                                     onChange={(event) => this._handleChange('email', event.target.value)}
                                 />
-                                {this._hasError('email')}
                             </div>
                             <div className={'bloc-form'}>
                                 <label className={'label-info'} htmlFor="label">{'Mot de passe :'}</label>
@@ -216,7 +227,6 @@ class PanelUser extends Component
                                     }}
                                     inputProps={{ name: "password", autoComplete: "off", className: "password" }}
                                 />
-                                {this._hasError('password')}
                             </div>
                             <PanelActions {...this.props}>
                                 <Button color={'primary'}>{'Enregistrer'}</Button>

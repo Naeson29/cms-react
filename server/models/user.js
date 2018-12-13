@@ -49,9 +49,8 @@ UserSchema
     .post('save', function(error, doc, next) {
         if (error.name === 'MongoError' && error.code === 11000) {
             next({
-                field : 'email',
-                error : true,
-                code  : '001'
+                error  : true,
+                code   : '001'
             });
         } else {
             next(error);

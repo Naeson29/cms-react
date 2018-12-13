@@ -1,23 +1,32 @@
 import React, { Component } from 'react';
 import PropTypes            from 'prop-types';
-import {NOTIFICATION}       from '../../../utils/consts';
 
 import {  TransitionGroup, CSSTransition } from 'react-transition-group';
 
 class Notification extends Component {
     render() {
-        const { type, attribute, custom} = this.props;
+        const {content} = this.props;
 
         return (
             <TransitionGroup>
                 <CSSTransition
-                    key={`trans_${attribute}`}
+                    key={`trans_notification`}
                     classNames={'notification'}
                     appear={true}
                     timeout={300}>
-                    <span className={`${type} notifications`}>
-                        {attribute === 'custom' ? custom : NOTIFICATION[type][attribute]}
-                    </span>
+                    <div className={'error notifications'}>
+                        <div className={'bloc-notification'}>
+                            {
+                                Object.keys(content).map((key, index) => {
+                                    return (
+                                        <p key={'error_' + index}>
+                                            {`* ${content[key]}`}
+                                        </p>
+                                    )
+                                })
+                            }
+                        </div>
+                    </div>
                 </CSSTransition>
             </TransitionGroup>
         );
@@ -25,9 +34,7 @@ class Notification extends Component {
 }
 
 Notification.propTypes = {
-    type      : PropTypes.string,
-    attribute : PropTypes.string,
-    custom    : PropTypes.string
+    content : PropTypes.object,
 };
 
 export default Notification;

@@ -12,8 +12,7 @@ import {SIZE_IMAGE, EXTENSION_IMAGE, UPLOAD_IMAGE, UPLOAD_LABEL, NOTIFICATION} f
 
 class PanelSlider extends Component
 {
-    constructor(props)
-    {
+    constructor(props){
         super(props);
 
         this.default = {
@@ -36,6 +35,7 @@ class PanelSlider extends Component
         this._updateSlider = this._updateSlider.bind(this);
         this._onDrop       = this._onDrop.bind(this);
         this._reset        = this._reset.bind(this);
+        this._scrollTop    = this._scrollTop.bind(this);
     }
 
     _handleChange(attribute, value) {
@@ -67,31 +67,46 @@ class PanelSlider extends Component
         });
     }
 
+    _scrollTop(){
+        this.content.scrollTo({
+            top      : 0,
+            behavior : "smooth"
+        });
+    }
+
     _checkForm() {
         const parameters = this.state.parameters;
         const create     = this.state.create;
+        const image      = this.state.image.length;
         let errors = {};
 
         Object.keys(parameters).map((key) => {
             if (!parameters[key]) {
-                errors[key] = true;
+                errors[key] = NOTIFICATION.error[key];
+            }
+            if(!image && create){
+                errors.image = NOTIFICATION.error.image;
             }
         });
 
-        if(this.state.image.length === 0 && create){
-            errors.image = true;
+        this.setState({formErrors: errors});
+
+        if(Object.keys(errors).length){
+            this._scrollTop();
         }
 
-        this.setState({formErrors: errors});
         return Object.keys(errors).length === 0;
     }
 
-    _hasError(attribute) {
-        if(!this.state.formErrors[attribute]){
+    _hasError() {
+        const formErrors = this.state.formErrors;
+
+        if(!Object.keys(formErrors).length){
             return;
         }
+
         return (
-            <Notification type={'error'} attribute={attribute}/>
+            <Notification content={formErrors}/>
         );
     }
 
@@ -104,6 +119,8 @@ class PanelSlider extends Component
         const data = new FormData(this.form);
 
         this.props.createSlider(data, (data, success) => {
+            this._scrollTop();
+
             if (success) {
                 this._reset();
                 this.props.closePanel(this.props._id);
@@ -121,6 +138,8 @@ class PanelSlider extends Component
         const data = new FormData(this.form);
 
         this.props.updateSlider(this.state.parameters.id_slider, data, (data, success) => {
+            this._scrollTop();
+
             if (success) {
                 this._reset();
                 this.props.closePanel(this.props._id);
@@ -135,7 +154,7 @@ class PanelSlider extends Component
         const key = !this.state.reset ? 'form_edit' : 'form_clean';
 
         return (
-            <div className="content-panel">
+            <div className="content-panel" ref={(el) => { this.content = el; }}>
                 <div className="content">
                     <div className={'forms'}>
                         <form
@@ -152,12 +171,14 @@ class PanelSlider extends Component
                                 )
                             }
                             <div className={'bloc-form'}>
+                                {this._hasError()}
+                            </div>
+                            <div className={'bloc-form'}>
                                 <label className={'label-info'} htmlFor="label">{'Titre :'}</label>
                                 <input id="label" name="label" type="text" autoFocus className={'input'}
                                     value={parameters.label}
                                     onChange={(event) => this._handleChange('label', event.target.value)}
                                 />
-                                {this._hasError('label')}
                             </div>
                             <div className={'bloc-form'}>
                                 <label className={'label-info'} htmlFor="label">{'Texte :'}</label>
@@ -165,7 +186,6 @@ class PanelSlider extends Component
                                     value={parameters.text}
                                     onChange={(event) => this._handleChange('text', event.target.value)}
                                 />
-                                {this._hasError('text')}
                             </div>
                             <div className={'bloc-form'}>
                                 <ImageUploader
@@ -182,7 +202,6 @@ class PanelSlider extends Component
                                     withPreview={true}
                                     singleImage={true}
                                 />
-                                {this._hasError('image')}
                             </div>
                             {
                                 create &&
