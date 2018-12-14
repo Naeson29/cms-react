@@ -122,7 +122,7 @@ class PanelUser extends Component
             return;
         }
 
-        if(error){
+        if(error && !Object.keys(formErrors).length){
             formErrors[error.code] = NOTIFICATION.code[error.code]
         }
 

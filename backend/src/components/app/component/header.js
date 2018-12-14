@@ -16,7 +16,7 @@ class Header extends Component {
 
         return (
             <nav className="navbar">
-                <NavLink to={'/'} className="navbar-brand">
+                <NavLink to={'/'} className="navbar-brand" replace>
                     <img src={'img/logo.png'} alt={'Logo'} />
                     <span>{'Backoffice'}</span>
                 </NavLink>
