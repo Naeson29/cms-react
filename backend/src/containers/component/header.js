@@ -1,6 +1,5 @@
 import { connect }  from 'react-redux';
 import {withRouter} from 'react-router-dom';
-import {logout}     from '../../actions/login';
 import Header       from '../../components/app/component/header';
 
 const mapStateToProps = () => {
@@ -12,7 +11,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 
     return {
         logout:() => {
-            logout();
+            localStorage.removeItem('token');
             history.push('/login');
         }
     };

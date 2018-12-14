@@ -8,7 +8,3 @@ export let login = new ClassicActions(LOGIN, {
         return LoginApi.login(parameters);
     },
 });
-
-export let logout = () => {
-    return LoginApi.logout();
-};

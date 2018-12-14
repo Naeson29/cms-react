@@ -14,12 +14,10 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     const {history} = ownProps;
 
     return {
-        load  : () => {
-
-        },
         login : (parameters) => {
             LoginManager.login(parameters, (datum, success) => {
                 if(success){
+                    localStorage.setItem('token', datum.token);
                     history.push('/');
                 }
             });
