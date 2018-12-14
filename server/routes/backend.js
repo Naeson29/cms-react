@@ -31,7 +31,6 @@ Router.get('/auth', (req, res) => {
     });
 });
 
-
 //Slider
 Router.get('/sliders', (req, res) => {
     Slider.find().sort({order : 1})
@@ -161,7 +160,6 @@ Router.post('/sliders/order', async (req, res) => {
             res.status(500).send(err);
         });
 });
-
 
 //User
 Router.get('/users', (req, res) => {
