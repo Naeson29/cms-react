@@ -66,7 +66,7 @@ class PanelUser extends Component
 
         this.setState({
             passwordValid : isValid
-        })
+        });
     }
 
     _reset(){
@@ -79,7 +79,7 @@ class PanelUser extends Component
     _scrollTop(){
         this.content.scrollTo({
             top      : 0,
-            behavior : "smooth"
+            behavior : 'smooth'
         });
     }
 
@@ -123,7 +123,7 @@ class PanelUser extends Component
         }
 
         if(error && !Object.keys(formErrors).length){
-            formErrors[error.code] = NOTIFICATION.code[error.code]
+            formErrors[error.code] = NOTIFICATION.code[error.code];
         }
 
         return (
@@ -230,7 +230,7 @@ class PanelUser extends Component
                                         this._handleChange('password', value.password);
                                         this._passwordValid(value.password, value.isValid);
                                     }}
-                                    inputProps={{ name: "password", autoComplete: "off", className: "password" }}
+                                    inputProps={{ name: 'password', autoComplete: 'off', className: 'password' }}
                                 />
                             </div>
                             <PanelActions {...this.props}>

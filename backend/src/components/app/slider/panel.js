@@ -70,7 +70,7 @@ class PanelSlider extends Component
     _scrollTop(){
         this.content.scrollTo({
             top      : 0,
-            behavior : "smooth"
+            behavior : 'smooth'
         });
     }
 

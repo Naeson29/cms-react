@@ -10,7 +10,7 @@ class Notification extends Component {
         return (
             <TransitionGroup>
                 <CSSTransition
-                    key={`trans_notification`}
+                    key={'trans_notification'}
                     classNames={'notification'}
                     appear={true}
                     timeout={300}>
@@ -22,7 +22,7 @@ class Notification extends Component {
                                         <p key={'error_' + index}>
                                             {`* ${content[key]}`}
                                         </p>
-                                    )
+                                    );
                                 })
                             }
                         </div>
