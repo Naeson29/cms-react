@@ -1,14 +1,14 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React                       from 'react';
+import ReactDOM                    from 'react-dom';
 import {HashRouter, Route, Switch} from 'react-router-dom';
-import { Provider } from 'react-redux';
-import store from './store';
-import {ToastContainer} from 'react-toastify';
+import { Provider }                from 'react-redux';
+import store                       from './store';
+import {ToastContainer}            from 'react-toastify';
 
 import '../scss/styles.scss';
 
 import Login from './containers/login';
-import Full  from './containers/full/index';
+import Full  from './containers/full';
 
 ReactDOM.render((
     <Provider store={store}>
