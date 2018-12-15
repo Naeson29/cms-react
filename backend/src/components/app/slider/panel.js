@@ -7,8 +7,10 @@ import Notification         from '../panel/notification';
 import PropTypes            from 'prop-types';
 import SubmitForm           from '../component/submitForm';
 import ImageUploader        from 'react-images-upload';
+import Config               from "../../../configuration";
 
 import {SIZE_IMAGE, EXTENSION_IMAGE, UPLOAD_IMAGE, UPLOAD_LABEL, NOTIFICATION} from '../../../utils/consts';
+
 
 class PanelSlider extends Component
 {
@@ -152,6 +154,7 @@ class PanelSlider extends Component
         const { submit, count }    = this.props;
         const { create, parameters } = this.state;
         const key = !this.state.reset ? 'form_edit' : 'form_clean';
+        const url = Config.get('api_url') + 'static/slider/';
 
         return (
             <div className="content-panel" ref={(el) => { this.content = el; }}>
@@ -187,6 +190,13 @@ class PanelSlider extends Component
                                     onChange={(event) => this._handleChange('text', event.target.value)}
                                 />
                             </div>
+                            {
+                                !create && (
+                                    <div className={'bloc-image'}>
+                                        <div className={'image'} style={{backgroundImage : `url(${url}${parameters.image})`}} />
+                                    </div>
+                                )
+                            }
                             <div className={'bloc-form'}>
                                 <ImageUploader
                                     name={'slider'}

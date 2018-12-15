@@ -12,6 +12,8 @@ import Loader              from '../component/loading';
 class User extends Component {
     constructor(props){
         super(props);
+
+        props.closeAllPanel();
         props.load();
 
         this._updateList   = this._updateList.bind(this);
