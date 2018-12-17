@@ -13,7 +13,6 @@ import {
     SortableHandle,
     arrayMove}            from 'react-sortable-hoc';
 
-
 class List extends  Component {
 
     constructor(props){
@@ -46,52 +45,54 @@ class List extends  Component {
     };
 
     render(){
-        const {openRightPanel, updateSlider, deleteLine, updateList} = this.props;
+        const {openRightPanel, updateSlider, deleteLine, updateList, boxImage} = this.props;
         const {items} = this.state;
         const url = Config.get('api_url') + 'static/slider/';
 
         const DragHandle = SortableHandle(() => <FontAwesomeIcon onClick={(e) => {e.stopPropagation();} } className={'svg'} icon={IconSolid.faBars}/>);
 
-        const SortableItem = SortableElement(({value}) =>
-            <tr onClick={() =>
-                openRightPanel(ACTIONS.PANEL_SLIDER, {
-                    slider: value,
-                    updateSlider: updateSlider,
-                    updateList: updateList
-                })
-            }
-            className={'clickable'}>
-                <td className={'image'}>
-                    <Image src={`${url}min_${value.image}`} thumbnail />
-                </td>
-                <td className={'label'}>
-                    <Truncate lines={1} ellipsis={'...'}>
-                        {value.label}
-                    </Truncate>
-                </td>
-                <td className={'text no-display'}>
-                    <Truncate lines={1} ellipsis={'...'}>
-                        {value.text}
-                    </Truncate>
-                </td>
-                <td className={'action'}>
-                    {
-                        items.length > 1 &&
-                        <DragHandle/>
-                    }
-                </td>
-                <td className={'action'}>
-                    <FontAwesomeIcon className={'svg'} icon={IconRegular.faTrashAlt} onClick={(e) => {deleteLine(e,value.id_slider);}}/>
-                </td>
-            </tr>
-        );
+        const SortableItem = SortableElement(({value, idx}) => {
+            return (
+                <tr onClick={() =>
+                    openRightPanel(ACTIONS.PANEL_SLIDER, {
+                        slider: value,
+                        updateSlider: updateSlider,
+                        updateList: updateList
+                    })
+                }
+                    className={'clickable'}>
+                    <td className={'image'}>
+                        <Image src={`${url}min_${value.image}`} thumbnail onClick={(e) => {boxImage(e,idx)}}/>
+                    </td>
+                    <td className={'label'}>
+                        <Truncate lines={1} ellipsis={'...'}>
+                            {value.label}
+                        </Truncate>
+                    </td>
+                    <td className={'text no-display'}>
+                        <Truncate lines={1} ellipsis={'...'}>
+                            {value.text}
+                        </Truncate>
+                    </td>
+                    <td className={'action'}>
+                        {
+                            items.length > 1 &&
+                            <DragHandle/>
+                        }
+                    </td>
+                    <td className={'action'}>
+                        <FontAwesomeIcon className={'svg'} icon={IconRegular.faTrashAlt} onClick={(e) => {deleteLine(e,value.id_slider);}}/>
+                    </td>
+                </tr>
+            )
+        });
 
         const SortableList = SortableContainer(({items}) => {
             return (
                 <tbody>
                     {
                         items.map((slider, idx) => (
-                            <SortableItem key={`item-${idx}`} index={idx} value={slider} />
+                            <SortableItem key={`item-${idx}`} index={idx} idx={idx} value={slider} />
                         ))
                     }
                 </tbody>
@@ -121,6 +122,7 @@ List.propTypes = {
     deleteLine     : PropTypes.func,
     updateList     : PropTypes.func,
     orderSlider    : PropTypes.func,
+    boxImage       : PropTypes.func,
     content        : PropTypes.oneOfType([
         PropTypes.object,
         PropTypes.array

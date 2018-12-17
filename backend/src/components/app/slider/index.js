@@ -8,6 +8,8 @@ import PropTypes           from 'prop-types';
 import * as IconSolid      from '@fortawesome/free-solid-svg-icons';
 import List                from './list';
 import Loader              from '../component/loading';
+import Lightbox            from 'react-images';
+import Config              from "../../../configuration";
 
 class Slider extends Component {
     constructor(props){
@@ -16,13 +18,48 @@ class Slider extends Component {
         props.closeAllPanel();
         props.load();
 
+        this.state = {
+            open         : false,
+            currentImage : 0
+        };
+
         this._updateList   = this._updateList.bind(this);
         this._delete       = this._delete.bind(this);
         this._orderSlider  = this._orderSlider.bind(this);
+        this._boxImage     = this._boxImage.bind(this);
+        this._closeBox     = this._closeBox.bind(this);
+        this._navBox       = this._navBox.bind(this);
     }
 
     _updateList(){
         this.forceUpdate();
+    }
+
+    _boxImage(event, index){
+        event.stopPropagation();
+        this.setState({
+            open         : true,
+            currentImage : index
+        });
+    }
+
+    _navBox(newCurrent){
+        if(newCurrent >= this.props.content.length){
+            newCurrent = 0;
+        }
+        if(newCurrent < 0){
+            newCurrent = 0;
+        }
+        this.setState({
+            currentImage : newCurrent
+        });
+    }
+
+    _closeBox(){
+        this.setState({
+            open         : false,
+            currentImage : 0
+        });
     }
 
     _delete(event, sliderId){
@@ -36,12 +73,18 @@ class Slider extends Component {
 
     render() {
         const { content, logged, openRightPanel, createSlider, updateSlider, loading } = this.props;
+        const url = Config.get('api_url') + 'static/slider/';
 
         if(loading){
             return (
                 <Loader/>
             );
         }
+
+        let images = [];
+        content.map((key) =>{
+            images.push({src :url + key.image});
+        });
 
         return (
             <div className={'slider list'}>
@@ -73,9 +116,19 @@ class Slider extends Component {
                         deleteLine={this._delete}
                         updateList={this._updateList}
                         orderSlider={this._orderSlider}
+                        boxImage={this._boxImage}
                         logged={logged}
                     />
                 </Table>
+                <Lightbox
+                    images={images}
+                    isOpen={this.state.open}
+                    onClose={this._closeBox}
+                    currentImage={this.state.currentImage}
+                    onClickPrev={() => {this._navBox(this.state.currentImage - 1)}}
+                    onClickNext={() => {this._navBox(this.state.currentImage + 1)}}
+                    imageCountSeparator={'sur'}
+                />
             </div>
         );
     }
