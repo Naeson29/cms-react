@@ -7,9 +7,9 @@ const Router              = Express.Router();
 const multer              = require('multer');
 const cryptoRandomString  = require('crypto-random-string');
 const fs                  = require('fs');
+//const gm                  = require('gm').subClass({imageMagick: true});
+const im                  = require('imagemagick');
 const async               = require('async');
-const jwt                 = require('jsonwebtoken');
-const secret              = Constants.secret;
 
 //Models
 const Slider = require('../models/slider');
@@ -44,15 +44,15 @@ Router.get('/sliders', (req, res) => {
 
 Router.post('/sliders', (req, res) => {
 
-    let fileName = cryptoRandomString(16);
+    let fileName    = cryptoRandomString(16);
 
     const upload = multer({storage: multer.diskStorage({
             destination: (req, file, callback) => {
-                callback(null, Constants.directory.slider)
+                callback(null, Constants.directory.slider);
             },
             filename: (req, file, callback) => {
                 fileName = fileName + '.' + mime.getExtension(file.mimetype);
-                callback(null, fileName)
+                callback(null, fileName);
             }
         })}).single('slider');
 
@@ -60,6 +60,16 @@ Router.post('/sliders', (req, res) => {
         if(err) {
             res.status(500).send(err);
         }else{
+
+            im.crop({
+                srcPath: req.file.path,
+                dstPath: `${Constants.directory.slider}/min_${fileName}`,
+                width: 150,
+                height: 150,
+                quality: 1,
+                gravity: 'Center'
+            });
+
             const data = new Slider({
                 label : req.body.label,
                 text  : req.body.text,
@@ -93,38 +103,49 @@ Router.put('/sliders/:id', (req, res) => {
             },
             filename: (req, file, callback) => {
                 fileName = fileName + '.' + mime.getExtension(file.mimetype);
-                callback(null, fileName)
+                callback(null, fileName);
             }
         })}).single('slider');
 
     upload(req, res, (err) => {
         if (err) {
             res.status(500).send(err);
-        }
+        }else{
 
-        Slider.findOne({id_slider : id }, (err, data) => {
-            if (err) {
-                res.status(500).send(err);
-            } else {
-                data.label = req.body.label;
-                data.text  = req.body.text;
-                if(req.file !== undefined){
-                    fs.unlink(Constants.directory.slider + '/' + data.image);
-                    data.image  = fileName;
-                }
-                data.save((err) => {
-                    if (err) {
-                        res.status(500).send(err);
-                    } else{
-                        res.status(200).send({
-                            success : true,
-                            data    : data,
-                            message : 'Update slider success'
-                        });
+            im.crop({
+                srcPath: req.file.path,
+                dstPath: `${Constants.directory.slider}/min_${fileName}`,
+                width: 150,
+                height: 150,
+                quality: 1,
+                gravity: 'Center'
+            });
+
+            Slider.findOne({id_slider : id }, (err, data) => {
+                if (err) {
+                    res.status(500).send(err);
+                } else {
+                    data.label = req.body.label;
+                    data.text  = req.body.text;
+                    if(req.file !== undefined){
+                        fs.unlink(Constants.directory.slider + '/' + data.image);
+                        fs.unlink(Constants.directory.slider + '/min_' + data.image);
+                        data.image  = fileName;
                     }
-                });
-            }
-        });
+                    data.save((err) => {
+                        if (err) {
+                            res.status(500).send(err);
+                        } else{
+                            res.status(200).send({
+                                success : true,
+                                data    : data,
+                                message : 'Update slider success'
+                            });
+                        }
+                    });
+                }
+            });
+        }
     })
 });
 
@@ -136,6 +157,7 @@ Router.delete('/sliders/:id', (req, res) => {
             res.status(500).send(err);
         } else {
             fs.unlinkSync(Constants.directory.slider + '/' + data.image);
+            fs.unlinkSync(Constants.directory.slider + '/min_' + data.image);
 
             res.status(200).send({
                 success : true,

@@ -1,10 +1,12 @@
 import React, {Component} from 'react';
+import { Image }          from 'react-bootstrap';
 import {FontAwesomeIcon}  from '@fortawesome/react-fontawesome';
 import * as IconRegular   from '@fortawesome/free-regular-svg-icons/index';
 import * as IconSolid     from '@fortawesome/free-solid-svg-icons/index';
 import {ACTIONS}          from '../../../utils/actions';
 import Truncate           from 'react-truncate';
 import PropTypes          from 'prop-types';
+import Config             from "../../../configuration";
 import {
     SortableContainer,
     SortableElement,
@@ -46,6 +48,7 @@ class List extends  Component {
     render(){
         const {openRightPanel, updateSlider, deleteLine, updateList} = this.props;
         const {items} = this.state;
+        const url = Config.get('api_url') + 'static/slider/';
 
         const DragHandle = SortableHandle(() => <FontAwesomeIcon onClick={(e) => {e.stopPropagation();} } className={'svg'} icon={IconSolid.faBars}/>);
 
@@ -58,6 +61,9 @@ class List extends  Component {
                 })
             }
             className={'clickable'}>
+                <td className={'image'}>
+                    <Image src={`${url}min_${value.image}`} thumbnail />
+                </td>
                 <td className={'label'}>
                     <Truncate lines={1} ellipsis={'...'}>
                         {value.label}

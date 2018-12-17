@@ -59,6 +59,7 @@ class Slider extends Component {
                 <Table responsive striped className="tables">
                     <thead>
                         <tr>
+                            <th>{'Image'}</th>
                             <th>{'Titre'}</th>
                             <th className={'no-display'}>{'Texte'}</th>
                             <th />
