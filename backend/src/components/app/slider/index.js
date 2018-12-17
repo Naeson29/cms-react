@@ -122,9 +122,11 @@ class Slider extends Component {
                     currentImage={this.state.currentImage}
                     onClickPrev={() => {this._navBox(this.state.currentImage - 1)}}
                     onClickNext={() => {this._navBox(this.state.currentImage + 1)}}
-                    imageCountSeparator={'sur'}
+                    imageCountSeparator={' sur '}
                     closeButtonTitle={'Fermer'}
                     backdropClosesModal={true}
+                    leftArrowTitle={'Précédente'}
+                    rightArrowTitle={'Suivante'}
                 />
             </div>
         );
