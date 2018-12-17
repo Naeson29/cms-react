@@ -44,12 +44,6 @@ class Slider extends Component {
     }
 
     _navBox(newCurrent){
-        if(newCurrent >= this.props.content.length){
-            newCurrent = 0;
-        }
-        if(newCurrent < 0){
-            newCurrent = 0;
-        }
         this.setState({
             currentImage : newCurrent
         });
@@ -121,6 +115,7 @@ class Slider extends Component {
                     />
                 </Table>
                 <Lightbox
+                    className={'light-box'}
                     images={images}
                     isOpen={this.state.open}
                     onClose={this._closeBox}
@@ -128,6 +123,8 @@ class Slider extends Component {
                     onClickPrev={() => {this._navBox(this.state.currentImage - 1)}}
                     onClickNext={() => {this._navBox(this.state.currentImage + 1)}}
                     imageCountSeparator={'sur'}
+                    closeButtonTitle={'Fermer'}
+                    backdropClosesModal={true}
                 />
             </div>
         );
