@@ -6,7 +6,7 @@ import * as IconSolid     from '@fortawesome/free-solid-svg-icons/index';
 import {ACTIONS}          from '../../../utils/actions';
 import Truncate           from 'react-truncate';
 import PropTypes          from 'prop-types';
-import Config             from "../../../configuration";
+import Config             from '../../../configuration';
 import {
     SortableContainer,
     SortableElement,
@@ -60,9 +60,9 @@ class List extends  Component {
                         updateList: updateList
                     })
                 }
-                    className={'clickable'}>
+                className={'clickable'}>
                     <td className={'image'}>
-                        <Image src={`${url}min_${value.image}`} thumbnail onClick={(e) => {boxImage(e,idx)}}/>
+                        <Image src={`${url}min_${value.image}`} thumbnail onClick={(e) => {boxImage(e,idx);}}/>
                     </td>
                     <td className={'label'}>
                         <Truncate lines={1} ellipsis={'...'}>
@@ -84,7 +84,7 @@ class List extends  Component {
                         <FontAwesomeIcon className={'svg'} icon={IconRegular.faTrashAlt} onClick={(e) => {deleteLine(e,value.id_slider);}}/>
                     </td>
                 </tr>
-            )
+            );
         });
 
         const SortableList = SortableContainer(({items}) => {

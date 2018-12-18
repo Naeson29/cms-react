@@ -1,7 +1,7 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import rootReducer                               from '../reducers/index';
 import promise                                   from 'redux-promise';
-import reduxReset                                from 'redux-reset'
+import reduxReset                                from 'redux-reset';
 
 export default function configureStore() {
     // Redux DEVTOOL

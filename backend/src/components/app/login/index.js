@@ -100,6 +100,9 @@ class Login extends Component {
 }
 
 Login.propTypes = {
+    login       : PropTypes.func.isRequired,
+    load        : PropTypes.func.isRequired,
+    loading     : PropTypes.bool,
     error       : PropTypes.oneOfType([
         PropTypes.bool,
         PropTypes.object,
@@ -108,9 +111,7 @@ Login.propTypes = {
         PropTypes.bool,
         PropTypes.object,
         PropTypes.node,
-    ]),
-    loading     : PropTypes.bool,
-    login       : PropTypes.func,
+    ])
 };
 
 export default Login;

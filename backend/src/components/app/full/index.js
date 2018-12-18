@@ -25,14 +25,14 @@ class Full extends Component {
     componentDidUpdate() {
         const {loading} = this.state;
 
+        if(!this.props.auth && !this.props.loading){
+            this.props.redirectLogin();
+        }
+
         if (loading && !this.props.loading && !this.props.error) {
             this.setState({
                 loading:false
             });
-        }
-
-        if(!this.props.auth && !this.props.loading){
-            this.props.redirectLogin();
         }
     }
 
@@ -70,7 +70,9 @@ export default Full;
 
 Full.propTypes = {
     load           : PropTypes.func.isRequired,
+    redirectLogin  : PropTypes.func.isRequired,
     loading        : PropTypes.bool,
+    auth           : PropTypes.bool,
     error          : PropTypes.oneOfType([
         PropTypes.object,
         PropTypes.bool,

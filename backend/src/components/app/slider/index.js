@@ -9,7 +9,7 @@ import * as IconSolid      from '@fortawesome/free-solid-svg-icons';
 import List                from './list';
 import Loader              from '../component/loading';
 import Lightbox            from 'react-images';
-import Config              from "../../../configuration";
+import Config              from '../../../configuration';
 
 class Slider extends Component {
     constructor(props){
@@ -120,8 +120,8 @@ class Slider extends Component {
                     isOpen={this.state.open}
                     onClose={this._closeBox}
                     currentImage={this.state.currentImage}
-                    onClickPrev={() => {this._navBox(this.state.currentImage - 1)}}
-                    onClickNext={() => {this._navBox(this.state.currentImage + 1)}}
+                    onClickPrev={() => {this._navBox(this.state.currentImage - 1);}}
+                    onClickNext={() => {this._navBox(this.state.currentImage + 1);}}
                     imageCountSeparator={' sur '}
                     closeButtonTitle={'Fermer'}
                     backdropClosesModal={true}
@@ -140,6 +140,7 @@ Slider.propTypes = {
     openRightPanel : PropTypes.func.isRequired,
     deleteSlider   : PropTypes.func.isRequired,
     orderSlider    : PropTypes.func.isRequired,
+    closeAllPanel  : PropTypes.func.isRequired,
     createSlider   : PropTypes.func,
     updateSlider   : PropTypes.func,
     loading        : PropTypes.bool,

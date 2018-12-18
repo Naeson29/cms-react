@@ -79,6 +79,7 @@ User.propTypes = {
     load           : PropTypes.func.isRequired,
     openRightPanel : PropTypes.func.isRequired,
     deleteUser     : PropTypes.func.isRequired,
+    closeAllPanel  : PropTypes.func.isRequired,
     createUser     : PropTypes.func,
     updateUser     : PropTypes.func,
     loading        : PropTypes.bool,
