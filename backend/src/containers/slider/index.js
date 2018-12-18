@@ -12,7 +12,8 @@ const mapStateToProps = (state) => {
     };
 };
 
-const mapDispatchToProps = () => {
+const mapDispatchToProps = (dispatch, ownProps) => {
+    const {history} = ownProps;
 
     return {
         load: (parameters) => {
@@ -30,6 +31,9 @@ const mapDispatchToProps = () => {
         orderSlider: (parameters, callback) => {
             SliderManager.order(parameters, callback);
         },
+        redirectLogin : () => {
+            history.push('/login');
+        }
     };
 };
 

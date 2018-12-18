@@ -103,7 +103,7 @@ class ReducerFunctions {
             success : false
         };
 
-        if(!payload.code){
+        if(!payload.code && payload.error !== 401){
             Notifier(action, TYPE_ERROR, 'Echec de la création');
         }
 
@@ -140,8 +140,8 @@ class ReducerFunctions {
             error   : payload,
             success : false
         };
-        if(!payload.code){
-            Notifier(action, TYPE_ERROR, 'Echec de la création');
+        if(!payload.code && payload.error !== 401){
+            Notifier(action, TYPE_ERROR, 'Echec de la modification');
         }
         return {...state};
     }
@@ -176,7 +176,9 @@ class ReducerFunctions {
         state.view.error = payload;
         state.view.loading = false;
 
-        Notifier(action, TYPE_ERROR, 'Echec de la suppression');
+        if(payload.error !== 401){
+            Notifier(action, TYPE_ERROR, 'Echec de la suppression');
+        }
         return {...state};
     }
 
@@ -199,8 +201,9 @@ class ReducerFunctions {
 
     orderFailure(action, state, payload) {
         state.view.error = payload;
-
-        Notifier(action, TYPE_INFO, 'Echec de l\'ordre');
+        if(payload.error !== 401){
+            Notifier(action, TYPE_INFO, 'Echec de l\'ordre');
+        }
         return {...state};
     }
 

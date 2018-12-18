@@ -20,6 +20,14 @@ class User extends Component {
         this._delete       = this._delete.bind(this);
     }
 
+    componentDidUpdate() {
+        const {error} = this.props.error;
+
+        if(error && error === 401){
+            this.props.redirectLogin();
+        }
+    }
+
     _updateList(){
         this.forceUpdate();
     }
@@ -86,5 +94,9 @@ User.propTypes = {
     content        : PropTypes.oneOfType([
         PropTypes.object,
         PropTypes.array
+    ]),
+    error          : PropTypes.oneOfType([
+        PropTypes.object,
+        PropTypes.bool
     ])
 };

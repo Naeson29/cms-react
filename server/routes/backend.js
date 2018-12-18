@@ -110,25 +110,36 @@ Router.put('/sliders/:id', (req, res) => {
         if (err) {
             res.status(500).send(err);
         }else{
-
-            im.crop({
-                srcPath: req.file.path,
-                dstPath: `${Constants.directory.slider}/min_${fileName}`,
-                width: 150,
-                height: 150,
-                quality: 1,
-                gravity: 'Center'
-            }, () => {
-                Slider.findOne({id_slider : id }, (err, data) => {
-                    if (err) {
-                        res.status(500).send(err);
-                    } else {
-                        data.label = req.body.label;
-                        data.text  = req.body.text;
-                        if(req.file !== undefined){
+            Slider.findOne({id_slider : id }, (err, data) => {
+                if (err) {
+                    res.status(500).send(err);
+                } else {
+                    data.label = req.body.label;
+                    data.text  = req.body.text;
+                    if(req.file !== undefined){
+                        im.crop({
+                            srcPath: req.file.path,
+                            dstPath: `${Constants.directory.slider}/min_${fileName}`,
+                            width: 150,
+                            height: 150,
+                            quality: 1,
+                            gravity: 'Center'
+                        }, () => {
                             deleteFiles([Constants.directory.slider + '/' + data.image, Constants.directory.slider + '/min_' + data.image]);
                             data.image  = fileName;
-                        }
+                            data.save((err) => {
+                                if (err) {
+                                    res.status(500).send(err);
+                                } else{
+                                    res.status(200).send({
+                                        success : true,
+                                        data    : data,
+                                        message : 'Update and upload slider success'
+                                    });
+                                }
+                            });
+                        });
+                    }else{
                         data.save((err) => {
                             if (err) {
                                 res.status(500).send(err);
@@ -141,7 +152,7 @@ Router.put('/sliders/:id', (req, res) => {
                             }
                         });
                     }
-                });
+                }
             });
         }
     })

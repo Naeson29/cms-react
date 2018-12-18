@@ -39,6 +39,14 @@ class PanelSlider extends Component
         this._scrollTop    = this._scrollTop.bind(this);
     }
 
+    componentDidUpdate() {
+        const {error} = this.props.error;
+
+        if(error && error === 401){
+            this.props.redirectLogin();
+        }
+    }
+
     _handleChange(attribute, value) {
         let newItem = {...this.state.parameters};
         newItem[attribute] = value;
@@ -120,7 +128,9 @@ class PanelSlider extends Component
         const data = new FormData(this.form);
 
         this.props.createSlider(data, (data, success) => {
-            this._scrollTop();
+            if(data.error !== 401){
+                this._scrollTop();
+            }
 
             if (success) {
                 this._reset();
@@ -139,7 +149,9 @@ class PanelSlider extends Component
         const data = new FormData(this.form);
 
         this.props.updateSlider(this.state.parameters.id_slider, data, (data, success) => {
-            this._scrollTop();
+            if(data.error !== 401){
+                this._scrollTop();
+            }
 
             if (success) {
                 this._reset();

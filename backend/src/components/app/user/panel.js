@@ -47,6 +47,14 @@ class PanelUser extends Component
         this._scrollTop     = this._scrollTop.bind(this);
     }
 
+    componentDidUpdate() {
+        const {error} = this.props.error;
+
+        if(error && error === 401){
+            this.props.redirectLogin();
+        }
+    }
+
     _handleChange(attribute, value) {
         let newItem = {...this.state.parameters};
         newItem[attribute] = value;
@@ -139,7 +147,9 @@ class PanelUser extends Component
         }
 
         this.props.createUser(serialize(this.form, {hash: true}), (data, success) => {
-            this._scrollTop();
+            if(data.error !== 401){
+                this._scrollTop();
+            }
 
             if (success) {
                 this._reset();
@@ -163,7 +173,9 @@ class PanelUser extends Component
         }
 
         this.props.updateUser(this.state.parameters.id_user, serialData, (data, success) => {
-            this._scrollTop();
+            if(data.error !== 401){
+                this._scrollTop();
+            }
 
             if (success) {
                 this._reset();

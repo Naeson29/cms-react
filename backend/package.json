@@ -19,6 +19,7 @@
     "email-validator": "^2.0.4",
     "fine-uploader": "^5.16.2",
     "form-serialize": "^0.7.2",
+    "history": "^4.7.2",
     "prop-types": "^15.6.2",
     "qs": "^6.5.2",
     "react": "^16.6.1",

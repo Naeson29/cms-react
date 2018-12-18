@@ -14,23 +14,15 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch, ownProps) => {
     const {history} = ownProps;
 
-    const full = {
+    return {
         load: () => {
-            full.getAuth();
-        },
-        getAuth : () => {
             AuthManager.auth((datum, success) => {
                 if(!success){
-                    full.redirectLogin();
+                    history.push('/login');
                 }
             });
-        },
-        redirectLogin: () => {
-            history.push('/login');
         }
     };
-
-    return full;
 };
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Full));

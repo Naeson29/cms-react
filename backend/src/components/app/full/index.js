@@ -10,24 +10,16 @@ import Slider        from '../../../containers/slider';
 import PanelManager  from '../../../containers/panel/panelManager';
 import Loader        from '../component/loading';
 
-const INTERVAL = 60000;
-
 class Full extends Component {
 
     constructor(props){
         super(props);
 
         this.state = {
-            loading      : true,
-            authInterval : setInterval(() => this.props.getAuth(), INTERVAL)
+            loading : true,
         };
 
         props.load();
-    }
-
-    componentWillUnmount() {
-        const {authInterval} = this.state;
-        clearInterval(authInterval);
     }
 
     componentDidUpdate() {
@@ -74,7 +66,6 @@ export default Full;
 
 Full.propTypes = {
     load           : PropTypes.func.isRequired,
-    getAuth        : PropTypes.func.isRequired,
     loading        : PropTypes.bool,
     error          : PropTypes.oneOfType([
         PropTypes.object,
