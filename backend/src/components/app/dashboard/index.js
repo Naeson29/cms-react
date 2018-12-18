@@ -13,7 +13,9 @@ class Dashboard extends Component {
     render() {
         return (
             <div className={'dashboard'}>
-
+                <h1>
+                    <span>{'Tableau de bord'}</span>
+                </h1>
             </div>
         );
     }

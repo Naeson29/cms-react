@@ -69,12 +69,6 @@ class Slider extends Component {
         const { content, logged, openRightPanel, createSlider, updateSlider, loading } = this.props;
         const url = Config.get('api_url') + 'static/slider/';
 
-        if(loading){
-            return (
-                <Loader/>
-            );
-        }
-
         let images = [];
         content.map((key) =>{
             images.push({src :url + key.image});
@@ -84,50 +78,58 @@ class Slider extends Component {
             <div className={'slider list'}>
                 <h1>
                     <span>{'Slider'}</span>
-                    <FontAwesomeIcon
-                        icon={IconSolid.faPlusCircle}
-                        onClick={() => openRightPanel(ACTIONS.PANEL_SLIDER, {
-                            createSlider : createSlider,
-                            updateList   : this._updateList,
-                            count        : (content.length + 1)
-                        })}
-                    />
+                    {
+                        !loading &&
+                        <FontAwesomeIcon
+                            icon={IconSolid.faPlusCircle}
+                            onClick={() => openRightPanel(ACTIONS.PANEL_SLIDER, {
+                                createSlider : createSlider,
+                                updateList   : this._updateList,
+                                count        : (content.length + 1)
+                            })}
+                        />
+                    }
                 </h1>
-                <Table responsive striped className="tables">
-                    <thead>
-                        <tr>
-                            <th>{'Image'}</th>
-                            <th>{'Titre'}</th>
-                            <th className={'no-display'}>{'Texte'}</th>
-                            <th />
-                            <th />
-                        </tr>
-                    </thead>
-                    <List
-                        content={content}
-                        updateSlider={updateSlider}
-                        openRightPanel={openRightPanel}
-                        deleteLine={this._delete}
-                        updateList={this._updateList}
-                        orderSlider={this._orderSlider}
-                        boxImage={this._boxImage}
-                        logged={logged}
-                    />
-                </Table>
-                <Lightbox
-                    className={'light-box'}
-                    images={images}
-                    isOpen={this.state.open}
-                    onClose={this._closeBox}
-                    currentImage={this.state.currentImage}
-                    onClickPrev={() => {this._navBox(this.state.currentImage - 1);}}
-                    onClickNext={() => {this._navBox(this.state.currentImage + 1);}}
-                    imageCountSeparator={' sur '}
-                    closeButtonTitle={'Fermer'}
-                    backdropClosesModal={true}
-                    leftArrowTitle={'Précédente'}
-                    rightArrowTitle={'Suivante'}
-                />
+                {
+                    loading ?  <Loader/> :
+                        <div>
+                            <Table responsive striped className="tables">
+                                <thead>
+                                <tr>
+                                    <th>{'Image'}</th>
+                                    <th>{'Titre'}</th>
+                                    <th className={'no-display'}>{'Texte'}</th>
+                                    <th />
+                                    <th />
+                                </tr>
+                                </thead>
+                                <List
+                                    content={content}
+                                    updateSlider={updateSlider}
+                                    openRightPanel={openRightPanel}
+                                    deleteLine={this._delete}
+                                    updateList={this._updateList}
+                                    orderSlider={this._orderSlider}
+                                    boxImage={this._boxImage}
+                                    logged={logged}
+                                />
+                            </Table>
+                            <Lightbox
+                                className={'light-box'}
+                                images={images}
+                                isOpen={this.state.open}
+                                onClose={this._closeBox}
+                                currentImage={this.state.currentImage}
+                                onClickPrev={() => {this._navBox(this.state.currentImage - 1);}}
+                                onClickNext={() => {this._navBox(this.state.currentImage + 1);}}
+                                imageCountSeparator={' sur '}
+                                closeButtonTitle={'Fermer'}
+                                backdropClosesModal={true}
+                                leftArrowTitle={'Précédente'}
+                                rightArrowTitle={'Suivante'}
+                            />
+                        </div>
+                }
             </div>
         );
     }

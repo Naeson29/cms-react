@@ -32,42 +32,42 @@ class User extends Component {
     render() {
         const { content, logged, openRightPanel, createUser, updateUser, loading } = this.props;
 
-        if(loading){
-            return (
-                <Loader/>
-            );
-        }
-
         return (
             <div className={'user list'}>
                 <h1>
                     <span>{'Utilisateurs'}</span>
-                    <FontAwesomeIcon
-                        icon={IconSolid.faPlusCircle}
-                        onClick={() => openRightPanel(ACTIONS.PANEL_USER, {
-                            createUser  : createUser,
-                            updateList  : this._updateList,
-                        })}
-                    />
+                    {
+                        !loading &&
+                        <FontAwesomeIcon
+                            icon={IconSolid.faPlusCircle}
+                            onClick={() => openRightPanel(ACTIONS.PANEL_USER, {
+                                createUser  : createUser,
+                                updateList  : this._updateList,
+                            })}
+                        />
+                    }
                 </h1>
-                <Table responsive striped className="tables">
-                    <thead>
-                        <tr>
-                            <th>{'Nom'}</th>
-                            <th>{'Prénom'}</th>
-                            <th className={'no-display'}>{'Email'}</th>
-                            <th />
-                        </tr>
-                    </thead>
-                    <List
-                        content={content}
-                        logged={logged}
-                        updateUser={updateUser}
-                        openRightPanel={openRightPanel}
-                        deleteLine={this._delete}
-                        updateList={this._updateList}
-                    />
-                </Table>
+                {
+                    loading ? <Loader/> :
+                        <Table responsive striped className="tables">
+                            <thead>
+                            <tr>
+                                <th>{'Nom'}</th>
+                                <th>{'Prénom'}</th>
+                                <th className={'no-display'}>{'Email'}</th>
+                                <th />
+                            </tr>
+                            </thead>
+                            <List
+                                content={content}
+                                logged={logged}
+                                updateUser={updateUser}
+                                openRightPanel={openRightPanel}
+                                deleteLine={this._delete}
+                                updateList={this._updateList}
+                            />
+                        </Table>
+                }
             </div>
         );
     }
