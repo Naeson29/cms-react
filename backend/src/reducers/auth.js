@@ -3,10 +3,12 @@ import AuthEntity       from '../models/entity/auth';
 import ReducerFunctions from './functions';
 
 const INITIAL_STATE = {
-    loading : true,
-    success : false,
-    error   : false,
-    auth    : false,
+    data : {
+        success : false,
+        error   : false,
+        auth    : false,
+        loading : true
+    }
 };
 
 export default function User(state = INITIAL_STATE, action) {

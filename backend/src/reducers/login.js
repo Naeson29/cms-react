@@ -1,11 +1,13 @@
-import {LOGIN} from '../actions/login';
-import LoginEntity     from '../models/entity/login';
+import {LOGIN}          from '../actions/login';
+import LoginEntity      from '../models/entity/login';
 import ReducerFunctions from './functions';
 
 const INITIAL_STATE = {
-    loading : false,
-    error   : false,
-    success : false
+    login : {
+        loading : false,
+        error   : false,
+        success : false
+    }
 };
 
 export default function Login(state = INITIAL_STATE, action) {

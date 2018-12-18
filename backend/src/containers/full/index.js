@@ -5,10 +5,12 @@ import AuthManager    from '../../models/manager/auth';
 
 const mapStateToProps = (state) => {
     return {
-        loading : state.Auth.loading,
-        error   : state.Auth.error,
-        success : state.Auth.success,
-        auth    : state.Auth.auth && state.User.auth && state.Slider.auth
+        loading : state.Auth.data.loading,
+        error   : state.Auth.data.error,
+        success : state.Auth.data.success,
+        auth    : state.Auth.data.auth
+        && state.User.auth
+        && state.Slider.auth
     };
 };
 

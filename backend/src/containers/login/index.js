@@ -5,9 +5,9 @@ import store         from '../../store';
 
 const mapStateToProps = (state) => {
     return {
-        error    : state.Login.error,
-        loading  : state.Login.loading,
-        success  : state.Login.success,
+        error    : state.Login.login.error,
+        loading  : state.Login.login.loading,
+        success  : state.Login.login.success
     };
 };
 
@@ -16,9 +16,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 
     return {
         load  : () => {
-            store.dispatch({
-                type: 'RESET'
-            })
+            store.dispatch({type: 'RESET'});
         },
         login : (parameters) => {
             LoginManager.login(parameters, (datum, success) => {

@@ -2,10 +2,9 @@ import Notifier, {TYPE_ERROR, TYPE_INFO} from '../utils/notifier';
 
 class ReducerFunctions {
     loginInit(state){
-        state.error   = false;
-        state.loading = true;
-        state.success = true;
-
+        state.login.error   = false;
+        state.login.success = false;
+        state.login.loading = true;
         return {...state};
     }
 
@@ -14,18 +13,16 @@ class ReducerFunctions {
     }
 
     loginFailure(state, payload){
-        state.error   = payload;
-        state.loading = false;
-        state.success = false;
-
+        state.login.error   = payload;
+        state.login.loading = false;
+        state.login.success = false;
         return {...state};
     }
 
     loginSuccess(state, payload){
-        state.error   = false;
-        state.loading = false;
-        state.success = payload;
-
+        state.login.error   = false;
+        state.login.loading = false;
+        state.login.success = payload;
         return {...state};
     }
 
@@ -44,10 +41,10 @@ class ReducerFunctions {
     }
 
     getAuthInit(state){
-        state.loading = true;
-        state.error   = false;
-        state.success = false;
-        state.auth    = false;
+        state.data.loading = true;
+        state.data.error   = false;
+        state.data.success = false;
+        state.data.auth    = false;
         return {...state};
     }
 
@@ -63,10 +60,10 @@ class ReducerFunctions {
     }
 
     getAuthFailure(state, payload){
-        state.loading = false;
-        state.error   = payload;
-        state.success = false;
-        state.auth    = false;
+        state.data.loading = false;
+        state.data.error   = payload;
+        state.data.success = false;
+        state.data.auth    = false;
         return {...state};
     }
 
@@ -82,10 +79,10 @@ class ReducerFunctions {
     }
 
     getAuthSuccess(state, payload){
-        state.loading = false;
-        state.error   = false;
-        state.success = payload;
-        state.auth    = true;
+        state.data.loading = false;
+        state.data.error   = false;
+        state.data.success = payload;
+        state.data.auth    = true;
         return {...state};
     }
 
