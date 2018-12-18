@@ -119,14 +119,13 @@ class PanelSlider extends Component
         const data = new FormData(this.form);
 
         this.props.createSlider(data, (data, success) => {
-            if(!data.error || data.error !== 401){
-                this._scrollTop();
-            }
-
             if (success) {
                 this._reset();
                 this.props.closePanel(this.props._id);
                 this.props.updateList();
+            }
+            if(data.error && data.error !== 401){
+                this._scrollTop();
             }
         });
     }
@@ -140,14 +139,13 @@ class PanelSlider extends Component
         const data = new FormData(this.form);
 
         this.props.updateSlider(this.state.parameters.id_slider, data, (data, success) => {
-            if(!data.error || data.error !== 401){
-                this._scrollTop();
-            }
-
             if (success) {
                 this._reset();
                 this.props.closePanel(this.props._id);
                 this.props.updateList();
+            }
+            if(data.error && data.error !== 401){
+                this._scrollTop();
             }
         });
     }
