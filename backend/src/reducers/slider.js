@@ -20,6 +20,9 @@ const INITIAL_STATE = {
 
 export default function Slider(state = INITIAL_STATE, action) {
     switch (action.type) {
+        case 'RESET' : {
+            return INITIAL_STATE;
+        }
         case GET_SLIDER.INIT: {
             return ReducerFunctions.getInit(state);
         }

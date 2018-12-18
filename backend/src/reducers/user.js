@@ -20,7 +20,9 @@ const INITIAL_STATE = {
 
 export default function User(state = INITIAL_STATE, action) {
     switch (action.type) {
-
+        case 'RESET' : {
+            return INITIAL_STATE;
+        }
         case GET_USER.INIT: {
             return ReducerFunctions.getInit(state);
         }

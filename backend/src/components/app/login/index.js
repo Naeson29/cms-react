@@ -13,6 +13,8 @@ class Login extends Component {
             }
         };
 
+        props.load();
+
         this._handleChange = this._handleChange.bind(this);
         this._hasError     = this._hasError.bind(this);
         this._login        = this._login.bind(this);

@@ -10,6 +10,9 @@ const INITIAL_STATE = {
 
 export default function Login(state = INITIAL_STATE, action) {
     switch (action.type) {
+        case 'RESET' : {
+            return INITIAL_STATE;
+        }
         case LOGIN.INIT: {
             return ReducerFunctions.loginInit(state);
         }

@@ -8,9 +8,7 @@ const mapStateToProps = (state) => {
         loading : state.Auth.loading,
         error   : state.Auth.error,
         success : state.Auth.success,
-        auth    : state.Auth.auth
-        && state.User.auth
-        && state.Slider.auth
+        auth    : state.Auth.auth && state.User.auth && state.Slider.auth
     };
 };
 
@@ -19,7 +17,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 
     return {
         load: () => {
-            AuthManager.auth(() => {});
+            AuthManager.auth();
         },
         redirectLogin : () => {
             history.push('/login');

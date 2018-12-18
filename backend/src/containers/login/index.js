@@ -1,6 +1,7 @@
 import { connect }   from 'react-redux';
 import Login         from '../../components/app/login';
 import LoginManager  from '../../models/manager/login';
+import store         from '../../store';
 
 const mapStateToProps = (state) => {
     return {
@@ -14,6 +15,11 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     const {history} = ownProps;
 
     return {
+        load  : () => {
+            store.dispatch({
+                type: 'RESET'
+            })
+        },
         login : (parameters) => {
             LoginManager.login(parameters, (datum, success) => {
                 if(success){

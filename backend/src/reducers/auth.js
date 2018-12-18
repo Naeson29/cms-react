@@ -1,4 +1,4 @@
-import {AUTH}          from '../actions/auth';
+import {AUTH}           from '../actions/auth';
 import AuthEntity       from '../models/entity/auth';
 import ReducerFunctions from './functions';
 
@@ -11,6 +11,9 @@ const INITIAL_STATE = {
 
 export default function User(state = INITIAL_STATE, action) {
     switch (action.type) {
+        case 'RESET' : {
+            return INITIAL_STATE;
+        }
         case AUTH.INIT: {
             return ReducerFunctions.getAuthInit(state);
         }
