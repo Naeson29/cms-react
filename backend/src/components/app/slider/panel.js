@@ -10,7 +10,6 @@ import ImageUploader        from 'react-images-upload';
 
 import {SIZE_IMAGE, EXTENSION_IMAGE, UPLOAD_IMAGE, UPLOAD_LABEL, NOTIFICATION} from '../../../utils/consts';
 
-
 class PanelSlider extends Component
 {
     constructor(props){
@@ -128,7 +127,7 @@ class PanelSlider extends Component
         const data = new FormData(this.form);
 
         this.props.createSlider(data, (data, success) => {
-            if(data.error !== 401){
+            if(!data.error || data.error !== 401){
                 this._scrollTop();
             }
 
@@ -149,7 +148,7 @@ class PanelSlider extends Component
         const data = new FormData(this.form);
 
         this.props.updateSlider(this.state.parameters.id_slider, data, (data, success) => {
-            if(data.error !== 401){
+            if(!data.error || data.error !== 401){
                 this._scrollTop();
             }
 

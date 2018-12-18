@@ -147,7 +147,7 @@ class PanelUser extends Component
         }
 
         this.props.createUser(serialize(this.form, {hash: true}), (data, success) => {
-            if(data.error !== 401){
+            if(!data.error || data.error !== 401){
                 this._scrollTop();
             }
 
@@ -173,7 +173,7 @@ class PanelUser extends Component
         }
 
         this.props.updateUser(this.state.parameters.id_user, serialData, (data, success) => {
-            if(data.error !== 401){
+            if(!data.error || data.error !== 401){
                 this._scrollTop();
             }
 
