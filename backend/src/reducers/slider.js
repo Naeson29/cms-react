@@ -4,6 +4,7 @@ import ReducerFunctions from './functions';
 
 const INITIAL_STATE = {
     data : {},
+    auth : true,
     view : {
         content : [],
         logged  : null,

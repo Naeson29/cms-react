@@ -12,8 +12,7 @@ const mapStateToProps = (state) => {
     };
 };
 
-const mapDispatchToProps = (dispatch, ownProps) => {
-    const {history} = ownProps;
+const mapDispatchToProps = () => {
 
     return {
         load: (parameters) => {
@@ -27,9 +26,6 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         },
         deleteUser: (userId, parameters, callback) => {
             UserManager.remove(userId, parameters, callback);
-        },
-        redirectLogin : () => {
-            history.push('/login');
         }
     };
 };

@@ -38,14 +38,6 @@ class PanelSlider extends Component
         this._scrollTop    = this._scrollTop.bind(this);
     }
 
-    componentDidUpdate() {
-        const {error} = this.props.error;
-
-        if(error && error === 401){
-            this.props.redirectLogin();
-        }
-    }
-
     _handleChange(attribute, value) {
         let newItem = {...this.state.parameters};
         newItem[attribute] = value;

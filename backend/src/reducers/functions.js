@@ -36,16 +36,18 @@ class ReducerFunctions {
                 logged : null
             };
         }
-        state.view.error = false;
+        state.view.error   = false;
         state.view.loading = true;
+        state.auth         = true;
 
         return {...state};
     }
 
     getAuthInit(state){
-        state.error   = false;
         state.loading = true;
+        state.error   = false;
         state.success = false;
+        state.auth    = false;
         return {...state};
     }
 
@@ -54,8 +56,9 @@ class ReducerFunctions {
     }
 
     getFailure(state, payload) {
-        state.view.error = payload;
+        state.view.error   = payload;
         state.view.loading = false;
+        state.auth         = payload.error !== 401;
         return {...state};
     }
 
@@ -63,15 +66,17 @@ class ReducerFunctions {
         state.loading = false;
         state.error   = payload;
         state.success = false;
+        state.auth    = false;
         return {...state};
     }
 
     getSuccess(state, payload) {
-        state.data = {...state.data};
+        state.data         = {...state.data};
         state.view.content = payload.data;
         state.view.logged  = payload.logged;
         state.view.loading = false;
         state.view.error   = false;
+        state.auth         = true;
 
         return {...state};
     }
@@ -80,10 +85,12 @@ class ReducerFunctions {
         state.loading = false;
         state.error   = false;
         state.success = payload;
+        state.auth    = true;
         return {...state};
     }
 
     createInit(state) {
+        state.auth = true;
         state.form = {
             loading : true,
             error   : false,
@@ -97,13 +104,14 @@ class ReducerFunctions {
     }
 
     createFailure(action, state, payload) {
+        state.auth = payload.error !== 401;
         state.form = {
             loading : false,
             error   : payload,
             success : false
         };
 
-        if(!payload.code && payload.error !== 401){
+        if(!payload.code && state.auth){
             Notifier(action, TYPE_ERROR, 'Echec de la création');
         }
 
@@ -112,6 +120,7 @@ class ReducerFunctions {
 
     createSuccess(action, state, payload) {
         state.view.content.push(payload.data);
+        state.auth = true;
         state.form = {
             loading : false,
             error   : false,
@@ -122,10 +131,11 @@ class ReducerFunctions {
     }
 
     updateInit(state) {
+        state.auth = true;
         state.form = {
             loading : true,
             error   : false,
-            success : false
+            success : false,
         };
         return {...state};
     }
@@ -140,13 +150,16 @@ class ReducerFunctions {
             error   : payload,
             success : false
         };
-        if(!payload.code && payload.error !== 401){
+        state.auth = payload.error !== 401;
+
+        if(!payload.code && state.auth){
             Notifier(action, TYPE_ERROR, 'Echec de la modification');
         }
         return {...state};
     }
 
     updateSuccess(action, state, payload) {
+        state.auth = true;
         state.view.content.map((item, key) => {
             if(item._id === payload.data._id){
                 state.view.content[key] = payload.data;
@@ -157,13 +170,15 @@ class ReducerFunctions {
             error   : false,
             success : payload
         };
+
         Notifier(action, TYPE_INFO, 'Succès de la modification');
         return {...state};
     }
 
     deleteInit(state) {
-        state.view.error = false;
+        state.view.error   = false;
         state.view.loading = true;
+        state.auth         = true;
 
         return {...state};
     }
@@ -175,8 +190,9 @@ class ReducerFunctions {
     deleteFailure(action, state, payload) {
         state.view.error = payload;
         state.view.loading = false;
+        state.auth = payload.error !== 401;
 
-        if(payload.error !== 401){
+        if(state.auth){
             Notifier(action, TYPE_ERROR, 'Echec de la suppression');
         }
         return {...state};
@@ -186,6 +202,7 @@ class ReducerFunctions {
         state.view.content = state.view.content.filter((item) => item._id !== payload.data._id);
         state.view.loading = false;
         state.view.error   = false;
+        state.auth         = true;
 
         Notifier(action, TYPE_INFO, 'Succès de la suppression');
         return {...state};
@@ -201,7 +218,8 @@ class ReducerFunctions {
 
     orderFailure(action, state, payload) {
         state.view.error = payload;
-        if(payload.error !== 401){
+        state.auth = payload.error !== 401;
+        if(state.auth){
             Notifier(action, TYPE_INFO, 'Echec de l\'ordre');
         }
         return {...state};
@@ -209,6 +227,7 @@ class ReducerFunctions {
 
     orderSuccess(action, state, payload) {
         state.view.content = payload.data;
+        state.auth         = true;
         return {...state};
     }
 }

@@ -10,13 +10,9 @@ const mapStateToProps = (state) => {
     };
 };
 
-const mapDispatchToProps = (dispatch, ownProps) => {
-    const {history} = ownProps;
+const mapDispatchToProps = () => {
 
     return {
-        redirectLogin : () => {
-            history.push('/login');
-        }
     };
 };
 

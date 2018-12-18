@@ -31,14 +31,6 @@ class Slider extends Component {
         this._navBox       = this._navBox.bind(this);
     }
 
-    componentDidUpdate() {
-        const {error} = this.props.error;
-
-        if(error && error === 401){
-            this.props.redirectLogin();
-        }
-    }
-
     _updateList(){
         this.forceUpdate();
     }

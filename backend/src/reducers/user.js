@@ -4,11 +4,12 @@ import ReducerFunctions from './functions';
 
 const INITIAL_STATE = {
     data : {},
+    auth : true,
     view : {
         content : [],
         logged  : null,
         loading : true,
-        error   : false
+        error   : false,
     },
     form : {
         loading : false,

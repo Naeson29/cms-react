@@ -30,6 +30,10 @@ class Full extends Component {
                 loading:false
             });
         }
+
+        if(!this.props.auth){
+            this.props.redirectLogin();
+        }
     }
 
     render() {
