@@ -13,6 +13,7 @@ const async               = require('async');
 //Models
 const Slider = require('../models/slider');
 const User   = require('../models/user');
+const Event  = require('../models/event');
 
 //Connect
 Mongoose.connect(`${Constants.dbUrl}${Constants.database}`, {
@@ -268,6 +269,16 @@ Router.delete('/users/:id', (req, res) => {
             });
         }
     });
+});
+
+//Event
+Router.get('/events', (req, res) => {
+    Event.find()
+        .then((data) => {
+            res.status(200).send({
+                data   : data
+            });
+        });
 });
 
 module.exports = Router;

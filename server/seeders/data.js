@@ -32,6 +32,23 @@ const data = [
                 order : 3
             }
         ]
+    },
+    {
+        'model': 'Event',
+        'documents': [
+            {
+                title  : 'All Day Event very long title',
+                allDay : true,
+                start  : new Date(2018, 12, 0),
+                end    : new Date(2018, 12, 1),
+            },
+            {
+                title  : 'Long Event',
+                allDay : true,
+                start  : new Date(2018, 12, 7),
+                end    : new Date(2018, 12, 10),
+            }
+        ]
     }
 ];
 

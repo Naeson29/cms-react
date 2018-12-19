@@ -7,7 +7,6 @@ const INITIAL_STATE = {
     auth : true,
     view : {
         content : [],
-        logged  : null,
         loading : true,
         error   : false
     },

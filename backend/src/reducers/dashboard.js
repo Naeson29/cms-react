@@ -1,6 +1,6 @@
-// import { GET_SLIDER} from '../actions/dashboard';
-// import DashboardEntity from '../models/entity/dashboard';
-// import ReducerFunctions from './functions';
+import { GET_EVENT} from '../actions/dashboard';
+import DashboardEntity from '../models/entity/dashboard';
+import ReducerFunctions from './functions';
 
 const INITIAL_STATE = {
     data: {},
@@ -16,20 +16,20 @@ export default function Dashboard(state = INITIAL_STATE, action) {
         case 'RESET' : {
             return INITIAL_STATE;
         }
-        // case GET_SLIDER.INIT: {
-        //     return ReducerFunctions.getInitSlider(state);
-        // }
-        // case GET_SLIDER.ACTION: {
-        //     return ReducerFunctions.getProcessed(state);
-        // }
-        //
-        // case GET_SLIDER.SUCCESS: {
-        //     return ReducerFunctions.getSuccessSlider(state, action.payload, DashboardEntity);
-        // }
-        //
-        // case GET_SLIDER.FAILURE: {
-        //     return ReducerFunctions.getFailureSlider(state, action.payload);
-        // }
+        case GET_EVENT.INIT: {
+            return ReducerFunctions.getInit(state);
+        }
+        case GET_EVENT.ACTION: {
+            return ReducerFunctions.getProcessed(state);
+        }
+
+        case GET_EVENT.SUCCESS: {
+            return ReducerFunctions.getSuccess(state, action.payload, DashboardEntity);
+        }
+
+        case GET_EVENT.FAILURE: {
+            return ReducerFunctions.getFailure(state, action.payload);
+        }
         default: {
             return state;
         }

@@ -1,3 +1,12 @@
 .dashboard {
 
+  .calendar {
+    padding    : 0.8rem;
+    min-height : 700px;
+
+    .rbc-calendar {
+      min-height : 700px;
+      width      : 100%;
+    }
+  }
 }

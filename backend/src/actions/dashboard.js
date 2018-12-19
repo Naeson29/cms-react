@@ -1,10 +1,10 @@
 import DashboardApi from '../api/dashboardApi';
 import {ClassicActions, ClassicConstantList} from './classic';
 
-export const GET_SLIDER = ClassicConstantList('GET_SLIDER');
+export const GET_EVENT = ClassicConstantList('GET_EVENT');
 
-export let getSlider = new ClassicActions(GET_SLIDER, {
+export let getEvent = new ClassicActions(GET_EVENT, {
     action: (parameters) => {
-        return DashboardApi.getSlider(parameters);
+        return DashboardApi.getEvent(parameters);
     },
 });
