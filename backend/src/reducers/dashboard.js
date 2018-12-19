@@ -3,8 +3,9 @@ import DashboardEntity from '../models/entity/dashboard';
 import ReducerFunctions from './functions';
 
 const INITIAL_STATE = {
-    data: {},
-    view: {
+    data : {},
+    auth : true,
+    view : {
         content : [],
         loading : true,
         error   : false

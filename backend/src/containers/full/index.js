@@ -9,6 +9,7 @@ const mapStateToProps = (state) => {
         error   : state.Auth.data.error,
         success : state.Auth.data.success,
         auth    : state.Auth.data.auth
+        && state.Dashboard.auth
         && state.User.auth
         && state.Slider.auth
     };
