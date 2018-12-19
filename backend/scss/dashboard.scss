@@ -79,8 +79,14 @@
       }
 
       .rbc-event {
+        .rbc-event-label {
+          width     : 100%;
+          margin    : 10px 0;
+          font-size : 13px;
+        }
         background : $primary-color;
         border     : 1px solid $primary-border;
+        text-align : center;
 
         &.rbc-event-allday {
           margin : 0 10px;
@@ -96,6 +102,45 @@
           background : $primary-color-light;
           border     : 1px solid $primary-border-light;
         }
+      }
+
+      .rbc-agenda-table {
+        border    : none;
+
+        .rbc-header {
+          color       : #fff;
+          background  : $primary-color;
+          border      : none;
+          font-weight : normal;
+          padding     : 0.5rem 0.75rem;
+          font-size   : 14px;
+        }
+
+        tbody {
+          tr {
+            border : none;
+
+            td {
+              border    : none;
+              padding   : 0.75rem;
+              font-size : 14px;
+
+              &.rbc-agenda-time-cell, &.rbc-agenda-date-cell {
+                text-transform : capitalize;
+              }
+            }
+
+            &:nth-of-type(odd) {
+              background-color : rgba(0, 0, 0, 0.07);
+            }
+          }
+        }
+      }
+
+      .rbc-agenda-empty {
+        display    : block;
+        text-align : center;
+        margin-top : 40px;
       }
     }
 

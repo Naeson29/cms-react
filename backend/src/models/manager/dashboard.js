@@ -1,4 +1,4 @@
-import {getEvent} from '../../actions/dashboard';
+import {getEvent, updateEvent} from '../../actions/dashboard';
 import Manager from './manager';
 
 class Dashboard extends Manager {
@@ -9,6 +9,17 @@ class Dashboard extends Manager {
             () => getEvent.ACTION(parameters),
             (content) => getEvent.SUCCESS(content, parameters),
             (error) => getEvent.FAILURE(error, parameters),
+            callback
+        );
+    }
+
+    update(eventId, parameters, callback) {
+        parameters.eventId = eventId;
+        return this.classicDispatch(
+            updateEvent.INIT,
+            () => updateEvent.ACTION(parameters),
+            (content) => updateEvent.SUCCESS(content, parameters),
+            (error) => updateEvent.FAILURE(error, parameters),
             callback
         );
     }

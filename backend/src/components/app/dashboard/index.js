@@ -1,13 +1,8 @@
 import React, {Component} from 'react';
 import {connect}          from 'react-redux';
 import PropTypes          from 'prop-types';
-import BigCalendar        from 'react-big-calendar';
-import moment             from 'moment';
 import Loader             from '../component/loading';
-import {FontAwesomeIcon}  from '@fortawesome/react-fontawesome';
-import * as IconSolid     from '@fortawesome/free-solid-svg-icons/index';
-
-import 'react-big-calendar/lib/css/react-big-calendar.css';
+import Calendar           from './calendar';
 
 class Dashboard extends Component {
 
@@ -15,33 +10,14 @@ class Dashboard extends Component {
         super(props);
 
         this.state = {
-            view: "day"
+            view: "agenda"
         };
 
         props.load();
-
-        this._view = this._view.bind(this);
-    }
-
-    _view(type){
-       this.setState({
-           view : type
-       });
     }
 
     render() {
-        const {content, loading} = this.props;
-        moment.locale('fr');
-        const locale = BigCalendar.momentLocalizer(moment);
-
-        const messages = {
-            month    : 'Mois',
-            week     : 'Semaine',
-            day      : 'Jour',
-            today    : 'Aujourd\'hui',
-            previous : <FontAwesomeIcon icon={IconSolid.faChevronLeft} />,
-            next     : <FontAwesomeIcon icon={IconSolid.faChevronRight} />,
-        };
+        const {content, loading, updateEvent} = this.props;
 
         return (
             <div className={'dashboard'}>
@@ -50,18 +26,7 @@ class Dashboard extends Component {
                 </h1>
                 {
                     loading ? <Loader/> :
-                        <div className={'calendar'}>
-                            <BigCalendar
-                                localizer={locale}
-                                events={content}
-                                view={this.state.view}
-                                onView={(type) => {this._view(type)}}
-                                startAccessor={(event) => { return new Date(event.start) }}
-                                endAccessor={(event) => { return new Date(event.end) }}
-                                defaultDate={new Date()}
-                                messages={messages}
-                            />
-                        </div>
+                        <Calendar content={content} updateEvent={updateEvent}/>
                 }
             </div>
         );
@@ -71,13 +36,14 @@ class Dashboard extends Component {
 export default connect()(Dashboard);
 
 Dashboard.propTypes = {
-    load    : PropTypes.func.isRequired,
-    loading : PropTypes.bool,
-    content : PropTypes.oneOfType([
+    load        : PropTypes.func.isRequired,
+    updateEvent : PropTypes.func.isRequired,
+    loading     : PropTypes.bool,
+    content     : PropTypes.oneOfType([
         PropTypes.array,
         PropTypes.object
     ]),
-    error   : PropTypes.oneOfType([
+    error       : PropTypes.oneOfType([
         PropTypes.bool,
         PropTypes.object
     ])

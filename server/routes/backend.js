@@ -281,4 +281,31 @@ Router.get('/events', (req, res) => {
         });
 });
 
+Router.put('/events/:id', (req, res) => {
+    let id = req.params.id;
+
+    Event.findOne({id_event : id }, (err, data) =>{
+        if (err) {
+            res.status(500).send(err);
+        } else {
+
+            Object.keys(req.body).map((key) => {
+                data[key] = req.body[key];
+            });
+
+            data.save((err) => {
+                if (err) {
+                    res.status(500).send(err);
+                } else{
+                    res.status(200).send({
+                        success : true,
+                        data    : data,
+                        message : 'Update event success'
+                    });
+                }
+            });
+        }
+    });
+});
+
 module.exports = Router;
