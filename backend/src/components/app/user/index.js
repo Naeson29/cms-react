@@ -51,12 +51,12 @@ class User extends Component {
                     loading ? <Loader/> :
                         <Table responsive striped className="tables">
                             <thead>
-                            <tr>
-                                <th>{'Nom'}</th>
-                                <th>{'Prénom'}</th>
-                                <th className={'no-display'}>{'Email'}</th>
-                                <th />
-                            </tr>
+                                <tr>
+                                    <th>{'Nom'}</th>
+                                    <th>{'Prénom'}</th>
+                                    <th className={'no-display'}>{'Email'}</th>
+                                    <th />
+                                </tr>
                             </thead>
                             <List
                                 content={content}

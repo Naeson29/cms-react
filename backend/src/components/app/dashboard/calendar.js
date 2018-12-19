@@ -1,12 +1,12 @@
 import React, {Component} from 'react';
 import BigCalendar        from 'react-big-calendar';
-import withDragAndDrop    from 'react-big-calendar/lib/addons/dragAndDrop'
+import withDragAndDrop    from 'react-big-calendar/lib/addons/dragAndDrop';
 import moment             from 'moment';
 import {FontAwesomeIcon}  from '@fortawesome/react-fontawesome';
 import * as IconSolid     from '@fortawesome/free-solid-svg-icons/index';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
-import 'react-big-calendar/lib/addons/dragAndDrop/styles.css'
-import PropTypes from "prop-types";
+import 'react-big-calendar/lib/addons/dragAndDrop/styles.css';
+import PropTypes from 'prop-types';
 
 const DraggableCalendar = withDragAndDrop(BigCalendar);
 
@@ -16,7 +16,7 @@ class Calendar extends Component {
         super(props);
 
         this.state = {
-            view    : "month",
+            view    : 'month',
             content : props.content
         };
 
@@ -31,7 +31,6 @@ class Calendar extends Component {
     }
 
     _onEventDrop(event){
-        console.log(event)
         let content = this.state.content;
         const index = content.findIndex(data => data.id_event === event.event.id_event);
         content[index].start = event.start;
@@ -39,7 +38,7 @@ class Calendar extends Component {
 
         if(this.state.view !== 'month' && content[index].allDay === true){
             content[index].allDay = false;
-            content[index].end    = moment(content[index].start).add(2, "hours");
+            content[index].end    = moment(content[index].start).add(2, 'hours');
         }
 
         if(event.isAllDay){
@@ -81,9 +80,9 @@ class Calendar extends Component {
                     localizer={locale}
                     events={content}
                     view={view}
-                    onView={(type) => {this._view(type)}}
-                    startAccessor={(event) => { return new Date(event.start) }}
-                    endAccessor={(event) => { return new Date(event.end) }}
+                    onView={(type) => {this._view(type);}}
+                    startAccessor={(event) => { return new Date(event.start); }}
+                    endAccessor={(event) => { return new Date(event.end); }}
                     defaultDate={new Date()}
                     messages={messages}
                     onEventDrop={this._onEventDrop}
