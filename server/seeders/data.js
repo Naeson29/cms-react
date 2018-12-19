@@ -1,3 +1,6 @@
+'use strict';
+const moment = require('moment');
+
 const data = [
     {
         'model' : 'User',
@@ -37,16 +40,22 @@ const data = [
         'model': 'Event',
         'documents': [
             {
-                title  : 'All Day Event very long title',
-                allDay : true,
-                start  : new Date(2018, 12, 0),
-                end    : new Date(2018, 12, 1),
+                title  : 'Long Event Test 1',
+                allDay : false,
+                start  : moment().add(2, "hours"),
+                end    : moment().add(4, "hours").add(25, "minutes"),
             },
             {
-                title  : 'Long Event',
+                title  : 'Long Event Test 2',
+                allDay : false,
+                start  : moment().add(1, "days").add(1, "hours"),
+                end    : moment().add(1, "days").add(3, "hours").add(30, "minutes"),
+            },
+            {
+                title  : 'Long Event Test 3',
                 allDay : true,
-                start  : new Date(2018, 12, 7),
-                end    : new Date(2018, 12, 10),
+                start  : moment().add(2, "days"),
+                end    : moment().add(2, "days"),
             }
         ]
     }

@@ -4,9 +4,10 @@ import PropTypes          from 'prop-types';
 import BigCalendar        from 'react-big-calendar';
 import moment             from 'moment';
 import Loader             from '../component/loading';
-import 'react-big-calendar/lib/css/react-big-calendar.css';
+import {FontAwesomeIcon}  from '@fortawesome/react-fontawesome';
+import * as IconSolid     from '@fortawesome/free-solid-svg-icons/index';
 
-moment.locale('fr');
+import 'react-big-calendar/lib/css/react-big-calendar.css';
 
 class Dashboard extends Component {
 
@@ -29,9 +30,18 @@ class Dashboard extends Component {
     }
 
     render() {
-        const {content, error, loading} = this.props;
-
+        const {content, loading} = this.props;
+        moment.locale('fr');
         const locale = BigCalendar.momentLocalizer(moment);
+
+        const messages = {
+            month    : 'Mois',
+            week     : 'Semaine',
+            day      : 'Jour',
+            today    : 'Aujourd\'hui',
+            previous : <FontAwesomeIcon icon={IconSolid.faChevronLeft} />,
+            next     : <FontAwesomeIcon icon={IconSolid.faChevronRight} />,
+        };
 
         return (
             <div className={'dashboard'}>
@@ -46,12 +56,13 @@ class Dashboard extends Component {
                                 events={content}
                                 view={this.state.view}
                                 onView={(type) => {this._view(type)}}
-                                startAccessor="start"
-                                endAccessor="end"
+                                startAccessor={(event) => { return new Date(event.start) }}
+                                endAccessor={(event) => { return new Date(event.end) }}
+                                defaultDate={new Date()}
+                                messages={messages}
                             />
                         </div>
                 }
-
             </div>
         );
     }
