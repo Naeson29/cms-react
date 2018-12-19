@@ -16,7 +16,7 @@ class Calendar extends Component {
         super(props);
 
         this.state = {
-            view    : "agenda",
+            view    : "month",
             content : props.content
         };
 
@@ -31,16 +31,27 @@ class Calendar extends Component {
     }
 
     _onEventDrop(event){
+        console.log(event)
         let content = this.state.content;
         const index = content.findIndex(data => data.id_event === event.event.id_event);
         content[index].start = event.start;
         content[index].end   = event.end;
 
+        if(this.state.view !== 'month' && content[index].allDay === true){
+            content[index].allDay = false;
+            content[index].end    = moment(content[index].start).add(2, "hours");
+        }
+
+        if(event.isAllDay){
+            content[index].allDay = true;
+        }
+
         this.setState({content : content});
 
         let params = {
-            start : event.start,
-            end   : event.end
+            start  : content[index].start,
+            end    : content[index].end,
+            allDay : content[index].allDay
         };
 
         this.props.updateEvent(event.event.id_event, params);
@@ -76,6 +87,7 @@ class Calendar extends Component {
                     defaultDate={new Date()}
                     messages={messages}
                     onEventDrop={this._onEventDrop}
+                    onEventResize={this._onEventDrop}
                 />
             </div>
         );
