@@ -107,6 +107,15 @@
       .rbc-agenda-table {
         border    : none;
 
+        th {
+          &:nth-child(1), &:nth-child(2){
+            width : 15%;
+          }
+          &:nth-child(3){
+            width : 70%;
+          }
+        }
+
         .rbc-header {
           color       : #fff;
           background  : $primary-color;
@@ -124,6 +133,13 @@
               border    : none;
               padding   : 0.75rem;
               font-size : 14px;
+
+              &:nth-child(1), &:nth-child(2){
+                width : 15%;
+              }
+              &:nth-child(3){
+                width : 70%;
+              }
 
               &.rbc-agenda-time-cell, &.rbc-agenda-date-cell {
                 text-transform : capitalize;

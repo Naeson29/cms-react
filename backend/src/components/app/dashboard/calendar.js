@@ -4,9 +4,12 @@ import withDragAndDrop    from 'react-big-calendar/lib/addons/dragAndDrop';
 import moment             from 'moment';
 import {FontAwesomeIcon}  from '@fortawesome/react-fontawesome';
 import * as IconSolid     from '@fortawesome/free-solid-svg-icons/index';
+import PropTypes          from 'prop-types';
+import {ACTIONS}          from '../../../utils/actions';
+
+
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import 'react-big-calendar/lib/addons/dragAndDrop/styles.css';
-import PropTypes from 'prop-types';
 
 const DraggableCalendar = withDragAndDrop(BigCalendar);
 
@@ -20,8 +23,8 @@ class Calendar extends Component {
             content : props.content
         };
 
-        this._view        = this._view.bind(this);
-        this._onEventDrop = this._onEventDrop.bind(this);
+        this._view           = this._view.bind(this);
+        this._onEventDrop    = this._onEventDrop.bind(this);
     }
 
     _view(type){
@@ -33,33 +36,24 @@ class Calendar extends Component {
     _onEventDrop(event){
         let content = this.state.content;
         const index = content.findIndex(data => data.id_event === event.event.id_event);
-        content[index].start = event.start;
-        content[index].end   = event.end;
-
-        if(this.state.view !== 'month' && content[index].allDay === true){
-            content[index].allDay = false;
-            content[index].end    = moment(content[index].start).add(2, 'hours');
-        }
+        content[index].start  = event.start;
+        content[index].end    = event.end;
+        content[index].allDay = !!event.isAllDay;
 
         if(event.isAllDay){
-            content[index].allDay = true;
+            content[index].end = moment(content[index].start).add(2, 'hours');
         }
 
         this.setState({content : content});
 
-        let params = {
-            start  : content[index].start,
-            end    : content[index].end,
-            allDay : content[index].allDay
-        };
-
-        this.props.updateEvent(event.event.id_event, params);
+        this.props.updateEvent(event.event.id_event, content[index]);
     }
 
     render() {
         moment.locale('fr');
         const locale = BigCalendar.momentLocalizer(moment);
         const {view, content} = this.state;
+        const {openRightPanel, updateEvent, updateCalendar} = this.props;
 
         const messages = {
             month           : 'Mois',
@@ -87,6 +81,11 @@ class Calendar extends Component {
                     messages={messages}
                     onEventDrop={this._onEventDrop}
                     onEventResize={this._onEventDrop}
+                    onSelectEvent={(event) => openRightPanel(ACTIONS.PANEL_EVENT, {
+                        event          : event,
+                        updateEvent    : updateEvent,
+                        updateCalendar : updateCalendar
+                    })}
                 />
             </div>
         );
@@ -97,6 +96,8 @@ export default Calendar;
 
 
 Calendar.propTypes = {
-    content     : PropTypes.array,
-    updateEvent : PropTypes.func
+    content        : PropTypes.array,
+    updateEvent    : PropTypes.func,
+    openRightPanel : PropTypes.func,
+    updateCalendar : PropTypes.func,
 };

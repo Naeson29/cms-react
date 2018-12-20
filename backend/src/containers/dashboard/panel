@@ -1,0 +1,19 @@
+import { connect }   from 'react-redux';
+import {withRouter}  from 'react-router-dom';
+import PanelEvent    from '../../components/app/dashboard/panel';
+
+const mapStateToProps = (state) => {
+    return {
+        submit  : state.User.form.loading,
+        success : state.User.form.success,
+        error   : state.User.form.error
+    };
+};
+
+const mapDispatchToProps = () => {
+
+    return {
+    };
+};
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(PanelEvent));
