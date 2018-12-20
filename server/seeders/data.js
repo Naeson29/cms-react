@@ -40,19 +40,19 @@ const data = [
         'model': 'Event',
         'documents': [
             {
-                title  : 'Long Event Test 1',
+                title  : 'Evenement de test',
                 allDay : false,
                 start  : moment().add(2, "hours"),
                 end    : moment().add(4, "hours").add(25, "minutes"),
             },
             {
-                title  : 'Long Event Test 2',
+                title  : 'Anniversaire de Paul',
                 allDay : false,
                 start  : moment().add(1, "days").add(1, "hours"),
                 end    : moment().add(1, "days").add(3, "hours").add(30, "minutes"),
             },
             {
-                title  : 'Long Event Test 3',
+                title  : 'Réunion DEV',
                 allDay : true,
                 start  : moment().add(2, "days"),
                 end    : moment().add(2, "days"),
