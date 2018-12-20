@@ -24,8 +24,6 @@ class Dashboard extends Component {
     render() {
         const {content, loading, createEvent, updateEvent, openRightPanel} = this.props;
 
-        console.log(content);
-
         return (
             <div className={'dashboard'}>
                 <h1>
