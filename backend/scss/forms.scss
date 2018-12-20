@@ -150,6 +150,56 @@
         }
       }
     }
+
+    .container-check {
+      position    : relative;
+      display     : inline-block;
+      line-height : 25px;
+
+      input {
+        position : absolute;
+        opacity  : 0;
+        cursor   : pointer;
+        height   : 0;
+        width    : 0;
+      }
+
+      &.active {
+        .check {
+          background-color: $primary-color-light;
+
+          &:after {
+            display : block;
+          }
+        }
+      }
+
+      .check {
+        position   : absolute;
+        top        : 0;
+        right      : -40px;
+        height     : 25px;
+        width      : 25px;
+        background : #ccc;
+        cursor     : pointer;
+
+        &:after {
+          content  : "";
+          position : absolute;
+          display  : none;
+          left     : 10px;
+          top      : 6px;
+          width    : 5px;
+          height   : 10px;
+          border   : solid white;
+
+          border-width      : 0 3px 3px 0;
+          -webkit-transform : rotate(45deg);
+          -ms-transform     : rotate(45deg);
+          transform         : rotate(45deg);
+        }
+      }
+    }
   }
 
   .bloc-success {

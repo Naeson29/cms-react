@@ -281,6 +281,29 @@ Router.get('/events', (req, res) => {
         });
 });
 
+Router.post('/events', (req, res) => {
+
+    let params = {};
+
+    Object.keys(req.body).map((key) => {
+        params[key] = req.body[key];
+    });
+
+    const data = new Event(params);
+
+    data.save((err, data) => {
+        if (err) {
+            res.status(500).send(err);
+        } else {
+            res.status(200).send({
+                success : true,
+                data    : data,
+                message : 'Create event success'
+            });
+        }
+    });
+});
+
 Router.put('/events/:id', (req, res) => {
     let id = req.params.id;
 
@@ -288,7 +311,6 @@ Router.put('/events/:id', (req, res) => {
         if (err) {
             res.status(500).send(err);
         } else {
-
             Object.keys(req.body).map((key) => {
                 data[key] = req.body[key];
             });

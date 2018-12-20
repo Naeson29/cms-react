@@ -1,4 +1,4 @@
-import { GET_EVENT, UPDATE_EVENT} from '../actions/dashboard';
+import { GET_EVENT, UPDATE_EVENT, CREATE_EVENT} from '../actions/dashboard';
 import DashboardEntity from '../models/entity/dashboard';
 import ReducerFunctions from './functions';
 
@@ -30,6 +30,21 @@ export default function Dashboard(state = INITIAL_STATE, action) {
 
         case GET_EVENT.FAILURE: {
             return ReducerFunctions.getFailure(state, action.payload);
+        }
+        case CREATE_EVENT.INIT: {
+            return ReducerFunctions.createInit(state);
+        }
+
+        case CREATE_EVENT.ACTION: {
+            return ReducerFunctions.createProcessed(state);
+        }
+
+        case CREATE_EVENT.SUCCESS: {
+            return ReducerFunctions.createSuccess(action, state, action.payload);
+        }
+
+        case CREATE_EVENT.FAILURE: {
+            return ReducerFunctions.createFailure(action, state, action.payload);
         }
         case UPDATE_EVENT.INIT: {
             return ReducerFunctions.updateInit(state);

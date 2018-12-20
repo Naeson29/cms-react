@@ -1,9 +1,12 @@
-import React, {Component} from 'react';
-import {connect}          from 'react-redux';
-import PropTypes          from 'prop-types';
-import Loader             from '../component/loading';
-import Calendar           from './calendar';
-import PanelFunctions     from '../../../containers/panel/functions';
+import React, {Component}  from 'react';
+import {connect}           from 'react-redux';
+import PropTypes           from 'prop-types';
+import Loader              from '../component/loading';
+import Calendar            from './calendar';
+import PanelFunctions      from '../../../containers/panel/functions';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import * as IconSolid      from '@fortawesome/free-solid-svg-icons/index';
+import {ACTIONS}           from '../../../utils/actions';
 
 class Dashboard extends Component {
 
@@ -19,12 +22,24 @@ class Dashboard extends Component {
     }
 
     render() {
-        const {content, loading, updateEvent, openRightPanel} = this.props;
+        const {content, loading, createEvent, updateEvent, openRightPanel} = this.props;
+
+        console.log(content);
 
         return (
             <div className={'dashboard'}>
                 <h1>
                     <span>{'Tableau de bord'}</span>
+                    {
+                        !loading &&
+                        <FontAwesomeIcon
+                            icon={IconSolid.faPlusCircle}
+                            onClick={() => openRightPanel(ACTIONS.PANEL_EVENT, {
+                                createEvent    : createEvent,
+                                updateCalendar : this._updateCalendar,
+                            })}
+                        />
+                    }
                 </h1>
                 {
                     loading ? <Loader/> :
@@ -45,7 +60,8 @@ export default connect(() => {return {};}, PanelFunctions)(Dashboard);
 Dashboard.propTypes = {
     load           : PropTypes.func.isRequired,
     openRightPanel : PropTypes.func.isRequired,
-    updateEvent    : PropTypes.func.isRequired,
+    createEvent    : PropTypes.func,
+    updateEvent    : PropTypes.func,
     loading        : PropTypes.bool,
     content        : PropTypes.oneOfType([
         PropTypes.array,

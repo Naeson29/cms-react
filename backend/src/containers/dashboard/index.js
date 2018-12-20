@@ -17,6 +17,9 @@ const mapDispatchToProps = () => {
         load: (parameters) => {
             DashboardManager.event(parameters);
         },
+        createEvent: (parameters, callback) => {
+            DashboardManager.create(parameters, callback);
+        },
         updateEvent: (eventId, parameters, callback) => {
             DashboardManager.update(eventId, parameters, callback);
         }

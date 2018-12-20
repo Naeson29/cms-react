@@ -7,7 +7,11 @@ import Notification          from '../panel/notification';
 import PropTypes             from 'prop-types';
 import SubmitForm            from '../component/submitForm';
 import serialize             from 'form-serialize';
-import {NOTIFICATION}        from '../../../utils/consts';
+import {NOTIFICATION,
+    DATE_FORMAT}             from '../../../utils/consts';
+import Datetime              from 'react-datetime';
+
+import 'react-datetime/css/react-datetime.css';
 
 class PanelEvent extends Component
 {
@@ -15,9 +19,10 @@ class PanelEvent extends Component
         super(props);
 
         this.default = {
-            title : '',
-            start : '',
-            end   : ''
+            title  : '',
+            start  : '',
+            end    : '',
+            allDay : false
         };
 
         this.state = {
@@ -66,11 +71,11 @@ class PanelEvent extends Component
         const parameters = this.state.parameters;
         let errors = {};
 
-        // Object.keys(parameters).map((key) => {
-        //     if (!parameters[key]) {
-        //         errors[key] = NOTIFICATION.error[key];
-        //     }
-        // });
+        Object.keys(parameters).map((key) => {
+            if (!parameters[key] && key !== 'allDay') {
+                errors[key] = NOTIFICATION.error[key];
+            }
+        });
 
         this.setState({formErrors: errors});
 
@@ -101,17 +106,20 @@ class PanelEvent extends Component
             return;
         }
 
-        // this.props.createUser(serialize(this.form, {hash: true}), (data, success) => {
-        //     if (success) {
-        //         this._reset();
-        //         this.props.closePanel(this.props._id);
-        //         this.props.updateList();
-        //     }
-        //
-        //     if(data.error && data.error !== 401){
-        //         this._scrollTop();
-        //     }
-        // });
+        const serialData = serialize(this.form, {hash: true});
+        serialData.allDay = this.state.parameters.allDay;
+
+        this.props.createEvent(serialData, (data, success) => {
+            if (success) {
+                this._reset();
+                this.props.closePanel(this.props._id);
+                this.props.updateCalendar();
+            }
+
+            if(data.error && data.error !== 401){
+                this._scrollTop();
+            }
+        });
     }
 
     _updateEvent(event) {
@@ -122,6 +130,7 @@ class PanelEvent extends Component
         }
 
         const serialData = serialize(this.form, {hash: true});
+        serialData.allDay = this.state.parameters.allDay;
 
         this.props.updateEvent(this.state.parameters.id_event, serialData, (data, success) => {
             if (success) {
@@ -165,6 +174,35 @@ class PanelEvent extends Component
                                     value={parameters.title}
                                     onChange={(event) => this._handleChange('title', event.target.value)}
                                 />
+                            </div>
+                            <div className={'bloc-form'}>
+                                <label className={'label-info'} htmlFor="label">{'Début :'}</label>
+                                <Datetime locale="fr"
+                                    dateFormat={DATE_FORMAT}
+                                    value={!parameters.start ? '' : new Date(parameters.start)}
+                                    onChange={(date) => {
+                                      this._handleChange('start', new Date(date));
+                                    }}
+                                />
+                                <input id="start" name="start" type="hidden" value={parameters.start}/>
+                            </div>
+                            <div className={'bloc-form'}>
+                                <label className={'label-info'} htmlFor="label">{'Fin :'}</label>
+                                <Datetime locale="fr"
+                                    dateFormat={DATE_FORMAT}
+                                    value={!parameters.end ? '' : new Date(parameters.end)}
+                                    onChange={(date) => {
+                                      this._handleChange('end', new Date(date));
+                                    }}
+                                />
+                                <input id="end" name="end" type="hidden" value={parameters.end}/>
+                            </div>
+                            <div className={'bloc-form'}>
+                                <label className={'label-info container-check' + (parameters.allDay ? ' active' : '')} htmlFor="label">
+                                    {'Journée entière :'}
+                                    <input name="allDay" className={'checkbox'} type="checkbox" value={parameters.allDay} defaultChecked={parameters.allDay}/>
+                                    <span className={'check'} onClick={() => {this._handleChange('allDay', !parameters.allDay )}}/>
+                                </label>
                             </div>
                             <PanelActions {...this.props}>
                                 <Button color={'primary'}>{'Enregistrer'}</Button>
