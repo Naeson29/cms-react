@@ -81,12 +81,15 @@
       .rbc-event {
         .rbc-event-label {
           width     : 100%;
-          margin    : 10px 0;
+          font-size : 13px;
+          margin-bottom:10px;
+        }
+        .rbc-event-content {
+          height:auto;
           font-size : 13px;
         }
         background : $primary-color;
         border     : 1px solid $primary-border;
-        text-align : center;
 
         &.rbc-event-allday {
           margin : 0 10px;
@@ -162,6 +165,10 @@
       .rbc-show-more {
         display : inline-block;
         margin  : 0 0.8rem;
+      }
+
+      .rbc-addons-dnd-resizable {
+        line-height: initial;
       }
     }
 
