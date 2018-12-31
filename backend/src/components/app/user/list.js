@@ -44,11 +44,12 @@ class List extends  Component {
                             <td>{user.firstName}</td>
                             <td className={'no-display'}>{user.email}</td>
                             <td className={'action'}>
-                                {
-                                    logged !== user.id_user && (
-                                        <FontAwesomeIcon className={'svg'} icon={IconRegular.faTrashAlt} onClick={(e) => {deleteLine(e,user.id_user);}}/>
-                                    )
-                                }
+                                <FontAwesomeIcon className={'svg' + (logged === user.id_user ? ' disable' : '')} icon={IconRegular.faTrashAlt} onClick={(e) => {
+                                    if(logged !== user.id_user) {
+                                        deleteLine(user.id_user);
+                                    }
+                                    e.stopPropagation();
+                                }}/>
                             </td>
                         </tr>
                     ))

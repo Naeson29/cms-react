@@ -24,8 +24,7 @@ class User extends Component {
         this.forceUpdate();
     }
 
-    _delete(event, userId){
-        event.stopPropagation();
+    _delete(userId){
         this.props.deleteUser(userId, () => {});
     }
 

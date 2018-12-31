@@ -10,6 +10,12 @@ const data = [
                 password  : '123456',
                 lastName  : 'Nahmias',
                 firstName : 'Nicolas'
+            },
+            {
+                email     : 'Pierre@beable.fr',
+                password  : '123456',
+                lastName  : 'Richard',
+                firstName : 'Pierre'
             }
         ]
     },

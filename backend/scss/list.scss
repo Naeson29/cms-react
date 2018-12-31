@@ -40,6 +40,10 @@
               width  : 18px;
               height : 18px;
               color  : $primary-color;
+
+              &.disable {
+                opacity : 0.5;
+              }
             }
           }
         }
