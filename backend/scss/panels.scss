@@ -111,6 +111,11 @@
           border-radius : initial;
           padding       : 0 1.8rem;
           color         : #fff;
+          margin        : 0 0.8rem;
+
+          &.delete {
+            line-height : 30px;
+          }
 
           &:focus {
             box-shadow : none;

@@ -95,17 +95,6 @@ body {
           }
         }
 
-        .btn {
-          background : $primary-color-light;
-
-          &:hover {
-            background : $btn-transition-color;
-          }
-          &:focus {
-            box-shadow : none;
-          }
-        }
-
         .loading-list {
           display: flex;
           justify-content: center;
@@ -139,6 +128,15 @@ body {
       &:hover {
         background : $btn-transition-color;
       }
+
+      &.delete {
+        background: $btn-delete-color;
+
+        &:hover {
+          background : $btn-transition-color-delete;
+        }
+      }
+
       &:focus {
         box-shadow : none;
       }

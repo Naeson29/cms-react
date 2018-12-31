@@ -1,5 +1,5 @@
 import Api from './api';
-import {HTTP_GET, HTTP_POST, HTTP_PUT} from './utils';
+import {HTTP_DELETE, HTTP_GET, HTTP_POST, HTTP_PUT} from './utils';
 
 const API_PREFIX = 'events';
 
@@ -15,5 +15,9 @@ export default class DashboardApi {
 
     static updateEvent(eventId, parameters) {
         return Api.callApi(HTTP_PUT, API_PREFIX + `/${eventId}/`, parameters, false);
+    }
+
+    static deleteEvent(eventId, parameters) {
+        return Api.callApi(HTTP_DELETE, API_PREFIX + `/${eventId}/`, parameters, false);
     }
 }

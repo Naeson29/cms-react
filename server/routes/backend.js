@@ -330,4 +330,20 @@ Router.put('/events/:id', (req, res) => {
     });
 });
 
+Router.delete('/events/:id', (req, res) => {
+    let id = req.params.id;
+
+    Event.findOneAndDelete({id_event : id }, (err, data) => {
+        if (err) {
+            res.status(500).send(err);
+        } else {
+            res.status(200).send({
+                success : true,
+                data    : data,
+                message : 'Delete event success'
+            });
+        }
+    });
+});
+
 module.exports = Router;

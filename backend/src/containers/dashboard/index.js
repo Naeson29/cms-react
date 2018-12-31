@@ -22,6 +22,12 @@ const mapDispatchToProps = () => {
         },
         updateEvent: (eventId, parameters, callback) => {
             DashboardManager.update(eventId, parameters, callback);
+        },
+        dropEvent: (eventId, parameters, callback) => {
+            DashboardManager.drop(eventId, parameters, callback);
+        },
+        deleteEvent: (eventId, parameters, callback) => {
+            DashboardManager.remove(eventId, parameters, callback);
         }
     };
 };

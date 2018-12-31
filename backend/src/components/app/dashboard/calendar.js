@@ -46,14 +46,14 @@ class Calendar extends Component {
 
         this.setState({content : content});
 
-        this.props.updateEvent(event.event.id_event, content[index]);
+        this.props.dropEvent(event.event.id_event, content[index]);
     }
 
     render() {
         moment.locale('fr');
         const locale = BigCalendar.momentLocalizer(moment);
         const {view, content} = this.state;
-        const {openRightPanel, updateEvent, updateCalendar} = this.props;
+        const {openRightPanel, updateEvent, updateCalendar, deleteEvent} = this.props;
 
         const messages = {
             month           : 'Mois',
@@ -84,6 +84,7 @@ class Calendar extends Component {
                     onSelectEvent={(event) => openRightPanel(ACTIONS.PANEL_EVENT, {
                         event          : event,
                         updateEvent    : updateEvent,
+                        deleteEvent    : deleteEvent,
                         updateCalendar : updateCalendar
                     })}
                 />
@@ -98,6 +99,8 @@ export default Calendar;
 Calendar.propTypes = {
     content        : PropTypes.array,
     updateEvent    : PropTypes.func,
+    dropEvent      : PropTypes.func,
     openRightPanel : PropTypes.func,
     updateCalendar : PropTypes.func,
+    deleteEvent    : PropTypes.func,
 };

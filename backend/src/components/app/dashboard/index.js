@@ -22,7 +22,7 @@ class Dashboard extends Component {
     }
 
     render() {
-        const {content, loading, createEvent, updateEvent, openRightPanel} = this.props;
+        const {content, loading, createEvent, updateEvent,dropEvent, openRightPanel, deleteEvent} = this.props;
 
         return (
             <div className={'dashboard'}>
@@ -43,7 +43,9 @@ class Dashboard extends Component {
                     loading ? <Loader/> :
                         <Calendar
                             content={content}
+                            dropEvent={dropEvent}
                             updateEvent={updateEvent}
+                            deleteEvent={deleteEvent}
                             openRightPanel={openRightPanel}
                             updateCalendar={this._updateCalendar}
                         />
@@ -59,6 +61,8 @@ Dashboard.propTypes = {
     load           : PropTypes.func.isRequired,
     openRightPanel : PropTypes.func.isRequired,
     createEvent    : PropTypes.func,
+    deleteEvent    : PropTypes.func,
+    dropEvent      : PropTypes.func,
     updateEvent    : PropTypes.func,
     loading        : PropTypes.bool,
     content        : PropTypes.oneOfType([

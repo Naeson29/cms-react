@@ -173,6 +173,33 @@ class ReducerFunctions {
         return {...state};
     }
 
+    dropInit(state) {
+        return {...state};
+    }
+
+    dropProcessed(state) {
+        return {...state};
+    }
+
+    dropSuccess(action, state, payload){
+        state.auth = true;
+        state.view.content.map((item, key) => {
+            if(item._id === payload.data._id){
+                state.view.content[key] = payload.data;
+            }
+        });
+        return {...state};
+    }
+
+    dropFailure(action, state, payload) {
+        state.view.error = payload;
+        state.auth = payload.error !== 401;
+        if(state.auth){
+            Notifier(action, TYPE_ERROR, 'Echec du déplacement');
+        }
+        return {...state};
+    }
+
     deleteInit(state) {
         state.view.error   = false;
         state.view.loading = true;

@@ -37,6 +37,7 @@ class PanelEvent extends Component
         this._handleChange  = this._handleChange.bind(this);
         this._createEvent   = this._createEvent.bind(this);
         this._updateEvent   = this._updateEvent.bind(this);
+        this._deleteEvent   = this._deleteEvent.bind(this);
         this._reset         = this._reset.bind(this);
         this._scrollTop     = this._scrollTop.bind(this);
     }
@@ -144,6 +145,16 @@ class PanelEvent extends Component
         });
     }
 
+    _deleteEvent(){
+        this.props.deleteEvent(this.state.parameters.id_event, (data, success) => {
+            if (success) {
+                this._reset();
+                this.props.closePanel(this.props._id);
+                this.props.updateCalendar();
+            }
+        });
+    }
+
     render(){
         const { submit }    = this.props;
         const { create, parameters } = this.state;
@@ -206,6 +217,10 @@ class PanelEvent extends Component
                             </div>
                             <PanelActions {...this.props}>
                                 <Button color={'primary'}>{'Enregistrer'}</Button>
+                                {
+                                    !create &&
+                                    <span className={'btn delete'} onClick={() => this._deleteEvent}>{'Supprimer'}</span>
+                                }
                             </PanelActions>
                         </form>
                     </div>
@@ -231,6 +246,7 @@ PanelEvent.propTypes = {
     createEvent    : PropTypes.func,
     updateList     : PropTypes.func,
     updateEvent    : PropTypes.func,
+    deleteEvent    : PropTypes.func,
     updateCalendar : PropTypes.func,
     event          : PropTypes.object,
 };
