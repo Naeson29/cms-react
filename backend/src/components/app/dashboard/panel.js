@@ -32,6 +32,11 @@ class PanelEvent extends Component
             reset         : false
         };
 
+        if(props.slot){
+            this.state.parameters.start = props.slot.start;
+            this.state.parameters.end   = props.slot.end;
+        }
+
         this._checkForm     = this._checkForm.bind(this);
         this._hasError      = this._hasError.bind(this);
         this._handleChange  = this._handleChange.bind(this);

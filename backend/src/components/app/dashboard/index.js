@@ -44,6 +44,7 @@ class Dashboard extends Component {
                         <Calendar
                             content={content}
                             dropEvent={dropEvent}
+                            createEvent={createEvent}
                             updateEvent={updateEvent}
                             deleteEvent={deleteEvent}
                             openRightPanel={openRightPanel}
