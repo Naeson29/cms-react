@@ -146,9 +146,8 @@ class PanelEvent extends Component
     }
 
     _deleteEvent(){
-        this.props.deleteEvent(this.state.parameters.id_event, (data, success) => {
+        this.props.deleteEvent(this.state.parameters.id_event, this.state.parameters, (data, success) => {
             if (success) {
-                this._reset();
                 this.props.closePanel(this.props._id);
                 this.props.updateCalendar();
             }
@@ -219,7 +218,7 @@ class PanelEvent extends Component
                                 <Button color={'primary'}>{'Enregistrer'}</Button>
                                 {
                                     !create &&
-                                    <span className={'btn delete'} onClick={() => this._deleteEvent}>{'Supprimer'}</span>
+                                    <span className={'btn delete'} onClick={this._deleteEvent}>{'Supprimer'}</span>
                                 }
                             </PanelActions>
                         </form>

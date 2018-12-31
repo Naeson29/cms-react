@@ -27,6 +27,14 @@ class Calendar extends Component {
         this._onEventDrop    = this._onEventDrop.bind(this);
     }
 
+    componentDidUpdate(prevProps) {
+        if (this.props.content !== prevProps.content) {
+            this.setState({
+                content: this.props.content
+            });
+        }
+    }
+
     _view(type){
         this.setState({
             view : type

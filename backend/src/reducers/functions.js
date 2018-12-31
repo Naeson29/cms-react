@@ -202,7 +202,6 @@ class ReducerFunctions {
 
     deleteInit(state) {
         state.view.error   = false;
-        state.view.loading = true;
         state.auth         = true;
 
         return {...state};
@@ -214,7 +213,6 @@ class ReducerFunctions {
 
     deleteFailure(action, state, payload) {
         state.view.error = payload;
-        state.view.loading = false;
         state.auth = payload.error !== 401;
 
         if(state.auth){
@@ -225,7 +223,6 @@ class ReducerFunctions {
 
     deleteSuccess(action, state, payload) {
         state.view.content = state.view.content.filter((item) => item._id !== payload.data._id);
-        state.view.loading = false;
         state.view.error   = false;
         state.auth         = true;
 
