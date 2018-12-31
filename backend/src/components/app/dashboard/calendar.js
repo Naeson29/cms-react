@@ -48,10 +48,6 @@ class Calendar extends Component {
         content[index].end    = event.end;
         content[index].allDay = !!event.isAllDay;
 
-        if(event.isAllDay){
-            content[index].end = moment(content[index].start).add(2, 'hours');
-        }
-
         this.setState({content : content});
 
         this.props.dropEvent(event.event.id_event, content[index]);
