@@ -46,18 +46,18 @@ const data = [
         'model': 'News',
         'documents': [
             {
-                label : 'Vulputate Mollis Ultricies Fermentum Parturient',
-                text  : 'Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Cras justo odio, dapibus ac facilisis.',
+                label : 'Concilier performance et agilité pour mieux accompagner les métiers',
+                text  : 'Défendre ses budgets, défendre les intérêts de son entreprise, défendre ses capacités à faire évoluer son architecture IT : les enjeux de la relation fournisseurs sont fondamentaux pour les DSI. Le 24 janvier 2019, notre confrère CIO organise une matinée sur le thème « Fournisseurs IT : les liaisons dangereuses - De la stratégie d\'achat à la gestion quotidienne » au Centre d\'affaires Paris Trocadéro. Son objet sera d\'expliciter les meilleures pratiques en matière de relations fournisseurs.',
                 image : 'news1.jpg',
             },
             {
-                label : 'Tortor Dapibus Commodo Aenean Quam',
-                text  : 'Nullam id dolor id nibh ultricies vehicula ut id elit. Cras mattis consectetur purus sit amet fermentum. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Donec sed odio dui.',
+                label : 'La Commission européenne pointe l\'urgence d\'accélérer sur l\'IA en Europe',
+                text  : 'Pour tenter de combler le retard qui se creuse avec les Etats-Unis et la Chine sur les technologies d\'intelligence artificielle, la Commission européenne enjoint les états-membres et les entreprises à se mettre rapidement en ordre de marche sur les investissements dans ce domaine. Elle présente un plan en 4 axes : financement, constitution de bases de données communes, renforcement des compétences et instauration de la confiance dans l\'IA.',
                 image : 'news2.jpg',
             },
             {
-                label : 'Phasellus volutpat metus',
-                text  : 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Duis mollis, est non commodo luctus, nisi erat porttitor ligula.',
+                label : 'La prochaine stratégie de la Commission européenne sera data-driven',
+                text  : 'La Commission européenne vient de publier sa stratégie numérique, adoptée le 21 novembre 2018. L\'objectif affiché est d\'évoluer « vers une administration transformée numériquement, centrée sur l\'utilisateur et fondée sur les données ». Les données sont, comme le rappelle la Commission, le coeur d\'une saine prise de décision. La logique du « Dites le moi une seule fois » chère aux instances françaises est aussi mise en avant au niveau européen, grâce aux échanges de données rendus possibles par une interopérabilité garantie, bien entendu dans le respect des données personnelles.',
                 image : 'news3.jpg',
             }
         ]
