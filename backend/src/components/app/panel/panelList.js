@@ -7,6 +7,7 @@ import PropTypes from 'prop-types';
 import PanelSlider from '../../../containers/slider/panel';
 import PanelUser   from '../../../containers/user/panel';
 import PanelEvent  from '../../../containers/dashboard/panel';
+import PanelNews   from '../../../containers/news/panel';
 
 class PanelList extends Component {
     constructor(props) {
@@ -45,6 +46,11 @@ class PanelList extends Component {
             case ACTIONS.PANEL_EVENT:
                 component   = (<PanelEvent {...panel.parameters} />);
                 panel.title = panel.parameters.event ? 'Modification d\'un évènement' : 'Ajout d\'un évènement';
+                break;
+
+            case ACTIONS.PANEL_NEWS:
+                component   = (<PanelNews {...panel.parameters} />);
+                panel.title = panel.parameters.news ? 'Modification d\'une actualité' : 'Ajout d\'une actualité';
                 break;
 
             default:

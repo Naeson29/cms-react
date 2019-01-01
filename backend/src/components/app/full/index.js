@@ -7,6 +7,7 @@ import Header        from '../../../containers/component/header';
 import Dashboard     from '../../../containers/dashboard';
 import User          from '../../../containers/user';
 import Slider        from '../../../containers/slider';
+import News          from '../../../containers/news';
 import PanelManager  from '../../../containers/panel/panelManager';
 import Loader        from '../component/loading';
 
@@ -59,6 +60,7 @@ class Full extends Component {
                         <Route path="/dashboard" name="dashboard" component={Dashboard}/>
                         <Route path="/user" name="user" component={User}/>
                         <Route path="/slider" name="slider" component={Slider}/>
+                        <Route path="/news" name="news" component={News}/>
                     </Switch>
                     <PanelManager/>
                 </div>

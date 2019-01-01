@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { NavLink }          from 'react-router-dom';
 import { FontAwesomeIcon }  from '@fortawesome/react-fontawesome';
 import * as IconSolid       from '@fortawesome/free-solid-svg-icons';
+import * as IconRegular     from '@fortawesome/free-regular-svg-icons';
 
 class Sidebar extends Component {
     render() {
@@ -26,6 +27,12 @@ class Sidebar extends Component {
                                 <NavLink to={'/slider'} className="nav-link" activeClassName="active" replace>
                                     <FontAwesomeIcon icon={IconSolid.faImages} />
                                     <span>{'Slider'}</span>
+                                </NavLink>
+                            </li>
+                            <li className="nav-item">
+                                <NavLink to={'/news'} className="nav-link" activeClassName="active" replace>
+                                    <FontAwesomeIcon icon={IconRegular.faNewspaper} />
+                                    <span>{'Actualités'}</span>
                                 </NavLink>
                             </li>
                         </ul>

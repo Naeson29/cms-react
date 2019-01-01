@@ -1,0 +1,19 @@
+import { connect }   from 'react-redux';
+import {withRouter}  from 'react-router-dom';
+import PanelNews     from '../../components/app/news/panel';
+
+const mapStateToProps = (state) => {
+    return {
+        submit  : state.News.form.loading,
+        success : state.News.form.success,
+        error   : state.News.form.error,
+    };
+};
+
+const mapDispatchToProps = () => {
+
+    return {
+    };
+};
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(PanelNews));
