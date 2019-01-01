@@ -66,7 +66,9 @@ class News extends Component {
 
         let images = [];
         content.map((key) =>{
-            images.push({src :url + key.image});
+            if(key.image !== undefined){
+                images.push({src :url + key.image});
+            }
         });
 
         return (
@@ -78,8 +80,8 @@ class News extends Component {
                         <FontAwesomeIcon
                             icon={IconSolid.faPlusCircle}
                             onClick={() => openRightPanel(ACTIONS.PANEL_NEWS, {
-                                createSlider : createNews,
-                                updateList   : this._updateList,
+                                createNews : createNews,
+                                updateList : this._updateList,
                             })}
                         />
                     }

@@ -44,7 +44,10 @@ class List extends  Component {
                         key={'news_' + idx}
                         className={'clickable'}>
                         <td className={'image'}>
-                            <Image src={`${url}min_${item.image}`} thumbnail onClick={(e) => {boxImage(e,idx);}}/>
+                            {
+                                item.image !== undefined &&
+                                <Image src={`${url}min_${item.image}`} thumbnail onClick={(e) => {boxImage(e,idx);}}/>
+                            }
                         </td>
                         <td className={'label'}>
                             <Truncate lines={1} ellipsis={'...'}>

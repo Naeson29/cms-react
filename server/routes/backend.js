@@ -377,19 +377,38 @@ Router.post('/news', (req, res) => {
             res.status(500).send(err);
         }else{
 
-            im.crop({
-                srcPath: req.file.path,
-                dstPath: `${Constants.directory.news}/min_${fileName}`,
-                width: 150,
-                height: 150,
-                quality: 1,
-                gravity: 'Center'
-            }, () => {
-                const data = new News({
-                    label : req.body.label,
-                    text  : req.body.text,
-                    image : fileName
+            const datum = {
+                label : req.body.label,
+                text  : req.body.text,
+            };
+
+            if(req.file !== undefined){
+                datum.image = fileName;
+                im.crop({
+                    srcPath: req.file.path,
+                    dstPath: `${Constants.directory.news}/min_${fileName}`,
+                    width: 150,
+                    height: 150,
+                    quality: 1,
+                    gravity: 'Center'
+                }, () => {
+                    const data = new News(datum);
+
+                    data.save((err, data) => {
+                        if (err) {
+                            res.status(500).send(err);
+                        } else {
+                            res.status(200).send({
+                                success : true,
+                                data    : data,
+                                message : 'Create and uplaod news success'
+                            });
+                        }
+                    });
                 });
+
+            }else{
+                const data = new News(datum);
 
                 data.save((err, data) => {
                     if (err) {
@@ -402,7 +421,7 @@ Router.post('/news', (req, res) => {
                         });
                     }
                 });
-            });
+            }
         }
     })
 });

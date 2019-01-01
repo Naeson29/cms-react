@@ -76,16 +76,11 @@ class PanelNews extends Component
 
     _checkForm() {
         const parameters = this.state.parameters;
-        const create     = this.state.create;
-        const image      = this.state.image.length;
         let errors = {};
 
         Object.keys(parameters).map((key) => {
             if (!parameters[key]) {
                 errors[key] = NOTIFICATION.error[key];
-            }
-            if(!image && create){
-                errors.image = NOTIFICATION.error.image;
             }
         });
 
