@@ -23,8 +23,8 @@ class News extends Manager {
         );
     }
 
-    update(sliderId, parameters, callback) {
-        parameters.sliderId = sliderId;
+    update(newsId, parameters, callback) {
+        parameters.newsId = newsId;
         return this.classicDispatch(
             updateNews.INIT,
             () => updateNews.ACTION(parameters),
@@ -34,8 +34,8 @@ class News extends Manager {
         );
     }
 
-    remove(sliderId, parameters, callback) {
-        parameters.sliderId = sliderId;
+    remove(newsId, parameters, callback) {
+        parameters.newsId = newsId;
         return this.classicDispatch(
             deleteNews.INIT,
             () => deleteNews.ACTION(parameters),

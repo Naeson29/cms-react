@@ -14,6 +14,7 @@ const async               = require('async');
 const Slider = require('../models/slider');
 const User   = require('../models/user');
 const Event  = require('../models/event');
+const News   = require('../models/news');
 
 //Connect
 Mongoose.connect(`${Constants.dbUrl}${Constants.database}`, {
@@ -341,6 +342,151 @@ Router.delete('/events/:id', (req, res) => {
                 success : true,
                 data    : data,
                 message : 'Delete event success'
+            });
+        }
+    });
+});
+
+//News
+Router.get('/news', (req, res) => {
+    News.find()
+        .then((data) => {
+            res.status(200).send({
+                logged : req.logged,
+                data   : data
+            });
+        });
+});
+
+Router.post('/news', (req, res) => {
+
+    let fileName    = cryptoRandomString(16);
+
+    const upload = multer({storage: multer.diskStorage({
+            destination: (req, file, callback) => {
+                callback(null, Constants.directory.news);
+            },
+            filename: (req, file, callback) => {
+                fileName = fileName + '.' + mime.getExtension(file.mimetype);
+                callback(null, fileName);
+            }
+        })}).single('news');
+
+    upload(req, res, (err) => {
+        if(err) {
+            res.status(500).send(err);
+        }else{
+
+            im.crop({
+                srcPath: req.file.path,
+                dstPath: `${Constants.directory.news}/min_${fileName}`,
+                width: 150,
+                height: 150,
+                quality: 1,
+                gravity: 'Center'
+            }, () => {
+                const data = new News({
+                    label : req.body.label,
+                    text  : req.body.text,
+                    image : fileName
+                });
+
+                data.save((err, data) => {
+                    if (err) {
+                        res.status(500).send(err);
+                    } else {
+                        res.status(200).send({
+                            success : true,
+                            data    : data,
+                            message : 'Create news success'
+                        });
+                    }
+                });
+            });
+        }
+    })
+});
+
+Router.put('/news/:id', (req, res) => {
+    let id = req.params.id;
+
+    let fileName = cryptoRandomString(16);
+
+    const upload = multer({storage: multer.diskStorage({
+            destination: (req, file, callback) => {
+                callback(null, Constants.directory.news)
+            },
+            filename: (req, file, callback) => {
+                fileName = fileName + '.' + mime.getExtension(file.mimetype);
+                callback(null, fileName);
+            }
+        })}).single('news');
+
+    upload(req, res, (err) => {
+        if (err) {
+            res.status(500).send(err);
+        }else{
+            News.findOne({id_news : id }, (err, data) => {
+                if (err) {
+                    res.status(500).send(err);
+                } else {
+                    data.label = req.body.label;
+                    data.text  = req.body.text;
+                    if(req.file !== undefined){
+                        im.crop({
+                            srcPath: req.file.path,
+                            dstPath: `${Constants.directory.news}/min_${fileName}`,
+                            width: 150,
+                            height: 150,
+                            quality: 1,
+                            gravity: 'Center'
+                        }, () => {
+                            deleteFiles([Constants.directory.news + '/' + data.image, Constants.directory.news + '/min_' + data.image]);
+                            data.image  = fileName;
+                            data.save((err) => {
+                                if (err) {
+                                    res.status(500).send(err);
+                                } else{
+                                    res.status(200).send({
+                                        success : true,
+                                        data    : data,
+                                        message : 'Update and upload news success'
+                                    });
+                                }
+                            });
+                        });
+                    }else{
+                        data.save((err) => {
+                            if (err) {
+                                res.status(500).send(err);
+                            } else{
+                                res.status(200).send({
+                                    success : true,
+                                    data    : data,
+                                    message : 'Update news success'
+                                });
+                            }
+                        });
+                    }
+                }
+            });
+        }
+    })
+});
+
+Router.delete('/news/:id', (req, res) => {
+    let id = req.params.id;
+
+    News.findOneAndDelete({id_news : id }, (err, data) => {
+        if (err) {
+            res.status(500).send(err);
+        } else {
+            deleteFiles([Constants.directory.news + '/' + data.image, Constants.directory.news + '/min_' + data.image]);
+
+            res.status(200).send({
+                success : true,
+                data    : data,
+                message : 'Delete news success'
             });
         }
     });

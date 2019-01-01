@@ -35,12 +35,13 @@ class List extends  Component {
             {
                 items.map((item, idx) => (
                     <tr onClick={() =>
-                        openRightPanel(ACTIONS.PANEL_SLIDER, {
+                        openRightPanel(ACTIONS.PANEL_NEWS, {
                             news: item,
                             updateNews: updateNews,
                             updateList: updateList
                         })
                     }
+                        key={'news_' + idx}
                         className={'clickable'}>
                         <td className={'image'}>
                             <Image src={`${url}min_${item.image}`} thumbnail onClick={(e) => {boxImage(e,idx);}}/>

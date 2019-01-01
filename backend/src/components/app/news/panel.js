@@ -191,7 +191,7 @@ class PanelNews extends Component
                             </div>
                             <div className={'bloc-form'}>
                                 <ImageUploader
-                                    name={'slider'}
+                                    name={'news'}
                                     buttonClassName={'btn'}
                                     onChange={this._onDrop}
                                     label={UPLOAD_LABEL}

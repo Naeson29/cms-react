@@ -1,0 +1,21 @@
+.list {
+  &.news {
+    .label {
+      @media (min-width: 768px) {
+        width:26%;
+      }
+    }
+    .image {
+      width  : 70px;
+      .img-thumbnail {
+        border-radius : initial;
+        padding       : 0.15rem;
+        border        : none;
+
+        -webkit-box-shadow : 2px 2px 3px 0 rgba(0,0,0,0.24);
+        -moz-box-shadow    : 2px 2px 3px 0 rgba(0,0,0,0.24);
+        box-shadow         : 2px 2px 3px 0 rgba(0,0,0,0.24);
+      }
+    }
+  }
+}
