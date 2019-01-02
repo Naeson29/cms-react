@@ -35,6 +35,7 @@ class Header extends Component {
 
     render() {
         const {device} = this.state;
+        const {parameters} = this.props;
 
         const styles = {
             bmCrossButton : {
@@ -58,11 +59,14 @@ class Header extends Component {
                                     {'Présentation'}
                                 </NavLink>
                             </li>
-                            <li className="nav-item">
-                                <NavLink to={'/newItem'} className="nav-link" activeClassName="active">
-                                    {'Items'}
-                                </NavLink>
-                            </li>
+                            {
+                                parameters.news &&
+                                <li className="nav-item">
+                                    <NavLink to={'/news'} className="nav-link" activeClassName="active">
+                                        {'Actualités'}
+                                    </NavLink>
+                                </li>
+                            }
                         </ul> :
                         <div className={'burger-menu'}>
                             <Menu
@@ -75,9 +79,12 @@ class Header extends Component {
                                 <NavLink to={'/home'} className="nav-link" activeClassName="active">
                                     {'Présentation'}
                                 </NavLink>
-                                <NavLink to={'/newItem'} className="nav-link" activeClassName="active">
-                                    {'Items'}
-                                </NavLink>
+                                {
+                                    parameters.news &&
+                                    <NavLink to={'/news'} className="nav-link" activeClassName="active">
+                                        {'Actualités'}
+                                    </NavLink>
+                                }
                             </Menu>
                         </div>
                 }

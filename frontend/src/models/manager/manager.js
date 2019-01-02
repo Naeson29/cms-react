@@ -22,7 +22,6 @@ export default class Manager {
                 }
             }
         }).catch((error) => {
-            console.error(error);
             dispatch(actionFailure(error.message));
 
             if (typeof callback === 'function') {

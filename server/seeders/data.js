@@ -89,6 +89,7 @@ const data = [
         'model': 'Parameter',
         'documents': [
             {
+                slug   : 'news',
                 label  : 'Actualités',
                 value  : true,
                 type   : 1

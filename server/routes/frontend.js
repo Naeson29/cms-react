@@ -5,7 +5,8 @@ const Mongoose            = require('mongoose');
 const Router              = Express.Router();
 
 //Models
-const Slider = require('../models/slider');
+const Slider     = require('../models/slider');
+const Parameters = require('../models/parameters');
 
 //Connect
 Mongoose.connect(`${Constants.dbUrl}${Constants.database}`, {
@@ -15,6 +16,16 @@ Mongoose.connect(`${Constants.dbUrl}${Constants.database}`, {
 });
 
 //Routes
+
+//Parameters
+Router.get('/parameters', (req, res) => {
+    Parameters.find()
+        .then(function(data) {
+            res.json(data);
+        });
+});
+
+//Slider
 Router.get('/sliders', (req, res) => {
   Slider.find().sort({order : 1})
     .then(function(data) {

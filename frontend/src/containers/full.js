@@ -1,17 +1,20 @@
-import { connect }    from 'react-redux';
-import { withRouter } from 'react-router-dom';
-import Full           from '../components/app/full';
+import { connect }       from 'react-redux';
+import { withRouter }    from 'react-router-dom';
+import Full              from '../components/app/full';
+import ParametersManager from '../models/manager/parameters';
 
-const mapStateToProps = () => {
+const mapStateToProps = (state) => {
     return {
-
+        content : state.Parameters.parameters.content,
+        loading : state.Parameters.parameters.loading,
+        error   : state.Parameters.parameters.error,
     };
 };
 
 const mapDispatchToProps = () => {
     return {
-        load: () => {
-
+        load: (parameters) => {
+            ParametersManager.parameters(parameters);
         },
     };
 };

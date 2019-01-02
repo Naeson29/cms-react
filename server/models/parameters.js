@@ -4,6 +4,10 @@ const Schema        = mongoose.Schema;
 const AutoIncrement = require('mongoose-sequence')(mongoose);
 
 const ParametersSchema = new Schema({
+        slug  : {
+            type     : String,
+            required : true,
+        },
         label : {
             type     : String,
             required : true,

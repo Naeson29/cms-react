@@ -7,12 +7,12 @@ const INITIAL_STATE = {
     view: {
         content : [],
         loading : true,
-        error   : null
+        error   : false
     },
     slider: {
         content : [],
         loading : true,
-        error   : null
+        error   : false
     }
 };
 

@@ -169,7 +169,10 @@ class ReducerFunctions {
             success : payload
         };
 
-        Notifier(action, TYPE_INFO, 'Succès de la modification');
+        if(action.type !== 'UPDATE_PARAMETERS_SUCCESS'){
+            Notifier(action, TYPE_INFO, 'Succès de la modification');
+        }
+
         return {...state};
     }
 
