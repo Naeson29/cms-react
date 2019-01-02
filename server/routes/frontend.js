@@ -7,6 +7,7 @@ const Router              = Express.Router();
 //Models
 const Slider     = require('../models/slider');
 const Parameters = require('../models/parameters');
+const News       = require('../models/news');
 
 //Connect
 Mongoose.connect(`${Constants.dbUrl}${Constants.database}`, {
@@ -31,6 +32,14 @@ Router.get('/sliders', (req, res) => {
     .then(function(data) {
       res.json(data);
     });
+});
+
+//News
+Router.get('/news', (req, res) => {
+    News.find()
+        .then(function(data) {
+            res.json(data);
+        });
 });
 
 module.exports = Router;

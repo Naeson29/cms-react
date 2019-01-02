@@ -20,9 +20,28 @@ class News extends Component {
             <div className={'home'}>
                 <div className={'content-full'}>
                     <h1>{'Actualités'}</h1>
-                    <div className="content col-lg-8 offset-lg-2 col-md-12 col-sm-12 col-xs-12">
+                    {
+                        loading ?
+                            <div className={'loading-content'}>
+                                <Loading type='oval' width={120} height={120} fill='#7E8284' className={'loading'}/>
+                            </div>
+                            :
+                            <div className="content news col-lg-8 offset-lg-2 col-md-12 col-sm-12 col-xs-12">
+                                {
+                                    content.map((key, index) => {
+                                        return (
+                                            <div key={'news_' + index} className={'bloc-news'}>
+                                                {
+                                                    key.image !== undefined &&
+                                                        <img src={url + key.image} />
+                                                }
 
-                    </div>
+                                            </div>
+                                        );
+                                    })
+                                }
+                            </div>
+                    }
                 </div>
             </div>
         );
