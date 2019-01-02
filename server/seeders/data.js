@@ -84,6 +84,16 @@ const data = [
                 end    : moment().add(2, "days"),
             }
         ]
+    },
+    {
+        'model': 'Parameter',
+        'documents': [
+            {
+                label  : 'Actualités',
+                value  : true,
+                type   : 1
+            }
+        ]
     }
 ];
 

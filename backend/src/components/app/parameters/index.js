@@ -11,7 +11,7 @@ class Parameters extends Component {
     }
 
     render() {
-        const { content, logged, loading } = this.props;
+        const { content, loading } = this.props;
 
         return (
             <div className={'parameters list'}>
@@ -23,7 +23,6 @@ class Parameters extends Component {
                         <Table responsive striped className="tables">
                             <List
                                 content={content}
-                                logged={logged}
                             />
                         </Table>
                 }
@@ -37,7 +36,6 @@ export default Parameters;
 Parameters.propTypes = {
     load           : PropTypes.func.isRequired,
     loading        : PropTypes.bool,
-    logged         : PropTypes.number,
     content        : PropTypes.oneOfType([
         PropTypes.object,
         PropTypes.array

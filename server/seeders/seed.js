@@ -11,10 +11,11 @@ seeder.connect(`${Constants.dbUrl}${Constants.database}`, {
         './models/user.js',
         './models/slider.js',
         './models/event.js',
-        './models/news.js'
+        './models/news.js',
+        './models/parameters.js',
     ]);
 
-    seeder.clearModels(['Slider', 'User', 'Event', 'News'], function() {
+    seeder.clearModels(['Slider', 'User', 'Event', 'News', 'Parameter'], function() {
         seeder.populateModels(data, function() {
             seeder.disconnect();
         });

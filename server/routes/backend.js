@@ -11,10 +11,11 @@ const im                  = require('imagemagick');
 const async               = require('async');
 
 //Models
-const Slider = require('../models/slider');
-const User   = require('../models/user');
-const Event  = require('../models/event');
-const News   = require('../models/news');
+const Slider     = require('../models/slider');
+const User       = require('../models/user');
+const Event      = require('../models/event');
+const News       = require('../models/news');
+const Parameters = require('../models/parameters');
 
 //Connect
 Mongoose.connect(`${Constants.dbUrl}${Constants.database}`, {
@@ -510,6 +511,16 @@ Router.delete('/news/:id', (req, res) => {
             });
         }
     });
+});
+
+//Parameters
+Router.get('/parameters', (req, res) => {
+    Parameters.find()
+        .then((data) => {
+            res.status(200).send({
+                data   : data
+            });
+        });
 });
 
 module.exports = Router;

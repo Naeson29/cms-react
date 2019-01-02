@@ -37,3 +37,7 @@ export const NOTIFICATION    = {
         content : 'Le contenu a bien été enregistré'
     }
 };
+
+//Parameters
+export const PARAMETERS_FRONT = 1;
+export const PARAMETERS_BACK  = 2;
