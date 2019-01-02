@@ -523,4 +523,28 @@ Router.get('/parameters', (req, res) => {
         });
 });
 
+Router.put('/parameters/:id', (req, res) => {
+    let id = req.params.id;
+
+    Parameters.findOne({id_parameter : id }, (err, data) =>{
+        if (err) {
+            res.status(500).send(err);
+        } else {
+            data.value  = req.body.value;
+
+            data.save((err) => {
+                if (err) {
+                    res.status(500).send(err);
+                } else{
+                    res.status(200).send({
+                        success : true,
+                        data    : data,
+                        message : 'Update parameter success'
+                    });
+                }
+            });
+        }
+    });
+});
+
 module.exports = Router;

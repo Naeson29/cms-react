@@ -47,6 +47,15 @@
             }
           }
         }
+        td {
+          &.align-right {
+            text-align: right;
+
+            .container-check {
+              vertical-align: top;
+            }
+          }
+        }
       }
 
     }

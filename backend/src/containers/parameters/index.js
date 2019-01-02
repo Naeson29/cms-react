@@ -17,6 +17,9 @@ const mapDispatchToProps = () => {
     return {
         load: (parameters) => {
             ParametersManager.parameters(parameters);
+        },
+        updateParameters : (parameterId, parameters, callback) => {
+            ParametersManager.update(parameterId, parameters, callback);
         }
     };
 };

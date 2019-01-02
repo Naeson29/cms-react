@@ -7,28 +7,34 @@ class List extends  Component {
         super(props);
 
         this.state = {
-            items : props.content
+            parameters : props.content
         };
     }
 
-    componentDidUpdate(prevProps) {
-        if (this.props.content !== prevProps.content) {
-            this.setState({
-                items: this.props.content
-            });
-        }
+    _handleChange(index, value) {
+        let newItem = this.state.parameters;
+        newItem[index].value = value;
+
+        this.setState({parameters: newItem});
+
+        this.props.updateParameters(this.state.parameters[index].id_parameter, newItem[index])
     }
 
     render(){
-        const {items} = this.state;
+        const {parameters} = this.state;
 
         return (
             <tbody>
                 {
-                    items.map((parameter, idx) => (
+                    parameters.map((parameter, idx) => (
                         <tr key={'parameters_' + idx}>
                             <td>{parameter.label}</td>
-                            <td>{parameter.value}</td>
+                            <td className={'align-right'}>
+                                <label className={'container-check' + (parameter.value ? ' active' : '')} htmlFor="label">
+                                    <input name={idx} className={'checkbox'} type="checkbox" value={parameter.value} defaultChecked={parameter.value}/>
+                                    <span className={'check check-list'} onClick={() => {this._handleChange(idx, !parameter.value )}}/>
+                                </label>
+                            </td>
                         </tr>
                     ))
                 }
@@ -40,12 +46,8 @@ class List extends  Component {
 export default List;
 
 List.propTypes = {
-    updateUser     : PropTypes.func,
-    openRightPanel : PropTypes.func,
-    deleteLine     : PropTypes.func,
-    updateList     : PropTypes.func,
-    logged         : PropTypes.number,
-    content        : PropTypes.oneOfType([
+    updateParameters : PropTypes.func,
+    content          : PropTypes.oneOfType([
         PropTypes.object,
         PropTypes.array
     ])

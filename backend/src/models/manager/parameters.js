@@ -1,4 +1,4 @@
-import {getParameters} from '../../actions/parameters';
+import {getParameters, updateParameter} from '../../actions/parameters';
 import Manager from './manager';
 
 class Parameters extends Manager {
@@ -9,6 +9,17 @@ class Parameters extends Manager {
             () => getParameters.ACTION(parameters),
             (content) => getParameters.SUCCESS(content, parameters),
             (error) => getParameters.FAILURE(error, parameters),
+            callback
+        );
+    }
+
+    update(parameterId, parameters, callback) {
+        parameters.parameterId = parameterId;
+        return this.classicDispatch(
+            updateParameter.INIT,
+            () => updateParameter.ACTION(parameters),
+            (content) => updateParameter.SUCCESS(content, parameters),
+            (error) => updateParameter.FAILURE(error, parameters),
             callback
         );
     }

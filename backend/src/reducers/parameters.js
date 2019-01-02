@@ -1,4 +1,4 @@
-import {GET_PARAMETERS} from '../actions/parameters';
+import {GET_PARAMETERS, UPDATE_PARAMETERS} from '../actions/parameters';
 import ParametersEntity from '../models/entity/parameters';
 import ReducerFunctions from './functions';
 
@@ -36,6 +36,22 @@ export default function Parameters(state = INITIAL_STATE, action) {
 
         case GET_PARAMETERS.FAILURE: {
             return ReducerFunctions.getFailure(state, action.payload);
+        }
+
+        case UPDATE_PARAMETERS.INIT: {
+            return ReducerFunctions.updateInit(state);
+        }
+
+        case UPDATE_PARAMETERS.ACTION: {
+            return ReducerFunctions.updateProcessed(state);
+        }
+
+        case UPDATE_PARAMETERS.SUCCESS: {
+            return ReducerFunctions.updateSuccess(action, state, action.payload);
+        }
+
+        case UPDATE_PARAMETERS.FAILURE: {
+            return ReducerFunctions.updateFailure(action, state, action.payload);
         }
 
         default: {
