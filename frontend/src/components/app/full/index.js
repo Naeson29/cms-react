@@ -6,6 +6,7 @@ import PropTypes            from 'prop-types';
 import Header from '../component/header';
 import Footer from '../component/footer';
 import Home   from '../../../containers/home';
+import News   from '../../../containers/news';
 
 class Full extends Component {
 
@@ -55,6 +56,10 @@ class Full extends Component {
                 <Switch>
                     <Route exact path="/" name="home" component={Home}/>
                     <Route exact path="/home" name="home" component={Home}/>
+                    {
+                        parameters.news &&
+                        <Route exact path="/news" name="news" component={News}/>
+                    }
                 </Switch>
                 <div className="footer-app">
                     <Footer/>
