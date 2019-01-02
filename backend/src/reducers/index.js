@@ -7,6 +7,7 @@ import NewsReducer         from './news';
 import PanelReducer        from './panel';
 import UserReducer         from './user';
 import AuthReducer         from './auth';
+import ParametersReducer   from './parameters';
 
 
 const rootReducer = combineReducers({
@@ -17,6 +18,7 @@ const rootReducer = combineReducers({
     News       : NewsReducer,
     User       : UserReducer,
     Panel      : PanelReducer,
+    Parameters : ParametersReducer,
     routing    : routerReducer,
 });
 

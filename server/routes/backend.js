@@ -28,7 +28,8 @@ Mongoose.connect(`${Constants.dbUrl}${Constants.database}`, {
 //Auth
 Router.get('/auth', (req, res) => {
     res.status(200).send({
-        success : true
+        success : true,
+        message : 'Authenticate'
     });
 });
 
