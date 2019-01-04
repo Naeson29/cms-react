@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
-import {connect} from 'react-redux';
-import 'react-animated-slider/build/horizontal.css';
-import Loading from 'react-loading-components';
-import PropTypes from 'prop-types';
-import Config from '../../../configuration'
+import {connect}          from 'react-redux';
+import Loading            from 'react-loading-components';
+import PropTypes          from 'prop-types';
+import Config             from '../../../configuration';
+import Truncate           from 'react-truncate';
 
 class News extends Component {
 
@@ -33,9 +33,23 @@ class News extends Component {
                                             <div key={'news_' + index} className={'bloc-news'}>
                                                 {
                                                     key.image !== undefined &&
-                                                        <img src={url + key.image} />
+                                                        <div
+                                                            className={'bloc image'}
+                                                            style={{ background: `url('${url + key.image}') no-repeat center center` }}
+                                                        />
                                                 }
-
+                                                <div className={'bloc content-news'}>
+                                                    <h2>
+                                                        <Truncate lines={1} ellipsis={'...'}>
+                                                            {key.label}
+                                                        </Truncate>
+                                                    </h2>
+                                                    <p>
+                                                        <Truncate lines={2} ellipsis={'...'}>
+                                                            {key.text}
+                                                        </Truncate>
+                                                    </p>
+                                                </div>
                                             </div>
                                         );
                                     })
