@@ -15,7 +15,9 @@
       box-shadow         : 2px 2px 3px 0 rgba(0,0,0,0.24);
 
       @media (min-width: 1024px) {
-        width : 50%;
+        width        : 32%;
+        margin-left  : 0.5%;
+        margin-right : 0.5%;
       }
       @media (max-width: 1024px) {
         width : 100%;
@@ -39,9 +41,9 @@
       //  height : 100%;
       //}
       //
-      //.content-news {
-      //  width  : 50%;
-      //}
+      .content-news {
+        height : 100px;
+      }
     }
   }
 }
